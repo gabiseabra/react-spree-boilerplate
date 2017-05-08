@@ -50,8 +50,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Front-end
 gem 'react_on_rails'
 
+gem 'mini_racer', platforms: :ruby
+
 # Spree
 gem 'spree', '~> 3.2.0'
 gem 'spree_auth_devise', '~> 3.2.0.beta'
 gem 'spree_gateway', '~> 3.2.0.beta'
-

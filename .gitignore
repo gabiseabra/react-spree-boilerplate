@@ -20,8 +20,16 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+
+# Spree
+/spree
+/public/spree
+
+# React on Rails
+npm-debug.log*
 node_modules
 
-/spree
+# Generated js bundles
+/app/assets/webpack/*
+
 /bin
-/public/spree
