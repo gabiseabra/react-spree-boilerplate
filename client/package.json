@@ -7,30 +7,61 @@
     "npm": "4.1.1"
   },
   "scripts": {
-    "build:test": "webpack --config webpack.config.js",
-    "build:production": "NODE_ENV=production webpack --config webpack.config.js",
-    "build:development": "webpack -w --config webpack.config.js"
+    "prebuild": "NODE_ENV=production npm run build:vendor",
+    "build": "webpack --config webpack/config.babel.js -p",
+    "build:dev": "NODE_ENV=development npm run build",
+    "build:test": "NODE_ENV=test npm run build",
+    "build:prod": "NODE_ENV=production npm run build",
+    "build:vendor": "webpack --config webpack/bundles/vendor.babel.js",
+    "build:rails": "webpack --config webpack/bundles/rails.babel.js",
+    "build:app": "webpack --config webpack/bundles/app.babel.js"
   },
-  "cacheDirectories": ["node_modules", "client/node_modules"],
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "dependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^6.3.2",
-    "babel-runtime": "^6.23.0",
+    "antd": "^2.10.0",
     "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
     "es5-shim": "^4.5.9",
-    "expose-loader": "^0.7.3",
-    "imports-loader": "^0.7.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-on-rails": "7.0.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
-    "webpack": "^2.3.3"
+    "redux-saga": "^0.15.3"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "css-loader": "^0.28.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "expose-loader": "^0.7.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "imports-loader": "^0.7.1",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "postcss": "^6.0.1",
+    "postcss-cssnext": "^2.10.0",
+    "postcss-import": "^9.1.0",
+    "postcss-loader": "^2.0.1",
+    "postcss-url": "^6.0.4",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.3.3",
+    "webpack-merge": "^4.1.0"
+  },
+  "optionalDependencies": {
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3"
   }
 }
