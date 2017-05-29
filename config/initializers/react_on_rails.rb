@@ -7,13 +7,19 @@ ReactOnRails.configure do |config|
   config.generated_assets_dir = File.join(%w(app assets webpack))
 
   # Define the files we need to check for webpack compilation when running tests.
-  config.webpack_generated_files = %w( webpack-bundle.js )
+  config.webpack_generated_files = %w(
+    app-bundle.js
+    app-bundle.css
+    common-bundle.js
+    server-bundle.js
+    vendor/manifest.json
+  )
 
   # This is the file used for server rendering of React when using `(prerender: true)`
   # If you are never using server rendering, you may set this to "".
   # If you are using the same file for client and server rendering, having this set probably does
   # not affect performance.
-  config.server_bundle_js_file = "webpack-bundle.js"
+  config.server_bundle_js_file = "server-bundle.js"
 
   # If you are using the ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config)
   # with rspec then this controls what yarn command is run
@@ -22,7 +28,7 @@ ReactOnRails.configure do |config|
 
   # This configures the script to run to build the production assets by webpack. Set this to nil
   # if you don't want react_on_rails building this file for you.
-  config.npm_build_production_command = "yarn run build:production"
+  config.npm_build_production_command = "yarn run build"
 
   ################################################################################
   # CLIENT RENDERING OPTIONS
