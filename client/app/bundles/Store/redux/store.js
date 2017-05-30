@@ -1,9 +1,6 @@
-import ReactOnRails from "react-on-rails"
 import { createStore, applyMiddleware, compose } from "redux"
 import createSagaMiddleware, { END } from "redux-saga"
 import reducer from "./reducer"
-
-export const STORE_NAME = "spreeStore"
 
 export default function create(props, railsContext) {
   console.log(props, railsContext)
@@ -30,7 +27,4 @@ export default function create(props, railsContext) {
     })
   }
   return store
-}
-
-export function withStore(component) {
 }
