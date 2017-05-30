@@ -5,7 +5,13 @@
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
-    <%= yield %>
+    <div id="app">
+      <%= react_component 'Header' %>
+      <main>
+        <%= yield %>
+      </main>
+      <%= react_component 'Footer' %>
+    </div>
     <%= redux_store_hydration_data %>
   </body>
 </html>

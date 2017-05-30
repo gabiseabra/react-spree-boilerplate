@@ -12,7 +12,7 @@ export default merge.smart(config, {
       "babel-polyfill",
       "./styles/app.css",
       "./styles/app.less",
-      "./app/bundles/Store/startup"
+      "./app/bundles/Store/startup/client"
     ]
   },
   output: {
