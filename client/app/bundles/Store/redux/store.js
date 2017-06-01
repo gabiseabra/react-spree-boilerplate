@@ -2,8 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux"
 import createSagaMiddleware, { END } from "redux-saga"
 import reducer from "./reducer"
 
-export default function create(props, railsContext) {
-  console.log(props, railsContext)
+export default function create() {
   const sagaMiddleware = createSagaMiddleware()
   const enhancers = []
   const middleware = [ sagaMiddleware ]

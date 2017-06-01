@@ -1,10 +1,10 @@
 import ReactOnRails from "react-on-rails"
 import { Header, Footer } from "../components"
-import { registerStore } from "../redux"
+import { createStore, STORE_NAME } from "../redux"
 
 ReactOnRails.register({
   Header,
   Footer
 })
 
-registerStore()
+ReactOnRails.registerStore({ [STORE_NAME]: createStore })
