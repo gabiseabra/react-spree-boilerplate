@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <%= render 'shared/head' %>
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
+    <%= render 'spree/shared/paths' %>
     <div id="app">
       <%= react_component 'Header' %>
       <main>
