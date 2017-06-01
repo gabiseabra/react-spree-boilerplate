@@ -16,6 +16,6 @@ Rails.application.config.assets.precompile += [
   "application.css",
   "vendor_bundle.js",
   "vendor_bundle.css",
-  "webpack_bundle.js",
-  "webpack_bundle.css"
+  "spree_bundle.js",
+  "spree_bundle.css"
 ]

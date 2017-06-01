@@ -8,11 +8,10 @@ ReactOnRails.configure do |config|
 
   # Define the files we need to check for webpack compilation when running tests.
   config.webpack_generated_files = %w(
-    app-bundle.js
-    app-bundle.css
+    spree-bundle.js
+    spree-bundle.css
     common-bundle.js
     server-bundle.js
-    vendor/manifest.json
   )
 
   # This is the file used for server rendering of React when using `(prerender: true)`

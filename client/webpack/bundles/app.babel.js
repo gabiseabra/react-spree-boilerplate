@@ -8,11 +8,11 @@ const vendors = Object.keys(vendorConfig.entry).map(module => `${module}.manifes
 
 export default merge.smart(config, {
   entry: {
-    app: [
+    spree: [
       "babel-polyfill",
       "./styles/app.css",
       "./styles/app.less",
-      "./app/bundles/Store/startup/client"
+      "./app/bundles/Spree/startup/client"
     ]
   },
   output: {

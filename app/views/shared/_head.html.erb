@@ -5,12 +5,6 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport"/>
 <%= raw meta_data_tags %>
-<%= canonical_tag current_store.url %>
 <%= favicon_link_tag 'favicon.ico' %>
 <%= csrf_meta_tags %>
-<%= env_stylesheet_link_tag    static: 'webpack_bundle', hot: 'vendor_bundle', media: 'all' %>
-<%= env_javascript_include_tag static: 'webpack_bundle', hot: 'vendor_bundle', media: 'all' %>
-<%= env_stylesheet_link_tag     hot: 'localhost:3500/app-bundle.css' %>
-<%= env_javascript_include_tag  hot: [ 'localhost:3500/common-bundle.js',
-                                       'localhost:3500/app-bundle.js'], media: 'all' %>
 <%= yield :head %>

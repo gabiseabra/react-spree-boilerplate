@@ -1,3 +1,3 @@
 //= require vendor_bundle
 //= require common-bundle
-//= require app-bundle
+//= require spree-bundle
