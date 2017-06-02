@@ -16,6 +16,7 @@
     "react/jsx-closing-bracket-location": "off",
     "react/require-default-props": "off",
     "react/forbid-prop-types": "off",
+    "react/prop-types": "off",
     "comma-dangle": ["error", "never"],
     "quotes": ["error", "double", {
       "avoidEscape": true
