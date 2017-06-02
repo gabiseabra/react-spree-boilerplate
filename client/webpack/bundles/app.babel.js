@@ -29,6 +29,9 @@ export default merge.smart(config, {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin("common"),
     new ExtractTextPlugin("[name]-bundle.css"),
+    new webpack.DefinePlugin({
+      __SSR__: false
+    }),
     ...(vendors.map(fileName => (
       new webpack.DllReferencePlugin({
         // eslint-disable-next-line import/no-dynamic-require
