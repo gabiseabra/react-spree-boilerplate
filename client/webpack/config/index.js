@@ -17,10 +17,10 @@ export default merge.smart({
     extensions: [ ".js", ".jsx" ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin([
-      "NODE_ENV",
-      "REACT_ON_RAILS_ENV"
-    ])
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: "",
+      REACT_ON_RAILS_ENV: ""
+    })
   ]
 }, envConfig)
 
