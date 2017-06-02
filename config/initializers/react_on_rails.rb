@@ -11,6 +11,7 @@ ReactOnRails.configure do |config|
     spree-bundle.js
     spree-bundle.css
     common-bundle.js
+    common-bundle.css
     server-bundle.js
   )
 

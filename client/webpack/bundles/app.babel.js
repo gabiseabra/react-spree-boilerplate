@@ -8,12 +8,12 @@ const vendors = Object.keys(vendorConfig.entry).map(module => `${module}.manifes
 
 export default merge.smart(config, {
   entry: {
-    spree: [
+    common: [
       "babel-polyfill",
       "./styles/app.css",
-      "./styles/app.less",
-      "./app/bundles/Spree/startup/client"
-    ]
+      "./styles/app.less"
+    ],
+    spree: "./app/bundles/Spree/startup/client"
   },
   output: {
     filename: "[name]-bundle.js"
