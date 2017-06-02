@@ -1,8 +1,6 @@
 import webpack from "webpack"
 
 export default {
-	devtool: "inline-source-map",
-	plugins: [
-		new webpack.NamedModulesPlugin()
-	]
+  devtool: "inline-source-map",
+  plugins: [ new webpack.NamedModulesPlugin() ]
 }

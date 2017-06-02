@@ -1,3 +1,4 @@
+import webpack from "webpack"
 import path from "path"
 import merge from "webpack-merge"
 import loadersFn from "./loaders"
@@ -16,7 +17,10 @@ export default merge.smart({
     extensions: [ ".js", ".jsx" ]
   },
   plugins: [
-
+    new webpack.EnvironmentPlugin([
+      "NODE_ENV",
+      "REACT_ON_RAILS_ENV"
+    ])
   ]
 }, envConfig)
 
