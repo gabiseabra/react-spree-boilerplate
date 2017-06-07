@@ -11,7 +11,7 @@ export const createStore = hydrateStore({
   saga,
   context(railsContext) {
     return {
-      apiClient: ApiClient(railsContext.href)
+      apiClient: new ApiClient(railsContext.href)
     }
   }
 })
