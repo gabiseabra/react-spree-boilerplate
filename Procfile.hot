@@ -1,3 +1,3 @@
-web: REACT_ON_RAILS_ENV=HOT rails s -p 3000
+web: HOT_RELOADING=YES rails s -p 3000
 
-assets: npm run clean && npm run translate && npm run dev-server
+assets: npm run clean && npm run translate && npm run build:vendor && npm run dev-server
