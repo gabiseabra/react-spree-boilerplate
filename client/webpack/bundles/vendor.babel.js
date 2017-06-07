@@ -1,11 +1,9 @@
 import path from "path"
 import webpack from "webpack"
-import merge from "webpack-merge"
-import config, { loaders } from "../config"
 
-const outputDir = path.join(config.output.path, "vendor")
+const outputDir = path.join(__dirname, "../../../app/assets/webpack/vendor")
 
-export default merge.smart(config, {
+export default {
   entry: {
     // vendor: [],
     react: [
@@ -22,8 +20,8 @@ export default merge.smart(config, {
     filename: "[name].dll.js",
     library: "[name]_dll"
   },
-  module: {
-    rules: loaders({ styles: false })
+  resolve: {
+    extensions: [ ".js", ".jsx" ]
   },
   plugins: [
     new webpack.DllPlugin({
@@ -31,6 +29,6 @@ export default merge.smart(config, {
       name: "[name]_dll"
     })
   ]
-})
+}
 
 export { outputDir }
