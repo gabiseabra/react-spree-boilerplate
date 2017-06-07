@@ -6,8 +6,14 @@ import _withStore from "../../../lib/withStore"
 
 export const STORE_NAME = "spreeStore"
 
-export const createStore = hydrateStore(store, saga, (context) => ({
-  apiClient: new ApiClient(context.href)
-}))
+export const createStore = hydrateStore({
+  store,
+  saga,
+  context(railsContext) {
+    return {
+      apiClient: ApiClient(railsContext.href)
+    }
+  }
+})
 
 export const withStore = _withStore.bind(undefined, STORE_NAME)
