@@ -8,7 +8,14 @@
   },
   "scripts": {
     "postinstall": "cd client && yarn install",
-    "rails-server": "echo 'visit http://localhost:3000/hello_world' && foreman start -f Procfile.dev",
+    "start": "foreman start",
+    "start:dev": "foreman start -f Procfile.dev",
+    "build": "cd client && npm run build --",
+    "build:dev": "cd client && npm run build:dev --",
+    "build:test": "cd client && npm run build:test --",
+    "build:prod": "cd client && npm run build:prod --",
+    "translate": "bundle exec rake react_on_rails:locale",
+    "clean": "rm -r app/assets/webpack/*",
     "test": "rspec"
   }
 }
