@@ -28,7 +28,10 @@ export default merge.smart(config, {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin("common"),
-    new ExtractTextPlugin("[name]-bundle.css"),
+    new ExtractTextPlugin({
+      filename: "[name]-bundle.css",
+      disable: (process.env.NODE_ENV === "development")
+    }),
     new webpack.DefinePlugin({
       __SSR__: false
     }),

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "prebuild": "NODE_ENV=production npm run build:vendor",
+    "dev-server": "webpack-dev-server --config webpack/devServer.babel.js --hot --inline",
     "build": "webpack --config webpack/config.babel.js --colors --progress",
     "build:dev": "NODE_ENV=development npm run build --",
     "build:test": "NODE_ENV=test npm run build --",
@@ -29,7 +30,8 @@
     "react-on-rails": "7.0.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
-    "redux-saga": "^0.15.3"
+    "redux-saga": "^0.15.3",
+    "webpack-dev-server": "^2.4.5"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

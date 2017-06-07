@@ -1,0 +1,3 @@
+web: REACT_ON_RAILS_ENV=HOT rails s -p 3000
+
+assets: npm run clean && npm run translate && npm run dev-server

@@ -11,7 +11,8 @@ const context = path.resolve(__dirname, "../..")
 export default merge.smart({
   context,
   output: {
-    path: outputDir
+    path: outputDir,
+    publicPath: "/"
   },
   resolve: {
     extensions: [ ".js", ".jsx" ]
