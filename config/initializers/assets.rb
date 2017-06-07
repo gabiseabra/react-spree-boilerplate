@@ -14,8 +14,5 @@ Rails.application.config.assets.paths << Rails.root.join("app", "assets", "webpa
 Rails.application.config.assets.precompile += [
   "application.js",
   "application.css",
-  "vendor_bundle.js",
-  "vendor_bundle.css",
-  "spree_bundle.js",
-  "spree_bundle.css"
+  "vendor_bundle.js"
 ]

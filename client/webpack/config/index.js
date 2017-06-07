@@ -4,7 +4,7 @@ import merge from "webpack-merge"
 import loadersFn from "./loaders"
 import envConfig from "./env"
 
-const outputDir = path.join(__dirname, "../../../app/assets/webpack")
+const outputDir = path.join(__dirname, "../../../public/webpack")
 
 const context = path.resolve(__dirname, "../..")
 
@@ -19,8 +19,7 @@ export default merge.smart({
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      NODE_ENV: "",
-      REACT_ON_RAILS_ENV: ""
+      NODE_ENV: ""
     })
   ]
 }, envConfig)

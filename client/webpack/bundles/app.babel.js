@@ -1,5 +1,6 @@
 import webpack from "webpack"
 import merge from "webpack-merge"
+import ManifestPlugin from "webpack-manifest-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import config, { loaders } from "../config"
 import vendorConfig, { outputDir as vendorDir } from "./vendor.babel"
@@ -34,6 +35,9 @@ export default merge.smart(config, {
     }),
     new webpack.DefinePlugin({
       __SSR__: false
+    }),
+    new ManifestPlugin({
+      writeToFileEmit: true
     }),
     ...(vendors.map(fileName => (
       new webpack.DllReferencePlugin({

@@ -4,11 +4,11 @@
     <%= render 'shared/head' %>
     <%= canonical_tag current_store.url %>
     <%= render 'spree/shared/paths' %>
-    <%= env_stylesheet_link_tag    static: 'spree_bundle', hot: 'vendor_bundle', media: 'all' %>
-    <%= env_javascript_include_tag static: 'spree_bundle', hot: 'vendor_bundle', media: 'all' %>
-    <%= env_stylesheet_link_tag     hot: 'localhost:3500/spree-bundle.css' %>
-    <%= env_javascript_include_tag  hot: [ 'localhost:3500/common-bundle.js',
-                                          'localhost:3500/spree-bundle.js'], media: 'all' %>
+    <%= javascript_include_tag 'vendor_bundle' %>
+    <%= javascript_pack_tag 'common' %>
+    <%= stylesheet_pack_tag 'common', media: 'all' %>
+    <%= javascript_pack_tag 'spree' %>
+    <%= stylesheet_pack_tag 'spree', media: 'all' %>
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
