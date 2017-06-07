@@ -24,6 +24,7 @@
     "antd": "^2.10.0",
     "babel-polyfill": "^6.23.0",
     "es5-shim": "^4.5.9",
+    "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-on-rails": "7.0.4",

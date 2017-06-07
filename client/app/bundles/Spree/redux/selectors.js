@@ -1,3 +1,5 @@
-export const getCount = (state) => state.counter.count
+export const getProduct = (state, id) => state.products[id]
 
-export const isCounterSynched = (state) => state.counter.synched
+export const getProductError = (state, id) => state.products[id].error
+
+export const isProductLoaded = (state, id) => state.products[id] && !state.products[id].error
