@@ -32,9 +32,13 @@ module ReduxStoreHydration
       self.store_hydration_hooks = [].freeze
     end
 
-    def collection(name, &block)
+    def collection(name, *args, &block)
+      options = args.extract_options!
       hash = store_collections.dup
-      hash[name.to_s] = block
+      hash[name.to_s] = {
+        partial: options[:partial],
+        selector: block
+      }
       self.store_collections = hash.freeze
     end
 
@@ -49,10 +53,18 @@ module ReduxStoreHydration
   end
 
   def hydrate_collections(store_name)
-    class_collections.each do |name, value|
-      value = self.instance_eval &value
+    class_collections.each do |name, v|
+      value = self.instance_eval &v[:selector]
       value = normalize_collection name, value
-      redux_store store_name, props: value
+      if v[:partial]
+        value = render_to_string partial: v[:partial], locals: value, formats: :json
+        value = JSON.parse(value)
+
+        respond_to do |f|
+          f.html
+        end
+      end
+      redux_store store_name, props: { name => value }
     end
   end
 
