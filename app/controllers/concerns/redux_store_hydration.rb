@@ -102,7 +102,7 @@ module ReduxStoreHydration
   end
 
   def render(*args)
-    hydrate
+    hydrate if request.format.to_sym == :html
     super(*args)
   end
 end
