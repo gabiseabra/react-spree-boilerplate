@@ -31,7 +31,9 @@ export default merge.smart(config, {
     new webpack.optimize.CommonsChunkPlugin("common"),
     new ExtractTextPlugin({
       filename: "[name]-bundle.css",
-      disable: (process.env.NODE_ENV === "development")
+      // Disable css files in hot mode, stylesheets are
+      // added to the document with javascript instead
+      disable: (process.argv.indexOf("--hot") !== -1)
     }),
     new webpack.DefinePlugin({
       __SSR__: false

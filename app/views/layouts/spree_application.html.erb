@@ -6,9 +6,9 @@
     <%= render 'spree/shared/paths' %>
     <%= javascript_include_tag 'vendor_bundle' %>
     <%= javascript_pack_tag 'common' %>
-    <%= stylesheet_pack_tag 'common', media: 'all', enabled_when_hot_loading: true %>
+    <%= stylesheet_pack_tag 'common', media: 'all' %>
     <%= javascript_pack_tag 'spree' %>
-    <%= stylesheet_pack_tag 'spree', media: 'all', enabled_when_hot_loading: true %>
+    <%= stylesheet_pack_tag 'spree', media: 'all' %>
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
