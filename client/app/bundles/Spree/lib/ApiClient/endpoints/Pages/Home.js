@@ -1,5 +1,5 @@
 import Endpoint from "../Endpoint"
-import { Product } from "../Products"
+import { Product } from "../../models/Product"
 
 export default class HomePage extends Endpoint {
   path = "/"
