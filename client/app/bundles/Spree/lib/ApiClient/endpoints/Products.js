@@ -1,15 +1,5 @@
-import qs from "querystring"
 import Endpoint from "./Endpoint"
-
-export class Product {
-  constructor(data) {
-    this.id = data.id
-    this.slug = data.slug
-    this.name = data.name
-    this.description = data.description
-    this.price = parseFloat(data.price) || undefined
-  }
-}
+import Product from "../models/Product"
 
 export default class Products extends Endpoint {
   path = "/api/v1/products"
@@ -21,14 +11,15 @@ export default class Products extends Endpoint {
       .then(this.parse)
   }
 
-  getPage(page = 1, count) {
-    const query = qs.stringify({ page, per_page: count })
+  getPage(options) {
+    const query = this.query.paginate(options)
+    // qs.stringify({ page, per_page: count })
     return this.api.fetch(`${this.path}/?${query}`)
       .then(this.parseAll)
   }
 
-  search(term, predicate = "name_cont") {
-    const query = qs.stringify({ [`q[${predicate}]`]: term })
+  search(predicates) {
+    const query = this.query.search(predicates)
     return this.api.fetch(`${this.path}/?${query}`)
       .then(this.parseAll)
   }
