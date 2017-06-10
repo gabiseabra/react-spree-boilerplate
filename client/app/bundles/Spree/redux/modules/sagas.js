@@ -1,1 +1,1 @@
-export { default as counter } from "./counter/saga"
+export { default as products } from "./products/saga"
