@@ -4,7 +4,9 @@ module ReduxStoreHydration
 
   included do
     class_attribute :store_hydration_hooks
+    class_attribute :store_collections
     clear_hydrate
+    clear_collection
   end
 
   module ClassMethods
@@ -29,11 +31,29 @@ module ReduxStoreHydration
     def clear_hydrate
       self.store_hydration_hooks = [].freeze
     end
+
+    def collection(name, &block)
+      hash = store_collections.dup
+      hash[name.to_s] = block
+      self.store_collections = hash.freeze
+    end
+
+    def clear_collection
+      self.store_collections = {}.freeze
+    end
   end
 
   def hydrate_taxonomies(store_name)
     @taxonomies ||= Spree::Taxonomy.includes(root: :children)
     redux_store store_name, props: { taxonomies: @taxonomies }
+  end
+
+  def hydrate_collections(store_name)
+    class_collections.each do |name, value|
+      value = self.instance_eval &value
+      value = normalize_collection name, value
+      redux_store store_name, props: value
+    end
   end
 
   def hydrate
@@ -55,6 +75,18 @@ module ReduxStoreHydration
     end if action_name
 
     hooks
+  end
+
+  def class_collections
+    self.class.store_collections.dup
+  end
+
+  def normalize_collection(name, record)
+    if record.is_a? ActiveRecord::Relation
+      { name => record.to_a }
+    else
+      record
+    end
   end
 
   def render(*args)
