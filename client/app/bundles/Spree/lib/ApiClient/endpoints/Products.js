@@ -10,13 +10,11 @@ export default class Products extends Endpoint {
 
   getPage = (options) => {
     const query = this.query.paginate(options)
-    return this.api.fetch(`${this.path}/?${query}`)
-      .then(this.parseAll)
+    return this.fetch(`${this.path}/?${query}`)
   }
 
   search = (predicates) => {
     const query = this.query.search(predicates)
-    return this.api.fetch(`${this.path}/?${query}`)
-      .then(this.parseAll)
+    return this.fetch(`${this.path}/?${query}`)
   }
 }

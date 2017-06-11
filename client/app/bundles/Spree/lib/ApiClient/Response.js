@@ -1,3 +1,4 @@
+import _ from "lodash"
 import ExtendableError from "es6-error"
 
 export class ResponseError extends ExtendableError {
@@ -8,7 +9,6 @@ export class ResponseError extends ExtendableError {
   }
 }
 
-/*
 export class Pagination {
   constructor(data) {
     this.location = data.location
@@ -19,19 +19,33 @@ export class Pagination {
     this.totalCount = data.total_count
     this.perPage = data.per_page
   }
+
+  pageQuery = (page) => ({
+    page,
+    per_page: this.perPage
+  })
 }
-*/
 
 export default class Response {
-  static async parse(response) {
+  static async parse(response, options) {
     if(!response.ok) {
       throw new ResponseError(response)
     }
     const json = await response.json()
-    return new Response(json)
+    return new Response(json, options)
   }
 
-  constructor(data) {
-    this.data = data
+  constructor(data, options) {
+    if("collection" in options) {
+      this.data = data[options.collection]
+      if("pagination" in data) {
+        this.pagination = new Pagination(data.pagination)
+      }
+    } else {
+      this.data = data
+    }
+    if("parser" in options) {
+      this.data = this.data.map(options.parser)
+    }
   }
 }

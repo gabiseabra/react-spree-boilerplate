@@ -10,15 +10,14 @@ export default class ProductsPage extends Endpoint {
   constructor(apiClient) {
     const router = crossroads.create()
     super(apiClient, router)
-    router.addRoute(`${this.path}`, this.index)
-    router.addRoute(`${this.path}/:id`, this.show)
+    router.addRoute(`${this.path}{?query}`, this.index)
+    router.addRoute(`${this.path}/{id}`, this.show)
   }
 
-  index = (options) => {
+  index = (options = {}) => {
     const query = this.query.paginate(options)
-    return this.api.fetch(`${this.path}/?${query}`)
-      .then(this.parseAll)
+    return this.fetch(`${this.path}/?${query}`)
   }
 
-  show = ({ id }) => this.api.fetch(`${this.path}/${id}`).then(this.parse)
+  show = (id) => this.fetch(`${this.path}/${id}`)
 }

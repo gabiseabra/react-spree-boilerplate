@@ -8,13 +8,15 @@ export default class Endpoint {
     }
   }
 
+  fetch = (url, options) => this.api.fetch(url, { parser: this.parse, ...options })
+
   parse = data => new this.Entity(data)
 
   parseAll = data => data.map(this.parse)
 
   query = {
-    paginate({ page, count }) {
-      return qs.stringify({ page, per_page: count })
+    paginate({ page, per_page }) {
+      return qs.stringify({ page, per_page })
     },
     search(predicates) {
       const query = {}
