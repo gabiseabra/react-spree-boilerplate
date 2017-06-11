@@ -5,7 +5,10 @@ const outputDir = path.join(__dirname, "../../../app/assets/webpack/vendor")
 
 export default {
   entry: {
-    // vendor: [],
+    vendor: [
+      "isomorphic-fetch",
+      "es6-error"
+    ],
     react: [
       "react",
       "react-dom",

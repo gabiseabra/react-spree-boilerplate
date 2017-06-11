@@ -6,8 +6,10 @@ export default class HomePage extends Endpoint {
 
   Entity = Product
 
-  index(page = 1) {
-    return this.api.fetch(`${this.path}/?page=${page}`)
+  index = (options) => {
+    const query = this.query.paginate(options)
+    return this.api.fetch(`${this.path}/?${query}`)
       .then(this.parseAll)
   }
+
 }

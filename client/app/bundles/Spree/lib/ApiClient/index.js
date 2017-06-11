@@ -1,3 +1,5 @@
+import fetch from "isomorphic-fetch"
+import ResponseError from "./ResponseError"
 import {
   Pages,
   Products
@@ -21,5 +23,11 @@ export default class ApiClient {
       headers[TOKEN_HEADER] = token
     }
     return fetch(url, { ...options, headers })
+      .then(response => {
+        if(response.status >= 300 || response.status < 200) {
+          throw new ResponseError(response)
+        }
+        return response.json()
+      })
   }
 }

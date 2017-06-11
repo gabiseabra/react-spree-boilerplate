@@ -6,19 +6,15 @@ export default class Products extends Endpoint {
 
   Entity = Product
 
-  get(id) {
-    return this.api.fetch(`${this.path}/${id}`)
-      .then(this.parse)
-  }
+  get = (id) => this.api.fetch(`${this.path}/${id}`).then(this.parse)
 
-  getPage(options) {
+  getPage = (options) => {
     const query = this.query.paginate(options)
-    // qs.stringify({ page, per_page: count })
     return this.api.fetch(`${this.path}/?${query}`)
       .then(this.parseAll)
   }
 
-  search(predicates) {
+  search = (predicates) => {
     const query = this.query.search(predicates)
     return this.api.fetch(`${this.path}/?${query}`)
       .then(this.parseAll)
