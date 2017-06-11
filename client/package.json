@@ -24,17 +24,19 @@
   "dependencies": {
     "antd": "^2.10.0",
     "babel-polyfill": "^6.23.0",
-    "crossroads": "^0.12.2",
     "es5-shim": "^4.5.9",
     "es6-error": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
+    "querystring": "^0.2.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-on-rails": "^8.0.2",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
-    "redux-saga": "^0.15.3"
+    "redux-saga": "^0.15.3",
+    "universal-router": "^3.2.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

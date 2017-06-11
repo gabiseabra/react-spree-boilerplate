@@ -1,14 +1,13 @@
 import qs from "querystring"
 
 export default class Endpoint {
-  constructor(apiClient, router) {
+  path = ""
+
+  constructor(apiClient) {
     this.api = apiClient
-    if(router) {
-      this.api.router.pipe(router)
-    }
   }
 
-  fetch = (url, options) => this.api.fetch(url, { parser: this.parse, ...options })
+  fetch = (path, options) => this.api.fetch(`${this.path}${path}`, { parser: this.parse, ...options })
 
   parse = data => new this.Entity(data)
 

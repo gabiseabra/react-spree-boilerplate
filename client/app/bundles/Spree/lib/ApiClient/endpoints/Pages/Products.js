@@ -1,23 +1,20 @@
-import crossroads from "crossroads"
 import Endpoint from "../Endpoint"
 import { Product } from "../../models/Product"
 
 export default class ProductsPage extends Endpoint {
-  path = "/products"
-
   Entity = Product
 
-  constructor(apiClient) {
-    const router = crossroads.create()
-    super(apiClient, router)
-    router.addRoute(`${this.path}{?query}`, this.index)
-    router.addRoute(`${this.path}/{id}`, this.show)
+  routes() {
+    return [
+      { path: "/products", action: this.index },
+      { path: "/products/:id", action: this.show }
+    ]
   }
 
   index = (options = {}) => {
     const query = this.query.paginate(options)
-    return this.fetch(`${this.path}/?${query}`)
+    return this.fetch(`/products?${query}`)
   }
 
-  show = (id) => this.fetch(`${this.path}/${id}`)
+  show = ({ params: { id } }) => this.fetch(`/products/${id}`)
 }
