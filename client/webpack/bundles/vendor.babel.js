@@ -8,6 +8,7 @@ export default {
     vendor: [
       "isomorphic-fetch",
       "es6-error",
+      "crossroads",
       "react",
       "react-dom",
       "react-redux",

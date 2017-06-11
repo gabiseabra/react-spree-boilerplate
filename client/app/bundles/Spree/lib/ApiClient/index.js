@@ -1,4 +1,5 @@
 import fetch from "isomorphic-fetch"
+import crossroads from "crossroads"
 import ResponseError from "./ResponseError"
 import {
   Pages,
@@ -9,13 +10,16 @@ export default class ApiClient {
   static TOKEN_HEADER = "X-Spree-Token"
 
   constructor(url, token) {
+    this.router = crossroads.create()
     this.url = url
     this.token = token
     this.pages = new Pages(this)
     this.products = new Products(this)
   }
 
-  fetch(url, options = {}) {
+  route = (path) => this.router.parse(path)
+
+  fetch = (url, options = {}) => {
     const { TOKEN_HEADER } = this.constructor
     const headers = options.headers || {}
     const token = this.token || options.token

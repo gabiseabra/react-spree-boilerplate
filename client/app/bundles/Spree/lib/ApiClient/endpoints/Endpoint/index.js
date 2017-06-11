@@ -1,13 +1,19 @@
 import qs from "querystring"
+import Page from "./Page"
 
 export default class Endpoint {
-  constructor(apiClient) {
+  constructor(apiClient, router) {
     this.api = apiClient
+    if(router) {
+      this.api.router.pipe(router)
+    }
   }
 
   parse = data => new this.Entity(data)
 
   parseAll = data => data.map(this.parse)
+
+  parsePage = (options) => new Page(options)
 
   query = {
     paginate({ page, count }) {
