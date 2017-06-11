@@ -33,13 +33,15 @@ export default class Response {
   }
 
   constructor(data, options) {
-    if("collection" in options) {
+    if(options.collection) {
       this.data = data[options.collection]
     } else {
       this.data = data
     }
-    this.pagination = new Pagination(data)
-    if("parser" in options) {
+    if(data.per_page) {
+      this.pagination = new Pagination(data)
+    }
+    if(options.parser) {
       this.data = this.data.map(options.parser)
     }
   }

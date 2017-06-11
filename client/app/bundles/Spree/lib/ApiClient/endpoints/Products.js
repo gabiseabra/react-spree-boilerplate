@@ -4,15 +4,11 @@ import Product from "../models/Product"
 export default class Products extends Endpoint {
   Entity = Product
 
-  get = (id) => this.api.fetch(`/api/v1/products/${id}`).then(this.parse)
-
-  getPage = (options) => {
-    const query = this.query.paginate(options)
-    return this.fetch(`/api/v1/products/?${query}`)
+  routes() {
+    return [
+      { path: "/api/products/:id", action: this.show }
+    ]
   }
 
-  search = (predicates) => {
-    const query = this.query.search(predicates)
-    return this.fetch(`/api/v1/products/?${query}`)
-  }
+  show = ({ params: { id } }) => this.api.fetch(`/api/v1/products/${id}`)
 }

@@ -16,7 +16,7 @@ export default class ApiClient {
     Accept: "application/json"
   }
 
-  constructor(url, token) {
+  constructor({ url: targetUrl, token }) {
     const { TOKEN_HEADER } = this.constructor
 
     this.endpoints = {
@@ -25,11 +25,13 @@ export default class ApiClient {
     }
     _.assign(this, this.endpoints)
 
-    this.url = url
+    this.url = targetUrl
     this.router = new Router(this.routes())
     if(token) {
       this.defaultHeaders[TOKEN_HEADER] = token
     }
+
+    window.$$apiClient = this
   }
 
   routes() {
@@ -46,7 +48,7 @@ export default class ApiClient {
   route = (target, context = {}) => {
     const { pathname, query: queryString } = url.parse(target)
     const query = qs.parse(queryString)
-    return this.router.resolve({ ...context, query, path: pathname })
+    return this.router.resolve({ ...context, query, queryString, path: pathname })
   }
 
   fetch = (path, options = {}) => {

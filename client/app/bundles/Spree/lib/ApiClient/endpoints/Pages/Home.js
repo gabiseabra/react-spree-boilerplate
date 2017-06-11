@@ -10,10 +10,5 @@ export default class HomePage extends Endpoint {
     ]
   }
 
-  index = (context) => {
-    const query = this.query.paginate(context)
-    return this.api.fetch(`/?${query}`, {
-      collection: "products"
-    })
-  }
+  index = ({ queryString }) => this.api.fetch(`/?${queryString}`, { collection: "products" })
 }

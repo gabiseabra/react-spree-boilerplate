@@ -11,10 +11,7 @@ export default class ProductsPage extends Endpoint {
     ]
   }
 
-  index = (options = {}) => {
-    const query = this.query.paginate(options)
-    return this.fetch(`/products?${query}`)
-  }
+  index = ({ queryString }) => this.fetch(`/products?${queryString}`, { collection: "products" })
 
   show = ({ params: { id } }) => this.fetch(`/products/${id}`)
 }

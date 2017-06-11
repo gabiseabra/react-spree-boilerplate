@@ -9,7 +9,7 @@ export default function create({ apiClient }) {
     if(response.error) {
       yield put(actions.fail(id, response.error))
     } else {
-      yield put(actions.succeed(id, response))
+      yield put(actions.succeed(id, response.data))
     }
   }
 
