@@ -7,9 +7,7 @@ export default {
   entry: {
     vendor: [
       "isomorphic-fetch",
-      "es6-error"
-    ],
-    react: [
+      "es6-error",
       "react",
       "react-dom",
       "react-redux",
