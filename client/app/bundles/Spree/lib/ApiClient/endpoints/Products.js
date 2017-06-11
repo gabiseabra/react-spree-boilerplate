@@ -10,5 +10,5 @@ export default class Products extends Endpoint {
     ]
   }
 
-  show = ({ params: { id } }) => this.api.fetch(`/api/v1/products/${id}`)
+  show = ({ params: { id } }) => this.fetch(`/api/v1/products/${id}`)
 }

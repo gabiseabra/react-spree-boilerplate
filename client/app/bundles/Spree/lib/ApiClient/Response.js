@@ -1,4 +1,3 @@
-import _ from "lodash"
 import ExtendableError from "es6-error"
 
 export class ResponseError extends ExtendableError {
@@ -32,17 +31,13 @@ export default class Response {
     return new Response(json, options)
   }
 
-  constructor(data, options) {
-    if(options.collection) {
-      this.data = data[options.collection]
-    } else {
-      this.data = data
-    }
-    if(data.per_page) {
-      this.pagination = new Pagination(data)
-    }
-    if(options.parser) {
-      this.data = this.data.map(options.parser)
+  constructor(json, { collection, parser }) {
+    let data = (collection && json[collection]) ? json[collection] : json
+    if(parser) data = parser(data)
+    this.collection = collection
+    this.data = data
+    if(json.per_page) {
+      this.pagination = new Pagination(json)
     }
   }
 }
