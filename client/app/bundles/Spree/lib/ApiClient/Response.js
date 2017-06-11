@@ -11,10 +11,7 @@ export class ResponseError extends ExtendableError {
 
 export class Pagination {
   constructor(data) {
-    this.location = data.location
     this.currentPage = data.current_page
-    this.nextPage = data.next_page
-    this.prevPage = data.prev_page
     this.totalPages = data.total_pages
     this.totalCount = data.total_count
     this.perPage = data.per_page
@@ -38,12 +35,10 @@ export default class Response {
   constructor(data, options) {
     if("collection" in options) {
       this.data = data[options.collection]
-      if("pagination" in data) {
-        this.pagination = new Pagination(data.pagination)
-      }
     } else {
       this.data = data
     }
+    this.pagination = new Pagination(data)
     if("parser" in options) {
       this.data = this.data.map(options.parser)
     }
