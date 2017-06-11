@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch"
 import crossroads from "crossroads"
-import ResponseError from "./ResponseError"
+import Response from "./Response"
 import {
   Pages,
   Products
@@ -26,12 +26,6 @@ export default class ApiClient {
     if(token && !(TOKEN_HEADER in headers)) {
       headers[TOKEN_HEADER] = token
     }
-    return fetch(url, { ...options, headers })
-      .then(response => {
-        if(response.status >= 300 || response.status < 200) {
-          throw new ResponseError(response)
-        }
-        return response.json()
-      })
+    return fetch(url, { ...options, headers }).then(Response.parse)
   }
 }
