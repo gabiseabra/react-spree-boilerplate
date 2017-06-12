@@ -1,3 +1,5 @@
+import url from "url"
+import qs from "querystring"
 import ExtendableError from "es6-error"
 
 export class ResponseError extends ExtendableError {
@@ -8,36 +10,39 @@ export class ResponseError extends ExtendableError {
   }
 }
 
-export class Pagination {
-  constructor(data) {
-    this.currentPage = data.current_page
-    this.totalPages = data.total_pages
-    this.totalCount = data.total_count
-    this.perPage = data.per_page
-  }
-
-  pageQuery = (page) => ({
-    page,
-    per_page: this.perPage
-  })
-}
-
 export default class Response {
-  static async parse(response, options) {
+  static async parse(response, targetUrl, options) {
     if(!response.ok) {
       throw new ResponseError(response)
     }
     const json = await response.json()
-    return new Response(json, options)
+    return new Response(json, targetUrl, options)
   }
 
-  constructor(json, { collection, parser }) {
+  constructor(json, targetUrl, { collection, parser }) {
     let data = (collection && json[collection]) ? json[collection] : json
     if(parser) data = parser(data)
     this.collection = collection
     this.data = data
+    this.url = url.parse(targetUrl)
+    this.query = qs.parse(this.url.query)
     if(json.per_page) {
-      this.pagination = new Pagination(json)
+      this.pagination = {
+        currentPage: json.current_page,
+        totalPages: json.total_pages,
+        totalCount: json.total_count,
+        perPage: json.per_page
+      }
     }
+  }
+
+  get search() {
+    const searchParams = {}
+    _.keys(this.query).forEach(key => {
+      if(/^q\[[^\]]+\]$/.test(key)) {
+        searchParams[key] = this.query[key]
+      }
+    })
+    return searchParams
   }
 }

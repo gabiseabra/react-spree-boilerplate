@@ -10,5 +10,5 @@ export default class HomePage extends Endpoint {
     ]
   }
 
-  index = ({ queryString }) => this.api.fetch(`/?${queryString}`, { collection: "products" })
+  index = (options) => this.api.fetch(`/?${this.query(options)}`, { collection: "products" })
 }
