@@ -32,5 +32,6 @@ export default function create(context) {
       store.task = store.runSaga(createSaga(context))
     })
   }
+  window.$$store = store
   return store
 }
