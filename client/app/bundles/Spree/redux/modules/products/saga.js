@@ -5,7 +5,7 @@ import * as actions from "./index"
 export default function create({ apiClient }) {
   function * request(id) {
     yield put(actions.request(id))
-    const response = yield call(apiClient.products.get, id)
+    const response = yield call(apiClient.route, `/api/products/${id}`)
     if(response.error) {
       yield put(actions.fail(id, response.error))
     } else {
