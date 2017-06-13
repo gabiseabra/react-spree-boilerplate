@@ -1,51 +1,83 @@
 // import _ from "lodash"
 // import { HYDRATE } from "../../../../../lib/hydrateStore"
+import { combineReducers } from "redux"
 
 export const LOAD = "page/LOAD"
 export const LOAD_PAGE = "page/LOAD_PAGE"
 export const REQUEST = "page/REQUEST"
+export const REQUEST_PAGE = "page/REQUEST_PAGE"
 export const SUCCESS = "page/SUCCESS"
 export const FAILURE = "page/FAILURE"
 
-export const load = (location, page = 1, query) => ({ type: LOAD_PAGE, location, page, query })
+export const load = (path, search, page = 1, perPage) => ({
+  type: LOAD_PAGE,
+  search,
+  path,
+  page,
+  perPage
+})
 export const loadPage = (page) => ({ type: LOAD_PAGE, page })
-export const request = (location, page = 1) => ({ type: REQUEST, location, page })
-export const succeed = (page, data, pagination) => ({ type: SUCCESS, page, data, pagination })
-export const fail = (page, error) => ({ type: FAILURE, page, error })
+export const request = (path, search, page = 1) => ({ type: REQUEST, search, path, page })
+export const requestPage = (page) => ({ type: REQUEST_PAGE, page })
+export const fail = (page, error, pagination) => ({
+  type: FAILURE,
+  page,
+  error,
+  pagination
+})
+export const succeed = (page, data, pagination) => ({
+  type: SUCCESS,
+  page,
+  data,
+  pagination
+})
 
 const initialState = {
-  data: {},
-  location: undefined,
-  search: undefined,
-  pagination: undefined
+  pages: {},
+  location: {
+    path: undefined,
+    search: undefined,
+    pagination: undefined
+  }
 }
 
-export default function products(state = initialState, action) {
+function pages(state = initialState.pages, action) {
   switch(action.type) {
     case REQUEST:
-      return {
-        data: (state.location === action.location ? state.data : {}),
-        location: action.location,
-        pagination: undefined
-      }
+      return {}
     case SUCCESS:
       return {
         ...state,
-        pagination: action.pagination,
-        data: {
-          ...state.data,
-          [action.page]: action.data
-        }
+        [action.page]: action.data
       }
     case FAILURE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          [action.page]: { error: action.error }
-        }
+        [action.page]: { error: action.error }
       }
     default:
       return state
   }
 }
+
+function location(state = initialState.location, action) {
+  switch(action.type) {
+    case REQUEST:
+      return {
+        ...state,
+        path: action.path,
+        search: action.search,
+        pagination: undefined
+      }
+    case SUCCESS:
+    case FAILURE:
+      return {
+        ...state,
+        pagination: action.pagination
+      }
+    default:
+      return state
+  }
+}
+
+export default combineReducers({ pages, location })
