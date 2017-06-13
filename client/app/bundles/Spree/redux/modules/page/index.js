@@ -37,6 +37,7 @@ const initialState = {
   location: {
     path: undefined,
     search: undefined,
+    currentPage: undefined,
     pagination: undefined
   }
 }
@@ -61,18 +62,26 @@ function pages(state = initialState.pages, action) {
 }
 
 function location(state = initialState.location, action) {
+  const currentPage = action.page || (action.pagination && action.pagination.currentPage)
   switch(action.type) {
     case REQUEST:
       return {
         ...state,
+        currentPage,
         path: action.path,
         search: action.search,
         pagination: undefined
+      }
+    case REQUEST_PAGE:
+      return {
+        ...state,
+        currentPage
       }
     case SUCCESS:
     case FAILURE:
       return {
         ...state,
+        currentPage,
         pagination: action.pagination
       }
     default:

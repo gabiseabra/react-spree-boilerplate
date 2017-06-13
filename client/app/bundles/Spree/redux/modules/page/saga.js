@@ -28,7 +28,7 @@ export default function create(context) {
 
   function * loadPage({ page: requestedPage }) {
     const page = parseInt(requestedPage)
-    const loaded = yield select(isPageLoaded, page)
+    const loaded = yield select(isPageLoaded, { page })
     const location = yield select(getLocation)
     const perPage = (location.pagination && location.pagination.perPage) || undefined
     if(!isNaN(page) && page >= 1 && !loaded) {

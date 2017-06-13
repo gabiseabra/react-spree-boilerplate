@@ -35,6 +35,7 @@
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-saga": "^0.15.3",
+    "reselect": "^3.0.1",
     "universal-router": "^3.2.0",
     "url": "^0.11.0"
   },
