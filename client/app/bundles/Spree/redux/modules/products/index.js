@@ -23,7 +23,7 @@ export default function products(state = initialState, action) {
     case FAILURE:
       return {
         ...state,
-        [action.id]: { error: action.data.error }
+        [action.id]: { error: action.error }
       }
     /* eslint-disable no-case-declarations */
     case HYDRATE:

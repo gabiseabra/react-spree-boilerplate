@@ -1,3 +1,4 @@
+import _ from "lodash"
 import url from "url"
 import qs from "querystring"
 import ExtendableError from "es6-error"
@@ -26,7 +27,7 @@ export default class Response {
     this.data = data
     this.url = url.parse(targetUrl)
     this.query = qs.parse(this.url.query)
-    if(json.per_page) {
+    if("per_page" in json) {
       this.pagination = {
         currentPage: json.current_page,
         totalPages: json.total_pages,

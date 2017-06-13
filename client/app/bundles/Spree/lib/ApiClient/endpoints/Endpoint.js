@@ -3,9 +3,11 @@ import qs from "querystring"
 
 export const searchQuery = (predicates) => {
   const query = {}
-  predicates.keys().forEach(key => {
-    query[`q[${key}]`] = predicates[key]
-  })
+  if(predicates) {
+    predicates.keys().forEach(key => {
+      query[`q[${key}]`] = predicates[key]
+    })
+  }
   return query
 }
 
@@ -17,10 +19,13 @@ export default class Endpoint {
   }
 
   query({ search, page, perPage }) {
-    const query = [].concat(
-      paginationQuery(page, perPage),
-      searchQuery(search)
-    )
+    const query = _({})
+      .assign(
+        paginationQuery(page, perPage),
+        searchQuery(search)
+      )
+      .omitBy(_.isEmpty)
+      .value()
     return qs.stringify(query)
   }
 

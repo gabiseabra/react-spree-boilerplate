@@ -54,6 +54,7 @@ export default class ApiClient {
   fetch = (path, options = {}) => {
     const headers = _.assign({}, options.headers || {}, this.defaultHeaders)
     return fetch(path, { ...options, headers })
-      .then(response => Response.parse(response, options))
+      .then(response => Response.parse(response, path, options))
+      .catch(error => ({ error }))
   }
 }
