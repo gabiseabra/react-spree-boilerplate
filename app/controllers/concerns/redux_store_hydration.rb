@@ -58,11 +58,7 @@ module ReduxStoreHydration
       value = normalize_collection name, value
       if v[:partial]
         value = render_to_string partial: v[:partial], locals: value, formats: :json
-        value = JSON.parse(value)
-
-        respond_to do |f|
-          f.html
-        end
+        value = JSON.parse value
       end
       redux_store store_name, props: { name => value }
     end
@@ -72,6 +68,7 @@ module ReduxStoreHydration
     class_hydration_hooks(action_name.to_s).each do |h|
       method(h[:method]).call h[:store_name]
     end
+    respond_to { |f| f.html }
   end
 
   def class_hydration_hooks(action_name = nil)
