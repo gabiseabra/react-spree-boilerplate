@@ -1,9 +1,20 @@
 import React from "react"
+import PropTypes from "prop-types"
+import Product from "../Product"
+import Pagination from "../Pagination"
 
-const HomePage = ({ products }) => (
+const HomePage = ({ products, pagination }) => (
   <div>
-    Hello World
+    <div>
+      {products.map(p => <Product key={p.id} product={p} />)}
+    </div>
+    {pagination && <Pagination pagination={pagination} />}
   </div>
 )
+
+HomePage.protoTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pagination: PropTypes.object.isRequired
+}
 
 export default HomePage

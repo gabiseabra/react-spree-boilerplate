@@ -28,6 +28,7 @@
     "es6-error": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "querystring": "^0.2.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
