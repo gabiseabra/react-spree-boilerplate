@@ -10,7 +10,7 @@ export const SUCCESS = "page/SUCCESS"
 export const FAILURE = "page/FAILURE"
 
 export const load = (path, search, page = 1, perPage) => ({
-  type: LOAD_PAGE,
+  type: LOAD,
   search,
   path,
   page,
