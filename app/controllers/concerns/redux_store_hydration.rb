@@ -12,14 +12,10 @@ module ReduxStoreHydration
   end
 
   module ClassMethods
-    def hydrate(store_name, *methods)
-      options = methods.extract_options!
-
+    def hydrate(store_name, *methods, **options)
       only_actions = Array(options.delete(:only)).map(&:to_s)
       except_actions = Array(options.delete(:except)).map(&:to_s)
-
       queue = store_hydration_hooks.dup
-
       methods.each do |m|
         queue << {
           store_name: store_name.to_s,
@@ -35,12 +31,12 @@ module ReduxStoreHydration
       self.store_hydration_hooks = [].freeze
     end
 
-    def collection(name, *args, &block)
-      options = args.extract_options!
+    def collection(name, **args, &block)
       hash = store_collections.dup
       hash[name.to_sym] = {
-        partial: options[:partial],
-        locals: options[:locals],
+        partial: args.fetch(:partial, nil),
+        locals: args.fetch(:locals, {}),
+        as: args.fetch(:as, name),
         selector: block
       }
       self.store_collections = hash.freeze
@@ -85,7 +81,7 @@ module ReduxStoreHydration
 
   def render(*args)
     hydrate if request.format.to_sym == :html
-    super(*args)
+    super
   end
 
   private
@@ -100,6 +96,17 @@ module ReduxStoreHydration
         else
           true
         end
+      end
+    end
+
+    # Render template as json
+    def render_to_json(*_, **args)
+      if args[:partial] && args[:collection]
+        JbuilderTemplate.new(view_context) do |json|
+          json.array! args[:collection], args.slice(:partial, :as, :locals)
+        end.attributes!
+      else
+        JSON.parse render_to_string(args)
       end
     end
 
@@ -125,24 +132,20 @@ module ReduxStoreHydration
     # Get class collection json for redux state by name
     def class_collection_json(name)
       collection = class_collection name
-      partial = collection[:partial]
-      locals = collection[:locals]
       record = collection[:record]
-      if partial
-        locals = locals.call(record) if locals.is_a?(Proc)
-        value = render_to_string partial: partial, locals: locals, formats: :json
-        JSON.parse value
+      if collection[:partial]
+        render_to_json(collection.merge(collection: record, formats: :json))
       else
-        record.to_a
+        collection[:record].to_a
       end
     end
 
     # Get class pagination json for redux state
     def class_pagination_collection
       record = class_collection(self.class.store_pagination).fetch(:record)
-      {
-        data: record.to_a.map(&:id.to_proc),
-        # pagination: ...
-      }
+      pagination = render_to_json partial: 'pagination',
+                                  locals: { collection: record },
+                                  formats: :json
+      { data: record.to_a.map(&:id.to_proc), pagination: pagination }
     end
 end

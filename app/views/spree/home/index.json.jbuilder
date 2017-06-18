@@ -1,5 +1,7 @@
 json.products do
-  json.partial! 'spree/api/collection', locals: { of: @products, as: :product }
+  json.array!(@products) do |product|
+    json.partial! 'spree/products/product', product: product
+  end
 end
 
-json.partial! 'spree/api/pagination', locals: { collection: @products }
+json.partial! 'pagination', locals: { collection: @products }
