@@ -1,5 +1,4 @@
-// import _ from "lodash"
-// import { HYDRATE } from "../../../../../lib/hydrateStore"
+import { HYDRATE } from "../../../../../lib/hydrateStore"
 import { combineReducers } from "redux"
 
 export const LOAD = "page/LOAD"
@@ -56,6 +55,13 @@ function pages(state = initialState.pages, action) {
         ...state,
         [action.page]: { error: action.error }
       }
+    case HYDRATE:
+      const { pagination, data } = action.payload
+      if(!pagination) return state
+      return {
+        ...state,
+        [pagination.currentPage]: data
+      }
     default:
       return state
   }
@@ -83,6 +89,16 @@ function location(state = initialState.location, action) {
         ...state,
         currentPage,
         pagination: action.pagination
+      }
+    case HYDRATE:
+      const { payload: { pagination }, context } = action
+      if(!pagination) return state
+      return {
+        ...state,
+        pagination,
+        currentPage: pagination.currentPage,
+        path: context.pathname,
+        search: context.search
       }
     default:
       return state

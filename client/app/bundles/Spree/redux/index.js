@@ -9,6 +9,7 @@ export const createStore = hydrateStore({
   store,
   context(railsContext) {
     return {
+      ...railsContext,
       apiClient: new ApiClient({
         url: railsContext.href
       })
