@@ -1,7 +1,7 @@
 Spree::HomeController.class_eval do
   include ReduxStoreHydration
   respond_to :html, :json
-  collection(:product, partial: 'spree/products/product.json') { @products }
+  collection(:products, partial: 'spree/products/product.json', as: :product) { @products }
   hydrate 'spreeStore', :taxonomies, :collections, :pagination, only: :index
-  paginate :product
+  paginate :products
 end
