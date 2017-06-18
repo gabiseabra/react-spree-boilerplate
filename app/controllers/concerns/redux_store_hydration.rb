@@ -31,13 +31,13 @@ module ReduxStoreHydration
       self.store_hydration_hooks = [].freeze
     end
 
-    def collection(name, **args, &block)
+    def collection(name, **args)
       hash = store_collections.dup
       hash[name.to_sym] = {
         partial: args.fetch(:partial, nil),
         locals: args.fetch(:locals, {}),
         as: args.fetch(:as, name),
-        selector: block
+        selector: args.fetch(:of)
       }
       self.store_collections = hash.freeze
     end
