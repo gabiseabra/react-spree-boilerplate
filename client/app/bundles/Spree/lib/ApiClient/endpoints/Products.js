@@ -1,5 +1,5 @@
 import Endpoint from "./Endpoint"
-import Product from "../models/Product"
+import { Product } from "../models"
 
 export default class Products extends Endpoint {
   Entity = Product

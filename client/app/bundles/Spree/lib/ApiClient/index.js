@@ -18,15 +18,13 @@ export default class ApiClient {
 
   constructor({ url: targetUrl, token }) {
     const { TOKEN_HEADER } = this.constructor
-
     this.endpoints = {
       pages: new Pages(this),
       products: new Products(this)
     }
-    _.assign(this, this.endpoints)
-
     this.url = targetUrl
     this.router = new Router(this.routes())
+    _.assign(this, this.endpoints)
     if(token) {
       this.defaultHeaders[TOKEN_HEADER] = token
     }

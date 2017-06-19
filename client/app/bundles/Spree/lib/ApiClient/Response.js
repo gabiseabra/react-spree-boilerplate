@@ -36,14 +36,4 @@ export default class Response {
       }
     }
   }
-
-  get search() {
-    const searchParams = {}
-    _.keys(this.query).forEach(key => {
-      if(/^q\[[^\]]+\]$/.test(key)) {
-        searchParams[key] = this.query[key]
-      }
-    })
-    return searchParams
-  }
 }

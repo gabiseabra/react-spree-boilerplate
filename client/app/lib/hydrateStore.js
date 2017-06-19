@@ -14,7 +14,6 @@ export default function hydrateStore(options) {
       context = parseContext ? parseContext(railsContext) : railsContext
       store = createStore(context)
     }
-    // Dispatch payload from rails app (redux_store)
     store.dispatch(hydrate(props, context))
     return store
   }

@@ -1,5 +1,6 @@
-import { HYDRATE } from "../../../../../lib/hydrateStore"
 import { combineReducers } from "redux"
+import { HYDRATE } from "../../../../../lib/hydrateStore"
+import { Pagination, Search } from "../../../lib/ApiClient/models"
 
 export const LOAD = "page/LOAD"
 export const LOAD_PAGE = "page/LOAD_PAGE"
@@ -60,7 +61,7 @@ function pages(state = initialState.pages, action) {
       if(!pagination) return state
       return {
         ...state,
-        [pagination.currentPage]: data
+        [pagination.current_page]: data
       }
     default:
       return state
@@ -91,14 +92,16 @@ function location(state = initialState.location, action) {
         pagination: action.pagination
       }
     case HYDRATE:
-      const { payload: { pagination }, context } = action
-      if(!pagination) return state
+      const { payload, context } = action
+      if(!payload.pagination) return state
+      const pagination = new Pagination(payload.pagination)
+      const search = new Search(context.search)
       return {
         ...state,
+        search,
         pagination,
         currentPage: pagination.currentPage,
-        path: context.pathname,
-        search: context.search
+        path: context.pathname
       }
     default:
       return state

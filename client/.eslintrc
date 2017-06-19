@@ -41,6 +41,7 @@
     "class-methods-use-this": "off",
     "no-plusplus": "off",
     "consistent-return": "off",
+    "no-case-declarations": "off",
     "generator-star-spacing": ["error", {
       "before": true,
       "after": true
