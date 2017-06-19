@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 // import { compose } from "redux"
 import { connect } from "react-redux"
 import { withStore } from "../../redux"
-import { HomePage } from "../../components"
+import { Layout, HomePage } from "../../components"
 import { getPageProducts, getPagination } from "../../redux/selectors"
 import { load } from "../../redux/modules/page"
 
@@ -22,7 +22,13 @@ class HomePageApp extends Component {
 
   render() {
     const { products, pagination } = this.props
-    return <HomePage products={products || []} pagination={pagination} />
+    return (
+      <Layout>
+        <HomePage
+          products={products || []}
+          pagination={pagination} />
+      </Layout>
+    )
   }
 }
 
