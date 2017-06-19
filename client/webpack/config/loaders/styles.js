@@ -1,5 +1,5 @@
 import path from "path"
-import variables from "../../../styles/variables"
+import variables from "../../../styles/theme"
 
 const defaults = {
   mcss: {

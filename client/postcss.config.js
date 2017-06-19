@@ -1,5 +1,5 @@
 const path = require("path")
-const variables = require("./styles/variables")
+const variables = require("./styles/theme")
 
 module.exports = {
   plugins: {

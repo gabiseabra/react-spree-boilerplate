@@ -1,0 +1,13 @@
+---
+backgroundColor    : &backgroundColor "#dedede"
+highlightColor     : "#eee"
+textColor          : "#444"
+textColorSecondary : "#666"
+primaryColor       : &primaryColor "#9d70d4"
+primaryTextColor   : "#eee"
+bodyFont           : &bodyFont "Roboto"
+headingFont        : "Quicksand"
+
+primary-color      : *primaryColor
+body-background    : *backgroundColor
+font-family        : *bodyFont
