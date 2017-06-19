@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -48,11 +49,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Front-end
-gem 'react_on_rails'
-
+gem 'react_on_rails', '~> 8.0.3'
 gem 'webpacker_lite'
-
-gem 'mini_racer', platforms: :ruby
 
 # Spree
 gem 'spree', '~> 3.2.0'

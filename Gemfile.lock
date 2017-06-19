@@ -206,7 +206,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
-    react_on_rails (8.0.2)
+    react_on_rails (8.0.3)
       addressable
       connection_pool
       execjs (~> 2.5)
@@ -349,7 +349,7 @@ DEPENDENCIES
   mini_racer
   puma (~> 3.0)
   rails (~> 5.0.0)
-  react_on_rails
+  react_on_rails (~> 8.0.3)
   sass-rails (~> 5.0)
   spree (~> 3.2.0)
   spree_auth_devise (~> 3.2.0.beta)
