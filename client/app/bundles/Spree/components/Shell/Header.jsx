@@ -1,12 +1,10 @@
 import React from "react"
-import styles from "./Header.css"
+import { Layout } from "antd"
 
 const Header = () => (
-  <header className={styles.Header}>
-    {/* logo */}
+  <Layout.Header>
     React Spree Boilerplate
-    {/* nav */}
-  </header>
+  </Layout.Header>
 )
 
 export default Header

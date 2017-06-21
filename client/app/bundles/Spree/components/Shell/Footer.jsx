@@ -1,13 +1,12 @@
 import React from "react"
-import styles from "./Footer.css"
+import { Layout } from "antd"
 
 const Footer = () => (
-  <footer className={styles.Footer}>
-    {/* nav */}
-    <div className={styles.copy}>
-      &copy; {(new Date).getFullYear()} Gabriela Seabra
+  <Layout.Footer>
+    <div>
+      &copy; {(new Date()).getFullYear()} Gabriela Seabra
     </div>
-  </footer>
+  </Layout.Footer>
 )
 
 export default Footer

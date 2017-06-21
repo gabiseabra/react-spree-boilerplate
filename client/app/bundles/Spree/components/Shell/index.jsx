@@ -1,16 +1,19 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Layout } from "antd"
 import Header from "./Header"
 import Footer from "./Footer"
 import LocaleProvider from "../../../../components/LocaleProvider"
 
 const Shell = ({ children }) => (
   <LocaleProvider>
-    <div>
+    <Layout>
       <Header />
-      <main>{children}</main>
+      <Layout.Content>
+        {children}
+      </Layout.Content>
       <Footer />
-    </div>
+    </Layout>
   </LocaleProvider>
 )
 
