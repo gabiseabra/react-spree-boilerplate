@@ -1,14 +1,10 @@
 import path from "path"
-import variables from "../../../styles/theme"
 
 const defaults = {
   mcss: {
     modules: true,
     importLoaders: 2,
     localIdentName: "[hash:base64:5]"
-  },
-  less: {
-    modifyVars: variables
   },
   url: {
     silent: true
