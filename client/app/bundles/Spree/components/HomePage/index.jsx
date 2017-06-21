@@ -12,7 +12,7 @@ const HomePage = ({ products, pagination }) => (
   </div>
 )
 
-HomePage.protoTypes = {
+HomePage.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   pagination: PropTypes.object.isRequired
 }
