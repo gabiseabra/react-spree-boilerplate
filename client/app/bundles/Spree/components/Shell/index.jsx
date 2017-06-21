@@ -4,7 +4,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import LocaleProvider from "../../../../components/LocaleProvider"
 
-const App = ({ children }) => (
+const Shell = ({ children }) => (
   <LocaleProvider>
     <div>
       <Header />
@@ -14,8 +14,8 @@ const App = ({ children }) => (
   </LocaleProvider>
 )
 
-App.propTypes = {
+Shell.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-export default App
+export default Shell

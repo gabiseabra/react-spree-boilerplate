@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 // import { compose } from "redux"
 import { connect } from "react-redux"
 import { withStore } from "../../redux"
-import { Layout, HomePage } from "../../components"
+import { Shell, HomePage } from "../../components"
 import { getPageProducts, getPagination } from "../../redux/selectors"
 import { load } from "../../redux/modules/page"
 
@@ -23,16 +23,16 @@ class HomePageApp extends Component {
   render() {
     const { products, pagination } = this.props
     return (
-      <Layout>
+      <Shell>
         <HomePage
           products={products || []}
           pagination={pagination} />
-      </Layout>
+      </Shell>
     )
   }
 }
 
-const mapper = (state) => ({
+const mapper = state => ({
   products: getPageProducts(state),
   pagination: getPagination(state)
 })
