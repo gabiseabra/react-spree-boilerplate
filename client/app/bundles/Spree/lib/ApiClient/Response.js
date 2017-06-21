@@ -2,6 +2,7 @@ import _ from "lodash"
 import url from "url"
 import qs from "querystring"
 import ExtendableError from "es6-error"
+import { Pagination, Search } from "./models"
 
 export class ResponseError extends ExtendableError {
   constructor({ status, statusText }) {
@@ -27,13 +28,9 @@ export default class Response {
     this.data = data
     this.url = url.parse(targetUrl)
     this.query = qs.parse(this.url.query)
+    this.search = new Search(this.query)
     if("per_page" in json) {
-      this.pagination = {
-        currentPage: json.current_page,
-        totalPages: json.total_pages,
-        totalCount: json.total_count,
-        perPage: json.per_page
-      }
+      this.pagination = new Pagination(json)
     }
   }
 }
