@@ -1,7 +1,7 @@
 import _ from "lodash"
-import { hydrate } from "../../../../../lib/hydrateStore"
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
 import { isPageLoaded, getLocation } from "../../selectors"
+import { hydrate } from "../../../../../lib/hydrateStore"
 import * as actions from "./index"
 
 export default function create(context) {
@@ -27,7 +27,7 @@ export default function create(context) {
   }
 
   function * loadPage({ page: requestedPage }) {
-    const page = parseInt(requestedPage)
+    const page = parseInt(requestedPage, 10)
     const loaded = yield select(isPageLoaded, { page })
     const location = yield select(getLocation)
     const perPage = (location.pagination && location.pagination.perPage) || undefined

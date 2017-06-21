@@ -16,9 +16,9 @@ export const load = (path, search, page = 1, perPage) => ({
   page,
   perPage
 })
-export const loadPage = (page) => ({ type: LOAD_PAGE, page })
+export const loadPage = page => ({ type: LOAD_PAGE, page })
 export const request = (path, search, page = 1) => ({ type: REQUEST, search, path, page })
-export const requestPage = (page) => ({ type: REQUEST_PAGE, page })
+export const requestPage = page => ({ type: REQUEST_PAGE, page })
 export const fail = (page, error, pagination) => ({
   type: FAILURE,
   page,
@@ -56,13 +56,14 @@ function pages(state = initialState.pages, action) {
         ...state,
         [action.page]: { error: action.error }
       }
-    case HYDRATE:
+    case HYDRATE: {
       const { pagination, data } = action.payload
       if(!pagination) return state
       return {
         ...state,
         [pagination.current_page]: data
       }
+    }
     default:
       return state
   }
@@ -91,7 +92,7 @@ function location(state = initialState.location, action) {
         currentPage,
         pagination: action.pagination
       }
-    case HYDRATE:
+    case HYDRATE: {
       const { payload, context } = action
       if(!payload.pagination) return state
       const pagination = new Pagination(payload.pagination)
@@ -103,6 +104,7 @@ function location(state = initialState.location, action) {
         currentPage: pagination.currentPage,
         path: context.pathname
       }
+    }
     default:
       return state
   }

@@ -4,7 +4,7 @@ import qs from "querystring"
 export const searchQuery = (predicates) => {
   const query = {}
   if(predicates) {
-    predicates.keys().forEach(key => {
+    predicates.keys().forEach((key) => {
       query[`q[${key}]`] = predicates[key]
     })
   }

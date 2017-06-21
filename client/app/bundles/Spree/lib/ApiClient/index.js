@@ -2,7 +2,7 @@ import _ from "lodash"
 import qs from "querystring"
 import url from "url"
 import fetch from "isomorphic-fetch"
-import Router from "universal-router"
+import Router from "universal-router" // eslint-disable-line import/extensions
 import Response from "./Response"
 import {
   Pages,

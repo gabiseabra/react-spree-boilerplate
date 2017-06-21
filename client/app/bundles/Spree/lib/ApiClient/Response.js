@@ -1,4 +1,3 @@
-import _ from "lodash"
 import url from "url"
 import qs from "querystring"
 import ExtendableError from "es6-error"

@@ -26,13 +26,14 @@ export default function products(state = initialState, action) {
         ...state,
         [action.id]: { error: action.error }
       }
-    case HYDRATE:
+    case HYDRATE: {
       if(!action.payload.products) return state
       const productsArray = action.payload.products.map(data => new Product(data))
       return {
         ...state,
         ..._.keyBy(productsArray, o => o.id)
       }
+    }
     default:
       return state
   }

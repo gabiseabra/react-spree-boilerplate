@@ -11,13 +11,9 @@
     "sourceType": "module"
   },
   "rules": {
-    "jsx-a11y/img-has-alt": "off",
-    "react/jsx-indent-props": "off",
-    "react/jsx-closing-bracket-location": "off",
-    "react/require-default-props": "off",
-    "react/forbid-prop-types": "off",
-    "react/prop-types": "off",
-    "comma-dangle": ["error", "never"],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true
+    }],
     "quotes": ["error", "double", {
       "avoidEscape": true
     }],
@@ -29,22 +25,16 @@
         "switch": { "after": false }
       }
     }],
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": true
-    }],
-    "array-bracket-spacing": ["error", "always"],
-    "semi": ["error", "never"],
-    "no-tabs": "off",
-    "arrow-parens": "off",
-    "new-parens": "off",
-    "default-case": "off",
-    "class-methods-use-this": "off",
-    "no-plusplus": "off",
-    "consistent-return": "off",
-    "no-case-declarations": "off",
     "generator-star-spacing": ["error", {
       "before": true,
       "after": true
-    }]
+    }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }],
+    "comma-dangle": ["error", "never"],
+    "array-bracket-spacing": ["error", "always"],
+    "semi": ["error", "never"],
+    "class-methods-use-this": "off"
   }
 }

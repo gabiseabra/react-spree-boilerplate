@@ -1,7 +1,7 @@
 import { createSelector } from "reselect"
 
 // products
-export const getAllProducts = (state) => state.products
+export const getAllProducts = state => state.products
 
 export const getProduct = createSelector(
   getAllProducts,
@@ -20,7 +20,7 @@ export const isProductLoaded = createSelector(
 )
 
 // page.location
-export const getLocation = (state) => state.page.location
+export const getLocation = state => state.page.location
 
 export const getPagination = createSelector(
   getLocation,
@@ -33,7 +33,7 @@ export const getCurrentPage = createSelector(
 )
 
 // page.pages
-export const getAllPages = (state) => state.page.pages
+export const getAllPages = state => state.page.pages
 
 export const getPageData = createSelector(
   getAllPages,
