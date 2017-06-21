@@ -13,6 +13,7 @@ export default {
       "es6-error",
       "react",
       "react-dom",
+      "react-intl",
       "react-redux",
       "react-on-rails",
       "redux",

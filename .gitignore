@@ -20,7 +20,6 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-
 # Spree
 /spree
 /public/spree
@@ -32,5 +31,9 @@ node_modules
 # Generated js bundles
 /app/assets/webpack/*
 /public/webpack/*
+
+# Ignore i18n
+/client/app/locales/translations.js
+/client/app/locales/default.js
 
 /bin
