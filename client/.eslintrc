@@ -35,6 +35,9 @@
     "comma-dangle": ["error", "never"],
     "array-bracket-spacing": ["error", "always"],
     "semi": ["error", "never"],
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "react/forbid-prop-types": "off",
+    "react/require-default-props": "off",
+    "react/jsx-closing-bracket-location": ["error", "after-props"]
   }
 }

@@ -9,9 +9,13 @@ import { load } from "../../redux/modules/page"
 
 class HomePageApp extends Component {
   static propTypes = {
-    products: PropTypes.arrayOf(PropTypes.object),
-    pagination: PropTypes.object,
-    load: PropTypes.func.isRequired
+    products: PropTypes.arrayOf(PropTypes.object).isRequired,
+    pagination: PropTypes.object
+    // load: PropTypes.func.isRequired
+  }
+
+  defaultProps = {
+    products: []
   }
 
   /*
@@ -25,7 +29,7 @@ class HomePageApp extends Component {
     return (
       <Shell>
         <HomePage
-          products={products || []}
+          products={products}
           pagination={pagination} />
       </Shell>
     )
