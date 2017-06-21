@@ -7,8 +7,8 @@
     "npm": "4.1.1"
   },
   "scripts": {
-    "prebuild": "NODE_ENV=production npm run build:vendor",
     "dev-server": "NODE_ENV=development webpack-dev-server --config webpack/devServer.babel.js --hot --inline",
+    "prebuild": "NODE_ENV=production npm run build:vendor && npm run translate",
     "build": "webpack --config webpack/config.babel.js --colors --progress",
     "build:dev": "NODE_ENV=development npm run build --",
     "build:test": "NODE_ENV=test npm run build --",
@@ -16,6 +16,7 @@
     "build:vendor": "webpack --config webpack/bundles/vendor.babel.js",
     "build:rails": "webpack --config webpack/bundles/rails.babel.js",
     "build:app": "webpack --config webpack/bundles/app.babel.js",
+    "translate": "bundle exec rake react_on_rails:locale",
     "lint": "eslint ./app"
   },
   "cacheDirectories": [

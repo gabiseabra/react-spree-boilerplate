@@ -7,7 +7,7 @@
     "npm": "4.1.1"
   },
   "scripts": {
-    "postinstall": "cd client && yarn install",
+    "postinstall": "cd client && npm install",
     "start": "foreman start",
     "start:dev": "foreman start -f Procfile.dev",
     "start:hot": "foreman start -f Procfile.hot",
@@ -17,7 +17,7 @@
     "build:test": "cd client && npm run build:test --",
     "build:prod": "cd client && npm run build:prod --",
     "build:vendor": "cd client && npm run build:vendor --",
-    "translate": "bundle exec rake react_on_rails:locale",
+    "translate": "cd client && npm run translate --",
     "clean": "npm run clean:app && npm run clean:vendor",
     "clean:app": "rm -r public/webpack/* || true",
     "clean:vendor": "rm -r app/assets/webpack/* || true",
