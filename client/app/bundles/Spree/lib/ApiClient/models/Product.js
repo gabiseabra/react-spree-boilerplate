@@ -1,5 +1,6 @@
 class Image {
   constructor(data) {
+    this.id = data.id
     this.urls = {
       mini: data.mini_url,
       small: data.small_url,
