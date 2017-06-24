@@ -15,7 +15,10 @@ export default merge.smart({
     publicPath: "/"
   },
   resolve: {
-    extensions: [ ".js", ".jsx" ]
+    extensions: [ ".js", ".jsx" ],
+    alias: {
+      images: path.join(__dirname, "../../../app/assets/images")
+    }
   },
   plugins: [
     new webpack.EnvironmentPlugin({
