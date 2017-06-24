@@ -12,7 +12,7 @@ export default merge.smart({
   context,
   output: {
     path: outputDir,
-    publicPath: "/"
+    publicPath: "/webpack/"
   },
   resolve: {
     extensions: [ ".js", ".jsx" ],
