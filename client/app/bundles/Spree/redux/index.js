@@ -17,4 +17,4 @@ export const createStore = hydrateStore({
   }
 })
 
-export const withStore = _withStore.bind(undefined, STORE_NAME)
+export const withStore = _withStore(STORE_NAME)
