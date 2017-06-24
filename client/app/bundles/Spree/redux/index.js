@@ -1,7 +1,7 @@
 import store from "./store"
 import ApiClient from "../lib/ApiClient"
 import hydrateStore from "../../../lib/hydrateStore"
-import _withStore from "../../../lib/withStore"
+import { withStore as _withStore } from "../../../components"
 
 export const STORE_NAME = "spreeStore"
 

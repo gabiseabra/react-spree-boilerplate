@@ -4,18 +4,15 @@ import { Layout } from "antd"
 import Header from "./Header"
 import Footer from "./Footer"
 import styles from "./Shell.css"
-import LocaleProvider from "../../../../components/LocaleProvider"
 
 const Shell = ({ children }) => (
-  <LocaleProvider>
-    <Layout className={styles.Shell}>
-      <Header />
-      <Layout.Content className={styles.content}>
-        {children}
-      </Layout.Content>
-      <Footer />
-    </Layout>
-  </LocaleProvider>
+  <Layout className={styles.Shell}>
+    <Header />
+    <Layout.Content className={styles.content}>
+      {children}
+    </Layout.Content>
+    <Footer />
+  </Layout>
 )
 
 Shell.propTypes = {

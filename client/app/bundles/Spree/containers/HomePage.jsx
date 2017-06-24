@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import { withProvider } from "./Provider"
 import Pagination from "./Pagination"
 import { Shell, HomePage } from "../components"
 import { getPageProducts } from "../redux/selectors"
 import { load } from "../redux/modules/page"
-import { withStore } from "../redux"
 
 class HomePageApp extends Component {
   static propTypes = {
@@ -39,4 +39,4 @@ const mapper = state => ({
   products: getPageProducts(state)
 })
 
-export default withStore(connect(mapper, { load })(HomePageApp))
+export default withProvider(connect(mapper, { load })(HomePageApp))
