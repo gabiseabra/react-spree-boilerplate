@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Row, Col } from "antd"
 import Product from "../Product"
-import Pagination from "../Pagination"
 
 const HomePage = ({ products, pagination }) => (
   <div>
@@ -13,13 +12,13 @@ const HomePage = ({ products, pagination }) => (
         </Col>
       ))}
     </Row>
-    {pagination && <Pagination pagination={pagination} />}
+    {pagination}
   </div>
 )
 
 HomePage.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pagination: PropTypes.object.isRequired
+  pagination: PropTypes.node
 }
 
 export default HomePage
