@@ -56,3 +56,27 @@ export const getPageProducts = createSelector(
   getAllProducts,
   (productList, products) => (productList ? productList.map(id => products[id]) : undefined)
 )
+
+// taxonomies
+export const getAllTaxonomies = state => state.taxonomies.tree
+
+export const getTaxonomiesError = state => state.taxonomies.error
+
+export const isTaxonomiesLoaded = state => state.taxonomies.tree.length && !state.taxonomies.error
+
+export const getTaxonomy = createSelector(
+  getAllTaxonomies,
+  (state, { id }) => id,
+  (taxonomies, id) => taxonomies.find(taxon => taxon.taxonomyId === id)
+)
+
+export const getAllTaxons = createSelector(
+  getAllTaxonomies,
+  taxonomies => taxonomies.reduce((arr, taxon) => arr.concat(taxon.flatten()), [])
+)
+
+export const getTaxon = createSelector(
+  getAllTaxons,
+  (state, { id }) => id,
+  (taxons, id) => taxons[id]
+)

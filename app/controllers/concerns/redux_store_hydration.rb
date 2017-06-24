@@ -79,6 +79,19 @@ module ReduxStoreHydration
     super
   end
 
+  # Render template as json
+  def render_to_json(*_, **args)
+    if args[:partial] && args[:collection]
+      jb_args = args.slice(:partial, :as, :locals)
+      jb_args[:formats] = :json
+      JbuilderTemplate.new(view_context) do |json|
+        json.array! args[:collection], jb_args
+      end.attributes!
+    else
+      JSON.parse render_to_string(args)
+    end
+  end
+
   private
 
     # Filter hooks for given action
@@ -91,17 +104,6 @@ module ReduxStoreHydration
         else
           true
         end
-      end
-    end
-
-    # Render template as json
-    def render_to_json(*_, **args)
-      if args[:partial] && args[:collection]
-        JbuilderTemplate.new(view_context) do |json|
-          json.array! args[:collection], args.slice(:partial, :as, :locals)
-        end.attributes!
-      else
-        JSON.parse render_to_string(args)
       end
     end
 

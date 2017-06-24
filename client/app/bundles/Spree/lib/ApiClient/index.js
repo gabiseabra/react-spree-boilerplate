@@ -6,7 +6,8 @@ import Router from "universal-router" // eslint-disable-line import/extensions
 import Response from "./Response"
 import {
   Pages,
-  Products
+  Products,
+  Taxonomies
 } from "./endpoints"
 
 export default class ApiClient {
@@ -20,7 +21,8 @@ export default class ApiClient {
     const { TOKEN_HEADER } = this.constructor
     this.endpoints = {
       pages: new Pages(this),
-      products: new Products(this)
+      products: new Products(this),
+      taxonomies: new Taxonomies(this)
     }
     this.url = targetUrl
     this.router = new Router(this.routes())
@@ -28,8 +30,6 @@ export default class ApiClient {
     if(token) {
       this.defaultHeaders[TOKEN_HEADER] = token
     }
-
-    window.$$apiClient = this
   }
 
   routes() {
