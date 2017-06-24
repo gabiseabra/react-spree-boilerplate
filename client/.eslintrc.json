@@ -1,14 +1,17 @@
 {
+  "extends": "airbnb",
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true,
     "es6": true
   },
-  "extends": "airbnb",
   "plugins": ["react"],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
+  "settings": {
+    "import/resolver": {
+      "webpack": { "config": "./webpack/bundles/app.babel.js" },
+      "node": false
+    }
   },
   "rules": {
     "import/no-extraneous-dependencies": ["error", {
@@ -35,6 +38,7 @@
     "comma-dangle": ["error", "never"],
     "array-bracket-spacing": ["error", "always"],
     "semi": ["error", "never"],
+    "global-require": "off",
     "class-methods-use-this": "off",
     "react/forbid-prop-types": "off",
     "react/require-default-props": "off",
