@@ -1,4 +1,5 @@
 import Endpoint from "../Endpoint"
+import parseQuery from "./parseQuery"
 import { Product } from "../../models"
 
 export default class HomePage extends Endpoint {
@@ -10,5 +11,5 @@ export default class HomePage extends Endpoint {
     ]
   }
 
-  index = options => this.api.fetch(`/?${this.query(options)}`, { collection: "products" })
+  index = options => this.api.fetch(`/?${parseQuery(options)}`, { collection: "products" })
 }
