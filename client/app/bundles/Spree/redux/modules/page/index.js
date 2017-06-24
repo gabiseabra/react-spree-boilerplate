@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import { HYDRATE } from "../../../../../lib/hydrateStore"
+import { HYDRATE } from "app/lib/hydrateStore"
 import { Pagination, Search } from "../../../lib/ApiClient/models"
 
 export const LOAD = "page/LOAD"

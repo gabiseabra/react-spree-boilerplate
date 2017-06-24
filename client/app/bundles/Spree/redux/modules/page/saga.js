@@ -1,7 +1,7 @@
 import _ from "lodash"
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
+import { hydrate } from "app/lib/hydrateStore"
 import { isPageLoaded, getLocation } from "../../selectors"
-import { hydrate } from "../../../../../lib/hydrateStore"
 import * as actions from "./index"
 
 export default function create(context) {

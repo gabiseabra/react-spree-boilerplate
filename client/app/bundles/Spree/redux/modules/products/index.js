@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { HYDRATE } from "../../../../../lib/hydrateStore"
+import { HYDRATE } from "app/lib/hydrateStore"
 import { Product } from "../../../lib/ApiClient/models"
 
 export const LOAD = "products/LOAD"

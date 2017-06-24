@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { LocaleProvider, withContext } from "app/components"
 import { withStore } from "../redux"
-import { LocaleProvider, withContext } from "../../../components"
 
 const Provider = ({ children }, { railsContext }) => (
   <LocaleProvider locale={railsContext.i18nLocale}>

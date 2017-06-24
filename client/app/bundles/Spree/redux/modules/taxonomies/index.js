@@ -1,4 +1,4 @@
-import { HYDRATE } from "../../../../../lib/hydrateStore"
+import { HYDRATE } from "app/lib/hydrateStore"
 import { Taxonomy } from "../../../lib/ApiClient/models"
 
 export const LOAD = "taxonomies/LOAD"

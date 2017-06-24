@@ -17,7 +17,8 @@ export default merge.smart({
   resolve: {
     extensions: [ ".js", ".jsx" ],
     alias: {
-      images: path.join(__dirname, "../../../app/assets/images")
+      images: path.join(__dirname, "../../../app/assets/images"),
+      app: path.join(context, "app")
     }
   },
   plugins: [
