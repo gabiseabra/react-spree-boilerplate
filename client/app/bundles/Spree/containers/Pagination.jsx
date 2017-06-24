@@ -11,9 +11,7 @@ class AppPagination extends Component {
     loadPage: PropTypes.func.isRequired
   }
 
-  onChange(page) {
-    this.props.loadPage(page)
-  }
+  onChange = page => this.props.loadPage(page)
 
   render() {
     const { pagination, ...props } = this.props
