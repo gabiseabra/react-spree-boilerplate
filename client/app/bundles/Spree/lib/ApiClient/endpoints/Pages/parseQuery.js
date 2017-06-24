@@ -1,14 +1,18 @@
 import _ from "lodash"
 import qs from "querystring"
+import { Search } from "../../models"
 
 export const searchQuery = (predicates) => {
-  const query = {}
-  if(predicates) {
+  if(predicates instanceof Search) {
+    return predicates.query
+  } else if(predicates) {
+    const query = {}
     predicates.keys().forEach((key) => {
       query[`q[${key}]`] = predicates[key]
     })
+    return query
   }
-  return query
+  return {}
 }
 
 export const paginationQuery = (page, perPage) => ({ page, per_page: perPage })
