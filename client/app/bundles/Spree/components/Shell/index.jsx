@@ -5,9 +5,9 @@ import Header from "./Header"
 import Footer from "./Footer"
 import styles from "./Shell.css"
 
-const Shell = ({ children }) => (
+const Shell = ({ children, taxonomies }) => (
   <Layout className={styles.Shell}>
-    <Header />
+    <Header taxonomies={taxonomies} />
     <Layout.Content className={styles.content}>
       {children}
     </Layout.Content>
@@ -16,7 +16,8 @@ const Shell = ({ children }) => (
 )
 
 Shell.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  taxonomies: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Shell

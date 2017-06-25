@@ -11,6 +11,7 @@ export default {
       "universal-router",
       "isomorphic-fetch",
       "es6-error",
+      "classnames",
       "react",
       "react-dom",
       "react-intl",
