@@ -37,8 +37,9 @@ const initialState = {
   location: {
     path: undefined,
     search: undefined,
-    currentPage: undefined,
-    pagination: undefined
+    pagination: {
+      currentPage: undefined
+    }
   }
 }
 
@@ -70,26 +71,26 @@ function pages(state = initialState.pages, action) {
 }
 
 function location(state = initialState.location, action) {
-  const currentPage = action.page || (action.pagination && action.pagination.currentPage)
   switch(action.type) {
     case REQUEST:
       return {
         ...state,
-        currentPage,
         path: action.path,
         search: action.search,
-        pagination: undefined
+        pagination: { currentPage: action.page }
       }
-    case REQUEST_PAGE:
+    case LOAD_PAGE:
       return {
         ...state,
-        currentPage
+        pagination: {
+          ...state.pagination,
+          currentPage: action.page
+        }
       }
     case SUCCESS:
     case FAILURE:
       return {
         ...state,
-        currentPage,
         pagination: action.pagination
       }
     case HYDRATE: {
@@ -101,7 +102,6 @@ function location(state = initialState.location, action) {
         ...state,
         search,
         pagination,
-        currentPage: pagination.currentPage,
         path: context.pathname
       }
     }

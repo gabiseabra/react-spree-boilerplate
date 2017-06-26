@@ -28,8 +28,8 @@ export const getPagination = createSelector(
 )
 
 export const getCurrentPage = createSelector(
-  getLocation,
-  location => location.currentPage
+  getPagination,
+  pagination => pagination.currentPage
 )
 
 // page.pages
