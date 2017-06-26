@@ -5,17 +5,14 @@ import { withProvider } from "./Provider"
 import Shell from "./Shell"
 import Pagination from "./Pagination"
 import { HomePage } from "../components"
-import { getPageProducts } from "../redux/selectors"
+import { getPageProducts, isPageLoaded } from "../redux/selectors"
 import { load } from "../redux/modules/page"
 
 class HomePageApp extends Component {
   static propTypes = {
-    products: PropTypes.arrayOf(PropTypes.object).isRequired
+    products: PropTypes.arrayOf(PropTypes.object),
+    loading: PropTypes.bool.isRequired
     // load: PropTypes.func.isRequired
-  }
-
-  defaultProps = {
-    products: []
   }
 
   /*
@@ -25,10 +22,11 @@ class HomePageApp extends Component {
   */
 
   render() {
-    const { products } = this.props
+    const { products, loading } = this.props
     return (
       <Shell>
         <HomePage
+          loading={loading}
           products={products}
           pagination={<Pagination />} />
       </Shell>
@@ -37,7 +35,8 @@ class HomePageApp extends Component {
 }
 
 const mapper = state => ({
-  products: getPageProducts(state)
+  products: getPageProducts(state),
+  loading: !isPageLoaded(state)
 })
 
 export default withProvider(connect(mapper, { load })(HomePageApp))
