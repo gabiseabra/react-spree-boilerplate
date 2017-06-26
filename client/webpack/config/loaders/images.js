@@ -9,7 +9,7 @@ export default function build() {
       options: { limit, name }
     },
     {
-      test: /\.(ttf|eot|svg)?$/,
+      test: /\.(ttf|eot|svg|woff2?)?$/,
       loader: "file-loader",
       options: { name }
     }

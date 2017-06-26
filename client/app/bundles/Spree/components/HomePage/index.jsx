@@ -1,17 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Row, Col } from "antd"
+import { Grid } from "semantic-ui-react"
 import Product from "../Product"
 
 const HomePage = ({ products, pagination }) => (
   <div>
-    <Row gutter={16}>
+    <Grid columns={4} stackable>
       {products.map(p => (
-        <Col key={p.id} md={6} sm={8} xs={24}>
-          <Product key={p.id} product={p} />
-        </Col>
+        <Grid.Column key={p.id}>
+          <Product product={p} />
+        </Grid.Column>
       ))}
-    </Row>
+    </Grid>
     {pagination}
   </div>
 )

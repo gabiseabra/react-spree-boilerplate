@@ -1,4 +1,4 @@
-import _ from "lodash"
+import { flow, assign, omitBy, isEmpty } from "lodash/fp"
 import qs from "querystring"
 import { Search } from "../../models"
 
@@ -18,12 +18,12 @@ export const searchQuery = (predicates) => {
 export const paginationQuery = (page, perPage) => ({ page, per_page: perPage })
 
 export default function parseQuery({ search, page, perPage }) {
-  const query = _({})
-    .assign(
+  const query = flow(
+    assign(
       paginationQuery(page, perPage),
       searchQuery(search)
-    )
-    .omitBy(_.isEmpty)
-    .value()
+    ),
+    omitBy(isEmpty)
+  )({})
   return qs.stringify(query)
 }

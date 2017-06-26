@@ -1,36 +1,38 @@
 import path from "path"
 
-const defaults = {
+const localIdentName = (
+  process.env.NODE_ENV === "development" ?
+  "[name]_[local]--[hash:base64:5]" :
+  "[hash:base64:5]"
+)
+
+const defaults = context => ({
   mcss: {
+    localIdentName,
     modules: true,
-    importLoaders: 2,
-    localIdentName: "[hash:base64:5]"
+    importLoaders: 2
   },
   url: {
     silent: true
+  },
+  modules: {
+    include: [
+      path.join(context, "app")
+    ],
+    exclude: [
+      /global\.\w+$/,
+      path.join(context, "app/styles")
+    ]
   }
-}
-
-if(process.env.NODE_ENV === "development") {
-  defaults.mcss.localIdentName = "[name]_[local]--[hash:base64:5]"
-}
+})
 
 export default function build(context, opts) {
   const {
-    modules,
+    modules: condition,
     extract,
     fallback,
     ...options
-  } = Object.assign({
-    modules: [
-      path.join(context, "styles"),
-      path.join(context, "app")
-    ]
-  }, opts, defaults)
-  const condition = {
-    include: modules,
-    exclude: /global\.\w+$/
-  }
+  } = Object.assign(opts, defaults)
   const loaders = [
     {
       test: /\.css$/,

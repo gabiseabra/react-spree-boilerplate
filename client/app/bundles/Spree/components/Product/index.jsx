@@ -1,16 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Card } from "antd"
+import { Card, Image } from "semantic-ui-react"
 import { Product as Entity } from "../../lib/ApiClient/models"
 
 const Product = ({ product }) => {
   const img = product.images[0]
   return (
     <Card>
-      <img width="100%" src={img.urls.product} alt={img.alt} />
-      <a href={`/products/${product.slug}`}>
-        {product.name}
-      </a>
+      <Image src={img.urls.product} alt={img.alt} />
+      <Card.Content>
+        <a href={`/products/${product.slug}`}>
+          {product.name}
+        </a>
+      </Card.Content>
     </Card>
   )
 }

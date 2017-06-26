@@ -5,11 +5,11 @@
 		"react"
 	],
   "plugins": [
-    [ "import", { "libraryName": "antd", "style": true } ]
+    ["lodash", {"id": ["lodash", "semantic-ui-react"]}]
   ],
 	"env": {
 		"production": {
-			"presets": [ "react-optimize" ]
+			"presets": ["react-optimize"]
 		}
 	}
 }

@@ -1,24 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Row, Col, Menu } from "antd"
+import { Segment, Grid } from "semantic-ui-react"
 import Logo from "../Logo"
+import Menu from "./Menu"
 import styles from "./Header.css"
 
 const Header = ({ taxonomies }) => (
-  <Row className={styles.Header}>
-    <Col span={6}>
-      <a href="/"><Logo size="small" /></a>
-    </Col>
-    <Col span={18}>
-      <Menu mode="horizontal" theme="dark">
-        {taxonomies && taxonomies.map(taxon => (
-          <Menu.Item key={`taxonomy:${taxon.id}`}>
-            <a href={`/t/${taxon.permalink}`}>{taxon.name}</a>
-          </Menu.Item>
-        ))}
-      </Menu>
-    </Col>
-  </Row>
+  <Segment as="header" className={styles.Header}>
+    <Grid columns={2}>
+      <Grid.Column width={4}>
+        <a href="/"><Logo size="small" /></a>
+      </Grid.Column>
+      <Grid.Column>
+        <Menu taxonomies={taxonomies} />
+      </Grid.Column>
+    </Grid>
+  </Segment>
 )
 
 

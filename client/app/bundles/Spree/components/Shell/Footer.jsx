@@ -1,12 +1,10 @@
 import React from "react"
-import { Layout } from "antd"
+import { Segment } from "semantic-ui-react"
 
 const Footer = () => (
-  <Layout.Footer>
-    <div>
-      &copy; {(new Date()).getFullYear()} Gabriela Seabra
-    </div>
-  </Layout.Footer>
+  <Segment as="footer" basic>
+    &copy; {(new Date()).getFullYear()} Gabriela Seabra
+  </Segment>
 )
 
 export default Footer

@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Pagination } from "antd"
+import { Pagination } from "../components"
 import { getPagination } from "../redux/selectors"
 import { loadPage } from "../redux/modules/page"
 
@@ -18,9 +18,8 @@ class AppPagination extends Component {
     const { currentPage, totalCount, perPage } = pagination
     return (
       <Pagination
-        current={currentPage}
-        total={totalCount}
-        pageSize={perPage}
+        currentPage={currentPage}
+        totalPages={Math.ceil(totalCount / perPage)}
         onChange={this.onChange}
         {...props} />
     )

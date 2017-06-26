@@ -1,18 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Layout } from "antd"
+import { Container } from "semantic-ui-react"
 import Header from "./Header"
 import Footer from "./Footer"
 import styles from "./Shell.css"
 
 const Shell = ({ children, taxonomies }) => (
-  <Layout className={styles.Shell}>
+  <div className={styles.Shell}>
     <Header taxonomies={taxonomies} />
-    <Layout.Content className={styles.content}>
+    <Container as="main" className={styles.content}>
       {children}
-    </Layout.Content>
+    </Container>
     <Footer />
-  </Layout>
+  </div>
 )
 
 Shell.propTypes = {

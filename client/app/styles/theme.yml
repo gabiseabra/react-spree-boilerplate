@@ -1,13 +1,9 @@
 ---
-backgroundColor    : &backgroundColor "#dedede"
+backgroundColor    : "#dedede"
 highlightColor     : "#eee"
 textColor          : "#444"
 textColorSecondary : "#666"
-primaryColor       : &primaryColor "#9d70d4"
+primaryColor       : "#9d70d4"
 primaryTextColor   : "#eee"
-bodyFont           : &bodyFont "'Montserrat', sans-serif"
+bodyFont           : "'Montserrat', sans-serif"
 headingFont        : "'Roboto', sans-serif"
-
-primary-color      : *primaryColor
-body-background    : *backgroundColor
-font-family        : *bodyFont
