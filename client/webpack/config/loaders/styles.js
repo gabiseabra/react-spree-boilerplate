@@ -32,7 +32,7 @@ export default function build(context, opts) {
     extract,
     fallback,
     ...options
-  } = Object.assign(opts, defaults)
+  } = Object.assign(opts, defaults(context))
   const loaders = [
     {
       test: /\.css$/,
