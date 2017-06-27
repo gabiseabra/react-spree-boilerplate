@@ -17,6 +17,4 @@ end
 
 Spree.user_class = "Spree::User"
 
-Spree::Config[:layout] = 'spree_application'
-
 Spree::Api::Config[:requires_authentication] = false
