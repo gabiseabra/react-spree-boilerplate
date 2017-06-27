@@ -145,6 +145,6 @@ module ReduxStoreHydration
       pagination = render_to_json partial: 'pagination',
                                   locals: { collection: record },
                                   formats: :json
-      { data: record.to_a.map(&:id.to_proc), pagination: pagination }
+      { data: Array(record).map(&:id.to_proc), pagination: pagination }
     end
 end
