@@ -82,9 +82,9 @@ module ReduxStoreHydration
   # Render template as json
   def render_to_json(*_, **args)
     record = args[:collection]
+    args[:formats] = :json
     if args[:partial] && record
-      jb_args = args.slice(:partial, :as, :locals)
-      jb_args[:formats] = :json
+      jb_args = args.slice(:partial, :as, :locals, :formats)
       record = [record] unless record.is_a? ActiveRecord::Relation
       JbuilderTemplate.new(view_context) do |json|
         json.array! record, jb_args
@@ -143,8 +143,7 @@ module ReduxStoreHydration
     def class_pagination_collection
       record = class_collection(self.class.store_pagination).fetch(:record)
       pagination = render_to_json partial: 'pagination',
-                                  locals: { collection: record },
-                                  formats: :json
+                                  locals: { collection: record }
       { data: Array(record).map(&:id.to_proc), pagination: pagination }
     end
 end
