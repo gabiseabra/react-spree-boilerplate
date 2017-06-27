@@ -4,7 +4,7 @@ import { Grid } from "semantic-ui-react"
 import Loader from "../Loader"
 import { Card } from "../Product"
 
-const HomePage = ({ loading, products, pagination }) => (
+const ProductsPage = ({ loading, products, pagination }) => (
   <div>
     <Loader loading={loading}>
       <Grid columns={4} stackable>
@@ -19,10 +19,10 @@ const HomePage = ({ loading, products, pagination }) => (
   </div>
 )
 
-HomePage.propTypes = {
+ProductsPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   products: PropTypes.arrayOf(PropTypes.object),
   pagination: PropTypes.node
 }
 
-export default HomePage
+export default ProductsPage
