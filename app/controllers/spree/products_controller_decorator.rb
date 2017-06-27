@@ -3,6 +3,7 @@ Spree::ProductsController.class_eval do
   layout 'react_spree_application'
   respond_to :html, :json
   hydrate 'spreeStore',
+          :user,
           :taxonomies,
           :collections,
           :pagination,
