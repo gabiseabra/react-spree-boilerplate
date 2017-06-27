@@ -5,9 +5,9 @@ import Header from "./Header"
 import Footer from "./Footer"
 import styles from "./Shell.css"
 
-const Shell = ({ children, taxonomies }) => (
+const Shell = ({ children, taxonomies, onChangeLocale }) => (
   <div className={styles.Shell}>
-    <Header taxonomies={taxonomies} />
+    <Header taxonomies={taxonomies} onChangeLocale={onChangeLocale} />
     <Container as="main" className={styles.content}>
       {children}
     </Container>
@@ -17,7 +17,8 @@ const Shell = ({ children, taxonomies }) => (
 
 Shell.propTypes = {
   children: PropTypes.node.isRequired,
-  taxonomies: PropTypes.arrayOf(PropTypes.object)
+  taxonomies: PropTypes.arrayOf(PropTypes.object),
+  onChangeLocale: PropTypes.func.isRequired
 }
 
 export default Shell

@@ -1,3 +1,5 @@
+require 'react_on_rails/rendering_extension'
+
 # Shown below are the defaults for configuration
 ReactOnRails.configure do |config|
   # Client bundles are configured in application.js
@@ -89,4 +91,7 @@ ReactOnRails.configure do |config|
   # To disable symlinks set this parameter to nil.
   config.symlink_non_digested_assets_regex = /\.(png|jpg|jpeg|gif|tiff|woff|ttf|eot|svg|map)/
 
+  # This allows you to add additional values to the Rails Context. Implement one static method
+  # called `custom_context(view_context)` and return a Hash.
+  config.rendering_extension = ReactOnRails::RenderingExtension
 end
