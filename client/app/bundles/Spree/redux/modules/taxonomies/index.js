@@ -1,5 +1,4 @@
 import { HYDRATE } from "app/lib/hydrateStore"
-import { Taxonomy } from "../../../lib/ApiClient/models"
 
 export const LOAD = "taxonomies/LOAD"
 export const REQUEST = "taxonomies/REQUEST"
@@ -26,13 +25,11 @@ export default function taxonomies(state = initialState, action) {
       return {
         error: action.error
       }
-    case HYDRATE: {
-      const { payload } = action
-      if(!payload.taxonomies) return state
+    case HYDRATE:
+      if(!action.payload.taxonomies) return state
       return {
-        tree: payload.taxonomies.map(data => new Taxonomy(data))
+        tree: action.payload.taxonomies
       }
-    }
     default:
       return state
   }

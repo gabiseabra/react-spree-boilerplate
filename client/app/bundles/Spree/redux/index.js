@@ -5,15 +5,16 @@ import ApiClient from "../lib/ApiClient"
 
 export const STORE_NAME = "spreeStore"
 
-export const createStore = hydrateStore({
-  store,
-  context(railsContext) {
-    return {
-      ...railsContext,
-      apiClient: new ApiClient({
-        url: railsContext.href
-      })
-    }
+export const createStore = hydrateStore(function * (railsContext) {
+  const { scheme, host, port } = railsContext
+  const apiClient = new ApiClient(`${scheme}://${host}:${port}/`)
+  const context = { apiClient }
+  // Create store
+  yield store(context)
+  // Parse hydration data from server
+  while(true) {
+    const props = yield
+    yield apiClient.hydrate(props)
   }
 })
 

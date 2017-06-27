@@ -11,5 +11,5 @@ export default class HomePage extends Endpoint {
     ]
   }
 
-  index = options => this.api.fetch(`/?${parseQuery(options)}`, { collection: "products" })
+  index = options => this.fetch(`/?${parseQuery(options)}`, { collection: "products" })
 }

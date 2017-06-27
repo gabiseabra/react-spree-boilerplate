@@ -4,11 +4,13 @@ import url from "url"
 import fetch from "isomorphic-fetch"
 import Router from "universal-router" // eslint-disable-line import/extensions
 import Response from "./Response"
+import hydrate from "./models/hydrate"
 import {
   Pages,
   Products,
   Taxonomies
 } from "./endpoints"
+
 
 export default class ApiClient {
   static TOKEN_HEADER = "X-Spree-Token"
@@ -26,6 +28,7 @@ export default class ApiClient {
     }
     this.url = targetUrl
     this.router = new Router(this.routes())
+    this.hydrate = hydrate
     _.assign(this, this.endpoints)
     if(token) {
       this.defaultHeaders[TOKEN_HEADER] = token

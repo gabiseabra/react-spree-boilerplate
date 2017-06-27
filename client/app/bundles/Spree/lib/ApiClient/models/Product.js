@@ -15,6 +15,8 @@ class Image {
 }
 
 export default class Product {
+  static collection = "products"
+
   constructor(data) {
     const { parseProperties, parseImages } = this.constructor
     this.id = data.id
@@ -38,5 +40,9 @@ export default class Product {
       name: prop.property_name,
       value: prop.value
     }))
+  }
+
+  static hydrate(products) {
+    return products.map(p => new Product(p))
   }
 }
