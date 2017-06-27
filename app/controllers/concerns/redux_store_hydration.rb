@@ -81,11 +81,13 @@ module ReduxStoreHydration
 
   # Render template as json
   def render_to_json(*_, **args)
-    if args[:partial] && args[:collection]
+    record = args[:collection]
+    if args[:partial] && record
       jb_args = args.slice(:partial, :as, :locals)
       jb_args[:formats] = :json
+      record = [record] unless record.is_a? ActiveRecord::Relation
       JbuilderTemplate.new(view_context) do |json|
-        json.array! args[:collection], jb_args
+        json.array! record, jb_args
       end.attributes!
     else
       JSON.parse render_to_string(args)
