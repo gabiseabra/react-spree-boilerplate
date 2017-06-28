@@ -96,54 +96,54 @@ module ReduxStoreHydration
 
   private
 
-    # Filter hooks for given action
-    def select_with_action(hooks, action_name)
-      hooks.select do |h|
-        if h[:only]
-          h[:only].include?(action_name)
-        elsif h[:except]
-          !h[:except].include?(action_name)
-        else
-          true
-        end
-      end
-    end
-
-    # Get class hydration defined with hydrate hooks enabled for the
-    # given action
-    def class_hydration_hooks(action_name = nil)
-      hooks = self.class.store_hydration_hooks.dup
-      hooks = select_with_action(hooks, action_name) if action_name
-    end
-
-    # Get an array of class collection names defined with collection
-    def class_collections
-      self.class.store_collections.keys
-    end
-
-    # Get class collection data by name
-    def class_collection(name)
-      collection = self.class.store_collections[name].dup
-      collection[:record] = instance_eval(&collection[:selector])
-      collection
-    end
-
-    # Get class collection json for redux state by name
-    def class_collection_json(name)
-      collection = class_collection name
-      record = collection[:record]
-      if collection[:partial]
-        render_to_json(collection.merge(collection: record, formats: :json))
+  # Filter hooks for given action
+  def select_with_action(hooks, action_name)
+    hooks.select do |h|
+      if h[:only]
+        h[:only].include?(action_name)
+      elsif h[:except]
+        !h[:except].include?(action_name)
       else
-        collection[:record].to_a
+        true
       end
     end
+  end
 
-    # Get class pagination json for redux state
-    def class_pagination_collection
-      record = class_collection(self.class.store_pagination).fetch(:record)
-      pagination = render_to_json partial: 'pagination',
-                                  locals: { collection: record }
-      { data: Array(record).map(&:id.to_proc), pagination: pagination }
+  # Get class hydration defined with hydrate hooks enabled for the
+  # given action
+  def class_hydration_hooks(action_name = nil)
+    hooks = self.class.store_hydration_hooks.dup
+    hooks = select_with_action(hooks, action_name) if action_name
+  end
+
+  # Get an array of class collection names defined with collection
+  def class_collections
+    self.class.store_collections.keys
+  end
+
+  # Get class collection data by name
+  def class_collection(name)
+    collection = self.class.store_collections[name].dup
+    collection[:record] = instance_eval(&collection[:selector])
+    collection
+  end
+
+  # Get class collection json for redux state by name
+  def class_collection_json(name)
+    collection = class_collection name
+    record = collection[:record]
+    if collection[:partial]
+      render_to_json(collection.merge(collection: record, formats: :json))
+    else
+      collection[:record].to_a
     end
+  end
+
+  # Get class pagination json for redux state
+  def class_pagination_collection
+    record = class_collection(self.class.store_pagination).fetch(:record)
+    pagination = render_to_json partial: 'pagination',
+                                locals: { collection: record }
+    { data: Array(record).map(&:id.to_proc), pagination: pagination }
+  end
 end
