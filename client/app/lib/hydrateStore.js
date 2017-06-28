@@ -12,10 +12,9 @@ export default function hydrateStore(storeGenerator) {
     if(!store) {
       iter = storeGenerator(railsContext)
       store = iter.next().value
+      iter.next()
     }
-    iter.next()
-    const finalProps = iter.next(props).value
-    store.dispatch(hydrate(finalProps, railsContext))
+    iter.next(props)
     return store
   }
 }

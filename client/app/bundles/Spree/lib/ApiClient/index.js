@@ -19,14 +19,14 @@ export default class ApiClient {
     Accept: "application/json"
   }
 
-  constructor({ url: targetUrl, token }) {
+  constructor({ scheme, host, port, token }) {
     const { TOKEN_HEADER } = this.constructor
     this.endpoints = {
       pages: new Pages(this),
       products: new Products(this),
       taxonomies: new Taxonomies(this)
     }
-    this.url = targetUrl
+    this.url = `${scheme}://${host}:${port}/`
     this.router = new Router(this.routes())
     this.hydrate = hydrate
     _.assign(this, this.endpoints)

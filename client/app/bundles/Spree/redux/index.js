@@ -1,20 +1,19 @@
-import hydrateStore from "app/lib/hydrateStore"
+import hydrateStore, { hydrate } from "app/lib/hydrateStore"
 import { withStore as _withStore } from "app/components"
-import store from "./store"
+import _createStore from "./store"
 import ApiClient from "../lib/ApiClient"
 
 export const STORE_NAME = "spreeStore"
 
 export const createStore = hydrateStore(function * (railsContext) {
-  const { scheme, host, port } = railsContext
-  const apiClient = new ApiClient(`${scheme}://${host}:${port}/`)
-  const context = { apiClient }
-  // Create store
-  yield store(context)
+  const apiClient = new ApiClient(railsContext)
+  const store = _createStore({ apiClient })
+  yield store
   // Parse hydration data from server
   while(true) {
     const props = yield
-    yield apiClient.hydrate(props)
+    const finalProps = apiClient.hydrate(props)
+    store.dispatch(hydrate(finalProps, railsContext))
   }
 })
 
