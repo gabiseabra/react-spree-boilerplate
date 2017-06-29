@@ -1,35 +1,40 @@
-import url from "url"
-import qs from "querystring"
-import ExtendableError from "es6-error"
-import { Pagination, Search } from "./models"
+import _ from "lodash"
+import ResponseData from "./ResponseData"
 
-export class ResponseError extends ExtendableError {
-  constructor({ status, statusText }) {
-    super(`HTTP Error: [${status}] ${statusText}`)
-    this.status = status
-    this.statusText = statusText
-  }
-}
-
-export default class Response {
-  static async parse(response, targetUrl, options) {
-    if(!response.ok) {
-      throw new ResponseError(response)
-    }
-    const json = await response.json()
-    return new Response(json, targetUrl, options)
+// Response parser
+export default class ApiResponse {
+  constructor(response, options) {
+    this.options = options
+    this.response = response
   }
 
-  constructor(json, targetUrl, { collection, parser }) {
-    let data = (collection && json[collection]) ? json[collection] : json
-    if(parser) data = parser(data)
-    this.collection = collection
-    this.data = data
-    this.url = url.parse(targetUrl)
-    this.query = qs.parse(this.url.query)
-    this.search = new Search(this.query)
-    if("per_page" in json) {
-      this.pagination = new Pagination(json)
+  async json() {
+    const { collection, Entity } = this.options
+    const data = await this.response.json()
+    let value
+    if(collection) value = data[collection]
+    if(Entity) {
+      value = _.isArray(value) ? value.map(v => new Entity(v)) : new Entity(value)
     }
+    return new ResponseData.Json({
+      response: this.response,
+      Entity,
+      data,
+      value
+    })
+  }
+
+  async html() {
+    return new ResponseData({
+      response: this.response,
+      data: (await this.response.html())
+    })
+  }
+
+  async text() {
+    return new ResponseData({
+      response: this.response,
+      data: (await this.response.text())
+    })
   }
 }

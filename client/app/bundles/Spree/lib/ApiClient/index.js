@@ -4,6 +4,7 @@ import url from "url"
 import fetch from "isomorphic-fetch"
 import Router from "universal-router" // eslint-disable-line import/extensions
 import Response from "./Response"
+import ResponseError from "./ResponseError"
 import hydrate from "./models/hydrate"
 import {
   Pages,
@@ -11,16 +12,22 @@ import {
   Taxonomies
 } from "./endpoints"
 
+const FORMATS = {
+  json: "application/json",
+  html: "text/html",
+  text: "text/*;q=0.9 */*;q=0.8"
+}
 
 export default class ApiClient {
-  static TOKEN_HEADER = "X-Spree-Token"
+  static API_TOKEN_HEADER = "X-Spree-Token"
+  static CRF_TOKEN_HEADER = "X-CRF-Token"
 
-  defaultHeaders = {
-    Accept: "application/json"
+  defaultOptions = {
+    format: "json",
+    headers: {}
   }
 
-  constructor({ scheme, host, port, token }) {
-    const { TOKEN_HEADER } = this.constructor
+  constructor({ scheme, host, port }) {
     this.endpoints = {
       pages: new Pages(this),
       products: new Products(this),
@@ -28,11 +35,7 @@ export default class ApiClient {
     }
     this.url = `${scheme}://${host}:${port}/`
     this.router = new Router(this.routes())
-    this.hydrate = hydrate
     _.assign(this, this.endpoints)
-    if(token) {
-      this.defaultHeaders[TOKEN_HEADER] = token
-    }
   }
 
   routes() {
@@ -46,6 +49,8 @@ export default class ApiClient {
     }, [])
   }
 
+  hydrate = hydrate
+
   route = (target, context = {}) => {
     const { pathname, query: queryString } = url.parse(target)
     const query = qs.parse(queryString)
@@ -53,9 +58,17 @@ export default class ApiClient {
   }
 
   fetch = (path, options = {}) => {
-    const headers = _.assign({}, options.headers || {}, this.defaultHeaders)
-    return fetch(path, { ...options, headers })
-      .then(response => Response.parse(response, path, options))
+    const reqOptions = _.merge({}, options, this.defaultOptions)
+    const format = reqOptions.format
+    if(format && !reqOptions.headers.Accept) {
+      reqOptions.headers.Accept = FORMATS[format]
+    }
+    return fetch(path, reqOptions)
+      .then((response) => {
+        if(!response.ok) throw new ResponseError(response)
+        return new Response(response, reqOptions)
+      })
+      .then(response => (format ? response[format].call(response) : response))
       .catch(error => ({ error }))
   }
 }

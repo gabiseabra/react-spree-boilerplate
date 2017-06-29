@@ -6,13 +6,7 @@ export default class Endpoint {
   }
 
   fetch = (path, options) => this.api.fetch(path, {
-    parser: this.parseAny,
+    Entity: this.Entity,
     ...options
   })
-
-  parse = data => new this.Entity(data)
-
-  parseAll = data => data.map(this.parse)
-
-  parseAny = data => (_.isArray(data) ? this.parseAll(data) : this.parse(data))
 }

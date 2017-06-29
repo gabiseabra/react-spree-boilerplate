@@ -9,15 +9,15 @@ export default function create(context) {
 
   function * request({ path, search, page, perPage }) {
     const response = yield call(apiClient.route, path, { search, page, perPage })
-    const { data, error, collection, pagination } = response
+    const { value, error, pagination, collection } = response
     if(error) {
       yield put(actions.fail(page, error, pagination))
     } else if(!collection) {
-      yield put(actions.succeed(page, data, pagination))
+      yield put(actions.succeed(page, value, pagination))
     } else {
-      const dataIds = _.isArray(data) ? data.map(o => o.id) : data.id
-      yield put(hydrate({ [collection]: _.flatten([ data ]) }, context))
-      yield put(actions.succeed(page, dataIds, pagination))
+      const idArray = _.isArray(value) ? value.map(o => o.id) : value.id
+      yield put(hydrate({ [collection]: _.flatten([ value ]) }, context))
+      yield put(actions.succeed(page, idArray, pagination))
     }
   }
 
