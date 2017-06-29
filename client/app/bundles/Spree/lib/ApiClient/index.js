@@ -2,6 +2,7 @@ import _ from "lodash"
 import qs from "querystring"
 import url from "url"
 import fetch from "isomorphic-fetch"
+import autobind from "class-autobind"
 import Router from "universal-router" // eslint-disable-line import/extensions
 import Response from "./Response"
 import ResponseError from "./ResponseError"
@@ -28,6 +29,7 @@ export default class ApiClient {
   }
 
   constructor({ scheme, host, port }) {
+    autobind(this)
     this.endpoints = {
       pages: new Pages(this),
       products: new Products(this),
@@ -36,6 +38,7 @@ export default class ApiClient {
     this.url = `${scheme}://${host}:${port}/`
     this.router = new Router(this.routes())
     _.assign(this, this.endpoints)
+    window.$$apiClient = this
   }
 
   routes() {
@@ -51,24 +54,33 @@ export default class ApiClient {
 
   hydrate = hydrate
 
-  route = (target, context = {}) => {
+  route(target, context = {}) {
     const { pathname, query: queryString } = url.parse(target)
     const query = qs.parse(queryString)
-    return this.router.resolve({ ...context, query, queryString, path: pathname })
+    return this.router.resolve({
+      ...context,
+      path: pathname,
+      queryString,
+      query
+    })
   }
 
-  fetch = (path, options = {}) => {
-    const reqOptions = _.merge({}, options, this.defaultOptions)
-    const format = reqOptions.format
-    if(format && !reqOptions.headers.Accept) {
-      reqOptions.headers.Accept = FORMATS[format]
+  parseRequestOptions(opts) {
+    const options = _.merge({}, this.defaultOptions, opts)
+    if(options.format && !options.headers.Accept) {
+      options.headers.Accept = FORMATS[options.format]
     }
-    return fetch(path, reqOptions)
-      .then((response) => {
-        if(!response.ok) throw new ResponseError(response)
-        return new Response(response, reqOptions)
-      })
-      .then(response => (format ? response[format].call(response) : response))
-      .catch(error => ({ error }))
+    return options
+  }
+
+  async fetch(path, opts = {}) {
+    const options = this.parseRequestOptions(opts)
+    const response = await fetch(path, options)
+    if(!response.ok) throw new ResponseError(response)
+    const apiResponse = new Response(response, options)
+    if(options.format) {
+      return apiResponse[options.format].call(apiResponse)
+    }
+    return apiResponse
   }
 }

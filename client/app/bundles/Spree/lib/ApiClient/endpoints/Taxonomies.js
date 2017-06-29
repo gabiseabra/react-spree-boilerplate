@@ -2,8 +2,6 @@ import Endpoint from "./Endpoint"
 import { Taxonomy } from "../models"
 
 export default class Taxonomies extends Endpoint {
-  Entity = Taxonomy
-
   routes = () => [
     {
       path: "/api/taxonomies/:id",
@@ -15,13 +13,18 @@ export default class Taxonomies extends Endpoint {
     }
   ]
 
-  getAll = ({ nested }) => {
+  getAll({ nested }) {
     const query = (nested ? "set=nested" : "")
-    return this.fetch(`/api/v1/taxonomies?${query}`, { collection: "taxonomies" })
+    return this.fetch(`/api/v1/taxonomies?${query}`, {
+      collection: "taxonomies",
+      Entity: Taxonomy
+    })
   }
 
-  get = (id, { nested }) => {
+  get(id, { nested }) {
     const query = (nested ? "set=nested" : "")
-    return this.fetch(`/api/v1/taxonomies/${id}?${query}`)
+    return this.fetch(`/api/v1/taxonomies/${id}?${query}`, {
+      Entity: Taxonomy
+    })
   }
 }

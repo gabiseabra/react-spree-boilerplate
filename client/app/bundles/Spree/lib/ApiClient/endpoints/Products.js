@@ -2,8 +2,6 @@ import Endpoint from "./Endpoint"
 import { Product } from "../models"
 
 export default class Products extends Endpoint {
-  Entity = Product
-
   routes = () => [
     {
       path: "/api/products/:id",
@@ -11,5 +9,7 @@ export default class Products extends Endpoint {
     }
   ]
 
-  get = id => this.fetch(`/api/v1/products/${id}`)
+  get(id) {
+    return this.fetch(`/api/v1/products/${id}`, { Entity: Product })
+  }
 }

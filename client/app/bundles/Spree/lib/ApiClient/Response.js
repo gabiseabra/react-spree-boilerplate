@@ -1,6 +1,12 @@
 import _ from "lodash"
 import ResponseData from "./ResponseData"
 
+const parseAny = (Entity, data) => (
+  _.isArray(data) ?
+  data.map(v => new Entity(v)) :
+  new Entity(data)
+)
+
 // Response parser
 export default class ApiResponse {
   constructor(response, options) {
@@ -11,11 +17,9 @@ export default class ApiResponse {
   async json() {
     const { collection, Entity } = this.options
     const data = await this.response.json()
-    let value
+    let value = data
     if(collection) value = data[collection]
-    if(Entity) {
-      value = _.isArray(value) ? value.map(v => new Entity(v)) : new Entity(value)
-    }
+    if(Entity) value = parseAny(Entity, value)
     return new ResponseData.Json({
       response: this.response,
       Entity,
