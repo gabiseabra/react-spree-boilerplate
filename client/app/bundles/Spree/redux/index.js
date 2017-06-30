@@ -1,3 +1,4 @@
+import ReactOnRails from "react-on-rails"
 import hydrateStore, { hydrate } from "app/lib/hydrateStore"
 import { withStore as _withStore } from "app/components"
 import _createStore from "./store"
@@ -6,7 +7,12 @@ import ApiClient from "../lib/ApiClient"
 export const STORE_NAME = "spreeStore"
 
 export const createStore = hydrateStore(function * (railsContext) {
-  const apiClient = new ApiClient(railsContext)
+  const apiClient = new ApiClient({
+    csrfToken: ReactOnRails.authenticityToken(),
+    scheme: railsContext.scheme,
+    host: railsContext.host,
+    port: railsContext.port
+  })
   const store = _createStore({ apiClient })
   yield store
   // Parse hydration data from server
