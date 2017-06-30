@@ -22,8 +22,23 @@ export default class ContextProvider extends React.Component {
   }
 }
 
-export const withContext = Component => (props, railsContext) => (
+export const withContextInjector = Component => (props, railsContext) => (
   <ContextProvider context={railsContext}>
     <Component {...props} />
   </ContextProvider>
+)
+
+export const withContext = Component => (
+  // eslint-disable-next-line
+  class extends React.Component {
+    static contextTypes = {
+      railsContext: PropTypes.object.isRequired
+    }
+
+    render() {
+      const props = this.props
+      const { railsContext } = this.context
+      return <Component {...props} railsContext={railsContext} />
+    }
+  }
 )
