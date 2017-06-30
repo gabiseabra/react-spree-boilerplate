@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Segment, Grid } from "semantic-ui-react"
+import * as Nav from "../Navigation"
 import Logo from "../Logo"
-import Nav from "./Nav"
 import styles from "./Header.css"
 
 const Header = ({ taxonomies, onChangeLocale }) => (
@@ -12,7 +12,7 @@ const Header = ({ taxonomies, onChangeLocale }) => (
         <a href="/"><Logo size="small" /></a>
       </Grid.Column>
       <Grid.Column>
-        <Nav taxonomies={taxonomies} onChangeLocale={onChangeLocale} />
+        <Nav.Header taxonomies={taxonomies} onChangeLocale={onChangeLocale} />
       </Grid.Column>
     </Grid>
   </Segment>
