@@ -23,7 +23,7 @@ export default class Login extends Component {
     const { error, loading } = this.props
     const { login, password, rememberMe } = this.state
     return (
-      <Form onSubmit={this.onSubmit} warning={error}>
+      <Form onSubmit={this.onSubmit} warning={Boolean(error)}>
         {error && <Message warning content={error.message} />}
         <Form.Input
           value={login}

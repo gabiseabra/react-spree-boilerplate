@@ -45,6 +45,10 @@ export default class ApiClient {
     window.$$apiClient = this
   }
 
+  setApiToken(token) { this.defaultOptions.apiToken = token }
+
+  setCsrfToken(token) { this.defaultOptions.csrfToken = token }
+
   routes() {
     return _.keys(this.endpoints).reduce((arr, key) => {
       const endpoint = this.endpoints[key]

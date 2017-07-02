@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get 'hello_world', to: 'hello_world#index'
 
   # This line mounts Spree's routes at the root of your application.
@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   #
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
   mount Spree::Core::Engine, at: '/'
-          # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+  Spree::Core::Engine.routes.draw do
+    get '/authenticity_token' => 'store#authenticity_token'
+  end
 end
