@@ -6,12 +6,7 @@ export const REQUEST = "auth/REQUEST"
 export const SUCCESS = "auth/SUCCESS"
 export const FAILURE = "auth/FAILURE"
 
-export const login = (username, password, rememberMe) => ({
-  type: LOGIN,
-  login: username,
-  password,
-  rememberMe
-})
+export const login = data => ({ type: LOGIN, data })
 export const logout = () => ({ type: LOGOUT })
 export const request = () => ({ type: REQUEST })
 export const succeed = user => ({ type: SUCCESS, user })

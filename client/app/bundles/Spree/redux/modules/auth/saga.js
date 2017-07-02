@@ -3,7 +3,7 @@ import { isUserLoggedIn } from "../../selectors"
 import * as actions from "./index"
 
 export default function create({ apiClient }) {
-  function * login(data) {
+  function * login({ data }) {
     const loggedIn = yield select(isUserLoggedIn)
     if(loggedIn) return
     yield put(actions.request())

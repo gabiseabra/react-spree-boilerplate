@@ -1,31 +1,16 @@
-import React, { Component } from "react"
+import React from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
 import { Shell } from "../components"
-import { getAllTaxonomies } from "../redux/selectors"
+import Navigation from "./Navigation"
 
-class ShellApp extends Component {
-  static propTypes = {
-    taxonomies: PropTypes.arrayOf(PropTypes.object),
-    children: PropTypes.node.isRequired
-  }
+const ShellApp = ({ children }) => (
+  <Shell navigation={<Navigation />}>
+    {children}
+  </Shell>
+)
 
-  onChangeLocale = (locale) => {
-    window.location.href = `/locale/set?locale=${locale}`
-  }
-
-  render() {
-    const { taxonomies, children } = this.props
-    return (
-      <Shell taxonomies={taxonomies} onChangeLocale={this.onChangeLocale}>
-        {children}
-      </Shell>
-    )
-  }
+ShellApp.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
-const mapper = state => ({
-  taxonomies: getAllTaxonomies(state)
-})
-
-export default connect(mapper)(ShellApp)
+export default ShellApp

@@ -13,6 +13,6 @@ body,
 }
 
 #app > div,
-[data-reactroot] {
+#app [data-reactroot] {
   height: 100%;
 }
