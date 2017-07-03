@@ -20,34 +20,27 @@ const FORMATS = {
 }
 
 export default class ApiClient {
-  static API_TOKEN_HEADER = "X-Spree-Token"
   static CSRF_TOKEN_HEADER = "X-CSRF-Token"
 
-  defaultOptions = {
+  options = {
     format: "json",
-    apiToken: undefined,
     csrfToken: undefined,
     headers: {}
   }
 
-  constructor({ scheme, host, port, csrfToken, apiToken }) {
+  constructor({ scheme, host, port, csrfToken }) {
     autobind(this)
     this.endpoints = {
       pages: new Pages(this),
       products: new Products(this),
       taxonomies: new Taxonomies(this)
     }
-    if(apiToken) this.defaultOptions.apiToken = apiToken
-    if(csrfToken) this.defaultOptions.csrfToken = csrfToken
+    if(csrfToken) this.options.csrfToken = csrfToken
     this.url = `${scheme}://${host}:${port}/`
     this.router = new Router(this.routes())
     _.assign(this, this.endpoints)
     window.$$apiClient = this
   }
-
-  setApiToken(token) { this.defaultOptions.apiToken = token }
-
-  setCsrfToken(token) { this.defaultOptions.csrfToken = token }
 
   routes() {
     return _.keys(this.endpoints).reduce((arr, key) => {
@@ -74,20 +67,14 @@ export default class ApiClient {
   }
 
   parseRequestOptions(opts) {
-    const {
-      API_TOKEN_HEADER,
-      CSRF_TOKEN_HEADER
-    } = ApiClient
-    const options = _.merge({}, this.defaultOptions, opts)
-    const { format, credentials, csrfToken, apiToken } = options
+    const { CSRF_TOKEN_HEADER } = ApiClient
+    const options = _.merge({}, this.options, opts)
+    const { format, credentials, csrfToken } = options
     if(format && !options.headers.Accept) {
       options.headers.Accept = FORMATS[format]
     }
     if(credentials && credentials !== "omit" && csrfToken) {
       options.headers[CSRF_TOKEN_HEADER] = csrfToken
-    }
-    if(apiToken) {
-      options.headers[API_TOKEN_HEADER] = apiToken
     }
     return options
   }
@@ -101,5 +88,12 @@ export default class ApiClient {
       return apiResponse[options.format].call(apiResponse)
     }
     return apiResponse
+  }
+
+  async refreshCsrfToken() {
+    const response = await this.fetch("/authenticity_token", {
+      credentials: "same-origin"
+    })
+    this.options.csrfToken = response.data.authenticity_token
   }
 }

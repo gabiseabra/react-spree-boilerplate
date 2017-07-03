@@ -25,9 +25,7 @@ export default function create({ apiClient }) {
     try {
       yield call(apiClient.route, "/logout")
       yield put(actions.succeed(undefined))
-      // Refresh authenticity token for new session
-      const token = yield call(apiClient.route, "/token")
-      apiClient.setCsrfToken(token)
+      yield call(apiClient.refreshCsrfToken)
     } catch(error) {
       yield put(actions.fail(error))
     }

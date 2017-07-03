@@ -4,15 +4,9 @@ import { User } from "../../models"
 export default class AuthPage extends Endpoint {
   routes() {
     return [
-      { path: "/token", action: this.token },
       { path: "/login", action: this.login },
       { path: "/logout", action: this.logout }
     ]
-  }
-
-  token() {
-    return this.fetch("/authenticity_token", { credentials: "same-origin" })
-      .then(({ data }) => data.authenticity_token)
   }
 
   async login({ login, password, rememberMe }) {
