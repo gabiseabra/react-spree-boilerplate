@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Segment, Grid } from "semantic-ui-react"
-import Logo from "../Logo"
+import { Logo } from "../../app"
 
 const Header = ({ navigation }) => (
   <Segment as="header">

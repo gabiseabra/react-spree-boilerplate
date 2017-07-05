@@ -1,16 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Shell, withProvider } from "../app"
-import { ShowProductPage } from "../../components/pages"
+import { withProvider } from "../app"
+import { ShowProductPage } from "../../components/views"
 import { getPageProducts, isPageLoaded } from "../../redux/selectors"
 
 const ShowProductPageApp = ({ products, loading }) => (
-  <Shell>
-    <ShowProductPage
-      loading={loading}
-      product={products && products[0]} />
-  </Shell>
+  <ShowProductPage
+    loading={loading}
+    product={products && products[0]} />
 )
 
 ShowProductPageApp.propTypes = {
