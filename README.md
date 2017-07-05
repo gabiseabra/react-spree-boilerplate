@@ -1,24 +1,50 @@
-# README
+# React Spree Boilerplate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is as base spree application with a frontend built with React + Redux.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+### Ruby
+* Rails 5
+* Spree 3.2
+* React on Rails 8
 
-* System dependencies
+### Node
+* React
+* React Intl
+* Redux
+* Redux Saga
+* Reselect
+* Webpack + HMR
 
-* Configuration
+## Installation
 
-* Database creation
+```shell
+bundle install
+npm install
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+```
 
-* Database initialization
+Optionally, Spree sample data may be loaded by:
 
-* How to run the test suite
+```shell
+bundle exec rake spree_sample:load
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Development
 
-* Deployment instructions
+```shell
+npm run start:hot
+```
 
-* ...
+Starts the app with hot module replacement. While this is the recommended approach, `start:dev` might also be used to start using watch mode instead of hmr.
+
+```shell
+npm run start:dev
+```
+
+The store can be accessed at
+
+http://localhost:3000 
