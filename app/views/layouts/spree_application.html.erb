@@ -9,11 +9,17 @@
     <%= stylesheet_pack_tag 'common', media: 'all' %>
     <%= javascript_pack_tag 'spree' %>
     <%= stylesheet_pack_tag 'spree', media: 'all' %>
+    <%= hydrate_taxonomies 'spreeStore' %>
+    <%= hydrate_user 'spreeStore' %>
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
     <div id="app">
-      <%= yield %>
+      <%= react_component 'Header' %>
+      <main>
+        <%= yield %>
+      </main>
+      <%= react_component 'Footer' %>
     </div>
     <%= redux_store_hydration_data %>
   </body>
