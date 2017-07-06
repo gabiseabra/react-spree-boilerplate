@@ -79,33 +79,14 @@ module ReduxStoreHydration
     super
   end
 
-  # Render template as json
-  def render_to_json(*_, **args)
-    record = args[:collection]
-    args[:formats] = :json
-    if args[:partial] && record
-      jb_args = args.slice(:partial, :as, :locals, :formats)
-      record = [record] unless record.is_a? ActiveRecord::Relation
-      JbuilderTemplate.new(view_context) do |json|
-        json.array! record, jb_args
-      end.attributes!
-    else
-      JSON.parse render_to_string(args)
-    end
-  end
-
   private
 
   # Filter hooks for given action
   def select_with_action(hooks, action_name)
     hooks.select do |h|
-      if h[:only]
-        h[:only].include?(action_name)
-      elsif h[:except]
-        !h[:except].include?(action_name)
-      else
-        true
-      end
+      next h[:only].include?(action_name) unless h[:only].empty?
+      next !h[:except].include?(action_name) unless h[:except].empty?
+      next true
     end
   end
 
@@ -133,7 +114,7 @@ module ReduxStoreHydration
     collection = class_collection name
     record = collection[:record]
     if collection[:partial]
-      render_to_json(collection.merge(collection: record, formats: :json))
+      view_context.render_to_json(collection.merge(collection: record, formats: :json))
     else
       collection[:record].to_a
     end
@@ -142,8 +123,8 @@ module ReduxStoreHydration
   # Get class pagination json for redux state
   def class_pagination_collection
     record = class_collection(self.class.store_pagination).fetch(:record)
-    pagination = render_to_json partial: 'pagination',
-                                locals: { collection: record }
+    pagination = view_context.render_to_json partial: 'pagination',
+                                             locals: { collection: record }
     { data: Array(record).map(&:id.to_proc), pagination: pagination }
   end
 end
