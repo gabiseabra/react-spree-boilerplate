@@ -94,4 +94,6 @@ ReactOnRails.configure do |config|
   # This allows you to add additional values to the Rails Context. Implement one static method
   # called `custom_context(view_context)` and return a Hash.
   config.rendering_extension = ReactOnRails::RenderingExtension
+
+  config.npm_build_production_command = 'npm run translate && npm run build:prod'
 end
