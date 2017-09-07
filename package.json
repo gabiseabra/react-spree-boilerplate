@@ -1,24 +1,28 @@
 {
-  "name": "react-webpack-rails-tutorial",
+  "name": "react-spree-boilerplate",
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": "6.9.0",
-    "npm": "4.1.1"
+    "node": "^6.9.0",
+    "yarn": "^0.24.5"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "scripts": {
-    "postinstall": "cd client && npm install",
+    "postinstall": "cd client && yarn install",
     "start": "foreman start",
     "start:dev": "foreman start -f Procfile.dev",
     "start:hot": "foreman start -f Procfile.hot",
-    "dev-server": "cd client && npm run dev-server --",
-    "build": "cd client && npm run build --",
-    "build:dev": "cd client && npm run build:dev --",
-    "build:test": "cd client && npm run build:test --",
-    "build:prod": "cd client && npm run build:prod --",
-    "build:vendor": "cd client && npm run build:vendor --",
-    "translate": "cd client && npm run translate --",
-    "clean": "npm run clean:app && npm run clean:vendor",
+    "dev-server": "cd client && yarn run dev-server --",
+    "build": "cd client && yarn run build --",
+    "build:dev": "cd client && yarn run build:dev --",
+    "build:test": "cd client && yarn run build:test --",
+    "build:prod": "cd client && yarn run build:prod --",
+    "build:vendor": "cd client && yarn run build:vendor --",
+    "translate": "cd client && yarn run translate --",
+    "clean": "yarn run clean:app & yarn run clean:vendor",
     "clean:app": "rm -r public/webpack/* || true",
     "clean:vendor": "rm -r app/assets/webpack/* || true",
     "test": "rspec"

@@ -95,5 +95,5 @@ ReactOnRails.configure do |config|
   # called `custom_context(view_context)` and return a Hash.
   config.rendering_extension = ReactOnRails::RenderingExtension
 
-  config.npm_build_production_command = 'npm run translate && npm run build:prod'
+  config.npm_build_production_command = 'yarn run translate && yarn run build:prod'
 end

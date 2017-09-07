@@ -21,7 +21,7 @@ This project is as base spree application with a frontend built with React + Red
 
 ```shell
 bundle install
-npm install
+yarn install
 bundle exec rake db:create
 bundle exec rake db:migrate
 bundle exec rake db:seed
@@ -36,13 +36,13 @@ bundle exec rake spree_sample:load
 ## Development
 
 ```shell
-npm run start:hot
+yarn run start:hot
 ```
 
 Starts the app with hot module replacement. While this is the recommended approach, `start:dev` might also be used to start using watch mode instead of hmr.
 
 ```shell
-npm run start:dev
+yarn run start:dev
 ```
 
 The store can be accessed at
