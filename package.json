@@ -25,6 +25,7 @@
     "clean": "yarn run clean:app & yarn run clean:vendor",
     "clean:app": "rm -r public/webpack/* || true",
     "clean:vendor": "rm -r app/assets/webpack/* || true",
-    "test": "rspec"
+    "test": "yarn run test:rails",
+    "test:rails": "bundle exec rspec"
   }
 }

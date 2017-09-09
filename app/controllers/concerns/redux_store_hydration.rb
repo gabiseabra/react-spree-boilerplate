@@ -36,7 +36,7 @@ module ReduxStoreHydration
       hash[name.to_sym] = {
         partial: args.fetch(:partial, nil),
         locals: args.fetch(:locals, {}),
-        as: args.fetch(:as, name),
+        as: args.fetch(:as, name.to_s.singularize.to_sym),
         selector: args.fetch(:of)
       }
       self.store_collections = hash.freeze
@@ -56,9 +56,10 @@ module ReduxStoreHydration
   end
 
   def hydrate_collections(store_name)
-    class_collections.each do |name|
+    class_collection_names.each do |name|
       value = class_collection_json name
-      redux_store store_name, props: { name => value }
+      collection = class_collection name
+      redux_store store_name, props: { collection[:as] => value }
     end
   end
 
@@ -71,11 +72,13 @@ module ReduxStoreHydration
     class_hydration_hooks(action_name.to_s).each do |h|
       method(h[:method]).call h[:store_name]
     end
-    respond_to { |f| f.html }
   end
 
   def render(*args)
-    hydrate if request.format.to_sym == :html
+    if request.format.to_sym == :html
+      hydrate
+      respond_to { |f| f.html }
+    end
     super
   end
 
@@ -98,7 +101,7 @@ module ReduxStoreHydration
   end
 
   # Get an array of class collection names defined with collection
-  def class_collections
+  def class_collection_names
     self.class.store_collections.keys
   end
 
@@ -115,8 +118,10 @@ module ReduxStoreHydration
     record = collection[:record]
     if collection[:partial]
       view_context.render_to_json(collection.merge(collection: record, formats: :json))
+    elsif record.respond_to?(:to_a)
+      record.to_a
     else
-      collection[:record].to_a
+      [record]
     end
   end
 
