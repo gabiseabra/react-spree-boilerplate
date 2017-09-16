@@ -2,7 +2,7 @@ import FormData from "isomorphic-form-data"
 import { User } from "../resources"
 
 export default {
-  "/login": async ({ username, password, rememberMe }) => {
+  "/login": async function ({ username, password, rememberMe }) {
     const body = new FormData()
     body.append("spree_user[email]", username)
     body.append("spree_user[password]", password)
@@ -22,7 +22,7 @@ export default {
       } catch(_) { throw error }
     }
   },
-  "/logout": async () => {
+  "/logout": async function () {
     await this.fetch("/logout", {
       credentials: "same-origin"
     })
