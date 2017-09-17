@@ -11,12 +11,14 @@ export default class User extends Resource {
 
   constructor(data) {
     super()
+    const shipping = data.ship_address
+    const billing = data.bill_address
     this.id = data.id
     this.email = data.email
     this.login = data.login
     this.addresses = {
-      shipping: new Address(data.ship_address),
-      billing: new Address(data.bill_address)
+      shipping: (shipping ? new Address(shipping) : undefined),
+      billing: (billing ? new Address(billing) : undefined)
     }
   }
 }
