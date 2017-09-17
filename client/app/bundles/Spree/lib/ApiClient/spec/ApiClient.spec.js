@@ -9,6 +9,7 @@ describe("ApiClient", () => {
   beforeEach("setup nock scope", function () {
     this.client = client
     this.scope = nock("http://test.api")
+    this.scope.withCredentials = token => this.scope.matchHeader(CSRF_TOKEN_HEADER, token || /.+/)
   })
   afterEach("finish nock scope", function () {
     this.scope.done()
@@ -74,7 +75,7 @@ describe("ApiClient", () => {
   describe("#refreshCsrfToken()", () => {
     beforeEach(function () {
       this.scope
-        .matchHeader(CSRF_TOKEN_HEADER, /^csrf-token/)
+        .withCredentials()
         .get("/authenticity_token")
         .reply(200, {
           authenticity_token: "csrf-token-test"
@@ -85,5 +86,9 @@ describe("ApiClient", () => {
       await this.client.refreshCsrfToken()
       this.client.headers[CSRF_TOKEN_HEADER].should.equal("csrf-token-test")
     })
+  })
+
+  describe("#route()", () => {
+    require("./routes/auth")
   })
 })
