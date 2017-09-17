@@ -1,9 +1,11 @@
 import _ from "lodash"
 import url from "url"
 import fetch from "isomorphic-fetch"
+import isIterable from "is-iterable"
 // import autobind from "class-autobind"
 import ResponseError from "./ResponseError"
 import Store from "./Store"
+import Resource from "./resources/Resource"
 import * as entities from "./resources"
 import routes from "./routes"
 import createEndpoints from "./endpoints"
@@ -16,12 +18,31 @@ const FORMATS = {
 
 export const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 
+function parseRelationships(resource, relationships) {
+  Object.keys(relationships).forEach((key) => {
+    const data = resource[key]
+    const Entity = relationships[key]
+    if(!(Entity.prototype instanceof Resource)) {
+      parseRelationships.call(this, data, relationships[key])
+    } else {
+      this.store(data)
+    }
+  })
+}
+
+function store(resource) {
+  const Entity = resource.constructor
+  this.cache.set(Entity, resource)
+  parseRelationships.call(this, resource, Entity.relationships)
+  resource.api = this
+}
+
 export default class ApiClient {
   constructor(apiUrl, { csrfToken }) {
     // autobind(this)
     this.url = apiUrl
     this.csrfToken = csrfToken
-    this.store = new Store(entities)
+    this.cache = new Store(Object.values(entities))
     this.endpoints = createEndpoints(this, { entities, routes })
     Object.assign(this, this.endpoints)
   }
@@ -83,13 +104,27 @@ export default class ApiClient {
   }
 
   async get(Entity, id) {
-    const instance = this.store.get(Entity, id)
+    const instance = this.cache.get(Entity, id)
     if(instance) {
       return instance
     } else if(Entity.collection in this.endpoints) {
       return this.endpoints[Entity.collection].get(id)
     }
     return undefined
+  }
+
+  async getAll(Entity, ids) {
+    return ids.map(id => this.get(Entity, id))
+  }
+
+  store(resource) {
+    if(isIterable(resource)) {
+      for(const instance of resource) {
+        store.call(this, instance)
+      }
+    } else {
+      store.call(this, resource)
+    }
   }
 
   async refreshCsrfToken() {
