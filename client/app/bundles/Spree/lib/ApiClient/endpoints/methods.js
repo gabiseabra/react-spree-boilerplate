@@ -3,14 +3,14 @@ import Collection from "../resources/Collection"
 export const page = Entity => async function (pageNum, { search, perPage }) {
   const queryString = buildQuery({ page: pageNum, perPage, search })
   const targetUrl = `${Entity.href()}?${queryString}`
-  const data = this.json(targetUrl, {
+  const data = await this.json(targetUrl, {
     method: "GET"
   })
   return Collection(data, Entity)
 }
 
 export const get = Entity => async function (id) {
-  const data = this.json(Entity.href(id), {
+  const data = await this.json(Entity.href(id), {
     method: "GET"
   })
   return new Entity(data)
