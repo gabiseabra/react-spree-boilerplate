@@ -91,4 +91,6 @@ describe("ApiClient", () => {
   describe("#route()", () => {
     require("./routes/auth")
   })
+
+  require("./endpoints/products")
 })
