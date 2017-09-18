@@ -3,11 +3,15 @@ export default class Resource {
   static relationships = {}
 
   static href(id) {
-    return this.baseUrl ? `${this.baseUrl}/${id}` : undefined
+    if(!this.baseUrl) return undefined
+    return (
+      typeof id === "undefined" ?
+      this.baseUrl :
+      `${this.baseUrl}/${id}`
+    )
   }
 
-  constructor(data) {
-    this._data = data
+  constructor() {
     this.id = null
   }
 
