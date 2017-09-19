@@ -1,5 +1,5 @@
 import Resource from "./Resource"
-import { page, get, hydrate } from "../endpoints/methods"
+import { page, hydrate } from "../endpoints/methods"
 
 export default class Taxon extends Resource {
   static baseUrl = "/api/v1/taxons"
@@ -8,7 +8,6 @@ export default class Taxon extends Resource {
 
   static endpoints = {
     page: page(Taxon),
-    get: get(Taxon),
     hydrate: hydrate(Taxon)
   }
 
