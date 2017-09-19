@@ -93,4 +93,5 @@ describe("ApiClient", () => {
   })
 
   require("./endpoints/products")
+  require("./endpoints/taxonomies")
 })
