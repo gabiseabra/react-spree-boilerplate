@@ -102,8 +102,7 @@ describe("ApiClient", () => {
       const data = await this.client.hydrate({
         products: [ mock.product(1), mock.product(2) ]
       })
-      data.products.should.be.an("array")
-      data.products.forEach(product => product.should.be.instanceof(Product))
+      data.products.should.be.an("array").and.be.all.instanceof(Product)
     })
 
     it("keeps unknown properties", async function () {
