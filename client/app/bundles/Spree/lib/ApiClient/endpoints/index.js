@@ -3,7 +3,8 @@ import url from "url"
 import qs from "querystring"
 // eslint-disable-next-line import/extensions
 import Router from "universal-router"
-import createEndpoint from "./create"
+
+const createEndpoint = (api, callback) => callback.bind(api)
 
 // Final hydrate() endpoint
 const hydrate = (api, endpointNames) => (data) => {
