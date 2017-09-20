@@ -2,6 +2,7 @@ import _ from "lodash"
 import url from "url"
 import fetch from "isomorphic-fetch"
 import ResponseError from "./ResponseError"
+import Response from "./Response"
 import * as entities from "./resources"
 import routes from "./routes"
 import createEndpoints from "./endpoints"
@@ -65,23 +66,23 @@ export default class ApiClient {
 
   async json(req, init = {}) {
     const response = await this.fetch(req, { format: "json", ...init })
-    return response.json()
+    return new Response(response, await response.json())
   }
 
   async html(req, init = {}) {
     const response = await this.fetch(req, { format: "html", ...init })
-    return response.text()
+    return new Response(response, await response.text())
   }
 
   async text(req, init = {}) {
     const response = await this.fetch(req, { format: "text", ...init })
-    return response.text()
+    return new Response(response, await response.text())
   }
 
   async refreshCsrfToken() {
     const response = await this.json("/authenticity_token", {
       credentials: "same-origin"
     })
-    this.csrfToken = response.authenticity_token
+    this.csrfToken = response.data.authenticity_token
   }
 }

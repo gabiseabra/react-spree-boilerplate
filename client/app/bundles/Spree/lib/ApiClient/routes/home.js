@@ -1,4 +1,5 @@
 import qs from "querystring"
+import Response from "../Response"
 import { Product } from "../resources"
 import Collection from "../resources/Collection"
 import * as query from "../query"
@@ -9,7 +10,7 @@ export default {
       query.search(search || {}),
       query.pagination({ page, perPage })
     ))
-    const data = await this.json(`/?${queryString}`)
-    return new Collection(data, Product)
+    const response = await this.json(`/?${queryString}`)
+    return new Response(response, new Collection(response.data, Product))
   }
 }

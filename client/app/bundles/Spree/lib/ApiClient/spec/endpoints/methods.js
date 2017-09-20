@@ -16,10 +16,10 @@ export const page = (Entity, resources) => function () {
   })
 
   it(`returns a collection of ${name}`, async function () {
-    const collection = await this.client[name].page(1)
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Entity)
-    collection.pagination.should.deep.equal({
+    const response = await this.client[name].page(1)
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Entity)
+    response.pagination.should.deep.equal({
       perPage: 20,
       currentPage: 1,
       totalPages: 1,
@@ -38,7 +38,8 @@ export const get = (Entity, resource) => function () {
       .reply(200, resource)
   })
 
-  it(`returns an instance of ${Entity.name}`, function () {
-    return this.client[name].get(id).should.eventually.be.instanceof(Entity)
+  it(`returns an instance of ${Entity.name}`, async function () {
+    const response = await this.client[name].get(id)
+    response.data.should.be.instanceof(Entity)
   })
 }

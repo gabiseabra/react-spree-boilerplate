@@ -17,9 +17,9 @@ describe("/", () => {
       .query(true)
       .reply(200, reply)
 
-    const collection = await this.client.route("/")
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Product)
+    const response = await this.client.route("/")
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Product)
   })
 
   it("accepts a search parameter", async function () {
@@ -28,13 +28,13 @@ describe("/", () => {
     .query({ q: { name: "test" } })
     .reply(200, reply)
 
-    const collection = await this.client.route("/", {
+    const response = await this.client.route("/", {
       search: {
         name: "test"
       }
     })
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Product)
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Product)
   })
 
   it("accepts pagination parameters", async function () {
@@ -43,8 +43,8 @@ describe("/", () => {
     .query({ page: 2, per_page: 15 })
     .reply(200, reply)
 
-    const collection = await this.client.route("/", { page: 2, perPage: 15 })
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Product)
+    const response = await this.client.route("/", { page: 2, perPage: 15 })
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Product)
   })
 })

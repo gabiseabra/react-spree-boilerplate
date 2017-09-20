@@ -17,9 +17,9 @@ describe("/products", () => {
       .query(true)
       .reply(200, reply)
 
-    const collection = await this.client.route("/products")
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Product)
+    const response = await this.client.route("/products")
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Product)
   })
 
   it("accepts a search parameter", async function () {
@@ -28,13 +28,13 @@ describe("/products", () => {
     .query({ q: { name: "test" } })
     .reply(200, reply)
 
-    const collection = await this.client.route("/products", {
+    const response = await this.client.route("/products", {
       search: {
         name: "test"
       }
     })
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Product)
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Product)
   })
 
   it("accepts pagination parameters", async function () {
@@ -43,9 +43,9 @@ describe("/products", () => {
     .query({ page: 2, per_page: 15 })
     .reply(200, reply)
 
-    const collection = await this.client.route("/products", { page: 2, perPage: 15 })
-    collection.should.be.instanceof(Collection)
-    collection.Entity.should.equal(Product)
+    const response = await this.client.route("/products", { page: 2, perPage: 15 })
+    response.data.should.be.instanceof(Collection)
+    response.data.Entity.should.equal(Product)
   })
 })
 
@@ -56,7 +56,8 @@ describe("/products/:id", () => {
       .reply(200, products[0])
   })
 
-  it("returns a product by id", function () {
-    return this.client.route("/products/1").should.eventually.be.instanceof(Product)
+  it("returns a product by id", async function () {
+    const response = await this.client.route("/products/1")
+    response.data.should.be.instanceof(Product)
   })
 })

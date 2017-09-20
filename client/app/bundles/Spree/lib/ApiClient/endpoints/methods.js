@@ -1,4 +1,5 @@
 import qs from "querystring"
+import Response from "../Response"
 import Collection from "../resources/Collection"
 import * as query from "../query"
 
@@ -8,17 +9,17 @@ export const page = Entity => async function (pageNum, { search, perPage } = {})
     query.pagination({ page: pageNum, perPage })
   ))
   const targetUrl = `${Entity.href()}?${queryString}`
-  const data = await this.json(targetUrl, {
+  const response = await this.json(targetUrl, {
     method: "GET"
   })
-  return new Collection(data, Entity)
+  return new Response(response, new Collection(response.data, Entity))
 }
 
 export const get = Entity => async function (id) {
-  const data = await this.json(Entity.href(id), {
+  const response = await this.json(Entity.href(id), {
     method: "GET"
   })
-  return new Entity(data)
+  return new Response(response, new Entity(response.data))
 }
 
 export const hydrate = Entity => async function (data) {

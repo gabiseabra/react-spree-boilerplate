@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 import nock from "nock"
 import ApiClient, { CSRF_TOKEN_HEADER } from "../../ApiClient"
+import Response from "../Response"
 import { Product } from "../resources"
 import * as mock from "./mock"
 
@@ -43,8 +44,10 @@ describe("ApiClient", () => {
         .reply(200, { foo: 1, bar: 2 })
     })
 
-    it("requests a json page and returns it's body", function () {
-      return this.client.json("/json").should.eventually.deep.equal({ foo: 1, bar: 2 })
+    it("requests a json page and returns it's body", async function () {
+      const response = await this.client.json("/json")
+      response.should.be.instanceof(Response)
+      response.data.should.deep.equal({ foo: 1, bar: 2 })
     })
   })
 
@@ -56,8 +59,10 @@ describe("ApiClient", () => {
         .reply(200, "<span>Test</span>")
     })
 
-    it("requests an html page and returns it's body", function () {
-      return this.client.html("/text").should.eventually.equal("<span>Test</span>")
+    it("requests an html page and returns it's body", async function () {
+      const response = await this.client.html("/text")
+      response.should.be.instanceof(Response)
+      response.data.should.equal("<span>Test</span>")
     })
   })
 
@@ -69,8 +74,10 @@ describe("ApiClient", () => {
         .reply(200, "Test")
     })
 
-    it("requests a text page and returns it's body", function () {
-      return this.client.text("/text").should.eventually.equal("Test")
+    it("requests a text page and returns it's body", async function () {
+      const response = await this.client.text("/text")
+      response.should.be.instanceof(Response)
+      response.data.should.equal("Test")
     })
   })
 

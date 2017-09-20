@@ -1,4 +1,6 @@
 import FormData from "isomorphic-form-data"
+import Response from "../Response"
+import AuthError from "../AuthError"
 import { User } from "../resources"
 
 export default {
@@ -9,17 +11,16 @@ export default {
     body.append("spree_user[remember_me]", rememberMe ? "1" : "")
     try {
       // spree_auth_devise responds to .js format instead of .json
-      const data = await this.json("/login.js", {
+      const response = await this.json("/login.js", {
         credentials: "same-origin",
         method: "POST",
         body
       })
-      return new User(data.user)
+      return new Response(response, new User(response.data.user))
     } catch(error) {
       if(error.status !== 422) throw error
-      try {
-        return error.response.json()
-      } catch(_) { throw error }
+      const data = await error.response.json()
+      throw new AuthError(error.response, data.error)
     }
   },
   "/logout": async function () {
