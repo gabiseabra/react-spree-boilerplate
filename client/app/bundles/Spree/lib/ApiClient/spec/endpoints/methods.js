@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 import Collection from "../../resources/Collection"
+import { pagination } from "../mock"
 
 export const page = (Entity, resources) => function () {
   const name = Entity.collection
@@ -10,10 +11,7 @@ export const page = (Entity, resources) => function () {
       .query({ page: 1 })
       .reply(200, {
         [name]: resources,
-        per_page: 20,
-        current_page: 1,
-        total_pages: 1,
-        total_count: resources.length
+        ...pagination({ page: 1, totalCount: resources.length })
       })
   })
 
