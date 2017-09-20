@@ -11,10 +11,6 @@ export default class Taxon extends Resource {
     hydrate: hydrate(Taxon)
   }
 
-  static relationships = {
-    taxons: Taxon
-  }
-
   constructor(data) {
     super()
     this.id = data.id
@@ -30,16 +26,6 @@ export default class Taxon extends Resource {
     const breadcrumbs = (this.parentId ? this.parent.breadcrumbs() : [])
     breadcrumbs.push(this.name)
     return breadcrumbs
-  }
-
-  get parent() {
-    if(!this.parentId) return undefined
-    if(this.parentId === this.taxonomyId) return this.api.taxonomies.get(this.parentId)
-    return this.api.taxons.get(this.parentId)
-  }
-
-  get taxonomy() {
-    return this.parentId ? this.api.taxonomies.get(this.taxonomyId) : undefined
   }
 
   flatten() {

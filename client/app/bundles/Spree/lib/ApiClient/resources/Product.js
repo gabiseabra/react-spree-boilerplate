@@ -48,9 +48,5 @@ export default class Product extends Resource {
     this.taxonIds = data.taxon_ids
   }
 
-  get taxons() {
-    return this.taxonIds.map(id => this.api.taxons.get(id))
-  }
-
   get props() { return this.properties }
 }
