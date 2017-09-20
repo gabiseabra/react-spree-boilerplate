@@ -1,30 +1,10 @@
 import _ from "lodash"
-import url from "url"
-import qs from "querystring"
 // eslint-disable-next-line import/extensions
 import Router from "universal-router"
+import hydrate from "./hydrate"
+import route from "./route"
 
 const createEndpoint = (api, callback) => callback.bind(api)
-
-// Final hydrate() endpoint
-const hydrate = (api, endpointNames) => (data) => {
-  const finalData = Object.assign({}, data)
-  endpointNames.forEach((name) => {
-    Object.assign(finalData, api[name].hydrate(data))
-  })
-  return finalData
-}
-
-const route = (api, router) => (target, context = {}) => {
-  const { pathname, query: queryString } = url.parse(target)
-  const query = qs.parse(queryString)
-  return router.resolve({
-    ...context,
-    path: pathname,
-    queryString,
-    query
-  })
-}
 
 function entityEndpoints(api, entities) {
   const hydrateEndpoints = []

@@ -17,3 +17,10 @@ export default class Collection {
     return this.data.values()
   }
 }
+
+export function hydrate(data) {
+  if("pagination" in data) {
+    return { pagination: pagination(data.pagination) }
+  }
+  return {}
+}
