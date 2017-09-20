@@ -11,7 +11,7 @@ export const page = (Entity, resources) => function () {
       .query({ page: 1 })
       .reply(200, {
         [name]: resources,
-        ...pagination({ page: 1, totalCount: resources.length })
+        ...pagination({ page: 1, perPage: 20, totalCount: resources.length })
       })
   })
 

@@ -1,6 +1,8 @@
 /* eslint-env mocha */
 import nock from "nock"
 import ApiClient, { CSRF_TOKEN_HEADER } from "../../ApiClient"
+import { Product } from "../resources"
+import * as mock from "./mock"
 
 describe("ApiClient", () => {
   const client = new ApiClient("http://test.api", {
@@ -85,6 +87,30 @@ describe("ApiClient", () => {
     it("updates client's CSRF token", async function () {
       await this.client.refreshCsrfToken()
       this.client.headers[CSRF_TOKEN_HEADER].should.equal("csrf-token-test")
+    })
+  })
+
+  describe("#hydrate()", () => {
+    it("returns instantiated server data", async function () {
+      const data = await this.client.hydrate({
+        products: [ mock.product(1), mock.product(2) ]
+      })
+      data.products.should.be.an("array")
+      data.products.forEach(product => product.should.be.instanceof(Product))
+    })
+
+    it("keeps unknown properties", async function () {
+      const data = await this.client.hydrate({
+        test: { foo: 1, bar: 2 },
+        pagination: mock.pagination({ page: 1, perPage: 20 })
+      })
+      data.pagination.should.deep.equal({
+        perPage: 20,
+        currentPage: 1,
+        totalPages: 1,
+        totalCount: 0
+      })
+      data.test.should.deep.equal({ foo: 1, bar: 2 })
     })
   })
 
