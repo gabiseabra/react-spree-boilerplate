@@ -1,9 +1,4 @@
-const pagination = data => ({
-  currentPage: data.current_page || 1,
-  totalPages: data.total_pages,
-  totalCount: data.total_count,
-  perPage: data.per_page
-})
+import { parse as pagination } from "../helpers/pagination"
 
 export default class Collection {
   constructor(data, Entity, collection) {
@@ -16,11 +11,4 @@ export default class Collection {
   [Symbol.iterator]() {
     return this.data.values()
   }
-}
-
-export function hydrate(data) {
-  if("pagination" in data) {
-    return { pagination: pagination(data.pagination) }
-  }
-  return {}
 }

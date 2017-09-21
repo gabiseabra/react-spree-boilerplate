@@ -1,13 +1,9 @@
-import qs from "querystring"
 import Response from "../Response"
 import Collection from "../resources/Collection"
-import * as query from "../query"
+import buildQuery from "../helpers/query"
 
 export const page = Entity => async function (pageNum, { search, perPage } = {}) {
-  const queryString = qs.stringify(Object.assign(
-    query.search(search || {}),
-    query.pagination({ page: pageNum, perPage })
-  ))
+  const queryString = buildQuery({ search, page: pageNum, perPage })
   const targetUrl = `${Entity.href()}?${queryString}`
   const response = await this.json(targetUrl, {
     method: "GET"
