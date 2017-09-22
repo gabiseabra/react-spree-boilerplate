@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-import Collection from "../../resources/Collection"
+import { Collection } from "../../resources"
 import { pagination } from "../mock"
 
 export const page = (Entity, resources) => function () {

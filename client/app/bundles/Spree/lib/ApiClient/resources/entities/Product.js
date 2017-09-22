@@ -1,5 +1,5 @@
-import Resource from "./Resource"
-import { page, get, hydrate } from "../endpoints/methods"
+import Resource from "../Resource"
+import { page, get, hydrate } from "../../endpoints/methods"
 
 class Image {
   constructor(data) {

@@ -1,5 +1,9 @@
-export { default as Address } from "./Address"
-export { default as User } from "./User"
-export { default as Taxon } from "./Taxon"
-export { default as Taxonomy } from "./Taxonomy"
-export { default as Product } from "./Product"
+export { default as Resource } from "./Resource"
+export { default as Collection } from "./Collection"
+export {
+  Address,
+  Product,
+  Taxon,
+  Taxonomy,
+  User
+} from "./entities"

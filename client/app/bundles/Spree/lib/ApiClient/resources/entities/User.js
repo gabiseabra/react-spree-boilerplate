@@ -1,4 +1,4 @@
-import Resource from "./Resource"
+import Resource from "../Resource"
 import Address from "./Address"
 
 export default class User extends Resource {

@@ -3,7 +3,7 @@ import url from "url"
 import fetch from "isomorphic-fetch"
 import ResponseError from "./ResponseError"
 import Response from "./Response"
-import * as entities from "./resources"
+import * as entities from "./resources/entities"
 import routes from "./routes"
 import createEndpoints from "./endpoints"
 

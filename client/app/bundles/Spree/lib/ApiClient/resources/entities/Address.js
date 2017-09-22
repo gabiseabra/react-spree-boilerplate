@@ -1,4 +1,4 @@
-import Resource from "./Resource"
+import Resource from "../Resource"
 
 const country = data => ({
   id: data.id,

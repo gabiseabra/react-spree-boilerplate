@@ -1,6 +1,5 @@
 /* eslint-env mocha */
-import { Product } from "../../resources"
-import Collection from "../../resources/Collection"
+import { Collection, Product } from "../../resources"
 import * as mock from "../mock"
 
 const products = Array.from(Array(10), (_, i) => mock.product(i + 1))

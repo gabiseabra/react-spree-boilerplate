@@ -1,6 +1,6 @@
 export default class Resource {
   static baseUrl = null
-  static relationships = {}
+  static collection = null
 
   static href(id) {
     if(!this.baseUrl) return undefined
@@ -17,5 +17,9 @@ export default class Resource {
 
   get href() {
     return this.constructor.href(this.id)
+  }
+
+  get collection() {
+    return { [this.constructor.collection]: [ this ] }
   }
 }

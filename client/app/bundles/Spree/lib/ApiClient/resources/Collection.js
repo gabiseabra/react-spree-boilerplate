@@ -1,14 +1,17 @@
 import { parse as pagination } from "../helpers/pagination"
 
 export default class Collection {
-  constructor(data, Entity, collection) {
-    const key = (collection || Entity.collection)
+  constructor(data, Entity) {
     this.Entity = Entity
+    this.data = data[Entity.collection].map(item => new Entity(item))
     this.pagination = pagination(data)
-    this.data = data[key].map(item => new Entity(item))
   }
 
-  [Symbol.iterator]() {
-    return this.data.values()
+  * [Symbol.iterator]() {
+    yield* this.data
+  }
+
+  get collection() {
+    return { [this.Entity.collection]: this.data }
   }
 }

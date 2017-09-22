@@ -1,5 +1,5 @@
-import Resource from "./Resource"
-import { page, hydrate } from "../endpoints/methods"
+import Resource from "../Resource"
+import { page, hydrate } from "../../endpoints/methods"
 
 export default class Taxon extends Resource {
   static baseUrl = "/api/v1/taxons"

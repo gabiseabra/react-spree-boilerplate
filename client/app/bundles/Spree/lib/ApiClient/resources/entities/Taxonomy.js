@@ -1,5 +1,5 @@
 import Taxon from "./Taxon"
-import { page, get, hydrate } from "../endpoints/methods"
+import { page, get, hydrate } from "../../endpoints/methods"
 
 export default class Taxonomy extends Taxon {
   static baseUrl = "/api/v1/taxonomies"

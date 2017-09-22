@@ -1,5 +1,5 @@
+import { Collection } from "../resources"
 import Response from "../Response"
-import Collection from "../resources/Collection"
 import buildQuery from "../helpers/query"
 
 export const page = Entity => async function (pageNum, { search, perPage } = {}) {
