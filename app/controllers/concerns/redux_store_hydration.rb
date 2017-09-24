@@ -36,6 +36,7 @@ module ReduxStoreHydration
       hash[name.to_sym] = {
         partial: args.fetch(:partial, nil),
         locals: args.fetch(:locals, {}),
+        # Object variable for partial template
         as: args.fetch(:as, name.to_s.singularize.to_sym),
         selector: args.fetch(:of)
       }
@@ -46,12 +47,15 @@ module ReduxStoreHydration
       self.store_collections = {}.freeze
     end
 
-    def paginate(collection)
-      self.store_pagination = collection.to_sym
+    def paginate(main, *collections)
+      self.store_pagination = {
+        main: main,
+        meta: collections
+      }.freeze
     end
 
     def clear_pagination
-      self.store_pagination = nil
+      self.store_pagination = {}.freeze
     end
   end
 
@@ -59,7 +63,7 @@ module ReduxStoreHydration
     class_collection_names.each do |name|
       value = class_collection_json name
       collection = class_collection name
-      redux_store store_name, props: { collection[:as] => value }
+      redux_store store_name, props: { name => value }
     end
   end
 
@@ -127,9 +131,15 @@ module ReduxStoreHydration
 
   # Get class pagination json for redux state
   def class_pagination_collection
-    record = class_collection(self.class.store_pagination).fetch(:record)
+    main = self.class.store_pagination[:main]
+    others = self.class.store_pagination[:meta]
+    records = { main => class_collection(main).fetch(:record) }
+    others.each do |key|
+      records[key] = class_collection(key).fetch(:record)
+    end
+    data = records.transform_values { |r| Array(r).map(&:id.to_proc) }
     pagination = view_context.render_to_json partial: 'pagination',
-                                             locals: { collection: record }
-    { data: Array(record).map(&:id.to_proc), pagination: pagination }
+                                             locals: { collection: records[main] }
+    { data: data, pagination: pagination }
   end
 end

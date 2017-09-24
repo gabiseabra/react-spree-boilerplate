@@ -8,6 +8,5 @@ Spree::ProductsController.class_eval do
   paginate :products
   collection :products,
              partial: 'spree/products/product.json',
-             of: -> { @product || @products },
-             as: :product
+             of: -> { @product || @products }
 end
