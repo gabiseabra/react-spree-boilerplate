@@ -8,7 +8,7 @@ const ProductInfo = ({ product }) => {
     <Card>
       <Image src={img.urls.product} alt={img.alt} />
       <Card.Content>
-        <a href={`/products/${product.slug}`}>
+        <a href={product.permalink}>
           {product.name}
         </a>
       </Card.Content>

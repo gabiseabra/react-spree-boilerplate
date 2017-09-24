@@ -48,5 +48,9 @@ export default class Product extends Resource {
     this.taxonIds = data.taxon_ids
   }
 
+  get permalink() {
+    return `/products/${this.slug}`
+  }
+
   get props() { return this.properties }
 }
