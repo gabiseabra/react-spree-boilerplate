@@ -24,7 +24,7 @@ export default class Taxon extends Resource {
 
   get breadcrumbs() {
     const breadcrumbs = (this.parentId ? this.parent.breadcrumbs() : [])
-    breadcrumbs.push(this.name)
+    breadcrumbs.push(this)
     return breadcrumbs
   }
 
