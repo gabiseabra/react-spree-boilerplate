@@ -1,6 +1,6 @@
 {
   "name": "react-spree-boilerplate-client",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev-server": "NODE_ENV=development webpack-dev-server --config webpack/devServer.babel.js --hot --inline",
