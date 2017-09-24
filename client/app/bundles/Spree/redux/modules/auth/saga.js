@@ -3,13 +3,13 @@ import { isUserLoggedIn } from "../../selectors"
 import * as actions from "./index"
 
 export default function create({ apiClient }) {
-  function * login(data) {
+  function * login({ data }) {
     const loggedIn = yield select(isUserLoggedIn)
     if(loggedIn) return
     yield put(actions.request())
     try {
       const response = yield call(apiClient.route, "/login", data)
-      yield put(actions.succeed(response.data.user))
+      yield put(actions.succeed(response.data))
     } catch(error) {
       yield put(actions.fail(error))
     }
