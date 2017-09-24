@@ -3,10 +3,10 @@ import { parse as search } from "./search"
 
 export default function hydrate(data) {
   const result = {}
-  if("pagination" in data) {
+  if(data.pagination) {
     result.pagination = pagination(data.pagination)
   }
-  if("search" in data) {
+  if(data.search) {
     result.search = search(data.search)
   }
   return result
