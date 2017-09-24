@@ -3,9 +3,9 @@ import { User } from "../../resources"
 import AuthError from "../../AuthError"
 import * as mock from "../mock"
 
-const username = "user@example.com"
+const login = "user@example.com"
 const password = "password"
-const user = mock.user(1, { email: username })
+const user = mock.user(1, { email: login })
 
 describe("/login", () => {
   beforeEach(function () {
@@ -14,7 +14,7 @@ describe("/login", () => {
       .post("/login.js")
       .reply((_, body, callback) => {
         const success = (
-          body.includes(`name="spree_user[email]"\r\n\r\n${username}`) &&
+          body.includes(`name="spree_user[email]"\r\n\r\n${login}`) &&
           body.includes(`name="spree_user[password]"\r\n\r\n${password}`)
         )
         if(!success) {
@@ -26,12 +26,12 @@ describe("/login", () => {
   })
 
   it("throws AuthError on invalid credentials", function () {
-    return this.client.route("/login", { username, password: "wrongpass" })
+    return this.client.route("/login", { login, password: "wrongpass" })
       .should.eventually.be.rejectedWith(AuthError)
   })
 
   it("returns logged in user on success", async function () {
-    const response = await this.client.route("/login", { username, password })
+    const response = await this.client.route("/login", { login, password })
     response.data.should.be.instanceof(User)
   })
 })

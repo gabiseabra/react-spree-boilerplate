@@ -4,9 +4,9 @@ import AuthError from "../AuthError"
 import { User } from "../resources"
 
 export default {
-  "/login": async function ({ username, password, rememberMe }) {
+  "/login": async function ({ login, password, rememberMe }) {
     const body = new FormData()
-    body.append("spree_user[email]", username)
+    body.append("spree_user[email]", login)
     body.append("spree_user[password]", password)
     body.append("spree_user[remember_me]", rememberMe ? "1" : "")
     try {
