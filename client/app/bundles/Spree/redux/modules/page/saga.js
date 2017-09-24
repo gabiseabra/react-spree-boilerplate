@@ -1,4 +1,3 @@
-import _ from "lodash"
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
 import { hydrate } from "app/lib/hydrateStore"
 import { isPageLoaded, getLocation } from "../../selectors"
@@ -8,16 +7,22 @@ export default function create(context) {
   const { apiClient } = context
 
   function * request({ path, search, page, perPage }) {
-    const response = yield call(apiClient.route, path, { search, page, perPage })
-    const { value, error, pagination, collection } = response
-    if(error) {
-      yield put(actions.fail(page, error, pagination))
-    } else if(!collection) {
-      yield put(actions.succeed(page, value, pagination))
-    } else {
-      const idArray = _.isArray(value) ? value.map(o => o.id) : value.id
-      yield put(hydrate({ [collection]: _.flatten([ value ]) }, context))
-      yield put(actions.succeed(page, idArray, pagination))
+    try {
+      const response = yield call(apiClient.route, path, { search, page, perPage })
+      const pagination = response.pagination
+      if(response.isResource) {
+        const collection = response.collection
+        const collectionIds = {}
+        Object.keys(collection).forEach((key) => {
+          collectionIds[key] = collection[key].map(item => item.id)
+        })
+        yield put(hydrate(collection, context))
+        yield put(actions.succeed(page, collectionIds, pagination))
+      } else {
+        yield put(actions.succeed(page, response.data, pagination))
+      }
+    } catch(error) {
+      yield put(actions.fail(page, error))
     }
   }
 
