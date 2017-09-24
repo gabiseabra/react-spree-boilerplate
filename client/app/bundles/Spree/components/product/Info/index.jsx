@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Card, Image } from "semantic-ui-react"
-import { Product } from "../../../lib/ApiClient/models"
 
 const ProductInfo = ({ product }) => {
   const img = product.images[0]
@@ -18,7 +17,7 @@ const ProductInfo = ({ product }) => {
 }
 
 ProductInfo.propTypes = {
-  product: PropTypes.instanceOf(Product).isRequired
+  product: PropTypes.object.isRequired
 }
 
 export default ProductInfo

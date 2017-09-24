@@ -1,13 +1,12 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Menu, Modal } from "semantic-ui-react"
-import { User } from "../../../lib/ApiClient/models"
 import { Login } from "../../auth"
 
 export default class UserNav extends Component {
   static propTypes = {
     error: PropTypes.instanceOf(Error),
-    user: PropTypes.instanceOf(User),
+    user: PropTypes.object,
     loading: PropTypes.bool.isRequired,
     onLogin: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired

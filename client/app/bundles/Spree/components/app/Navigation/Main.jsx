@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Menu } from "semantic-ui-react"
-import { Taxonomy } from "../../../lib/ApiClient/models"
 
 const MainNav = ({ taxonomies }) => (
   <Menu.Menu>
@@ -15,7 +14,7 @@ const MainNav = ({ taxonomies }) => (
 )
 
 MainNav.propTypes = {
-  taxonomies: PropTypes.arrayOf(PropTypes.instanceOf(Taxonomy))
+  taxonomies: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default MainNav

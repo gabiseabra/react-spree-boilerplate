@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Menu, Accordion, Icon } from "semantic-ui-react"
-import { Taxonomy, Taxon } from "../../../lib/ApiClient/models"
 import styles from "./Sidebar.css"
 
 const Node = ({ taxon, onChange }) => {
@@ -24,7 +23,7 @@ const Node = ({ taxon, onChange }) => {
 }
 
 Node.propTypes = {
-  taxon: PropTypes.instanceOf(Taxon).isRequired,
+  taxon: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired
 }
 
@@ -35,7 +34,7 @@ const Sidebar = ({ taxonomies, onChange, ...props }) => (
 )
 
 Sidebar.propTypes = {
-  taxonomies: PropTypes.arrayOf(PropTypes.instanceOf(Taxonomy)).isRequired,
+  taxonomies: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired
 }
 
