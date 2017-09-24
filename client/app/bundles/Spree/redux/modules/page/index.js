@@ -1,6 +1,5 @@
 import { combineReducers } from "redux"
 import { HYDRATE } from "app/lib/hydrateStore"
-import { Search } from "../../../lib/ApiClient/models"
 
 export const LOAD = "page/LOAD"
 export const LOAD_PAGE = "page/LOAD_PAGE"
@@ -19,11 +18,10 @@ export const load = (path, search, page = 1, perPage) => ({
 export const loadPage = page => ({ type: LOAD_PAGE, page })
 export const request = (path, search, page = 1) => ({ type: REQUEST, search, path, page })
 export const requestPage = page => ({ type: REQUEST_PAGE, page })
-export const fail = (page, error, pagination) => ({
+export const fail = (page, error) => ({
   type: FAILURE,
   page,
-  error,
-  pagination
+  error
 })
 export const succeed = (page, data, pagination) => ({
   type: SUCCESS,
@@ -33,12 +31,15 @@ export const succeed = (page, data, pagination) => ({
 })
 
 const initialState = {
-  pages: {},
+  pages: {
+    // pageNum: { collection: [ ... ], ... }
+  },
   location: {
     path: undefined,
     search: undefined,
     pagination: {
-      currentPage: undefined
+      currentPage: 1,
+      totalPages: 1
     }
   }
 }
@@ -94,14 +95,12 @@ function location(state = initialState.location, action) {
         pagination: action.pagination
       }
     case HYDRATE: {
-      const { payload: { pagination }, context } = action
-      if(!pagination) return state
-      const search = new Search(context.search)
+      const { pagination, search, path } = action.payload
       return {
         ...state,
-        search,
-        pagination,
-        path: context.pathname
+        path: (path || state.path),
+        search: (search || state.search),
+        pagination: (pagination || state.pagination)
       }
     }
     default:
