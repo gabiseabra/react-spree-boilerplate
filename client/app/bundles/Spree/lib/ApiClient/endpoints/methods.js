@@ -18,7 +18,7 @@ export const get = Entity => async function (id) {
   return new Response(response, new Entity(response.data))
 }
 
-export const hydrate = Entity => async function (data) {
+export const hydrate = Entity => function (data) {
   if(Entity.collection in data) {
     const collection = new Collection(data, Entity)
     return { [Entity.collection]: Array.from(collection) }

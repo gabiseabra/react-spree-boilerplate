@@ -98,25 +98,25 @@ describe("ApiClient", () => {
   })
 
   describe("#hydrate()", () => {
-    it("returns instantiated server data", async function () {
-      const data = await this.client.hydrate({
+    it("returns instantiated server data", function () {
+      this.client.hydrate({
         products: [ mock.product(1), mock.product(2) ]
-      })
-      data.products.should.be.an("array").and.be.all.instanceof(Product)
+      }).products.should.be.an("array").and.be.all.instanceof(Product)
     })
 
-    it("keeps unknown properties", async function () {
-      const data = await this.client.hydrate({
+    it("keeps unknown properties", function () {
+      this.client.hydrate({
         test: { foo: 1, bar: 2 },
         pagination: mock.pagination({ page: 1, perPage: 20 })
+      }).should.deep.equal({
+        test: { foo: 1, bar: 2 },
+        pagination: {
+          perPage: 20,
+          currentPage: 1,
+          totalPages: 1,
+          totalCount: 0
+        }
       })
-      data.pagination.should.deep.equal({
-        perPage: 20,
-        currentPage: 1,
-        totalPages: 1,
-        totalCount: 0
-      })
-      data.test.should.deep.equal({ foo: 1, bar: 2 })
     })
   })
 
