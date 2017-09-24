@@ -40,6 +40,7 @@ export default function auth(state = initialState, action) {
     case HYDRATE:
       if(!action.payload.user) return state
       return {
+        loading: false,
         user: action.payload.user
       }
     default:
