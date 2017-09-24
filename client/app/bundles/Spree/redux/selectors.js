@@ -54,7 +54,9 @@ export const isPageLoaded = createSelector(
 export const getPageProducts = createSelector(
   getPageData,
   getAllProducts,
-  (productList, products) => (productList ? productList.map(id => products[id]) : undefined)
+  (page, products) => (
+    (page && page.products) ? page.products.map(id => products[id]) : undefined
+  )
 )
 
 // taxonomies
