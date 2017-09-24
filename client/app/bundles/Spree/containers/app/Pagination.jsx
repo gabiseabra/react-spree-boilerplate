@@ -15,11 +15,11 @@ class AppPagination extends Component {
 
   render() {
     const { pagination, ...props } = this.props
-    const { currentPage, totalCount, perPage } = pagination
+    const { currentPage, totalPages } = pagination
     return (
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.ceil(totalCount / perPage)}
+        totalPages={totalPages}
         onChange={this.onChange}
         {...props} />
     )
