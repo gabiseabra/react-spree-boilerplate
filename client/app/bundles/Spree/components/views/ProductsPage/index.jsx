@@ -4,8 +4,9 @@ import { Grid } from "semantic-ui-react"
 import { Card } from "../../product"
 import Loader from "../Loader"
 
-const ProductsPage = ({ loading, products, pagination }) => (
+const ProductsPage = ({ loading, products, breadcrumbs, pagination }) => (
   <div>
+    {breadcrumbs}
     <Loader loading={loading}>
       <Grid columns={4} stackable>
         {products && products.map(p => (
@@ -22,6 +23,7 @@ const ProductsPage = ({ loading, products, pagination }) => (
 ProductsPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   products: PropTypes.arrayOf(PropTypes.object),
+  breadcrumbs: PropTypes.node,
   pagination: PropTypes.node
 }
 

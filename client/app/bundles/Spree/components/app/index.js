@@ -1,3 +1,4 @@
+export { default as Breadcrumbs } from "./Breadcrumbs"
 export { default as Logo } from "./Logo"
 export { default as Sidebar } from "./Sidebar"
 export { default as Navigation } from "./Navigation"
