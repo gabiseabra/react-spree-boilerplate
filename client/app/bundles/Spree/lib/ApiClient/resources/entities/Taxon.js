@@ -26,12 +26,6 @@ export default class Taxon extends Resource {
     return `/t/${this.permalinkPath}`
   }
 
-  get breadcrumbs() {
-    const breadcrumbs = (this.parentId ? this.parent.breadcrumbs() : [])
-    breadcrumbs.push(this)
-    return breadcrumbs
-  }
-
   flatten() {
     return this.taxons.reduce((array, taxon) => (
       array.concat(taxon.flatten())
