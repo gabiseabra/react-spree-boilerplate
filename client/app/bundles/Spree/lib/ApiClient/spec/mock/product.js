@@ -1,3 +1,5 @@
+import variant from "./variant"
+
 const property = (product, id, { name, value }) => ({
   id,
   value,
@@ -6,23 +8,43 @@ const property = (product, id, { name, value }) => ({
   product_id: product.id
 })
 
-export default (id = 1, { slug, name, taxons, properties } = {}) => {
+const optionType = (_, id, { name, presentation, position }) => ({
+  id,
+  name,
+  presentation,
+  position: position || id
+})
+
+export default (id = 1, props = {}) => {
+  let i = 1
+  const { variants, properties, optionTypes } = props
+  const master = variant(id, i, props, true)
   const product = {
     id,
-    slug: slug || "product_name",
-    name: name || "Product Name",
-    price: 100.00,
-    in_stock: true,
+    master,
+    slug: master.slug,
+    name: master.name,
+    description: master.description,
+    taxon_ids: props.taxons || [],
     product_properties: [],
-    taxons: taxons || [],
-    master: {
-      images: []
+    option_types: [],
+    variants: []
+  }
+  if(variants) {
+    product.has_variants = true
+    for(++i; i < variants.length; ++i) {
+      product.variants.push(id, i, variant[variants[i]])
     }
   }
   if(properties) {
-    properties.foreEach((prop, i) => {
-      product.product_properties.push(property, i + 1, prop)
-    })
+    for(let j = 1; j < properties.length; ++j) {
+      product.product_properties.push(property(id, j + 1, properties[j]))
+    }
+  }
+  if(optionTypes) {
+    for(let j = 1; j < optionTypes.length; ++j) {
+      product.option_types.push(optionType(id, j + 1, optionTypes[j]))
+    }
   }
   return product
 }

@@ -8,5 +8,6 @@ Spree::ProductsController.class_eval do
   paginate :products
   collection :products,
              partial: 'spree/products/product.json',
+             locals: { variants: true },
              of: -> { @product || @products }
 end

@@ -7,12 +7,12 @@ import styles from "./Card.css"
 
 const ProductCard = ({ product }) => (
   <Thumbnail className={styles.Card}>
-    <Image product={product} />
+    <Image product={product.master} />
     <div className={styles.body}>
       <h3><a href={product.permalink}>{product.name}</a></h3>
     </div>
     <div className={styles.controls}>
-      <Price product={product} />
+      <Price product={product.master} />
       <Button>Add to Cart</Button>
     </div>
   </Thumbnail>

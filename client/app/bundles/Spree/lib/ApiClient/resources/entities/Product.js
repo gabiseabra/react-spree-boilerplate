@@ -1,28 +1,24 @@
 import Resource from "../Resource"
+import Variant from "./Variant"
 import { page, get } from "../../endpoints/methods"
-
-class Image {
-  constructor(data) {
-    this.id = data.id
-    this.urls = {
-      mini: data.mini_url,
-      small: data.small_url,
-      product: data.product_url,
-      large: data.large_url
-    }
-    this.contentType = data.attachment_content_type
-    this.width = data.attachment_width
-    this.height = data.attachment_height
-    this.alt = data.alt
-  }
-}
-
-const images = data => data.map(img => new Image(img))
 
 const properties = data => data.map(prop => ({
   name: prop.property_name,
   value: prop.value
 }))
+
+const optionTypes = (data) => {
+  const result = {}
+  data.forEach((opt) => {
+    result[opt.id] = {
+      id: opt.id,
+      position: opt.position,
+      name: opt.name,
+      display: opt.presentation
+    }
+  })
+  return result
+}
 
 export default class Product extends Resource {
   static baseUrl = "/api/v1/products"
@@ -40,10 +36,15 @@ export default class Product extends Resource {
     this.slug = data.slug
     this.name = data.name
     this.description = data.description
-    this.price = parseFloat(data.price) || undefined
-    this.inStock = data.master.in_stock
-    this.images = images(data.master.images)
+    this.hasVariants = data.has_variants
+    this.master = new Variant(data.master)
+    this.variants = (
+      data.variants ?
+      data.variants.map(item => new Variant(item)) :
+      undefined
+    )
     this.properties = properties(data.product_properties)
+    this.optionTypes = optionTypes(data.option_types)
     this.taxonIds = data.taxon_ids
   }
 
@@ -57,6 +58,8 @@ export default class Product extends Resource {
   get permalink() {
     return `/products/${this.slug}`
   }
+
+  get images() { return this.master.images }
 
   get props() { return this.properties }
 }

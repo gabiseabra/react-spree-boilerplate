@@ -1,1 +1,1 @@
-json.partial! 'product', product: @product
+json.partial! 'product', product: @product, variants: true
