@@ -1,9 +1,14 @@
+import _ from "lodash"
+import qs from "querystring"
 import { Collection } from "../resources"
 import Response from "../Response"
-import buildQuery from "../helpers/query"
+import helperQuery from "../helpers/query"
 
-export const page = Entity => async function (pageNum, { search, perPage } = {}) {
-  const queryString = buildQuery({ search, page: pageNum, perPage })
+export const page = (Entity, buildQuery) => async function (pageNum, props = {}) {
+  const queryString = qs.stringify(Object.assign(
+    helperQuery({ page: pageNum, ...props }),
+    buildQuery ? _.pickBy(buildQuery(props), n => n !== undefined) : {}
+  ))
   const targetUrl = `${Entity.href()}?${queryString}`
   const response = await this.json(targetUrl, {
     method: "GET"
