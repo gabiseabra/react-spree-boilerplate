@@ -13,17 +13,19 @@ module ReduxStoreHydration
 
   module ClassMethods
     def hydrate(store_name, *methods, **options)
+      collections = Array(options.delete(:collections))
       only_actions = Array(options.delete(:only)).map(&:to_s)
       except_actions = Array(options.delete(:except)).map(&:to_s)
+      args = Array(options.delete(:args))
+      hook = {
+        store_name: store_name.to_s,
+        args: args,
+        only: only_actions,
+        except: except_actions
+      }
       queue = store_hydration_hooks.dup
-      methods.each do |m|
-        queue << {
-          store_name: store_name.to_s,
-          method: :"hydrate_#{m}",
-          only: only_actions,
-          except: except_actions
-        }
-      end
+      methods.each { |m| queue << hook.merge(method: :"hydrate_#{m}") }
+      collections.each { |c| queue << hook.merge(method: :hydrate_collection, args: [c]) }
       self.store_hydration_hooks = queue.freeze
     end
 
@@ -59,11 +61,14 @@ module ReduxStoreHydration
     end
   end
 
+  def hydrate_collection(store_name, name)
+    value = class_collection_json name
+    redux_store store_name, props: { name => value }
+  end
+
   def hydrate_collections(store_name)
     class_collection_names.each do |name|
-      value = class_collection_json name
-      collection = class_collection name
-      redux_store store_name, props: { name => value }
+      hydrate_collection store_name, name
     end
   end
 
@@ -74,7 +79,7 @@ module ReduxStoreHydration
 
   def hydrate
     class_hydration_hooks(action_name.to_s).each do |h|
-      method(h[:method]).call h[:store_name]
+      method(h[:method]).call h[:store_name], *h[:args]
     end
   end
 
