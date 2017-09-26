@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Menu, Modal } from "semantic-ui-react"
+import { Menu, Modal } from "react-bootstrap"
 import { Login } from "../../auth"
 
 export default class UserNav extends Component {
@@ -28,18 +28,17 @@ export default class UserNav extends Component {
   renderModal() {
     const { user, error, loading, onLogin } = this.props
     return (
-      <Modal
-        open={this.state.active}
-        onClose={this.hide}
-        size="small"
-        closeIcon>
-        <Modal.Content>
+      <Modal show={this.state.active} onHide={this.hide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <Login
             user={user}
             error={error}
             loading={loading}
             onSubmit={onLogin} />
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
     )
   }

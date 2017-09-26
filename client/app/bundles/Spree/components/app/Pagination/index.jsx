@@ -1,41 +1,22 @@
 import React from "react"
-import { Menu } from "semantic-ui-react"
-import { createUltimatePagination, ITEM_TYPES } from "react-ultimate-pagination"
+import PropTypes from "prop-types"
+import { Pagination as PaginationComponent } from "react-bootstrap"
 
-/* eslint-disable react/prop-types */
-const WrapperComponent = ({ children }) => (
-  <Menu pagination>{children}</Menu>
+const Pagination = ({ currentPage, totalPages, ...props }) => (
+  <PaginationComponent
+    prev next
+    first last
+    ellipsis
+    boundaryLinks
+    maxButtons={7}
+    items={totalPages}
+    activePage={currentPage}
+    {...props} />
 )
 
-const Page = ({ value, isActive, ...props }) => (
-  <Menu.Item name={String(value)} active={isActive} {...props} />
-)
-
-const renderArrow = label => ({ isActive, ...props }) => (
-  <Menu.Item disabled={isActive} {...props}>{label}</Menu.Item>
-)
-
-const First = renderArrow("\u00ab") // &laquo;
-
-const Prev = renderArrow("\u2039") // &lsaquo;
-
-const Next = renderArrow("\u203a") // &rsaquo;
-
-const Last = renderArrow("\u00bb") // &raquo;
-
-const Ellipsis = renderArrow("\u2026") // &hellip;
-
-/* eslint-enable */
-
-const itemTypeToComponent = {
-  [ITEM_TYPES.PAGE]: Page,
-  [ITEM_TYPES.ELLIPSIS]: Ellipsis,
-  [ITEM_TYPES.LAST_PAGE_LINK]: Last,
-  [ITEM_TYPES.NEXT_PAGE_LINK]: Next,
-  [ITEM_TYPES.FIRST_PAGE_LINK]: First,
-  [ITEM_TYPES.PREVIOUS_PAGE_LINK]: Prev
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired
 }
-
-const Pagination = createUltimatePagination({ itemTypeToComponent, WrapperComponent })
 
 export default Pagination

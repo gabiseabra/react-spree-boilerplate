@@ -1,18 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Card, Image } from "semantic-ui-react"
+import { Thumbnail } from "react-bootstrap"
 
 const ProductCard = ({ product }) => {
   const img = product.images[0]
   return (
-    <Card>
-      <Image src={img.urls.product} alt={img.alt} />
-      <Card.Content>
-        <a href={product.permalink}>
-          {product.name}
-        </a>
-      </Card.Content>
-    </Card>
+    <Thumbnail href={product.permalink} src={img.urls.product} alt={img.alt}>
+      <a href={product.permalink}>
+        <h2>{product.name}</h2>
+      </a>
+    </Thumbnail>
   )
 }
 

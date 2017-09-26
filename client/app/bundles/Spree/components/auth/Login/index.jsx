@@ -1,6 +1,13 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Form, Message } from "semantic-ui-react"
+import {
+  Alert,
+  Checkbox,
+  FormGroup,
+  FormControl,
+  ControlLabel
+} from "react-bootstrap"
+import { LoadingButton } from "../../shared"
 
 export default class Login extends Component {
   static propTypes = {
@@ -23,28 +30,35 @@ export default class Login extends Component {
     const { error, loading } = this.props
     const { login, password, rememberMe } = this.state
     return (
-      <Form onSubmit={this.onSubmit} warning={Boolean(error)}>
-        {error && <Message warning content={error.message} />}
-        <Form.Input
-          value={login}
-          name="login"
-          label="Username"
-          placeholder="Username"
-          onChange={this.onChange} />
-        <Form.Input
-          value={password}
-          name="password"
-          type="password"
-          label="Password"
-          placeholder="Password"
-          onChange={this.onChange} />
-        <Form.Checkbox
+      <form onSubmit={this.onSubmit}>
+        {error && <Alert bsStyle="warning">{error.message}</Alert>}
+        <FormGroup controlId="login">
+          <ControlLabel>Username</ControlLabel>
+          <FormControl
+            value={login}
+            name="login"
+            type="text"
+            placeholder="Username"
+            onChange={this.onChange} />
+        </FormGroup>
+        <FormGroup controlId="password">
+          <ControlLabel>Username</ControlLabel>
+          <FormControl
+            value={password}
+            name="password"
+            type="password"
+            label="Password"
+            placeholder="Password"
+            onChange={this.onChange} />
+        </FormGroup>
+        <Checkbox
           value={rememberMe}
           name="rememberMe"
-          label="Remember Me"
-          onChange={this.onChange} />
-        <Form.Button type="submit" loading={loading}>Login</Form.Button>
-      </Form>
+          onChange={this.onChange}>
+          Remember Me
+        </Checkbox>
+        <LoadingButton type="submit" loading={loading}>Login</LoadingButton>
+      </form>
     )
   }
 }

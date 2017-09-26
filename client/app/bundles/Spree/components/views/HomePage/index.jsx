@@ -1,19 +1,19 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Grid } from "semantic-ui-react"
+import { Row, Col } from "react-bootstrap"
 import { Card } from "../../product"
-import Loader from "../Loader"
+import { Loader } from "../../shared"
 
 const HomePage = ({ loading, products, pagination }) => (
   <div>
     <Loader loading={loading}>
-      <Grid columns={4} stackable>
+      <Row>
         {products && products.map(p => (
-          <Grid.Column key={p.id}>
+          <Col xs={12} sm={6} md={3} key={p.id}>
             <Card product={p} />
-          </Grid.Column>
+          </Col>
         ))}
-      </Grid>
+      </Row>
     </Loader>
     {pagination}
   </div>

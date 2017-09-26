@@ -1,9 +1,27 @@
 import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
 import { Header } from "../../components/views"
-import { Navigation, withProvider } from "../app"
+import { Login, UserNav } from "../auth"
+import { withProvider } from "../app"
+import { getAllTaxonomies } from "../../redux/selectors"
 
-const HeaderApp = () => (
-  <Header navigation={<Navigation />} />
+const HeaderApp = ({ taxonomies }) => (
+  <Header
+    taxonomies={taxonomies}
+    userNav={(
+      <UserNav>
+        <Login />
+      </UserNav>
+    )} />
 )
 
-export default withProvider(HeaderApp)
+HeaderApp.propTypes = {
+  taxonomies: PropTypes.arrayOf(PropTypes.object)
+}
+
+const props = state => ({
+  taxonomies: getAllTaxonomies(state)
+})
+
+export default withProvider(connect(props)(HeaderApp))

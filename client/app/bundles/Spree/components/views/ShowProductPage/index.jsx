@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Info } from "../../product"
-import Loader from "../Loader"
+import { Loader } from "../../shared"
 
 const ShowProductPage = ({ loading, product, breadcrumbs }) => (
   <div>

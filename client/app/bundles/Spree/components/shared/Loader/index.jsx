@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Dimmer, Loader as Spinner } from "semantic-ui-react"
 
 class Content extends Component {
   static propTypes = {
@@ -17,12 +16,10 @@ class Content extends Component {
 }
 
 const Loader = ({ loading, children }) => (
-  <Dimmer.Dimmable dimmed={loading} blurring>
-    <Dimmer active={loading}>
-      <Spinner />
-    </Dimmer>
+  <div className={loading}>
+    {/* loading && <Spinner /> */}
     <Content loading={loading}>{children}</Content>
-  </Dimmer.Dimmable>
+  </div>
 )
 
 Loader.propTypes = {

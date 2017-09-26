@@ -1,23 +1,27 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Segment, Grid } from "semantic-ui-react"
-import { Logo } from "../../app"
+import { Navbar } from "react-bootstrap"
+import { Logo } from "../../shared"
+import Navigation from "./Navigation"
 
-const Header = ({ navigation }) => (
-  <Segment as="header">
-    <Grid columns={2}>
-      <Grid.Column width={4}>
+const Header = ({ taxonomies, userNav }) => (
+  <Navbar collapseOnSelect>
+    <Navbar.Header>
+      <Navbar.Brand>
         <a href="/"><Logo size="small" /></a>
-      </Grid.Column>
-      <Grid.Column>
-        {navigation}
-      </Grid.Column>
-    </Grid>
-  </Segment>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Navbar.Collapse>
+      {taxonomies && <Navigation taxonomies={taxonomies} />}
+      {userNav && React.cloneElement(userNav, { pullRight: true })}
+    </Navbar.Collapse>
+  </Navbar>
 )
 
 Header.propTypes = {
-  navigation: PropTypes.node.isRequired
+  taxonomies: PropTypes.arrayOf(PropTypes.object),
+  // selectLanguage: PropTypes.node,
+  userNav: PropTypes.node
 }
 
 export default Header

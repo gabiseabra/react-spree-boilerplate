@@ -1,28 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Breadcrumb } from "semantic-ui-react"
-
-const navigateTo = taxon => () => {
-  window.location.href = taxon.permalink
-}
+import { Breadcrumb } from "react-bootstrap"
 
 const TaxonBreadcrumbs = ({ taxons }) => {
   const parents = taxons.slice(0, -1)
   const active = taxons[taxons.length - 1]
-  const sections = [
-    ...parents.map(taxon => ({
-      key: taxon.id,
-      content: taxon.name,
-      link: true,
-      onClick: navigateTo(taxon)
-    })),
-    {
-      key: active.id,
-      content: active.name,
-      active: true
-    }
-  ]
-  return <Breadcrumb sections={sections} />
+  return (
+    <Breadcrumb>
+      {parents.map(taxon => (
+        <Breadcrumb.Item href={taxon.permalink}>{taxon.name}</Breadcrumb.Item>
+      ))}
+      <Breadcrumb.Item active>{active.name}</Breadcrumb.Item>
+    </Breadcrumb>
+  )
 }
 
 TaxonBreadcrumbs.propTypes = {
