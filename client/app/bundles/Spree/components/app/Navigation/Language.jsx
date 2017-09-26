@@ -4,7 +4,7 @@ import languages from "app/locales/languages"
 import { SplitButton, MenuItem } from "react-bootstrap"
 
 const SelectLanguage = ({ locales, selected, onChange }) => (
-  <SplitButton title="Language">
+  <SplitButton id="Nav-Language" title="Language">
     {locales.map(l => (
       <MenuItem
         key={l}

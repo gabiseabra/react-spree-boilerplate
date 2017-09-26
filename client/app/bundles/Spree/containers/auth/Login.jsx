@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { withContext } from "app/components"
 import { Login } from "../../components/auth"
 import { login } from "../../redux/modules/auth"
 import {
@@ -34,4 +33,4 @@ const props = state => ({
   loading: isAuthLoading(state)
 })
 
-export default withContext(connect(props, { login })(LoginApp))
+export default connect(props, { login })(LoginApp)

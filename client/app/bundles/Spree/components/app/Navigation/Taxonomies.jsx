@@ -9,7 +9,7 @@ import {
 
 const Taxonomy = ({ taxonomy }) => (
   taxonomy.taxons.length ? (
-    <NavDropdown id={`Header-Nav-t${taxonomy.id}`} title={taxonomy.name}>
+    <NavDropdown id={`Nav-Taxonomies-t${taxonomy.id}`} title={taxonomy.name}>
       <MenuItem href={taxonomy.permalink}>{taxonomy.name}</MenuItem>
       <MenuItem divider />
       {taxonomy.taxons.map(taxon => (
@@ -25,14 +25,14 @@ Taxonomy.propTypes = {
   taxonomy: PropTypes.object.isRequired
 }
 
-const Navigation = ({ taxonomies }) => (
+const TaxonomiesNav = ({ taxonomies }) => (
   <Nav>
     {taxonomies.map(taxon => <Taxonomy key={taxon.id} taxonomy={taxon} />)}
   </Nav>
 )
 
-Navigation.propTypes = {
+TaxonomiesNav.propTypes = {
   taxonomies: PropTypes.arrayOf(PropTypes.object)
 }
 
-export default Navigation
+export default TaxonomiesNav

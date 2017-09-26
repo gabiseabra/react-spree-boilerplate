@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SelectLanguage } from "../../components/app"
+import { withContext } from "app/components"
+import { Navigation } from "../../../components/app"
 
-export default class SelectLanguageApp extends Component {
+class SelectLanguageApp extends Component {
   static propTypes = {
     railsContext: PropTypes.object.isRequired
   }
@@ -14,10 +15,12 @@ export default class SelectLanguageApp extends Component {
   render() {
     const { railsContext } = this.props
     return (
-      <SelectLanguage
+      <Navigation.Language
         locales={railsContext.availableLocales}
         selected={railsContext.i18nLocale}
         onChange={this.onChangeLocale} />
     )
   }
 }
+
+export default withContext(SelectLanguageApp)

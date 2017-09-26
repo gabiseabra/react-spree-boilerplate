@@ -2,9 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Navbar } from "react-bootstrap"
 import { Logo } from "../../shared"
-import Navigation from "./Navigation"
 
-const Header = ({ taxonomies, userNav }) => (
+const Header = ({ navigation }) => (
   <Navbar collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
@@ -12,16 +11,13 @@ const Header = ({ taxonomies, userNav }) => (
       </Navbar.Brand>
     </Navbar.Header>
     <Navbar.Collapse>
-      {taxonomies && <Navigation taxonomies={taxonomies} />}
-      {userNav && React.cloneElement(userNav, { pullRight: true })}
+      {navigation}
     </Navbar.Collapse>
   </Navbar>
 )
 
 Header.propTypes = {
-  taxonomies: PropTypes.arrayOf(PropTypes.object),
-  // selectLanguage: PropTypes.node,
-  userNav: PropTypes.node
+  navigation: PropTypes.node.isRequired
 }
 
 export default Header

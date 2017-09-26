@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { withContext } from "app/components"
 import { UserNav } from "../../components/auth"
 import { logout } from "../../redux/modules/auth"
 import {
@@ -41,4 +40,4 @@ const props = state => ({
   loading: isAuthLoading(state)
 })
 
-export default withContext(connect(props, { logout })(UserNavApp))
+export default connect(props, { logout })(UserNavApp)
