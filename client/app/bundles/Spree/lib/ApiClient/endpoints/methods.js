@@ -7,7 +7,7 @@ import { pagination, search } from "../helpers"
 export const page = (Entity, buildQuery) => async function (pageNum, props = {}) {
   const query = Object.assign(
     pagination.query({ page: pageNum, perPage: props.perPage }),
-    search.query(props.search),
+    props.search ? search.query(props.search) : {},
     buildQuery ? buildQuery(props) : {}
   )
   const queryString = qs.stringify(_.pickBy(query, n => n !== undefined))
