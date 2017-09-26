@@ -1,0 +1,13 @@
+.Price {
+  font-weight: bold;
+}
+
+.Price--small {
+  & .currency { font-size: .6em }
+  & .price { font-size: 1em }
+}
+
+.Price--default {
+  & .currency { font-size: 1em }
+  & .price { font-size: 1.2em }
+}

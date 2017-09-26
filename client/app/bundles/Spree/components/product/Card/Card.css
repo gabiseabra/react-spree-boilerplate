@@ -1,0 +1,11 @@
+.body {
+  min-height: 3em;
+  & h3 {
+    font-size: 1.15em
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}

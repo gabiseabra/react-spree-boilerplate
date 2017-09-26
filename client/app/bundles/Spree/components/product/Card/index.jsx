@@ -1,17 +1,22 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Thumbnail } from "react-bootstrap"
+import { Thumbnail, Button } from "react-bootstrap"
+import Price from "../Price"
+import Image from "./Image"
+import styles from "./Card.css"
 
-const ProductCard = ({ product }) => {
-  const img = product.images[0]
-  return (
-    <Thumbnail href={product.permalink} src={img.urls.product} alt={img.alt}>
-      <a href={product.permalink}>
-        <h2>{product.name}</h2>
-      </a>
-    </Thumbnail>
-  )
-}
+const ProductCard = ({ product }) => (
+  <Thumbnail className={styles.Card}>
+    <Image product={product} />
+    <div className={styles.body}>
+      <h3><a href={product.permalink}>{product.name}</a></h3>
+    </div>
+    <div className={styles.controls}>
+      <Price product={product} />
+      <Button>Add to Cart</Button>
+    </div>
+  </Thumbnail>
+)
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired
