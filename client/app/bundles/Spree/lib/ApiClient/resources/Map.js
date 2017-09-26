@@ -11,7 +11,7 @@ export default class Map {
       const collection = Entity.collection
       const item = data[key]
       if(Array.isArray(item)) {
-        const instance = new Collection(item, Entity)
+        const instance = new Collection({ [collection]: item }, Entity)
         this[key] = instance
         this.collection[collection] = instance
       } else {
