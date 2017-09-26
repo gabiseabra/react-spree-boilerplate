@@ -22,9 +22,15 @@ export default class Login extends Component {
     rememberMe: ""
   }
 
-  onChange = (_, { name, value }) => this.setState({ [name]: value })
+  onChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
 
-  onSubmit = () => this.props.onSubmit(this.state)
+  onSubmit = (e) => {
+    e.preventDefault()
+    this.props.onSubmit(this.state)
+  }
 
   render() {
     const { error, loading } = this.props
