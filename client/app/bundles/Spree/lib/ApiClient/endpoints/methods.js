@@ -2,13 +2,15 @@ import _ from "lodash"
 import qs from "querystring"
 import { Collection } from "../resources"
 import Response from "../Response"
-import helperQuery from "../helpers/query"
+import { pagination, search } from "../helpers"
 
 export const page = (Entity, buildQuery) => async function (pageNum, props = {}) {
-  const queryString = qs.stringify(Object.assign(
-    helperQuery({ page: pageNum, ...props }),
-    buildQuery ? _.pickBy(buildQuery(props), n => n !== undefined) : {}
-  ))
+  const query = Object.assign(
+    pagination.query({ page: pageNum, perPage: props.perPage }),
+    search.query(props.search),
+    buildQuery ? buildQuery(props) : {}
+  )
+  const queryString = qs.stringify(_.pickBy(query, n => n !== undefined))
   const targetUrl = `${Entity.href()}?${queryString}`
   const response = await this.json(targetUrl, {
     method: "GET"
@@ -21,12 +23,4 @@ export const get = Entity => async function (id) {
     method: "GET"
   })
   return new Response(response, new Entity(response.data))
-}
-
-export const hydrate = Entity => function (data) {
-  if(Entity.collection in data) {
-    const collection = new Collection(data, Entity)
-    return { [Entity.collection]: Array.from(collection) }
-  }
-  return {}
 }

@@ -1,7 +1,6 @@
 import url from "url"
 import { Resource, Collection, Map } from "./resources"
-import { parse as pagination } from "./helpers/pagination"
-import { parse as search } from "./helpers/search"
+import { search } from "./helpers"
 
 export default class ApiResponse {
   constructor(response, data) {
@@ -24,14 +23,14 @@ export default class ApiResponse {
   }
 
   get search() {
-    return search(this.query)
+    return search.parse(this.query)
   }
 
   get pagination() {
     if(this.isResource) {
       return this.data.pagination
     }
-    return pagination()
+    return undefined
   }
 
   get collection() {
