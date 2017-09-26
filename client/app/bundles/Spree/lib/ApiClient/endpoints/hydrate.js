@@ -3,7 +3,7 @@ import hydrateHelpers from "../helpers/hydrate"
 // Final hydrate() endpoint
 export default (api, endpoints) => (data) => {
   const finalData = Object.assign({}, data)
-  const hydratedData = endpoints.map(name => api[name].hydrate(data))
+  const hydratedData = endpoints.map(callback => callback(data))
   Object.assign(
     finalData,
     hydrateHelpers(data),

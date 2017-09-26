@@ -10,12 +10,12 @@ function entityEndpoints(api, entities) {
   const hydrateEndpoints = []
   const result = {}
   _.values(entities).forEach((Entity) => {
+    if(Entity.hydrate) {
+      hydrateEndpoints.push(Entity.hydrate)
+    }
     if(!Entity.collection || _.isEmpty(Entity.endpoints)) return
     const name = Entity.collection
     const methods = {}
-    if("hydrate" in Entity.endpoints) {
-      hydrateEndpoints.push(name)
-    }
     _.keys(Entity.endpoints).forEach((key) => {
       methods[key] = createEndpoint(api, Entity.endpoints[key])
     })

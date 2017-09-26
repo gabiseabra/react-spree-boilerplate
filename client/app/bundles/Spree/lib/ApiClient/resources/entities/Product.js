@@ -48,6 +48,13 @@ export default class Product extends Resource {
     this.taxonIds = data.taxon_ids
   }
 
+  static hydrate({ products }) {
+    if(products) {
+      return { products: products.map(data => new Product(data)) }
+    }
+    return {}
+  }
+
   get permalink() {
     return `/products/${this.slug}`
   }

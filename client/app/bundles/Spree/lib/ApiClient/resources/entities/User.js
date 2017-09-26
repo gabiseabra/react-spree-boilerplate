@@ -14,4 +14,11 @@ export default class User extends Resource {
       billing: (billing ? new Address(billing) : undefined)
     }
   }
+
+  static hydrate({ user }) {
+    if(user) {
+      return { user: new User(user) }
+    }
+    return {}
+  }
 }
