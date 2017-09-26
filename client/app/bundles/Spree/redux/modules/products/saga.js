@@ -1,5 +1,5 @@
 import { put, call, fork, select, takeEvery } from "redux-saga/effects"
-import { isProductLoaded } from "../../selectors"
+import { isProductLoaded } from "../../selectors/products"
 import * as actions from "./index"
 
 export default function create({ apiClient }) {

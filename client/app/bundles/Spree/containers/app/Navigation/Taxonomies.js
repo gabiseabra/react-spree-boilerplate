@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import { Navigation } from "../../../components/app"
-import { getAllTaxonomies } from "../../../redux/selectors"
+import { getAllTaxonomies } from "../../../redux/selectors/taxonomies"
 
 const props = state => ({
   taxonomies: getAllTaxonomies(state)

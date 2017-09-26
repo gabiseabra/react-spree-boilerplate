@@ -7,7 +7,7 @@ import {
   getLoggedInUser,
   getAuthError,
   isAuthLoading
-} from "../../redux/selectors"
+} from "../../redux/selectors/auth"
 
 class UserNavApp extends Component {
   static propTypes = {

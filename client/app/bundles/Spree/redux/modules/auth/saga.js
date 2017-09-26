@@ -1,5 +1,5 @@
 import { put, call, select, takeLatest } from "redux-saga/effects"
-import { isUserLoggedIn } from "../../selectors"
+import { isUserLoggedIn } from "../../selectors/auth"
 import * as actions from "./index"
 
 export default function create({ apiClient }) {

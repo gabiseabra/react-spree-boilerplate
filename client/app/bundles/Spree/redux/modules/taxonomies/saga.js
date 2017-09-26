@@ -1,5 +1,5 @@
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
-import { isTaxonomiesLoaded } from "../../selectors"
+import { isTaxonomiesLoaded } from "../../selectors/taxonomies"
 import * as actions from "./index"
 
 export default function create({ apiClient }) {

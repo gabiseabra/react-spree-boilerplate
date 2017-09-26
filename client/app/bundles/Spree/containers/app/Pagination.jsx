@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Pagination } from "../../components/app"
-import { getPagination } from "../../redux/selectors"
+import { getPagination } from "../../redux/selectors/page"
 import { loadPage } from "../../redux/modules/page"
 
 class AppPagination extends Component {

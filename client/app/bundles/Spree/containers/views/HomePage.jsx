@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Pagination, withProvider } from "../app"
 import { HomePage } from "../../components/views"
-import { getPageProducts, isPageLoaded } from "../../redux/selectors"
+import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
 import { load } from "../../redux/modules/page"
 
 const HomePageApp = ({ products, loading }) => (

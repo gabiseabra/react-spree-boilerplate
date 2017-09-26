@@ -6,7 +6,7 @@ import { login } from "../../redux/modules/auth"
 import {
   getAuthError,
   isAuthLoading
-} from "../../redux/selectors"
+} from "../../redux/selectors/auth"
 
 class LoginApp extends Component {
   static propTypes = {

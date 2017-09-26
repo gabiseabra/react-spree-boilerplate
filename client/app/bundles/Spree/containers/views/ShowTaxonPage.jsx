@@ -3,7 +3,11 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Pagination, Breadcrumbs, withProvider } from "../app"
 import { ProductsPage } from "../../components/views"
-import { getPageProducts, getPageTaxons, isPageLoaded } from "../../redux/selectors"
+import {
+  getPageProducts,
+  getPageTaxons,
+  isPageLoaded
+} from "../../redux/selectors/page"
 
 const ShowTaxonPageApp = ({ products, taxons, loading }) => (
   <ProductsPage
