@@ -24,7 +24,7 @@ export default class UserNav extends Component {
     }
   }
 
-  hideModal = () => this.modal.show()
+  hideModal = () => this.modal.hide()
 
   showModal = () => this.modal.show()
 
@@ -32,7 +32,12 @@ export default class UserNav extends Component {
     const { children } = this.props
     return (
       <Modal ref={(x) => { this.modal = x }}>
-        {children}
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {children}
+        </Modal.Body>
       </Modal>
     )
   }

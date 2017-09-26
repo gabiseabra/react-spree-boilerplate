@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap"
 
 const LoadingButton = ({ loading, loadingText, children, ...props }) => (
   <Button disabled={loading} {...props}>
-    (loading ? loadingText : children)
+    {loading ? loadingText : children}
   </Button>
 )
 

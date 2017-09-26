@@ -2,8 +2,8 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Modal } from "react-bootstrap"
 
-export default class ControlledModal extends Component {
-  propTypes = {
+class ControlledModal extends Component {
+  static propTypes = {
     children: PropTypes.node.isRequired
   }
 
@@ -18,13 +18,15 @@ export default class ControlledModal extends Component {
     const { children } = this.props
     return (
       <Modal show={active} onHide={this.hide}>
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {children}
-        </Modal.Body>
+        {children}
       </Modal>
     )
   }
 }
+
+ControlledModal.Header = Modal.Header
+ControlledModal.Title = Modal.Title
+ControlledModal.Body = Modal.Body
+ControlledModal.Footer = Modal.Footer
+
+export default ControlledModal
