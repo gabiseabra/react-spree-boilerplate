@@ -17,7 +17,6 @@ export default {
       "react-intl",
       "react-redux",
       "react-on-rails",
-      "react-ultimate-pagination",
       "redux",
       "redux-saga"
     ]

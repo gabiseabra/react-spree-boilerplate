@@ -5,7 +5,7 @@
 		"react"
 	],
   "plugins": [
-    ["lodash", {"id": ["lodash", "semantic-ui-react"]}]
+    ["lodash", {"id": ["lodash"]}]
   ],
 	"env": {
 		"production": {

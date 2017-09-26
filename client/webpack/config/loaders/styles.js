@@ -1,4 +1,5 @@
 import path from "path"
+import theme from "../../../app/styles/theme"
 
 const localIdentName = (
   process.env.NODE_ENV === "development" ?
@@ -11,6 +12,9 @@ const defaults = context => ({
     localIdentName,
     modules: true,
     importLoaders: 2
+  },
+  less: {
+    modifyVars: theme
   },
   url: {
     silent: true
