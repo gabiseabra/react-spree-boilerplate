@@ -1,5 +1,5 @@
 import Resource from "../Resource"
-import { page, get, hydrate } from "../../endpoints/methods"
+import { page, get } from "../../endpoints/methods"
 
 class Image {
   constructor(data) {
@@ -31,8 +31,7 @@ export default class Product extends Resource {
 
   static endpoints = {
     page: page(Product),
-    get: get(Product),
-    hydrate: hydrate(Product)
+    get: get(Product)
   }
 
   constructor(data) {
