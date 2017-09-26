@@ -11,16 +11,17 @@ class AppPagination extends Component {
     loadPage: PropTypes.func.isRequired
   }
 
-  onChange = page => this.props.loadPage(page)
+  onSelect = page => this.props.loadPage(page)
 
   render() {
     const { pagination, ...props } = this.props
     const { currentPage, totalPages } = pagination
+    delete props.loadPage
     return (
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onChange={this.onChange}
+        onSelect={this.onSelect}
         {...props} />
     )
   }
