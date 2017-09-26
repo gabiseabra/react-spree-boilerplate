@@ -50,6 +50,8 @@ export const getBreadcrumb = createSelector(
 // products
 export const getAllProducts = state => state.products.data
 
+export const getAllVariants = state => state.products.variants
+
 export const getProductSlugs = state => state.products.slugs
 
 export const getProduct = createSelector(
@@ -60,6 +62,12 @@ export const getProduct = createSelector(
     const id = (name in slugs ? slugs : name)
     return products[id]
   }
+)
+
+export const getProductVariants = createSelector(
+  getAllVariants,
+  getProduct,
+  (variants, product) => variants[product.id]
 )
 
 export const getProductError = createSelector(
