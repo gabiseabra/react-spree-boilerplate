@@ -8,7 +8,7 @@ const TaxonBreadcrumbs = ({ taxons }) => {
   return (
     <Breadcrumb>
       {parents.map(taxon => (
-        <Breadcrumb.Item href={taxon.permalink}>{taxon.name}</Breadcrumb.Item>
+        <Breadcrumb.Item key={taxon.id} href={taxon.permalink}>{taxon.name}</Breadcrumb.Item>
       ))}
       <Breadcrumb.Item active>{active.name}</Breadcrumb.Item>
     </Breadcrumb>
