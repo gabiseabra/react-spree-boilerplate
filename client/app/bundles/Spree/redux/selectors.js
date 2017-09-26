@@ -48,12 +48,18 @@ export const getBreadcrumb = createSelector(
 )
 
 // products
-export const getAllProducts = state => state.products
+export const getAllProducts = state => state.products.data
+
+export const getProductSlugs = state => state.products.slugs
 
 export const getProduct = createSelector(
   getAllProducts,
+  getProductSlugs,
   (state, { id }) => id,
-  (products, id) => products[id]
+  (products, slugs, name) => {
+    const id = (name in slugs ? slugs : name)
+    return products[id]
+  }
 )
 
 export const getProductError = createSelector(

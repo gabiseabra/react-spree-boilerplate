@@ -1,3 +1,4 @@
+import _ from "lodash"
 import Resource from "../Resource"
 import Variant from "./Variant"
 import { page, get } from "../../endpoints/methods"
@@ -38,11 +39,8 @@ export default class Product extends Resource {
     this.description = data.description
     this.hasVariants = data.has_variants
     this.master = new Variant(data.master)
-    this.variants = (
-      data.variants ?
-      data.variants.map(item => new Variant(item)) :
-      undefined
-    )
+    const variants = (data.variants || []).map(item => new Variant(item))
+    this.variants = _.keyBy(variants, item => item.id)
     this.properties = properties(data.product_properties)
     this.optionTypes = optionTypes(data.option_types)
     this.taxonIds = data.taxon_ids

@@ -55,6 +55,13 @@ export default class Variant extends Resource {
     this.options = options(data.option_values)
   }
 
+  static hydrate({ variants }) {
+    if(variants) {
+      return { variants: variants.map(data => new Variant(data)) }
+    }
+    return {}
+  }
+
   get href() {
     return this.constructor.href(this.slug, this.id)
   }
