@@ -13,7 +13,8 @@ export const fail = (id, error) => ({ type: FAILURE, id, error })
 
 const initialState = {
   data: {},
-  slugs: {}
+  slugs: {},
+  variants: {}
 }
 
 export default function products(state = initialState, action) {
@@ -22,20 +23,20 @@ export default function products(state = initialState, action) {
       return {
         slugs: {
           ...action.slugs,
-          [action.slug]: action.id
+          [action.data.slug]: action.id
         },
         data: {
           ...action.data,
           [action.id]: action.data
+        },
+        variants: {
+          ...action.data,
+          [action.id]: action.data.variants
         }
       }
     case FAILURE:
       return {
         ...state,
-        slugs: {
-          ...action.slugs,
-          [action.slug]: action.id
-        },
         data: {
           ...action.data,
           [action.id]: { error: action.error }
@@ -48,14 +49,14 @@ export default function products(state = initialState, action) {
         payload.products.forEach((product) => {
           result.slugs[product.slug] = product.id
           result.data[product.id] = product
+          result.variants[product.id] = product.variants
         })
       }
       if(payload.variants) {
         payload.variants.forEach((variant) => {
           const id = result.slugs[variant.slug]
           if(id) {
-            const targetProduct = result.data[id]
-            targetProduct.variants[variant.id] = variant
+            result.variants[id][variant.id] = variant
           }
         })
       }
