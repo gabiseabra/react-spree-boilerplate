@@ -11,7 +11,7 @@ export default class Option extends Component {
     onSelect(id)
   }
 
-  render() {
+  renderButton() {
     const props = this.props
     switch(props.optionType) {
       case "tshirt-color":
@@ -20,5 +20,11 @@ export default class Option extends Component {
       default:
         return <Text {...props} onSelect={this.onSelect} />
     }
+  }
+
+  render() {
+    return (
+      <span>{this.renderButton()}</span>
+    )
   }
 }
