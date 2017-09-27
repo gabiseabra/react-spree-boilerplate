@@ -7,10 +7,11 @@ import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
 import { load } from "../../redux/modules/page"
 
 const HomePageApp = ({ products, loading }) => (
-  <HomePage
-    loading={loading}
-    products={products}
-    pagination={<Pagination />} />
+  <HomePage>
+    <HomePage.Title />
+    <HomePage.Content loading={loading} products={products} />
+    <Pagination />
+  </HomePage>
 )
 
 HomePageApp.propTypes = {
@@ -18,9 +19,9 @@ HomePageApp.propTypes = {
   loading: PropTypes.bool.isRequired
 }
 
-const mapper = state => ({
+const props = state => ({
   products: getPageProducts(state),
   loading: !isPageLoaded(state)
 })
 
-export default withProvider(connect(mapper, { load })(HomePageApp))
+export default withProvider(connect(props, { load })(HomePageApp))

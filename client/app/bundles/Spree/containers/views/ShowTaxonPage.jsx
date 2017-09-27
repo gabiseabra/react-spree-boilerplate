@@ -10,25 +10,25 @@ import {
 } from "../../redux/selectors/page"
 
 const ShowTaxonPageApp = ({ products, taxons, loading }) => (
-  <ProductsPage
-    loading={loading}
-    products={products}
-    breadcrumbs={taxons && taxons.map(({ id }) => (
+  <ProductsPage>
+    {taxons && taxons.map(({ id }) => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}
-    pagination={<Pagination />} />
+    <ProductsPage.Content loading={loading} products={products} />
+    <Pagination />
+  </ProductsPage>
 )
 
 ShowTaxonPageApp.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
-  breadcrumbs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+  taxons: PropTypes.arrayOf(PropTypes.object),
   loading: PropTypes.bool.isRequired
 }
 
-const mapper = state => ({
+const props = state => ({
   products: getPageProducts(state),
   taxons: getPageTaxons(state),
   loading: !isPageLoaded(state)
 })
 
-export default withProvider(connect(mapper)(ShowTaxonPageApp))
+export default withProvider(connect(props)(ShowTaxonPageApp))

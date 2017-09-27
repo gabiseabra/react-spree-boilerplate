@@ -4,27 +4,33 @@ import { Row, Col } from "react-bootstrap"
 import { Card } from "../../product"
 import { Loader } from "../../shared"
 
-const ProductsPage = ({ loading, products, breadcrumbs, pagination }) => (
+const ProductsPage = ({ children }) => (
   <div>
-    {breadcrumbs}
-    <Loader loading={loading}>
-      <Row>
-        {products && products.map(p => (
-          <Col xs={6} md={3} key={p.id}>
-            <Card product={p} />
-          </Col>
-        ))}
-      </Row>
-    </Loader>
-    {pagination}
+    {children}
   </div>
 )
 
+ProductsPage.Title = () => (<h2>Products</h2>)
+
+ProductsPage.Content = ({ loading, products }) => (
+  <Loader loading={loading}>
+    <Row>
+      {products && products.map(p => (
+        <Col xs={12} sm={6} md={3} key={p.id}>
+          <Card product={p} />
+        </Col>
+      ))}
+    </Row>
+  </Loader>
+)
+
 ProductsPage.propTypes = {
+  children: PropTypes.node
+}
+
+ProductsPage.Content.propTypes = {
   loading: PropTypes.bool.isRequired,
-  products: PropTypes.arrayOf(PropTypes.object),
-  breadcrumbs: PropTypes.node,
-  pagination: PropTypes.node
+  products: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default ProductsPage

@@ -3,21 +3,32 @@ import PropTypes from "prop-types"
 import { Navbar } from "react-bootstrap"
 import { Logo } from "../../shared"
 
-const Header = ({ navigation }) => (
+const Header = ({ children }) => (
   <Navbar collapseOnSelect>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="/"><Logo size="small" /></a>
-      </Navbar.Brand>
-    </Navbar.Header>
-    <Navbar.Collapse>
-      {navigation}
-    </Navbar.Collapse>
+    {children}
   </Navbar>
 )
 
+Header.Navigation = ({ children }) => (
+  <Navbar.Collapse>
+    {children}
+  </Navbar.Collapse>
+)
+
+Header.Brand = () => (
+  <Navbar.Header>
+    <Navbar.Brand>
+      <a href="/"><Logo size="small" /></a>
+    </Navbar.Brand>
+  </Navbar.Header>
+)
+
 Header.propTypes = {
-  navigation: PropTypes.node.isRequired
+  children: PropTypes.node
+}
+
+Header.Navigation.propTypes = {
+  children: PropTypes.node
 }
 
 export default Header

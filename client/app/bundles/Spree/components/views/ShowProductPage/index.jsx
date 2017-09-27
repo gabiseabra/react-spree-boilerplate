@@ -3,19 +3,26 @@ import PropTypes from "prop-types"
 import { Info } from "../../product"
 import { Loader } from "../../shared"
 
-const ShowProductPage = ({ loading, product, breadcrumbs, options }) => (
+const ShowProductPage = ({ children }) => (
   <div>
-    {breadcrumbs}
-    <Loader loading={loading}>
-      {product && <Info product={product} options={options} />}
-    </Loader>
+    {children}
   </div>
 )
 
+ShowProductPage.Title = ({ product }) => (<h2>{product.name}</h2>)
+
+ShowProductPage.Content = ({ loading, product, options }) => (
+  <Loader loading={loading}>
+    {product && <Info product={product} options={options} />}
+  </Loader>
+)
 ShowProductPage.propTypes = {
+  children: PropTypes.node
+}
+
+ShowProductPage.Content.propTypes = {
   loading: PropTypes.bool.isRequired,
   product: PropTypes.object,
-  breadcrumbs: PropTypes.node,
   options: PropTypes.node
 }
 
