@@ -41,6 +41,7 @@
     "semi": ["error", "never"],
     "global-require": "off",
     "class-methods-use-this": "off",
+    "react/prop-types": "warn",
     "react/forbid-prop-types": "off",
     "react/require-default-props": "off",
     "react/jsx-closing-bracket-location": ["error", "after-props"]
