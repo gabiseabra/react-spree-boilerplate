@@ -1,9 +1,7 @@
 import FormData from "isomorphic-form-data"
-import Variant from "./Variant"
+import LineItem from "./LineItem"
 import Resource from "../Resource"
 import Response from "../../Response"
-import ResponseError from "../../ResponseError"
-import { get } from "../../endpoints/methods"
 
 const STEPS = [
   "cart",
@@ -13,15 +11,6 @@ const STEPS = [
   "complete"
 ]
 
-const lineItem = ({ id, quantity, price, total, variant_id, variant }) => ({
-  id,
-  quantity,
-  price: parseFloat(price),
-  total: parseFloat(total),
-  variantId: variant_id,
-  variant: new Variant(variant)
-})
-
 export default class Order extends Resource {
   static steps = STEPS
 
@@ -29,8 +18,7 @@ export default class Order extends Resource {
 
   static collection = "orders"
 
-  static endpoints = {
-    get: get(Order),
+  static methods = {
     async post({ lineItems }) {
       const body = new FormData()
       if(lineItems) {
@@ -40,18 +28,12 @@ export default class Order extends Resource {
           body.append("order[line_items][][variant_id]", variantId)
         })
       }
-      try {
-        const response = await this.json(Order.href(), {
-          body,
-          method: "POST",
-          credentials: "same-origin"
-        })
-        return new Response(response, new Order(response.data))
-      } catch(error) {
-        if(error.status !== 422) throw error
-        const data = await error.response.json()
-        throw new ResponseError(error.response, data.error, data.errors)
-      }
+      const response = await this.json(Order.href(), {
+        body,
+        method: "POST",
+        credentials: "same-origin"
+      })
+      return new Response(response, new Order(response.data))
     },
     async empty(number) {
       await this.fetch(`${Order.href(number)}/empty`, {
@@ -76,7 +58,7 @@ export default class Order extends Resource {
       shipping: parseFloat(data.ship_total),
       adjustment: parseFloat(data.adjustment_total)
     }
-    this.lineItems = data.line_items.map(item => lineItem(item))
+    this.lineItems = data.line_items.map(item => new LineItem(item))
   }
 
   static hydrate({ orders, current_order }) {

@@ -7,5 +7,6 @@ export {
   Taxon,
   Taxonomy,
   User,
-  Order
+  Order,
+  LineItem
 } from "./entities"

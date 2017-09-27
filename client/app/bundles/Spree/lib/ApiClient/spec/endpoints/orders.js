@@ -1,22 +1,20 @@
 /* eslint-env mocha */
 import { Order } from "../../resources"
-import { get } from "./methods"
 import * as mock from "../mock"
 
-const lineItems = {
-  1: { quantity: 1 },
-  2: { quantity: 1 },
-  3: { quantity: 5 }
-}
+const lineItems = [
+  { variantId: 1, quantity: 1 },
+  { variantId: 2, quantity: 1 },
+  { variantId: 3, quantity: 5 }
+]
 
 const order = mock.order(1, { lineItems })
 
 describe("#orders", () => {
-  describe("#get()", get(Order, order))
-
   describe("#post()", () => {
     beforeEach(function () {
       this.scope
+        .withCredentials()
         .post("/api/v1/orders")
         .reply(201, order)
     })
@@ -30,6 +28,7 @@ describe("#orders", () => {
   describe("#empty()", () => {
     beforeEach(function () {
       this.scope
+        .withCredentials()
         .put(`/api/v1/orders/${order.number}/empty`)
         .reply(200)
     })

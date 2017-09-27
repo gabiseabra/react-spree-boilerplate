@@ -131,4 +131,5 @@ describe("ApiClient", () => {
   require("./endpoints/taxonomies")
   require("./endpoints/products")
   require("./endpoints/orders")
+  require("./endpoints/lineItems")
 })
