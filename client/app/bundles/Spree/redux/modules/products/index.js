@@ -17,6 +17,8 @@ const initialState = {
   variants: {}
 }
 
+const byId = array => _.keyBy(array, i => i.id)
+
 export default function products(state = initialState, action) {
   switch(action.type) {
     case SUCCESS:
@@ -31,7 +33,7 @@ export default function products(state = initialState, action) {
         },
         variants: {
           ...action.data,
-          [action.id]: action.data.variants
+          [action.id]: byId(action.data.variants)
         }
       }
     case FAILURE:
@@ -49,7 +51,7 @@ export default function products(state = initialState, action) {
         payload.products.forEach((product) => {
           result.slugs[product.slug] = product.id
           result.data[product.id] = product
-          result.variants[product.id] = product.variants
+          result.variants[product.id] = byId(product.variants)
         })
       }
       if(payload.variants) {

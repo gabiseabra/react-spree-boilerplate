@@ -24,7 +24,7 @@ const options = (data) => {
     result[opt.option_type_id] = {
       id: opt.id,
       value: opt.name,
-      display: opt.presentation
+      presentation: opt.presentation
     }
   })
   return result

@@ -12,9 +12,9 @@ const optionTypes = (data) => {
   data.forEach((opt) => {
     result[opt.id] = {
       id: opt.id,
-      position: opt.position,
       name: opt.name,
-      display: opt.presentation
+      presentation: opt.presentation,
+      position: opt.position
     }
   })
   return result
