@@ -6,7 +6,7 @@ export default class Taxonomy extends Taxon {
 
   static collection = "taxonomies"
 
-  static endpoints = {
+  static methods = {
     page: page(Taxonomy, ({ nested }) => ({
       set: nested ? "nested" : undefined
     })),

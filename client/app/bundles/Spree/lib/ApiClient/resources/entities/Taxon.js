@@ -6,7 +6,7 @@ export default class Taxon extends Resource {
 
   static collection = "taxons"
 
-  static endpoints = {
+  static methods = {
     page: page(Taxon)
   }
 

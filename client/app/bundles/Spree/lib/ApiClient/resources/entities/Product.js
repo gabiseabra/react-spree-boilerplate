@@ -25,7 +25,7 @@ export default class Product extends Resource {
 
   static collection = "products"
 
-  static endpoints = {
+  static methods = {
     page: page(Product),
     get: get(Product)
   }

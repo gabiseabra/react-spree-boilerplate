@@ -10,14 +10,14 @@ function entityEndpoints(api, entities) {
   const hydrateEndpoints = []
   const result = {}
   _.values(entities).forEach((Entity) => {
+    const name = Entity.endpoint || Entity.collection
     if(Entity.hydrate) {
       hydrateEndpoints.push(Entity.hydrate)
     }
-    if(!Entity.collection || _.isEmpty(Entity.endpoints)) return
-    const name = Entity.collection
+    if(!name || _.isEmpty(Entity.methods)) return
     const methods = {}
-    _.keys(Entity.endpoints).forEach((key) => {
-      methods[key] = createEndpoint(api, Entity.endpoints[key])
+    _.keys(Entity.methods).forEach((key) => {
+      methods[key] = createEndpoint(api, Entity.methods[key])
     })
     result[name] = methods
   })

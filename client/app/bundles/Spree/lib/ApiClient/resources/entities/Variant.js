@@ -33,10 +33,6 @@ const options = (data) => {
 export default class Variant extends Resource {
   static collection = "products"
 
-  static endpoints = {
-    // page: async function (product) {}
-  }
-
   static href(product, id) {
     if(!product) return "/api/v1/variants"
     if(!id) return `/api/v1/products/${product}/variants`
