@@ -14,6 +14,8 @@ export default {
       const response = await this.json("/login.js", {
         credentials: "same-origin",
         method: "POST",
+        // Throw AuthError instead of ResponseError
+        catch: false,
         body
       })
       return new Response(response, new User(response.data.user))

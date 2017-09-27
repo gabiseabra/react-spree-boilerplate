@@ -65,8 +65,16 @@ export default class ApiClient {
   }
 
   async json(req, init = {}) {
-    const response = await this.fetch(req, { format: "json", ...init })
-    return new Response(response, await response.json())
+    try {
+      const response = await this.fetch(req, { format: "json", ...init })
+      return new Response(response, await response.json())
+    } catch(error) {
+      if(error.status !== 422) throw error
+      try {
+        const data = await error.response.json()
+        throw new ResponseError(error.response, data.error, data)
+      } catch(__) { throw error }
+    }
   }
 
   async html(req, init = {}) {
