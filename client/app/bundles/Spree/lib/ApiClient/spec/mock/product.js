@@ -33,7 +33,7 @@ export default (id = 1, props = {}) => {
   if(variants) {
     product.has_variants = true
     for(++i; i < variants.length; ++i) {
-      product.variants.push(id, i, variant[variants[i]])
+      product.variants.push(variant(id, i, variant[variants[i]]))
     }
   }
   if(properties) {

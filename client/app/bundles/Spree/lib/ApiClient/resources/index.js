@@ -6,5 +6,6 @@ export {
   Product,
   Taxon,
   Taxonomy,
-  User
+  User,
+  Order
 } from "./entities"

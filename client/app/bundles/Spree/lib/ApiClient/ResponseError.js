@@ -1,9 +1,9 @@
 import ExtendableError from "es6-error"
 
 export default class ResponseError extends ExtendableError {
-  constructor(response) {
+  constructor(response, message) {
     const { status, statusText } = response
-    super(`HTTP Error: [${status}] ${statusText}`)
+    super(message || `HTTP Error: [${status}] ${statusText}`)
     this.status = status
     this.statusText = statusText
     this.response = response
