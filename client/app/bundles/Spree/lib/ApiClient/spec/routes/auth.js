@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import { User } from "../../resources"
-import AuthError from "../../AuthError"
+import ResponseError from "../../ResponseError"
 import * as mock from "../mock"
 
 const login = "user@example.com"
@@ -25,9 +25,9 @@ describe("/login", () => {
       })
   })
 
-  it("throws AuthError on invalid credentials", function () {
+  it("throws ResponseError on invalid credentials", function () {
     return this.client.route("/login", { login, password: "wrongpass" })
-      .should.eventually.be.rejectedWith(AuthError)
+      .should.eventually.be.rejectedWith(ResponseError)
   })
 
   it("returns logged in user on success", async function () {
