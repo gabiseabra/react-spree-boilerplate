@@ -13,4 +13,11 @@ module SpreeHydrationHelper
                           locals: { user: spree_current_user }
     redux_store store_name, props: { user: json }
   end
+
+  def hydrate_order(store_name)
+    return unless @order
+    json = render_to_json partial: 'spree/shared/order.json',
+                          locals: { order: @order }
+    redux_store store_name, props: { order: order }
+  end
 end

@@ -11,6 +11,7 @@
     <%= stylesheet_pack_tag 'spree', media: 'all' %>
     <%= hydrate_taxonomies 'spreeStore' %>
     <%= hydrate_user 'spreeStore' %>
+    <%= hydrate_order 'spreeStore' %>
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
