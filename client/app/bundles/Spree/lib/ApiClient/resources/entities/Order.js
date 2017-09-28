@@ -19,7 +19,8 @@ export default class Order extends Resource {
   static collection = "orders"
 
   static methods = {
-    async post({ lineItems }) {
+    async post(props) {
+      /*
       const body = new FormData()
       if(lineItems) {
         Object.keys(lineItems).forEach((variantId) => {
@@ -34,6 +35,8 @@ export default class Order extends Resource {
         credentials: "same-origin"
       })
       return new Response(response, new Order(response.data))
+      */
+      return this.route("/cart/populate", props)
     },
     async empty(number) {
       await this.fetch(`${Order.href(number)}/empty`, {
@@ -48,6 +51,7 @@ export default class Order extends Resource {
     super()
     this.id = data.id
     this.number = data.number
+    this.token = data.token
     this.state = data.state
     this.userId = data.user_id
     this.quantity = data.total_quantity

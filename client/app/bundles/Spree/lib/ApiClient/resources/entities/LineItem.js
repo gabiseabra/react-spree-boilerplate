@@ -19,27 +19,36 @@ export default class LineItem extends Resource {
   static methods = {
     async post(order, { variantId, quantity }) {
       const query = queryString({ variantId, quantity })
-      const href = `${LineItem.href(order)}?${query}`
+      const href = `${LineItem.href(order.number)}?${query}`
       const response = await this.json(href, {
         method: "POST",
-        credentials: "same-origin"
+        credentials: "same-origin",
+        headers: {
+          "X-Spree-Order-Token": order.token
+        }
       })
       return new Response(response, new LineItem(response.data))
     },
     async put(order, id, { quantity }) {
       const query = queryString({ quantity })
-      const href = `${LineItem.href(order, id)}?${query}`
+      const href = `${LineItem.href(order.number, id)}?${query}`
       const response = await this.json(href, {
         method: "PUT",
-        credentials: "same-origin"
+        credentials: "same-origin",
+        headers: {
+          "X-Spree-Order-Token": order.token
+        }
       })
       return new Response(response, new LineItem(response.data))
     },
     async delete(order, id) {
       if(!order || !id) return false
-      await this.fetch(LineItem.href(order, id), {
+      await this.fetch(LineItem.href(order.id, id), {
         method: "DELETE",
-        credentials: "same-origin"
+        credentials: "same-origin",
+        headers: {
+          "X-Spree-Order-Token": order.token
+        }
       })
       return true
     }
