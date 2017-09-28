@@ -11,12 +11,12 @@ module SpreeHydrationHelper
     return unless spree_current_user
     json = render_to_json partial: 'spree/shared/user.json',
                           locals: { user: spree_current_user }
-    redux_store store_name, props: { current_order: json }
+    redux_store store_name, props: { user: json }
   end
 
   def hydrate_order(store_name)
     return unless simple_current_order
-    json = render_to_json partial: 'spree/shared/order.json',
+    json = render_to_json partial: 'spree/orders/order.json',
                           locals: { order: simple_current_order }
     redux_store store_name, props: { order: json }
   end
