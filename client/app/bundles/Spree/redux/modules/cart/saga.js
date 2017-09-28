@@ -4,8 +4,6 @@ import * as actions from "./index"
 
 export default function createSaga({ apiClient }) {
   function * create({ variantId, quantity }) {
-    const order = yield select(getOrder)
-    if(order) return fork(add, { variantId, quantity })
     yield put(actions.request())
     try {
       const response = yield call(apiClient.orders.post, {
@@ -20,6 +18,8 @@ export default function createSaga({ apiClient }) {
   }
 
   function * add({ variantId, quantity }) {
+    const order = yield select(getOrder)
+    if(order) return fork(add, { variantId, quantity })
     // ...
   }
 
@@ -38,6 +38,7 @@ export default function createSaga({ apiClient }) {
   return function * watch() {
     yield [
       takeLatest(actions.CREATE, create),
+      takeLatest(actions.ADD, add),
       takeLatest(actions.EMPTY, empty)
     ]
   }
