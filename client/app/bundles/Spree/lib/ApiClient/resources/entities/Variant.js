@@ -1,22 +1,18 @@
 import Resource from "../Resource"
 
-class Image {
-  constructor(data) {
-    this.id = data.id
-    this.urls = {
-      mini: data.mini_url,
-      small: data.small_url,
-      product: data.product_url,
-      large: data.large_url
-    }
-    this.contentType = data.attachment_content_type
-    this.width = data.attachment_width
-    this.height = data.attachment_height
-    this.alt = data.alt
+const image = ({ id, alt, ...data }) => ({
+  id,
+  alt,
+  contentType: data.attachment_content_type,
+  width: data.width,
+  height: data.height,
+  urls: {
+    mini: data.mini_url,
+    small: data.small_url,
+    product: data.product_url,
+    large: data.large_url
   }
-}
-
-const images = data => data.map(img => new Image(img))
+})
 
 const options = (data) => {
   const result = {}
@@ -47,7 +43,7 @@ export default class Variant extends Resource {
     this.description = data.description
     this.price = parseFloat(data.price) || undefined
     this.inStock = data.in_stock
-    this.images = images(data.images)
+    this.images = data.images.map(img => image(img))
     this.options = options(data.option_values)
   }
 
