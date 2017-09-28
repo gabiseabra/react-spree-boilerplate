@@ -61,14 +61,10 @@ export default class Order extends Resource {
     this.lineItems = data.line_items.map(item => new LineItem(item))
   }
 
-  static hydrate({ orders, current_order }) {
-    const result = {}
-    if(orders) {
-      result.orders = orders.map(data => new Order(data))
+  static hydrate({ order }) {
+    if(order) {
+      return { order: new Order(order) }
     }
-    if(current_order) {
-      result.current_order = new Order(current_order)
-    }
-    return result
+    return {}
   }
 }
