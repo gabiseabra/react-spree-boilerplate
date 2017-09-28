@@ -1,10 +1,6 @@
 import { createSelector } from "reselect"
 
-export const getAllTaxonomies = state => state.taxonomies.tree
-
-export const getTaxonomiesError = state => state.taxonomies.error
-
-export const isTaxonomiesLoaded = state => state.taxonomies.tree.length && !state.taxonomies.error
+export const getAllTaxonomies = state => state.taxonomies
 
 export const getTaxonomy = createSelector(
   getAllTaxonomies,

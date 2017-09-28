@@ -3,8 +3,7 @@ import {
   auth,
   cart,
   page,
-  products,
-  taxonomies
+  products
 } from "./modules/sagas"
 
 export default function create(context) {
@@ -13,8 +12,7 @@ export default function create(context) {
       fork(auth(context)),
       fork(cart(context)),
       fork(page(context)),
-      fork(products(context)),
-      fork(taxonomies(context))
+      fork(products(context))
     ]
   }
 }
