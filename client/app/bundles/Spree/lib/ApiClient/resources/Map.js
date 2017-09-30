@@ -4,7 +4,7 @@ import { pagination } from "../helpers"
 export default class Map {
   constructor(data, entities) {
     this.entities = entities
-    this.pagination = pagination.parse(data)
+    this.pagination = pagination(data)
     this.collection = {}
     Object.keys(entities).forEach((key) => {
       const Entity = entities[key]

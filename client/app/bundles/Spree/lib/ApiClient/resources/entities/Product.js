@@ -1,6 +1,5 @@
 import Resource from "../Resource"
 import Variant from "./Variant"
-import { page, get } from "../../endpoints/methods"
 
 const properties = data => data.map(prop => ({
   name: prop.property_name,
@@ -21,14 +20,7 @@ const optionTypes = (data) => {
 }
 
 export default class Product extends Resource {
-  static baseUrl = "/api/v1/products"
-
   static collection = "products"
-
-  static methods = {
-    page: page(Product),
-    get: get(Product)
-  }
 
   constructor(data) {
     super()
@@ -46,7 +38,7 @@ export default class Product extends Resource {
 
   static hydrate({ products }) {
     if(products) {
-      return { products: products.map(data => new Product(data)) }
+      return { [this.collection]: products.map(data => new Product(data)) }
     }
     return {}
   }
@@ -54,8 +46,4 @@ export default class Product extends Resource {
   get permalink() {
     return `/products/${this.slug}`
   }
-
-  get images() { return this.master.images }
-
-  get props() { return this.properties }
 }

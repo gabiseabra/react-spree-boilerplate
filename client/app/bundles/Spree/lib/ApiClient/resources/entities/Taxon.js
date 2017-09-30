@@ -1,14 +1,7 @@
 import Resource from "../Resource"
-import { page } from "../../endpoints/methods"
 
 export default class Taxon extends Resource {
-  static baseUrl = "/api/v1/taxons"
-
   static collection = "taxons"
-
-  static methods = {
-    page: page(Taxon)
-  }
 
   constructor(data) {
     super()
@@ -23,7 +16,7 @@ export default class Taxon extends Resource {
 
   static hydrate({ taxons }) {
     if(taxons) {
-      return { taxons: taxons.map(data => new Taxon(data)) }
+      return { [this.collection]: taxons.map(data => new Taxon(data)) }
     }
     return {}
   }

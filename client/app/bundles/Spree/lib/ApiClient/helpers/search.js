@@ -1,21 +1,30 @@
 import qs from "querystring"
 
-export const parse = (query) => {
-  const search = (typeof query === "string" ? qs.parse(query) : query)
+const search = (query) => {
+  const params = (typeof query === "string" ? qs.parse(query) : query)
   const result = {}
-  Object.keys(search).forEach((key) => {
+  Object.keys(params).forEach((key) => {
     const match = key.match(/^q\[([^\]]+)\]$/)
     if(match) {
-      result[match[1]] = search[key]
+      result[match[1]] = params[key]
     }
   })
   return result
 }
 
-export const query = (predicates) => {
+search.query = (predicates) => {
   const result = {}
   Object.keys(predicates).forEach((key) => {
     result[`q[${key}]`] = predicates[key]
   })
   return result
 }
+
+search.hydrate = (data) => {
+  if(data.search) {
+    return { search: search(data.search) }
+  }
+  return {}
+}
+
+export default search

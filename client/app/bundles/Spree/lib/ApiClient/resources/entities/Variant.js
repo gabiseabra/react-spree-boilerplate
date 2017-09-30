@@ -27,13 +27,7 @@ const options = (data) => {
 }
 
 export default class Variant extends Resource {
-  static collection = "products"
-
-  static href(product, id) {
-    if(!product) return "/api/v1/variants"
-    if(!id) return `/api/v1/products/${product}/variants`
-    return `/api/v1/products/${product}/variants/${id}`
-  }
+  static collection = "variants"
 
   constructor(data) {
     super()
@@ -49,12 +43,8 @@ export default class Variant extends Resource {
 
   static hydrate({ variants }) {
     if(variants) {
-      return { variants: variants.map(data => new Variant(data)) }
+      return { [this.collection]: variants.map(data => new Variant(data)) }
     }
     return {}
-  }
-
-  get href() {
-    return this.constructor.href(this.slug, this.id)
   }
 }

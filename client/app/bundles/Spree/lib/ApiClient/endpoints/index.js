@@ -1,44 +1,18 @@
 import _ from "lodash"
-// eslint-disable-next-line import/extensions
-import Router from "universal-router"
-import hydrate from "./hydrate"
-import route from "./route"
+import * as products from "./products"
+import * as orders from "./orders"
+import * as lineItems from "./lineItems"
 
-const createEndpoint = (api, callback) => callback.bind(api)
+const endpoints = {
+  products,
+  orders,
+  lineItems
+}
 
-function entityEndpoints(api, entities) {
-  const hydrateEndpoints = []
+export default function createEndpoints(api) {
   const result = {}
-  _.values(entities).forEach((Entity) => {
-    const name = Entity.endpoint || Entity.collection
-    if(Entity.hydrate) {
-      hydrateEndpoints.push(Entity.hydrate)
-    }
-    if(!name || _.isEmpty(Entity.methods)) return
-    const methods = {}
-    _.keys(Entity.methods).forEach((key) => {
-      methods[key] = createEndpoint(api, Entity.methods[key])
-    })
-    result[name] = methods
+  Object.keys(endpoints).forEach((name) => {
+    result[name] = _.mapValues(endpoints[name], fun => fun.bind(api))
   })
-  result.hydrate = hydrate(api, hydrateEndpoints)
   return result
-}
-
-function routerEndpoints(api, routes) {
-  const finalRoutes = Object.keys(routes).map(path => ({
-    path,
-    action: createEndpoint(api, routes[path])
-  }))
-  const router = new Router(finalRoutes, {
-    context: { api }
-  })
-  return { route: route(api, router) }
-}
-
-export default function createEndpoints(api, { entities, routes }) {
-  return {
-    ...entityEndpoints(api, entities),
-    ...routerEndpoints(api, routes)
-  }
 }

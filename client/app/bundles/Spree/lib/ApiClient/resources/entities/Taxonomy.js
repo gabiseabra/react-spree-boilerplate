@@ -1,17 +1,7 @@
 import Taxon from "./Taxon"
-import { page, get } from "../../endpoints/methods"
 
 export default class Taxonomy extends Taxon {
-  static baseUrl = "/api/v1/taxonomies"
-
   static collection = "taxonomies"
-
-  static methods = {
-    page: page(Taxonomy, ({ nested }) => ({
-      set: nested ? "nested" : undefined
-    })),
-    get: get(Taxonomy)
-  }
 
   constructor(data) {
     super(data.root)
@@ -19,7 +9,7 @@ export default class Taxonomy extends Taxon {
 
   static hydrate({ taxonomies }) {
     if(taxonomies) {
-      return { taxonomies: taxonomies.map(data => new Taxonomy(data)) }
+      return { [this.collection]: taxonomies.map(data => new Taxonomy(data)) }
     }
     return {}
   }
