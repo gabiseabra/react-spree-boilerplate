@@ -1,11 +1,40 @@
 /* eslint-env mocha */
 import { Product } from "../../resources"
-import { page, get } from "./methods"
 import * as mock from "../mock"
 
-const products = Array.from(Array(10), (_, i) => mock.product(i + 1))
+const subject = mock.product(1, {
+  slug: "test",
+  name: "test product"
+})
 
 describe("#products", () => {
-  describe("#page()", page(Product, products))
-  describe("#get()", get(Product, products[0]))
+  describe("#page()", () => {
+    beforeEach(function () {
+      this.scope
+        .get("/api/v1/products")
+        .query({ page: 1 })
+        .reply(200, {
+          products: [ subject ],
+          current_page: 1
+        })
+    })
+
+    it("returns an array of products", async function () {
+      const response = await this.client.products.page(1)
+      response.data.should.be.an("array").and.be.all.instanceof(Product)
+    })
+  })
+
+  describe("#get()", () => {
+    beforeEach(function () {
+      this.scope
+        .get(`/api/v1/products/${subject.id}`)
+        .reply(200, subject)
+    })
+
+    it("returns a product", async function () {
+      const response = await this.client.products.get(subject.id)
+      response.data.should.be.instanceof(Product)
+    })
+  })
 })

@@ -2,16 +2,20 @@
 import { LineItem } from "../../resources"
 import * as mock from "../mock"
 
-const order = "ORDERNUM001"
+const order = mock.order()
 
 const item = mock.lineItem(1, { variantId: 1, quantity: 1 })
 
 describe("#lineItems", () => {
+  beforeEach(function () {
+    this.scope.matchHeader("X-Spree-Order-Token", order.token)
+  })
+
   describe("#post()", () => {
     beforeEach(function () {
       this.scope
         .withCredentials()
-        .post(`/api/v1/orders/${order}/line_items`)
+        .post(`/api/v1/orders/${order.number}/line_items`)
         .query({
           line_item: {
             variant_id: 1,
@@ -31,7 +35,7 @@ describe("#lineItems", () => {
     beforeEach(function () {
       this.scope
         .withCredentials()
-        .put(`/api/v1/orders/${order}/line_items/${item.id}`)
+        .put(`/api/v1/orders/${order.number}/line_items/${item.id}`)
         .query({
           line_item: {
             quantity: 2
@@ -46,16 +50,16 @@ describe("#lineItems", () => {
     })
   })
 
-  describe("#delete()", () => {
+  describe("#del()", () => {
     beforeEach(function () {
       this.scope
         .withCredentials()
-        .delete(`/api/v1/orders/${order}/line_items/${item.id}`)
+        .delete(`/api/v1/orders/${order.number}/line_items/${item.id}`)
         .reply(204)
     })
 
     it("deletes a line item", function () {
-      this.client.lineItems.delete(order, item.id).should.eventually.be.ok
+      this.client.lineItems.del(order, item.id).should.eventually.be.ok
     })
   })
 })

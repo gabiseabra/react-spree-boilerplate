@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-import { Order } from "../../resources"
+// import { Order } from "../../resources"
 import * as mock from "../mock"
 
 const lineItems = [
@@ -11,18 +11,8 @@ const lineItems = [
 const order = mock.order(1, { lineItems })
 
 describe("#orders", () => {
-  describe("#post()", () => {
-    beforeEach(function () {
-      this.scope
-        .withCredentials()
-        .post("/api/v1/orders")
-        .reply(201, order)
-    })
-
-    it("creates a new order", async function () {
-      const response = await this.client.orders.post({ lineItems })
-      response.data.should.be.instanceof(Order)
-    })
+  beforeEach(function () {
+    this.scope.matchHeader("X-Spree-Order-Token", order.token)
   })
 
   describe("#empty()", () => {
@@ -34,7 +24,7 @@ describe("#orders", () => {
     })
 
     it("empties an order's line items", function () {
-      this.client.orders.empty(order.number).should.eventually.be.ok
+      this.client.orders.empty(order).should.eventually.be.ok
     })
   })
 })
