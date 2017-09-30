@@ -3,8 +3,7 @@ import url from "url"
 import fetch from "isomorphic-fetch"
 import ResponseError from "./ResponseError"
 import Response from "./Response"
-import * as entities from "./resources/entities"
-import routes from "./routes"
+import createRouter from "./routes"
 import createEndpoints from "./endpoints"
 
 const FORMATS = {
@@ -19,8 +18,8 @@ export default class ApiClient {
   constructor(apiUrl, { csrfToken }) {
     this.url = apiUrl
     this.csrfToken = csrfToken
-    this.endpoints = createEndpoints(this, { entities, routes })
-    Object.assign(this, this.endpoints)
+    this.router = createRouter(this)
+    Object.assign(this, createEndpoints(this))
   }
 
   get headers() {
@@ -85,6 +84,15 @@ export default class ApiClient {
   async text(req, init = {}) {
     const response = await this.fetch(req, { format: "text", ...init })
     return new Response(response, await response.text())
+  }
+
+  async route(target, context = {}) {
+    const { pathname, query } = url.parse(target, true)
+    return this.router.resolve({
+      ...context,
+      query,
+      path: pathname
+    })
   }
 
   async refreshCsrfToken() {
