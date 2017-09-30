@@ -16,7 +16,7 @@ export default class Taxon extends Resource {
 
   static hydrate({ taxons }) {
     if(taxons) {
-      return { [this.collection]: taxons.map(data => new Taxon(data)) }
+      return { [Taxon.collection]: taxons.map(data => new Taxon(data)) }
     }
     return {}
   }

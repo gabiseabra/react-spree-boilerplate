@@ -1,4 +1,2 @@
-import * as pagination from "./pagination"
-import * as search from "./search"
-
-export { pagination, search }
+export { default as pagination } from "./pagination"
+export { default as search } from "./search"

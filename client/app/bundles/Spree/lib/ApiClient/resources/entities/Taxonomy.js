@@ -9,7 +9,7 @@ export default class Taxonomy extends Taxon {
 
   static hydrate({ taxonomies }) {
     if(taxonomies) {
-      return { [this.collection]: taxonomies.map(data => new Taxonomy(data)) }
+      return { [Taxonomy.collection]: taxonomies.map(data => new Taxonomy(data)) }
     }
     return {}
   }

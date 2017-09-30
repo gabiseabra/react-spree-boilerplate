@@ -43,7 +43,7 @@ export default class Variant extends Resource {
 
   static hydrate({ variants }) {
     if(variants) {
-      return { [this.collection]: variants.map(data => new Variant(data)) }
+      return { [Variant.collection]: variants.map(data => new Variant(data)) }
     }
     return {}
   }

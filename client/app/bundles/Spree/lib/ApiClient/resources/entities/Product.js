@@ -38,7 +38,7 @@ export default class Product extends Resource {
 
   static hydrate({ products }) {
     if(products) {
-      return { [this.collection]: products.map(data => new Product(data)) }
+      return { [Product.collection]: products.map(data => new Product(data)) }
     }
     return {}
   }
