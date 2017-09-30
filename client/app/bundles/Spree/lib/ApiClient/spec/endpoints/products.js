@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-import { Product } from "../../resources"
+import { Product, Collection } from "../../resources"
 import * as mock from "../mock"
 
 const subject = mock.product(1, {
@@ -21,7 +21,8 @@ describe("#products", () => {
 
     it("returns an array of products", async function () {
       const response = await this.client.products.page(1)
-      response.data.should.be.an("array").and.be.all.instanceof(Product)
+      response.data.should.be.instanceof(Collection)
+      response.data.Entity.should.equal(Product)
     })
   })
 

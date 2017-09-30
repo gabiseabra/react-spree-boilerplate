@@ -2,6 +2,7 @@ import lineItem from "./lineItem"
 
 export default (id = 1, { state, lineItems } = {}) => ({
   id,
+  token: `ORDETOKEN${id}`,
   number: `ORDERNUM${id}`,
   state: state || "cart",
   quantity: 0,
