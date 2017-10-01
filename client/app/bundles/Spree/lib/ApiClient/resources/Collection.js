@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { pagination } from "../helpers"
 
 export default class Collection {
@@ -12,6 +13,6 @@ export default class Collection {
   }
 
   get collection() {
-    return { [this.Entity.collection]: this.data }
+    return _.merge(this.data.map(item => item.toJSON()))
   }
 }
