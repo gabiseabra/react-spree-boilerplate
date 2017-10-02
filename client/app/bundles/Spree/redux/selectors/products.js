@@ -41,7 +41,7 @@ export const getProductVariants = createSelector(
  *     options: {
  *       [option.id]: {
  *         ...option,
- *         productIds: [ ... ]
+ *         variantIds: [ ... ]
  * }}}}
  */
 export const getOptionTypes = createSelector(
