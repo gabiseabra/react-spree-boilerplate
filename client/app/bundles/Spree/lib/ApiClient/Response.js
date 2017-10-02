@@ -39,4 +39,8 @@ export default class ApiResponse {
     }
     return undefined
   }
+
+  toJSON() {
+    return (this.data.toJSON ? this.data.toJSON() : this.data)
+  }
 }
