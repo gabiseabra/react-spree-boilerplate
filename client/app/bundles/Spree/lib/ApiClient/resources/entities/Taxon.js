@@ -9,12 +9,8 @@ export default class Taxon extends Resource {
     this.parentId = data.parent_id
     this.taxonomyId = data.taxonomy_id
     this.name = data.name
-    this.permalinkPath = data.permalink
     this.position = data.position
     this.taxons = data.taxons.map(t => new Taxon(t))
-  }
-
-  get permalink() {
-    return `/t/${this.permalinkPath}`
+    this.permalink = `/t/${data.permalink}`
   }
 }

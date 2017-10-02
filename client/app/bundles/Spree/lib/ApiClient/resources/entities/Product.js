@@ -34,9 +34,6 @@ export default class Product extends Resource {
     this.properties = properties(data.product_properties)
     this.optionTypes = optionTypes(data.option_types)
     this.taxonIds = data.taxon_ids
-  }
-
-  get permalink() {
-    return `/products/${this.slug}`
+    this.permalink = `/products/${data.slug}`
   }
 }
