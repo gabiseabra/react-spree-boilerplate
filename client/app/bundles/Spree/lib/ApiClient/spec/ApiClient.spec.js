@@ -2,7 +2,6 @@
 import nock from "nock"
 import ApiClient, { CSRF_TOKEN_HEADER } from "../../ApiClient"
 import Response from "../Response"
-import { Product } from "../resources"
 import * as mock from "./mock"
 
 describe("ApiClient", () => {
@@ -101,7 +100,7 @@ describe("ApiClient", () => {
     it("returns instantiated server data", function () {
       this.client.hydrate({
         products: [ mock.product(1), mock.product(2) ]
-      }).products.should.be.an("array").and.be.all.instanceof(Product)
+      }).products.should.be.an("array").and.all.include.keys("id", "master")
     })
 
     it("keeps unknown properties", function () {
