@@ -1,8 +1,22 @@
+import _ from "lodash"
+
 export default class Resource {
   static collection = null
 
   constructor() {
     this.id = null
+  }
+
+  static hydrate(props) {
+    const Entity = this
+    if(this.collection in props) {
+      const values = props[this.collection]
+      return _.assignWith(
+        ...values.map(v => (new Entity(v)).collection),
+        (obj, src) => [ ...obj, ...src ]
+      )
+    }
+    return {}
   }
 
   toJSON() {

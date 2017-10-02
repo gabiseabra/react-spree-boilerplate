@@ -4,7 +4,7 @@ import { pagination, search } from "../helpers"
 
 const methods = _.flow(
   _.values,
-  _.map(Entity => Entity.hydrate),
+  _.map(Entity => Entity.hydrate.bind(Entity)),
   _.compact
 )(entities)
 

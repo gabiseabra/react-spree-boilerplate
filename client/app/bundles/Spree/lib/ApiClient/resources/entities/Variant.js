@@ -40,11 +40,4 @@ export default class Variant extends Resource {
     this.images = data.images.map(img => image(img))
     this.options = options(data.option_values)
   }
-
-  static hydrate({ variants }) {
-    if(variants) {
-      return { [Variant.collection]: variants.map(data => new Variant(data)) }
-    }
-    return {}
-  }
 }

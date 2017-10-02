@@ -14,13 +14,6 @@ export default class Taxon extends Resource {
     this.taxons = data.taxons.map(t => new Taxon(t))
   }
 
-  static hydrate({ taxons }) {
-    if(taxons) {
-      return { [Taxon.collection]: taxons.map(data => new Taxon(data)) }
-    }
-    return {}
-  }
-
   get permalink() {
     return `/t/${this.permalinkPath}`
   }

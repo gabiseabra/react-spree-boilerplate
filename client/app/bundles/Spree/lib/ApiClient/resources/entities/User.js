@@ -17,7 +17,7 @@ export default class User extends Resource {
 
   static hydrate({ user }) {
     if(user) {
-      return { user: new User(user) }
+      return { user: (new User(user)).toJSON() }
     }
     return {}
   }
