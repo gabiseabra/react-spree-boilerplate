@@ -1,6 +1,7 @@
 import _ from "lodash"
 import url from "url"
 import fetch from "isomorphic-fetch"
+import autobind from "class-autobind"
 import ResponseError from "./ResponseError"
 import Response from "./Response"
 import createRouter from "./routes"
@@ -16,6 +17,7 @@ export const CSRF_TOKEN_HEADER = "X-CSRF-Token"
 
 export default class ApiClient {
   constructor(apiUrl, { csrfToken }) {
+    autobind(this)
     this.url = apiUrl
     this.csrfToken = csrfToken
     this.router = createRouter(this)
