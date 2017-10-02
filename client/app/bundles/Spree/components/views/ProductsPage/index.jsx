@@ -14,13 +14,6 @@ ProductsPage.Title = () => (<h2>Products</h2>)
 
 ProductsPage.Content = ({ loading, products }) => (
   <Loader loading={loading}>
-    <Row>
-      {products && products.map(p => (
-        <Col xs={12} sm={6} md={3} key={p.id}>
-          <Card product={p} />
-        </Col>
-      ))}
-    </Row>
   </Loader>
 )
 
