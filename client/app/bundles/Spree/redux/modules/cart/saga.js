@@ -6,7 +6,10 @@ export default function createSaga({ apiClient }) {
   function * add({ variantId, quantity }) {
     yield put(actions.request())
     try {
-      const response = yield call(apiClient.route, "/cart/populate", { variantId, quantity })
+      const response = yield call(apiClient.route, "/cart/populate", {
+        variantId,
+        quantity
+      })
       yield put(actions.succeed(response.toJSON()))
     } catch(error) {
       yield put(actions.fail(error))

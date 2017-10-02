@@ -30,8 +30,8 @@ export default function cart(state = initialState, action) {
       }
     case SUCCESS:
       return {
-        order: action.order || state.order,
-        lineItems: action.lineItems || state.lineItems,
+        order: action.order,
+        lineItems: action.lineItems,
         loading: false,
         error: undefined
       }
