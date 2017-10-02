@@ -28,19 +28,6 @@ export default class ProductInfo extends Component {
     return !this.props.variant.inStock
   }
 
-  renderProduct() {
-
-  }
-
-  renderDetails() {
-    const { product } = this.props
-    return (
-      <div>
-        <Details product={product} />
-      </div>
-    )
-  }
-
   render() {
     const { product, variant, options } = this.props
     return (
@@ -64,6 +51,7 @@ export default class ProductInfo extends Component {
               Add to cart
             </Button>
           </div>
+          <Details product={product} />
         </Col>
       </Row>
     )
