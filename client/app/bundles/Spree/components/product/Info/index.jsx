@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Row, Col, FormControl, Button } from "react-bootstrap"
 import Slideshow from "../Slideshow"
 import Price from "../Price"
-import Details from "./Details"
+import Details from "../Details"
 import styles from "./Info.css"
 
 export default class ProductInfo extends Component {
