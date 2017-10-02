@@ -2,9 +2,10 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import propTypes from "../propTypes"
 
-const Text = ({ id, presentation, selected, onSelect }) => (
+const Text = ({ id, value, presentation, selected, onSelect }) => (
   <Button
     value={id}
+    title={value}
     active={selected}
     onClick={onSelect}>
     {presentation}

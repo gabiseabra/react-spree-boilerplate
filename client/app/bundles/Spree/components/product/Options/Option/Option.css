@@ -1,0 +1,10 @@
+.Option {
+  margin-right: 10px;
+
+  & button {
+    font-size: 1.2em;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+  }
+}

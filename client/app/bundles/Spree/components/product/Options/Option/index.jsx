@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import propTypes from "./propTypes"
 import Color from "./Color"
 import Text from "./Text"
+import styles from "./Option.css"
 
 export default class Option extends Component {
   static propTypes = propTypes
@@ -24,7 +25,7 @@ export default class Option extends Component {
 
   render() {
     return (
-      <span>{this.renderButton()}</span>
+      <span className={styles.Option}>{this.renderButton()}</span>
     )
   }
 }

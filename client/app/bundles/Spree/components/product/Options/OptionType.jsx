@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Row } from "react-bootstrap"
 import Option from "./Option"
 
 export default class OptionType extends Component {
@@ -40,9 +39,9 @@ export default class OptionType extends Component {
     return (
       <div>
         <div>{presentation}</div>
-        <Row>
+        <div>
           {Object.keys(options).map(id => this.renderOption(id))}
-        </Row>
+        </div>
       </div>
     )
   }
