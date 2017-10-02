@@ -24,6 +24,9 @@ export default class Map {
   }
 
   get collection() {
-    return _.merge(...this.data.map(value => value.collection))
+    return _.assignWith(
+      ...this.data.map(value => value.collection),
+      (obj, src) => [ ...obj, ...src ]
+    )
   }
 }

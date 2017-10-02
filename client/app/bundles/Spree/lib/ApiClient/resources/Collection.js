@@ -13,6 +13,9 @@ export default class Collection {
   }
 
   get collection() {
-    return _.merge(this.data.map(item => item.toJSON()))
+    return _.assignWith(
+      ...this.data.map(value => value.collection),
+      (obj, src) => [ ...obj, ...src ]
+    )
   }
 }
