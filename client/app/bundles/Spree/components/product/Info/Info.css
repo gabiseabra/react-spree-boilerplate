@@ -1,0 +1,11 @@
+.cart {
+  display: flex;
+  justify-content: space-between;
+
+  & .quantity {
+    flex: 0 1 5em;
+  }
+  & button {
+    width: 90%;
+  }
+}

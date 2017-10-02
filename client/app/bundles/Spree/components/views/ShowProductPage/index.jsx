@@ -13,9 +13,10 @@ ShowProductPage.Title = ({ product }) => (<h2>{product.name}</h2>)
 
 ShowProductPage.Content = ({ loading, product, options }) => (
   <Loader loading={loading}>
-    {product && <Info product={product} options={options} />}
+    {product && <Info product={product} variant={product.master} options={options} />}
   </Loader>
 )
+
 ShowProductPage.propTypes = {
   children: PropTypes.node
 }
