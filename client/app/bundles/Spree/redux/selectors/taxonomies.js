@@ -1,5 +1,10 @@
 import { createSelector } from "reselect"
 
+const flatten = taxon => taxon.taxons.reduce((array, child) => (
+  array.concat(flatten(child))
+), [ taxon ])
+
+
 export const getAllTaxonomies = state => state.taxonomies
 
 export const getTaxonomy = createSelector(
@@ -11,7 +16,7 @@ export const getTaxonomy = createSelector(
 export const getAllTaxons = createSelector(
   getAllTaxonomies,
   (taxonomies) => {
-    const taxonsArray = taxonomies.reduce((arr, taxon) => arr.concat(taxon.flatten()), [])
+    const taxonsArray = taxonomies.reduce((arr, taxon) => arr.concat(flatten(taxon)), [])
     const map = {}
     taxonsArray.forEach((taxon) => {
       map[taxon.id] = taxon

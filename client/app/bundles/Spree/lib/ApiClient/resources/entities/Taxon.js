@@ -17,10 +17,4 @@ export default class Taxon extends Resource {
   get permalink() {
     return `/t/${this.permalinkPath}`
   }
-
-  flatten() {
-    return this.taxons.reduce((array, taxon) => (
-      array.concat(taxon.flatten())
-    ), [ this ])
-  }
 }
