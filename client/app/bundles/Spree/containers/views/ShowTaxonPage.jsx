@@ -2,7 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Pagination, Breadcrumbs, withProvider } from "../app"
-import { ProductsPage } from "../../components/views"
+import { Catalog } from "../product"
+import { Page } from "../../components/views"
 import {
   getPageProducts,
   getPageTaxons,
@@ -10,13 +11,15 @@ import {
 } from "../../redux/selectors/page"
 
 const ShowTaxonPageApp = ({ products, taxons, loading }) => (
-  <ProductsPage>
+  <Page>
     {taxons && taxons.map(({ id }) => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}
-    <ProductsPage.Content loading={loading} products={products} />
+    <Page.Content loading={loading}>
+      {products && <Catalog products={products} />}
+    </Page.Content>
     <Pagination />
-  </ProductsPage>
+  </Page>
 )
 
 ShowTaxonPageApp.propTypes = {

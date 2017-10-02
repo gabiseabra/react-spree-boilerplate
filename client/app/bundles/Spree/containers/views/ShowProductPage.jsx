@@ -2,21 +2,19 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Breadcrumbs, withProvider } from "../app"
-import { Options } from "../product"
-import { ShowProductPage } from "../../components/views"
+import { Info } from "../product"
+import { Page } from "../../components/views"
 import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
 
 const ShowProductPageApp = ({ product, loading }) => (
-  <ShowProductPage>
-    <ShowProductPage.Title product={product} />
+  <Page>
     {product && product.taxonIds.map(id => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}
-    <ShowProductPage.Content
-      loading={loading}
-      product={product}
-      options={product && <Options productId={product.id} />} />
-  </ShowProductPage>
+    <Page.Content loading={loading}>
+      {product && <Info product={product} />}
+    </Page.Content>
+  </Page>
 )
 
 ShowProductPageApp.propTypes = {

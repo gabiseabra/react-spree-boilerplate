@@ -2,16 +2,18 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Pagination, withProvider } from "../app"
-import { HomePage } from "../../components/views"
+import { Catalog } from "../product"
+import { Page } from "../../components/views"
 import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
 import { load } from "../../redux/modules/page"
 
 const HomePageApp = ({ products, loading }) => (
-  <HomePage>
-    <HomePage.Title />
-    <HomePage.Content loading={loading} products={products} />
+  <Page>
+    <Page.Content loading={loading}>
+      {products && <Catalog products={products} />}
+    </Page.Content>
     <Pagination />
-  </HomePage>
+  </Page>
 )
 
 HomePageApp.propTypes = {
