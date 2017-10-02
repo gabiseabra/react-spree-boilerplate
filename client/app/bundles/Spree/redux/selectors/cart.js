@@ -1,5 +1,7 @@
 export const hasCart = state => state.cart.data !== undefined
 
+export const getLineItems = state => state.cart.lineItems
+
 export const getOrder = state => state.cart.data
 
 export const getOrderError = state => state.cart.error

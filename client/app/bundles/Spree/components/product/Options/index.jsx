@@ -39,8 +39,8 @@ export default class ProductOptions extends Component {
 
   onSelect = () => {
     const { onSelect } = this.props
-    const { variant, quantity } = this.state
-    if(onSelect && quantity) onSelect(variant, quantity)
+    const { quantity } = this.state
+    if(onSelect && quantity) onSelect(this.variant, quantity)
   }
 
   get completed() {
