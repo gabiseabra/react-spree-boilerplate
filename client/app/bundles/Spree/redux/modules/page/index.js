@@ -89,7 +89,6 @@ function location(state = initialState.location, action) {
         }
       }
     case SUCCESS:
-    case FAILURE:
       return {
         ...state,
         pagination: action.pagination

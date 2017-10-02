@@ -9,7 +9,7 @@ export default function create({ apiClient }) {
     yield put(actions.request())
     try {
       const response = yield call(apiClient.route, "/login", data)
-      yield put(actions.succeed(response.data))
+      yield put(actions.succeed(response.toJSON()))
     } catch(error) {
       yield put(actions.fail(error))
     }

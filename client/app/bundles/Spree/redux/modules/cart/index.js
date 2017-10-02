@@ -13,11 +13,12 @@ export const add = (variantId, quantity = 1) => ({ type: ADD, variantId, quantit
 // export const edit = (variantId, quantity) => ({ type: REMOVE, variantId, quantity })
 export const empty = () => ({ type: EMPTY })
 export const request = () => ({ type: REQUEST })
-export const succeed = order => ({ type: SUCCESS, order })
+export const succeed = ({ lineItems, ...order }) => ({ type: SUCCESS, order, lineItems })
 export const fail = error => ({ type: FAILURE, error })
 
 const initialState = {
   order: undefined,
+  lineItems: {},
   loading: false,
   error: undefined
 }
@@ -32,6 +33,7 @@ export default function cart(state = initialState, action) {
     case SUCCESS:
       return {
         order: action.order,
+        lineItems: action.lineItems,
         loading: false,
         error: undefined
       }
@@ -41,12 +43,15 @@ export default function cart(state = initialState, action) {
         loading: false,
         error: action.error
       }
-    case HYDRATE:
+    case HYDRATE: {
       if(!action.payload.order) return state
+      const { lineItems, ...order } = action.payload.order
       return {
         ...state,
-        order: action.payload.order
+        order,
+        lineItems
       }
+    }
     default:
       return state
   }

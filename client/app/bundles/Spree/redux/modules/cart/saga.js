@@ -11,7 +11,7 @@ export default function createSaga({ apiClient }) {
           [variantId]: { quantity }
         } : undefined)
       })
-      yield put(actions.succeed(response.data))
+      yield put(actions.succeed(response.toJSON()))
     } catch(error) {
       yield put(actions.fail(error))
     }
@@ -28,8 +28,8 @@ export default function createSaga({ apiClient }) {
     if(!order) return
     yield put(actions.request())
     try {
-      const response = yield call(apiClient.orders.empty, order.number)
-      yield put(actions.succeed(response.data))
+      yield call(apiClient.orders.empty, order)
+      yield put(actions.succeed({ ...order, lineItems: [] }))
     } catch(error) {
       yield put(actions.fail(error))
     }

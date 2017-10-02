@@ -8,7 +8,7 @@ export const FAILURE = "products/FAILURE"
 
 export const load = id => ({ type: LOAD, id })
 export const request = id => ({ type: REQUEST, id })
-export const succeed = (id, data) => ({ type: SUCCESS, id, data })
+export const succeed = (id, { variants, ...data }) => ({ type: SUCCESS, id, data, variants })
 export const fail = (id, error) => ({ type: FAILURE, id, error })
 
 const initialState = {
@@ -33,7 +33,7 @@ export default function products(state = initialState, action) {
         },
         variants: {
           ...action.data,
-          [action.id]: byId(action.data.variants)
+          [action.id]: byId(action.variants)
         }
       }
     case FAILURE:
@@ -68,4 +68,3 @@ export default function products(state = initialState, action) {
       return state
   }
 }
-

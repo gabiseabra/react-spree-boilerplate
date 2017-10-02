@@ -6,10 +6,10 @@ export default function create({ apiClient }) {
   function * request(id) {
     yield put(actions.request(id))
     const response = yield call(apiClient.products.get, id)
-    if(response.error) {
-      yield put(actions.fail(id, response.error))
-    } else {
-      yield put(actions.succeed(id, response.value))
+    try {
+      yield put(actions.succeed(id, response.toJSON()))
+    } catch(error) {
+      yield put(actions.fail(id, error))
     }
   }
 
