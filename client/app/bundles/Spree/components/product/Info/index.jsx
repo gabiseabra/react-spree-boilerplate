@@ -40,16 +40,8 @@ export default class ProductInfo extends Component {
             <h2>{product.name}</h2>
             <Price className={styles.price} product={variant} />
           </header>
-          {options && <div className={styles.options}>{options}</div>}
           <div className={styles.cart}>
-            <FormControl
-              className={styles.quantity}
-              type="number"
-              value={this.state.quantity}
-              onChange={this.onChange} />
-            <Button disabled={this.isDisabled} onClick={this.onSelect}>
-              Add to cart
-            </Button>
+            {options}
           </div>
           <Details product={product} />
         </Col>

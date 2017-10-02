@@ -1,61 +1,91 @@
-import _ from "lodash"
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import OptionType from "./OptionType"
-
-function isSelectionCompleted(selected, { optionTypes }) {
-  return _.difference(_.keys(optionTypes), _.keys(selected)).length === 0
-}
-
-function selectVariant(selected, { optionTypes, variants }) {
-  const products = Object.keys(selected).map(typeId => (
-    optionTypes[typeId].options[selected[typeId]].variantIds
-  ))
-  const result = _.intersection(...products)
-  return (result.length === 1 ? variants[result[0]] : undefined)
-}
+import { FormControl, Button } from "react-bootstrap"
+import Variants from "./Variants"
 
 export default class ProductOptions extends Component {
   static propTypes = {
     optionTypes: PropTypes.object.isRequired,
+    product: PropTypes.object.isRequired,
     variants: PropTypes.objectOf(PropTypes.object).isRequired,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onSelect: PropTypes.func
   }
 
   state = {
-    selected: {},
     completed: false,
-    variant: undefined
+    variant: undefined,
+    quantity: 1
   }
 
-  onChange = (typeId, optionId) => {
-    const { onChange } = this.props
-    const selected = {
-      ...this.state.selected,
-      [typeId]: optionId
+  componentWillReceiveProps({ product }) {
+    if(!product.hasVariants) {
+      this.setState({
+        completed: true,
+        variant: product.master
+      })
     }
-    const completed = isSelectionCompleted(selected, this.props)
-    const variant = completed ? selectVariant(selected, this.props) : undefined
-    this.setState({
-      selected,
-      completed,
-      variant
-    })
-    if(onChange) onChange(variant)
   }
 
-  renderType(id) {
-    const type = this.props.optionTypes[id]
-    return (
-      <OptionType {...type} key={type.id} onChange={this.onChange} />
-    )
+  onChangeQuantity = (e) => {
+    this.setState({ quantity: e.target.value })
+  }
+
+  onChangeVariant = (variant, completed) => {
+    const { onChange } = this.props
+    this.setState({ variant, completed })
+    if(onChange) onChange(variant, completed)
+  }
+
+  onSelect = () => {
+    const { onSelect } = this.props
+    const { variant, quantity } = this.state
+    if(onSelect && quantity) onSelect(variant, quantity)
+  }
+
+  get completed() {
+    return (this.props.product.hasVariants && this.state.completed)
+  }
+
+  get variant() {
+    const { product } = this.props
+    const { variant } = this.state
+    return (product.hasVariants ? variant : product.master)
+  }
+
+  get status() {
+    const variant = this.variant
+    return variant && variant.inStock
+  }
+
+  get statusText() {
+    const { variant, completed } = this
+    if(!completed) return "Please select a product"
+    if(!variant) return "Product unavailable"
+    if(!variant.inStock) return "Out of stock"
+    return "In stock"
   }
 
   render() {
-    const { optionTypes } = this.props
+    const { optionTypes, variants, product } = this.props
     return (
       <div>
-        {Object.keys(optionTypes).map(id => this.renderType(id))}
+        {product.hasVariants &&
+        <Variants
+          variants={variants}
+          optionTypes={optionTypes}
+          onChange={this.onChangeVariant} />}
+        <div>
+          <p>{this.statusText}</p>
+          <FormControl
+            type="number"
+            min="1"
+            value={this.state.quantity}
+            onChange={this.onChangeQuantity} />
+          <Button disabled={!this.status} onClick={this.onSelect}>
+            Add to cart
+          </Button>
+        </div>
       </div>
     )
   }

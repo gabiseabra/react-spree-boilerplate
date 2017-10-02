@@ -8,13 +8,20 @@ export default class ProductInfoApp extends Component {
     product: PropTypes.object.isRequired
   }
 
+  state = {
+    variant: undefined
+  }
+
+  onChange = variant => this.setState({ variant })
+
   render() {
     const { product } = this.props
+    const { variant } = this.state
     return (
       <Info
         product={product}
-        variant={product.master}
-        options={<Options productId={product.id} />} />
+        variant={variant || product.master}
+        options={<Options product={product} onChange={this.onChange} />} />
     )
   }
 }
