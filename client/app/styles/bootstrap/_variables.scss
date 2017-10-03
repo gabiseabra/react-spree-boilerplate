@@ -1,0 +1,18 @@
+/* ====================================== *
+ * Variable overrides
+ * ===================================== */
+
+/*
+$screen-xs: 380px;
+$screen-sm: 568px;
+$screen-md: 822px;
+$screen-lg: 1200px;
+
+$grid-gutter-width: 30px;
+
+$container-tablet:        ($screen-sm - $grid-gutter-width);
+$container-desktop:       ($screen-md - $grid-gutter-width);
+$container-large-desktop: ($screen-lg - $grid-gutter-width);
+*/
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";

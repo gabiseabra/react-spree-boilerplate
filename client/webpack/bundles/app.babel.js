@@ -13,7 +13,7 @@ export default merge.smart(config, {
     common: [
       "babel-polyfill",
       "./app/styles/app.css",
-      "./app/styles/bootstrap/bootstrap.less"
+      "./app/styles/bootstrap/bootstrap.scss"
     ],
     spree: "./app/bundles/Spree/startup/client"
   },
