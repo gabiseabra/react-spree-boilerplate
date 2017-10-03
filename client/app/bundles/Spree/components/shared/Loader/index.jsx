@@ -16,7 +16,7 @@ class Content extends Component {
 }
 
 const Loader = ({ loading, children }) => (
-  <div className={loading}>
+  <div>
     {/* loading && <Spinner /> */}
     <Content loading={loading}>{children}</Content>
   </div>

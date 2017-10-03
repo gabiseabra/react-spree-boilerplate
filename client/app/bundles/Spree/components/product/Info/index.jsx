@@ -4,7 +4,6 @@ import { Row, Col } from "react-bootstrap"
 import Slideshow from "../Slideshow"
 import Price from "../Price"
 import Details from "../Details"
-import styles from "./Info.scss"
 
 export default class ProductInfo extends Component {
   static propTypes = {
@@ -35,12 +34,12 @@ export default class ProductInfo extends Component {
         <Col xs={12} sm={6} md={4}>
           <Slideshow variant={variant} />
         </Col>
-        <Col xs={12} sm={6} md={8} className={styles.details}>
+        <Col xs={12} sm={6} md={8}>
           <header>
             <h2>{product.name}</h2>
-            <Price className={styles.price} product={variant} />
+            <Price product={variant} />
           </header>
-          <div className={styles.cart}>
+          <div>
             {options}
           </div>
           <Details product={product} />

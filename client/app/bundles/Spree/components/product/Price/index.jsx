@@ -10,8 +10,8 @@ const Price = ({ product, className, ...props }) => {
   )
   return (
     <div className={priceClass} {...props}>
-      <span className={styles.currency}>$</span>
-      <span className={styles.price}>{product.price}</span>
+      <span>$</span>
+      <span>{product.price}</span>
     </div>
   )
 }
