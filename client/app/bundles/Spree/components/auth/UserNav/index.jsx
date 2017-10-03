@@ -52,10 +52,12 @@ export default class UserNav extends Component {
   }
 
   renderUserMenu() {
-    const { user, onLogout } = this.props
+    const { onLogout } = this.props
     return (
       <Nav>
-        <NavDropdown id="UserNav-options" title={user.email}>
+        <NavDropdown id="UserNav-options" title="Account">
+          <MenuItem href="/account">My Account</MenuItem>
+          <MenuItem divider />
           <MenuItem onSelect={onLogout}>Logout</MenuItem>
         </NavDropdown>
       </Nav>
