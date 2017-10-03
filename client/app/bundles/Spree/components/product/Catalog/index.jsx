@@ -5,7 +5,7 @@ import Card from "../Card"
 import styles from "./Catalog.scss"
 
 const Catalog = ({ products }) => (
-  <Grid className={styles.Catalog}>
+  <Grid className={styles.Catalog} fluid>
     {products.map(p => (
       <Col xs={12} sm={6} md={4} key={p.id}>
         <Card product={p} />
