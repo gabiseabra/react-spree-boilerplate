@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => (
     <div className="thumbnail">
       <Image product={product.master} />
       <div className={classnames("caption", styles.body)}>
-        <h3><a href={product.permalink}>{product.name}</a></h3>
+        <h3>{product.name}</h3>
         <Price product={product.master} />
       </div>
     </div>
