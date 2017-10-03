@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Row, Col, FormControl, Button } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import Slideshow from "../Slideshow"
 import Price from "../Price"
 import Details from "../Details"
-import styles from "./Info.css"
+import styles from "./Info.scss"
 
 export default class ProductInfo extends Component {
   static propTypes = {

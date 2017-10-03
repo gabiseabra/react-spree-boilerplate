@@ -61,19 +61,10 @@
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
-    "flat": "^4.0.0",
     "ignore-styles": "^5.0.1",
     "imports-loader": "^0.7.1",
-    "js-yaml": "^3.8.4",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.4",
     "mocha": "^3.5.0",
     "nock": "^9.0.14",
-    "postcss": "^6.0.2",
-    "postcss-cssnext": "^2.11.0",
-    "postcss-import": "^9.1.0",
-    "postcss-loader": "^2.0.6",
-    "postcss-url": "^6.3.1",
     "prop-types": "^15.6.0",
     "react-test-renderer": "^15.6.1",
     "style-loader": "^0.17.0",
@@ -84,5 +75,9 @@
     "webpack-merge": "^4.1.0",
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3"
+  },
+  "optionalDependencies": {
+    "less": "^2.7.2",
+    "less-loader": "^4.0.4"
   }
 }

@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import classnames from "classnames"
-import styles from "./Logo.css"
+import styles from "./Logo.scss"
 
 const Logo = ({ className }) => (
   <div className={classnames(className, styles.Logo)}>

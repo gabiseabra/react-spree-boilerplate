@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import classnames from "classnames"
 import Price from "../Price"
 import Image from "./Image"
-import styles from "./Card.css"
+import styles from "./Card.scss"
 
 const ProductCard = ({ product }) => (
   <a className={styles.Card} href={product.permalink}>

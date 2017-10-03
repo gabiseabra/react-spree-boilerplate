@@ -1,13 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import classnames from "classnames"
-import styles from "./Price.css"
+import styles from "./Price.scss"
 
-const Price = ({ product, size, className, ...props }) => {
+const Price = ({ product, className, ...props }) => {
   const priceClass = classnames(
     className,
-    styles.Price,
-    styles[`Price--${size}`]
+    styles.Price
   )
   return (
     <div className={priceClass} {...props}>
@@ -19,12 +18,7 @@ const Price = ({ product, size, className, ...props }) => {
 
 Price.propTypes = {
   product: PropTypes.object.isRequired,
-  size: PropTypes.oneOf([ "small", "default" ]),
   className: PropTypes.any
-}
-
-Price.defaultProps = {
-  size: "default"
 }
 
 export default Price

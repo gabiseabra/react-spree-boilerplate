@@ -2,7 +2,7 @@ import React from "react"
 import classnames from "classnames"
 import { Button } from "react-bootstrap"
 import propTypes from "../propTypes"
-import styles from "./Color.css"
+import styles from "./Color.scss"
 
 const Color = ({ id, value, selected, onSelect }) => (
   <Button

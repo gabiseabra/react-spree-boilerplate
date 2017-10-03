@@ -1,12 +1,12 @@
-@import "styles/media.css";
+@import "styles/bootstrap/variables";
 
-@media (--screen-sm) and (--screen-sm-max) {
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
   .Catalog {
     & :global(.col-sm-6):nth-child(2n+1) { clear: left }
   }
 }
 
-@media (--screen-md) {
+@media (min-width: $screen-md-min) {
   .Catalog {
     & :global(.col-md-4):nth-child(3n+1) { clear: left }
   }

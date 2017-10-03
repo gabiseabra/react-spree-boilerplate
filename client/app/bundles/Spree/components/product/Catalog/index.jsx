@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Grid, Col } from "react-bootstrap"
 import Card from "../Card"
-import styles from "./Catalog.css"
+import styles from "./Catalog.scss"
 
 const Catalog = ({ products }) => (
   <Grid className={styles.Catalog}>

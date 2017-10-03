@@ -1,5 +1,4 @@
 import path from "path"
-import theme from "../../../app/styles/theme"
 
 const localIdentName = (
   process.env.NODE_ENV === "development" ?
@@ -13,8 +12,10 @@ const defaults = context => ({
     modules: true,
     importLoaders: 2
   },
-  less: {
-    modifyVars: theme
+  sass: {
+    includePaths: [
+      path.join(context, "app")
+    ]
   },
   url: {
     silent: true
@@ -40,7 +41,7 @@ export default function build(context, opts) {
   const loaders = [
     {
       test: /\.css$/,
-      use: [ { loader: "postcss-loader", options: options.postcss } ]
+      use: [ /* { loader: "postcss-loader", options: options.postcss } */ ]
     },
     {
       test: /\.less$/,

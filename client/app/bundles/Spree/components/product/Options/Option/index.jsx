@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import propTypes from "./propTypes"
 import Color from "./Color"
 import Text from "./Text"
-import styles from "./Option.css"
+import styles from "./Option.scss"
 
 export default class Option extends Component {
   static propTypes = propTypes
