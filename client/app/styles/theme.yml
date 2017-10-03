@@ -1,9 +1,6 @@
 ---
-backgroundColor    : "#dedede"
-highlightColor     : "#eee"
-textColor          : "#444"
-textColorSecondary : "#666"
-primaryColor       : "#9d70d4"
-primaryTextColor   : "#eee"
-bodyFont           : "'Montserrat', sans-serif"
-headingFont        : "'Roboto', sans-serif"
+screen:
+  xs: 480px
+  sm: 768px
+  md: 992px
+  lg: 1200px
