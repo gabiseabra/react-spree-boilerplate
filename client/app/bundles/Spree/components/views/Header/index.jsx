@@ -20,6 +20,7 @@ Header.Brand = () => (
     <Navbar.Brand>
       <a href="/"><Logo size="small" /></a>
     </Navbar.Brand>
+    <Navbar.Toggle />
   </Navbar.Header>
 )
 
