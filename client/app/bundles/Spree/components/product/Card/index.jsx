@@ -6,7 +6,7 @@ import Image from "./Image"
 import styles from "./Card.css"
 
 const ProductCard = ({ product }) => (
-  <a href={product.permalink}>
+  <a className={styles.Card} href={product.permalink}>
     <div className="thumbnail">
       <Image product={product.master} />
       <div className={classnames("caption", styles.body)}>
