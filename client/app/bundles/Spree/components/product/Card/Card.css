@@ -1,11 +1,9 @@
 .body {
-  min-height: 3em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
   & h3 {
     font-size: 1.15em
   }
-}
-
-.controls {
-  display: flex;
-  justify-content: space-between;
 }
