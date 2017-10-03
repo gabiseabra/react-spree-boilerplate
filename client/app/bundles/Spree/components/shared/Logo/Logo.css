@@ -1,3 +1,5 @@
+@import "styles/media.css";
+
 .Logo {
   height: 100%;
   width: auto;
@@ -5,26 +7,17 @@
   align-items: center;
 
   & img {
-    height: 100%;
-    max-width: 100%;
+    height: 40px;
+    width: 40px;
     width: auto;
   }
-  & span {
-    color: white !important;
+  & .title {
     font-family: Roboto, sans-serif;
     white-space: nowrap;
     margin-left: 8px;
   }
 }
 
-.Logo--small {
-  & img { height: 60px; width: 60px; }
-}
-
-.Logo--default {
-  & img { height: 120px; width: 120px; }
-}
-
-.Logo--large {
-  & img { height: 160px; width: 160px; }
+@media (--screen-sm) and (--screen-sm-max) {
+  .Logo .title { display: none }
 }
