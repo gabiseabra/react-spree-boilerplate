@@ -1,0 +1,13 @@
+@import "styles/media.css";
+
+@media (--screen-sm) and (--screen-sm-max) {
+  .Catalog {
+    & :global(.col-sm-6):nth-child(2n+1) { clear: left }
+  }
+}
+
+@media (--screen-md) {
+  .Catalog {
+    & :global(.col-md-4):nth-child(3n+1) { clear: left }
+  }
+}
