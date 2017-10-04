@@ -3,24 +3,26 @@ import PropTypes from "prop-types"
 import { Nav } from "react-bootstrap"
 import Taxonomies from "./Taxonomies"
 import Language from "./Language"
+import Cart from "./Cart"
 
-const Navigation = ({ children, controls }) => (
+const Navigation = ({ children, right }) => (
   <div>
     <Nav>
       {children}
     </Nav>
     <Nav pullRight>
-      {controls}
+      {right}
     </Nav>
   </div>
 )
 
 Navigation.propTypes = {
-  controls: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  right: PropTypes.node.isRequired
 }
 
 Navigation.Taxonomies = Taxonomies
 Navigation.Language = Language
+Navigation.Cart = Cart
 
 export default Navigation
