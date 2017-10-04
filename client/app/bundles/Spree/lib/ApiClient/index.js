@@ -93,7 +93,7 @@ export default class ApiClient {
     return this.router.resolve({
       ...context,
       query,
-      path: pathname
+      pathname
     })
   }
 
