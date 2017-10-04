@@ -1,14 +1,14 @@
 import { HYDRATE } from "app/lib/hydrateStore"
 
 export const ADD = "cart/ADD"
-// export const EDIT = "cart/EDIT"
+export const EDIT = "cart/EDIT"
 export const EMPTY = "cart/EMPTY"
 export const REQUEST = "cart/REQUEST"
 export const SUCCESS = "cart/SUCCESS"
 export const FAILURE = "cart/FAILURE"
 
 export const add = (variantId, quantity = 1) => ({ type: ADD, variantId, quantity })
-// export const edit = (variantId, quantity) => ({ type: REMOVE, variantId, quantity })
+export const edit = (lineItemId, quantity) => ({ type: EDIT, lineItemId, quantity })
 export const empty = () => ({ type: EMPTY })
 export const request = () => ({ type: REQUEST })
 export const succeed = ({ lineItems, ...order }) => ({ type: SUCCESS, order, lineItems })

@@ -3,7 +3,7 @@ Spree::StoreController.class_eval do
 
   def cart_link
     order = simple_current_order
-    render partial: "spree/shared/order.json", locals: { order: order }
+    render partial: "spree/orders/order.json", locals: { order: order }
     fresh_when order
   end
 

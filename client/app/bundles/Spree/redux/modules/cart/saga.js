@@ -16,6 +16,19 @@ export default function createSaga({ apiClient }) {
     }
   }
 
+  function * edit({ lineItemId, quantity }) {
+    const order = yield select(getOrder)
+    if(!order) return
+    yield put(actions.request())
+    try {
+      yield call(apiClient.lineItems.put, order, lineItemId, { quantity })
+      const response = yield call(apiClient.route, "/cart")
+      yield put(actions.succeed(response.toJSON()))
+    } catch(error) {
+      yield put(actions.fail(error))
+    }
+  }
+
   function * empty() {
     const order = yield select(getOrder)
     if(!order) return
@@ -31,6 +44,7 @@ export default function createSaga({ apiClient }) {
   return function * watch() {
     yield [
       takeLatest(actions.ADD, add),
+      takeLatest(actions.EDIT, edit),
       takeLatest(actions.EMPTY, empty)
     ]
   }
