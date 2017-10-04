@@ -1,6 +1,0 @@
-.accordion {
-  margin: 0 !important;
-  & :global(.title) { padding: 0 !important; }
-  & :global(.content) { padding-top: 0.5em !important; }
-  & :global(.item:last-child) { margin-bottom: 0 !important; }
-}
