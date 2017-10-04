@@ -1,15 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Nav } from "react-bootstrap"
 
 const CartPreview = ({ order }) => (
-  <Nav>
+  <ul className="nav navbar-nav">
     <li role="presentation">
       <a href="/cart">
         Cart {(order && `($${order.price.total})`)}
       </a>
     </li>
-  </Nav>
+  </ul>
 )
 
 CartPreview.propTypes = {
