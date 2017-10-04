@@ -1,19 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import languages from "app/locales/languages"
-import { SplitButton, MenuItem } from "react-bootstrap"
+import { Nav, NavDropdown, MenuItem } from "react-bootstrap"
 
 const SelectLanguage = ({ locales, selected, onChange }) => (
-  <SplitButton id="Nav-Language" title="Language">
-    {locales.map(l => (
-      <MenuItem
-        key={l}
-        active={selected === l}
-        onSelect={() => onChange(l)}>
-        {languages[l].label}
-      </MenuItem>
-    ))}
-  </SplitButton>
+  <Nav>
+    <NavDropdown id="Navigation-Language" title="Language">
+      {locales.map(l => (
+        <MenuItem
+          key={l}
+          selected={l === selected}
+          onSelect={() => onChange(l)}>
+          {languages[l].label}
+        </MenuItem>
+      ))}
+    </NavDropdown>
+  </Nav>
 )
 
 SelectLanguage.propTypes = {
