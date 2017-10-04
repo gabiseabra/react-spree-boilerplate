@@ -5,7 +5,7 @@
 		"react"
 	],
   "plugins": [
-    ["lodash", {"id": ["lodash"]}]
+    ["lodash", {"id": ["lodash", "react-bootstrap"]}]
   ],
 	"env": {
 		"production": {
