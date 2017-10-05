@@ -32,7 +32,7 @@ const TaxonomiesNav = ({ taxonomies }) => (
 )
 
 TaxonomiesNav.propTypes = {
-  taxonomies: PropTypes.arrayOf(PropTypes.object)
+  taxonomies: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default TaxonomiesNav

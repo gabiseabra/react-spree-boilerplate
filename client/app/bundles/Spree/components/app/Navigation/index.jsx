@@ -2,27 +2,28 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Nav } from "react-bootstrap"
 import Taxonomies from "./Taxonomies"
-import Language from "./Language"
-import Cart from "./Cart"
 
-const Navigation = ({ children, right }) => (
+const Navigation = ({ taxonomies, user, cart, language }) => (
   <div>
-    <Nav>
-      {children}
-    </Nav>
+    {taxonomies && <Taxonomies taxonomies={taxonomies} />}
     <Nav pullRight>
-      {right}
+      {user}
+      {language}
+      {cart &&
+      <ul className="nav navbar-nav">
+        <li role="presentation">
+          {cart}
+        </li>
+      </ul>}
     </Nav>
   </div>
 )
 
 Navigation.propTypes = {
-  children: PropTypes.node.isRequired,
-  right: PropTypes.node.isRequired
+  taxonomies: PropTypes.arrayOf(PropTypes.object),
+  user: PropTypes.node,
+  cart: PropTypes.node,
+  language: PropTypes.node
 }
-
-Navigation.Taxonomies = Taxonomies
-Navigation.Language = Language
-Navigation.Cart = Cart
 
 export default Navigation
