@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { Nav } from "react-bootstrap"
 import Taxonomies from "./Taxonomies"
 
+const NavItem = ({ children }) => (<li role="presentation">{children}</li>)
+
 const Navigation = ({ taxonomies, user, cart, language }) => (
   <div>
     {taxonomies && <Taxonomies taxonomies={taxonomies} />}
@@ -10,11 +12,9 @@ const Navigation = ({ taxonomies, user, cart, language }) => (
       {user}
       {language}
       {cart &&
-      <ul className="nav navbar-nav">
-        <li role="presentation">
-          {cart}
-        </li>
-      </ul>}
+      <NavItem>
+        {cart}
+      </NavItem>}
     </Nav>
   </div>
 )
