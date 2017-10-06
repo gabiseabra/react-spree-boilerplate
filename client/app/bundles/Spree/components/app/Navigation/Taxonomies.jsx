@@ -16,7 +16,7 @@ const Taxonomy = ({ taxonomy }) => (
       </LinkContainer>
       <MenuItem divider />
       {taxonomy.taxons.map(taxon => (
-        <LinkContainer key={taxon.id} to={taxonomy.permalink}>
+        <LinkContainer key={taxon.id} to={taxon.permalink}>
           <MenuItem>{taxon.name}</MenuItem>
         </LinkContainer>
       ))}
