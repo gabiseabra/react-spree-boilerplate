@@ -36,6 +36,9 @@ export default {
     new webpack.DllPlugin({
       path: path.join(outputDir, "[name].manifest.json"),
       name: "[name]_dll"
+    }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: ""
     })
   ]
 }
