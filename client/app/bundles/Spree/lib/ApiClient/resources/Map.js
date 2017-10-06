@@ -1,6 +1,6 @@
-import _ from "lodash"
 import Collection from "../resources/Collection"
 import { pagination } from "../helpers"
+import extractCollection from "./extractCollection"
 
 export default class Map {
   constructor(data, entities) {
@@ -24,9 +24,6 @@ export default class Map {
   }
 
   get collection() {
-    return _.assignWith(
-      ...this.data.map(value => value.collection),
-      (obj, src) => [ ...obj, ...src ]
-    )
+    return extractCollection(this.data)
   }
 }

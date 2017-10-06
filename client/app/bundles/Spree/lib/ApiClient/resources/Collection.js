@@ -1,5 +1,5 @@
-import _ from "lodash"
 import { pagination } from "../helpers"
+import extractCollection from "./extractCollection"
 
 export default class Collection {
   constructor(data, Entity) {
@@ -13,9 +13,6 @@ export default class Collection {
   }
 
   get collection() {
-    return _.assignWith(
-      ...this.data.map(value => value.collection),
-      (obj, src) => [ ...obj, ...src ]
-    )
+    return extractCollection(this.data)
   }
 }
