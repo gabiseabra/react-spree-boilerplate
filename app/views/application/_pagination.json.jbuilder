@@ -3,4 +3,6 @@ if collection.is_a? ActiveRecord::Relation
   json.per_page collection.limit_value
 else
   json.current_page 1
+  json.total_pages 1
+  json.total_count 1
 end
