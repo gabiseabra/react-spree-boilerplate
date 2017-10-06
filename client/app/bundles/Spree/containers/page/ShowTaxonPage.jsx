@@ -7,11 +7,9 @@ import { getPageProducts, getPageTaxons } from "../../redux/selectors/page"
 import Page from "./Page"
 import Pagination from "./Pagination"
 
-const ShowTaxonPageApp = ({ products, taxons }) => (
+const ShowTaxonPageApp = ({ products, taxon }) => (
   <Page>
-    {taxons && taxons.map(({ id }) => (
-      <Breadcrumbs key={id} taxonId={id} />
-    ))}
+    {taxon && <Breadcrumbs taxonId={taxon.id} active />}
     <Page.Content>
       {products && <Catalog products={products} />}
     </Page.Content>
@@ -21,12 +19,12 @@ const ShowTaxonPageApp = ({ products, taxons }) => (
 
 ShowTaxonPageApp.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
-  taxons: PropTypes.arrayOf(PropTypes.object)
+  taxon: PropTypes.object
 }
 
 const props = state => ({
   products: getPageProducts(state),
-  taxons: getPageTaxons(state)
+  taxon: (getPageTaxons(state) || [])[0]
 })
 
 export default connect(props)(ShowTaxonPageApp)
