@@ -9,13 +9,18 @@ import { QuickSearch } from "../../components/page"
 
 class QuickSearchApp extends Component {
   static propTypes = {
+    root: PropTypes.string.isRequired,
     taxon: PropTypes.object,
     location: PropTypes.object
   }
 
+  static defaultProps = {
+    root: "/products"
+  }
+
   onSubmit = ({ value, limit }) => {
-    const { taxon, location } = this.props
-    const pathname = (taxon && limit) ? taxon.permalink : "/"
+    const { root, taxon, location } = this.props
+    const pathname = (taxon && limit) ? taxon.permalink : root
     const query = (
       location.search ?
       qs.parse(location.search.slice(1)) :
