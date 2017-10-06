@@ -5,9 +5,11 @@ import { Catalog } from "../product"
 import { getPageProducts } from "../../redux/selectors/page"
 import Page from "./Page"
 import Pagination from "./Pagination"
+import QuickSearch from "./QuickSearch"
 
 const ProductsPageApp = ({ products }) => (
   <Page>
+    <QuickSearch />
     <Page.Content>
       {products && <Catalog products={products} />}
     </Page.Content>

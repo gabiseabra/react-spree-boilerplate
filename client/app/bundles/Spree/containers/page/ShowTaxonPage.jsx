@@ -6,10 +6,12 @@ import { Catalog } from "../product"
 import { getPageProducts, getPageTaxons } from "../../redux/selectors/page"
 import Page from "./Page"
 import Pagination from "./Pagination"
+import QuickSearch from "./QuickSearch"
 
 const ShowTaxonPageApp = ({ products, taxon }) => (
   <Page>
     {taxon && <Breadcrumbs taxonId={taxon.id} active />}
+    <QuickSearch />
     <Page.Content>
       {products && <Catalog products={products} />}
     </Page.Content>
