@@ -1,3 +1,4 @@
+import qs from "qs"
 import ReactOnRails from "react-on-rails"
 import hydrateStore, { hydrate } from "app/lib/hydrateStore"
 import { withStore as _withStore } from "app/components"
@@ -17,7 +18,10 @@ export const createStore = context => hydrateStore(function * (railsContext) {
     store.dispatch(hydrate(finalProps, railsContext))
   }
   yield store
-  hydrateProps({ search, path: pathname })
+  store.dispatch(hydrate({
+    path: pathname,
+    search: (search && qs.parse(search).q) || {}
+  }, railsContext))
   // Parse hydration data from server
   while(true) {
     const props = yield

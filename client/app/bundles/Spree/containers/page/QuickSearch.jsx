@@ -1,4 +1,4 @@
-import qs from "querystring"
+import qs from "qs"
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
@@ -25,7 +25,7 @@ class QuickSearchApp extends Component {
       pathname,
       search: qs.stringify({
         ...query,
-        "q[name_cont]": value
+        q: { name_cont: value }
       })
     })
   }

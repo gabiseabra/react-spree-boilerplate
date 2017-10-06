@@ -1,5 +1,5 @@
 import _ from "lodash"
-import qs from "querystring"
+import qs from "qs"
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
@@ -31,7 +31,7 @@ class PageApp extends Component {
     const query = parseQuery(location.search)
     const nextLocation = next.location
     const nextQuery = parseQuery(nextLocation.search)
-    if(nextLocation.pathname !== location.pathname) {
+    if(nextLocation.pathname !== location.pathname || !_.isEqual(nextQuery.q, query.q)) {
       this.load(next)
     } else if(nextQuery.page !== query.page) {
       this.loadPage(next)
@@ -42,7 +42,8 @@ class PageApp extends Component {
     const query = parseQuery(location.search)
     this.props.load(
       location.pathname,
-      query.page || 1
+      query.page || 1,
+      query.q
     )
   }
 

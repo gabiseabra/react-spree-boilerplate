@@ -6,6 +6,7 @@ const outputDir = path.join(__dirname, "../../../app/assets/webpack/vendor")
 export default {
   entry: {
     vendor: [
+      "qs",
       "universal-router",
       "isomorphic-fetch",
       "class-autobind",

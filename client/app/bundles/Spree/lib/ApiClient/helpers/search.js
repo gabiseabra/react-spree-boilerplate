@@ -1,15 +1,8 @@
-import qs from "querystring"
+import qs from "qs"
 
 const search = (query) => {
   const params = (typeof query === "string" ? qs.parse(query) : query)
-  const result = {}
-  Object.keys(params).forEach((key) => {
-    const match = key.match(/^q\[([^\]]+)\]$/)
-    if(match) {
-      result[match[1]] = params[key]
-    }
-  })
-  return result
+  return params.q || {}
 }
 
 search.query = (predicates) => {
