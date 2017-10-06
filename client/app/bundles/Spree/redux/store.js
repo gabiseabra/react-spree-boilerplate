@@ -15,7 +15,7 @@ export default function create(context) {
   if(process.env.NODE_ENV === "development") {
     /* eslint-disable no-underscore-dangle */
     if(window.__REDUX_DEVTOOLS_EXTENSION__) {
-      enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__())
+      enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__())
     }
     /* eslint-enable */
   }
