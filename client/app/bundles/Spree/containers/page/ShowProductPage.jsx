@@ -3,28 +3,26 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Breadcrumbs } from "../app"
 import { Info } from "../product"
-import { Page } from "../../components/views"
-import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
+import { getPageProducts } from "../../redux/selectors/page"
+import Page from "./Page"
 
-const ShowProductPageApp = ({ product, loading }) => (
+const ShowProductPageApp = ({ product }) => (
   <Page>
     {product && product.taxonIds.map(id => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}
-    <Page.Content loading={loading}>
+    <Page.Content>
       {product && <Info product={product} />}
     </Page.Content>
   </Page>
 )
 
 ShowProductPageApp.propTypes = {
-  product: PropTypes.object,
-  loading: PropTypes.bool.isRequired
+  product: PropTypes.object
 }
 
 const props = state => ({
-  product: (getPageProducts(state) || [])[0],
-  loading: !isPageLoaded(state)
+  product: (getPageProducts(state) || [])[0]
 })
 
 export default connect(props)(ShowProductPageApp)

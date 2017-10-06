@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import { push } from "react-router-redux"
-import { Pagination } from "../../components/app"
+import { Pagination } from "../../components/page"
 import { getPagination } from "../../redux/selectors/page"
 import { loadPage } from "../../redux/modules/page"
 

@@ -5,7 +5,7 @@ import {
   ProductsPage,
   ShowProductPage,
   ShowTaxonPage
-} from "../pages"
+} from "../page"
 
 const App = () => (
   <Switch>

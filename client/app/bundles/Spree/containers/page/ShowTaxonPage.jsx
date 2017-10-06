@@ -1,21 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Pagination, Breadcrumbs } from "../app"
+import { Breadcrumbs } from "../app"
 import { Catalog } from "../product"
-import { Page } from "../../components/views"
-import {
-  getPageProducts,
-  getPageTaxons,
-  isPageLoaded
-} from "../../redux/selectors/page"
+import { getPageProducts, getPageTaxons } from "../../redux/selectors/page"
+import Page from "./Page"
+import Pagination from "./Pagination"
 
-const ShowTaxonPageApp = ({ products, taxons, loading }) => (
+const ShowTaxonPageApp = ({ products, taxons }) => (
   <Page>
     {taxons && taxons.map(({ id }) => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}
-    <Page.Content loading={loading}>
+    <Page.Content>
       {products && <Catalog products={products} />}
     </Page.Content>
     <Pagination />
@@ -24,14 +21,12 @@ const ShowTaxonPageApp = ({ products, taxons, loading }) => (
 
 ShowTaxonPageApp.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
-  taxons: PropTypes.arrayOf(PropTypes.object),
-  loading: PropTypes.bool.isRequired
+  taxons: PropTypes.arrayOf(PropTypes.object)
 }
 
 const props = state => ({
   products: getPageProducts(state),
-  taxons: getPageTaxons(state),
-  loading: !isPageLoaded(state)
+  taxons: getPageTaxons(state)
 })
 
 export default connect(props)(ShowTaxonPageApp)

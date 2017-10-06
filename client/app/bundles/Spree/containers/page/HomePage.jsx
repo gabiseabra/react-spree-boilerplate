@@ -1,15 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Pagination } from "../app"
 import { Catalog } from "../product"
-import { Page } from "../../components/views"
-import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
+import { getPageProducts } from "../../redux/selectors/page"
 import { load } from "../../redux/modules/page"
+import Page from "./Page"
+import Pagination from "./Pagination"
 
-const HomePageApp = ({ products, loading }) => (
+const HomePageApp = ({ products }) => (
   <Page>
-    <Page.Content loading={loading}>
+    <Page.Content>
       {products && <Catalog products={products} />}
     </Page.Content>
     <Pagination />
@@ -17,13 +17,11 @@ const HomePageApp = ({ products, loading }) => (
 )
 
 HomePageApp.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object),
-  loading: PropTypes.bool.isRequired
+  products: PropTypes.arrayOf(PropTypes.object)
 }
 
 const props = state => ({
-  products: getPageProducts(state),
-  loading: !isPageLoaded(state)
+  products: getPageProducts(state)
 })
 
 export default connect(props, { load })(HomePageApp)
