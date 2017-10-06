@@ -1,4 +1,5 @@
 import _ from "lodash"
+import { LOCATION_CHANGE } from "react-router-redux"
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
 import { hydrate } from "app/lib/hydrateStore"
 import { isPageLoaded, getLocation } from "../../selectors/page"
@@ -54,10 +55,19 @@ export default function create(context) {
     yield fork(request, { path, search, page, perPage })
   }
 
+  function * change({ payload }) {
+    const location = yield select(getLocation)
+    // Fix flashing between pages by clearing loaded data when history changes
+    if(payload.pathname !== location.path) {
+      yield put(actions.clear())
+    }
+  }
+
   return function * watch() {
     yield [
       takeLatest(actions.LOAD, load),
-      takeLatest(actions.LOAD_PAGE, loadPage)
+      takeLatest(actions.LOAD_PAGE, loadPage),
+      takeLatest(LOCATION_CHANGE, change)
     ]
   }
 }

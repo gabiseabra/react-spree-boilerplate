@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 class Content extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node
   }
 
   shouldComponentUpdate(next) {
@@ -11,7 +11,7 @@ class Content extends Component {
   }
 
   render() {
-    return this.props.children
+    return this.props.children || <div />
   }
 }
 
@@ -23,8 +23,8 @@ const Loader = ({ loading, children }) => (
 )
 
 Loader.propTypes = {
-  children: PropTypes.node.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  children: PropTypes.node
 }
 
 export default Loader

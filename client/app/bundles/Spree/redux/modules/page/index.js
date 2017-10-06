@@ -1,6 +1,7 @@
 import { combineReducers } from "redux"
 import { HYDRATE } from "app/lib/hydrateStore"
 
+export const CLEAR = "page/CLEAR"
 export const LOAD = "page/LOAD"
 export const LOAD_PAGE = "page/LOAD_PAGE"
 export const REQUEST = "page/REQUEST"
@@ -8,6 +9,7 @@ export const REQUEST_PAGE = "page/REQUEST_PAGE"
 export const SUCCESS = "page/SUCCESS"
 export const FAILURE = "page/FAILURE"
 
+export const clear = () => ({ type: CLEAR })
 export const load = (path, page = 1, search, perPage) => ({
   type: LOAD,
   search,
@@ -46,6 +48,7 @@ const initialState = {
 
 function pages(state = initialState.pages, action) {
   switch(action.type) {
+    case CLEAR:
     case REQUEST:
       return {}
     case SUCCESS:
