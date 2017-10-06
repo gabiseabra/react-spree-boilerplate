@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
 import { hydrate } from "app/lib/hydrateStore"
 import { isPageLoaded, getLocation } from "../../selectors/page"
@@ -25,11 +26,6 @@ export default function create(context) {
     }
   }
 
-  function * load({ path, search, page, perPage }) {
-    yield put(actions.request(path, search, page))
-    yield fork(request, { path, search, page, perPage })
-  }
-
   function * loadPage({ page: requestedPage }) {
     const page = parseInt(requestedPage, 10)
     const loaded = yield select(isPageLoaded, { page })
@@ -44,6 +40,18 @@ export default function create(context) {
         search: location.search
       })
     }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function * load({ path, search, page, perPage }) {
+    const location = yield select(getLocation)
+    if(location.path === path &&
+      _.isEqual(location.search, search) &&
+      (!perPage || location.perPage === perPage)) {
+      return fork(loadPage, { page })
+    }
+    yield put(actions.request(path, page, search))
+    yield fork(request, { path, search, page, perPage })
   }
 
   return function * watch() {

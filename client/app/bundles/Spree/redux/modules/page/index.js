@@ -8,7 +8,7 @@ export const REQUEST_PAGE = "page/REQUEST_PAGE"
 export const SUCCESS = "page/SUCCESS"
 export const FAILURE = "page/FAILURE"
 
-export const load = (path, search, page = 1, perPage) => ({
+export const load = (path, page = 1, search, perPage) => ({
   type: LOAD,
   search,
   path,
@@ -16,7 +16,7 @@ export const load = (path, search, page = 1, perPage) => ({
   perPage
 })
 export const loadPage = page => ({ type: LOAD_PAGE, page })
-export const request = (path, search, page = 1) => ({ type: REQUEST, search, path, page })
+export const request = (path, page = 1, search) => ({ type: REQUEST, search, path, page })
 export const requestPage = page => ({ type: REQUEST_PAGE, page })
 export const fail = (page, error) => ({
   type: FAILURE,
@@ -75,11 +75,14 @@ function location(state = initialState.location, action) {
   switch(action.type) {
     case REQUEST:
       return {
-        ...state,
         path: action.path,
         search: action.search,
-        pagination: { currentPage: action.page }
+        pagination: {
+          ...initialState.location.pagination,
+          currentPage: action.page
+        }
       }
+    case LOAD:
     case LOAD_PAGE:
       return {
         ...state,
@@ -91,7 +94,7 @@ function location(state = initialState.location, action) {
     case SUCCESS:
       return {
         ...state,
-        pagination: action.pagination
+        pagination: action.pagination || initialState.location.pagination
       }
     case HYDRATE: {
       const { pagination, search, path } = action.payload
