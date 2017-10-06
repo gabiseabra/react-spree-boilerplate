@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Breadcrumbs, withProvider } from "../app"
+import { Breadcrumbs } from "../app"
 import { Info } from "../product"
 import { Page } from "../../components/views"
 import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
@@ -27,4 +27,4 @@ const props = state => ({
   loading: !isPageLoaded(state)
 })
 
-export default withProvider(connect(props)(ShowProductPageApp))
+export default connect(props)(ShowProductPageApp)

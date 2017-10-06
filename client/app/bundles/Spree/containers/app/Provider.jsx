@@ -1,16 +1,20 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { ConnectedRouter } from "react-router-redux"
 import { LocaleProvider, withContextInjector } from "app/components"
 import { withStore } from "../../redux"
 
-const Provider = ({ children }, { railsContext }) => (
+const Provider = ({ children, history }, { railsContext }) => (
   <LocaleProvider locale={railsContext.i18nLocale}>
-    {children}
+    <ConnectedRouter history={history}>
+      {children}
+    </ConnectedRouter>
   </LocaleProvider>
 )
 
 Provider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 Provider.contextTypes = {
@@ -19,8 +23,10 @@ Provider.contextTypes = {
 
 export default Provider
 
-export const withProvider = Component => withContextInjector(withStore(props => (
-  <Provider>
-    <Component {...props} />
-  </Provider>
-)))
+export const withProvider = (Component, { history }) => (
+  withContextInjector(withStore(props => (
+    <Provider history={history}>
+      <Component {...props} />
+    </Provider>
+  )))
+)

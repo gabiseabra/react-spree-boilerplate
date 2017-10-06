@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import { Navbar } from "react-bootstrap"
 import { Logo } from "../../shared"
 
@@ -18,7 +19,7 @@ Header.Navigation = ({ children }) => (
 Header.Brand = () => (
   <Navbar.Header>
     <Navbar.Brand>
-      <a href="/"><Logo size="small" /></a>
+      <Link to="/"><Logo size="small" /></Link>
     </Navbar.Brand>
     <Navbar.Toggle />
   </Navbar.Header>

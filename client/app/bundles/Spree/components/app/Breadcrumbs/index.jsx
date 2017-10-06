@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { LinkContainer } from "react-router-bootstrap"
 import { Breadcrumb } from "react-bootstrap"
 
 const TaxonBreadcrumbs = ({ taxons }) => {
@@ -8,7 +9,9 @@ const TaxonBreadcrumbs = ({ taxons }) => {
   return (
     <Breadcrumb>
       {parents.map(taxon => (
-        <Breadcrumb.Item key={taxon.id} href={taxon.permalink}>{taxon.name}</Breadcrumb.Item>
+        <LinkContainer key={taxon.id} to={taxon.permalink}>
+          <Breadcrumb.Item>{taxon.name}</Breadcrumb.Item>
+        </LinkContainer>
       ))}
       <Breadcrumb.Item active>{active.name}</Breadcrumb.Item>
     </Breadcrumb>

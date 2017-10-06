@@ -1,6 +1,6 @@
 import React from "react"
 import { Header } from "../../components/views"
-import { Navigation, withProvider } from "../app"
+import { Navigation } from "../app"
 
 const HeaderApp = () => (
   <Header>
@@ -11,4 +11,4 @@ const HeaderApp = () => (
   </Header>
 )
 
-export default withProvider(HeaderApp)
+export default HeaderApp

@@ -1,9 +1,18 @@
+import _ from "lodash"
 import ReactOnRails from "react-on-rails"
+import { createBrowserHistory } from "history"
+import { withProvider } from "../containers/app"
 import * as containers from "../containers/views"
 import { createStore, STORE_NAME } from "../redux"
 
 window.Spree = {}
 
-ReactOnRails.register(containers)
+const history = createBrowserHistory()
 
-ReactOnRails.registerStore({ [STORE_NAME]: createStore })
+const connect = Component => withProvider(Component, { history })
+
+const connectedContainers = _.mapValues(containers, connect)
+
+ReactOnRails.register(connectedContainers)
+
+ReactOnRails.registerStore({ [STORE_NAME]: createStore({ history }) })

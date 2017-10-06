@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux"
+import { routerMiddleware } from "react-router-redux"
 import createSagaMiddleware, { END } from "redux-saga"
 import createSaga from "./saga"
 import reducer from "./reducer"
@@ -7,7 +8,10 @@ export default function create(context) {
   const saga = createSaga(context)
   const sagaMiddleware = createSagaMiddleware()
   const enhancers = []
-  const middleware = [ sagaMiddleware ]
+  const middleware = [
+    sagaMiddleware,
+    routerMiddleware(context.history)
+  ]
   if(process.env.NODE_ENV === "development") {
     /* eslint-disable no-underscore-dangle */
     if(window.__REDUX_DEVTOOLS_EXTENSION__) {

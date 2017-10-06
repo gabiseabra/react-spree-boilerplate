@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { LinkContainer } from "react-router-bootstrap"
 import {
   Nav,
   NavItem,
@@ -10,14 +11,20 @@ import {
 const Taxonomy = ({ taxonomy }) => (
   taxonomy.taxons.length ? (
     <NavDropdown id={`Nav-Taxonomies-t${taxonomy.id}`} title={taxonomy.name}>
-      <MenuItem href={taxonomy.permalink}>{taxonomy.name}</MenuItem>
+      <LinkContainer to={taxonomy.permalink}>
+        <MenuItem>{taxonomy.name}</MenuItem>
+      </LinkContainer>
       <MenuItem divider />
       {taxonomy.taxons.map(taxon => (
-        <MenuItem key={taxon.id} href={taxon.permalink}>{taxon.name}</MenuItem>
+        <LinkContainer key={taxon.id} to={taxonomy.permalink}>
+          <MenuItem>{taxon.name}</MenuItem>
+        </LinkContainer>
       ))}
     </NavDropdown>
   ) : (
-    <NavItem href={taxonomy.permalink}>{taxonomy.name}</NavItem>
+    <LinkContainer to={taxonomy.permalink}>
+      <NavItem>{taxonomy.name}</NavItem>
+    </LinkContainer>
   )
 )
 

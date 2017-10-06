@@ -1,12 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Pagination, withProvider } from "../app"
+import { Pagination } from "../app"
 import { Catalog } from "../product"
 import { Page } from "../../components/views"
 import { getPageProducts, isPageLoaded } from "../../redux/selectors/page"
+import { load } from "../../redux/modules/page"
 
-const ProductsPageApp = ({ products, loading }) => (
+const HomePageApp = ({ products, loading }) => (
   <Page>
     <Page.Content loading={loading}>
       {products && <Catalog products={products} />}
@@ -15,7 +16,7 @@ const ProductsPageApp = ({ products, loading }) => (
   </Page>
 )
 
-ProductsPageApp.propTypes = {
+HomePageApp.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
   loading: PropTypes.bool.isRequired
 }
@@ -25,4 +26,4 @@ const props = state => ({
   loading: !isPageLoaded(state)
 })
 
-export default withProvider(connect(props)(ProductsPageApp))
+export default connect(props, { load })(HomePageApp)

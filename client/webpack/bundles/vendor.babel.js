@@ -13,8 +13,11 @@ export default {
       "classnames",
       "react",
       "react-dom",
-      "react-intl",
+      "react-router",
+      "react-router-dom",
+      "react-router-redux",
       "react-redux",
+      "react-intl",
       "react-on-rails",
       "redux",
       "redux-saga"

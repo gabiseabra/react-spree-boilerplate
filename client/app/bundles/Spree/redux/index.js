@@ -6,12 +6,12 @@ import ApiClient from "../lib/ApiClient"
 
 export const STORE_NAME = "spreeStore"
 
-export const createStore = hydrateStore(function * (railsContext) {
+export const createStore = context => hydrateStore(function * (railsContext) {
   const { scheme, host, port, pathname, search } = railsContext
   const apiClient = new ApiClient(`${scheme}://${host}:${port}/`, {
     csrfToken: ReactOnRails.authenticityToken()
   })
-  const store = _createStore({ apiClient })
+  const store = _createStore({ apiClient, ...context })
   const hydrateProps = (props) => {
     const finalProps = apiClient.hydrate(props)
     store.dispatch(hydrate(finalProps, railsContext))
