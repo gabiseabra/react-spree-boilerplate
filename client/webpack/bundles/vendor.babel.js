@@ -10,10 +10,11 @@ export default {
       "isomorphic-fetch",
       "class-autobind",
       "es6-error",
-      "classnames",
+      "classnames"
+    ],
+    react: [
       "react",
       "react-dom",
-      "react-router",
       "react-router-dom",
       "react-router-redux",
       "react-redux",
