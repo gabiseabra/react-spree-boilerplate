@@ -82,7 +82,7 @@ function location(state = initialState.location, action) {
         search: action.search,
         pagination: {
           ...initialState.location.pagination,
-          currentPage: action.page
+          currentPage: parseInt(action.page, 10)
         }
       }
     case LOAD:
@@ -91,7 +91,7 @@ function location(state = initialState.location, action) {
         ...state,
         pagination: {
           ...state.pagination,
-          currentPage: action.page
+          currentPage: parseInt(action.page, 10)
         }
       }
     case SUCCESS:

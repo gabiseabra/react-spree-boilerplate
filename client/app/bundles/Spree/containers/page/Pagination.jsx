@@ -7,13 +7,11 @@ import { withRouter } from "react-router"
 import { push } from "react-router-redux"
 import { Pagination } from "../../components/page"
 import { getPagination } from "../../redux/selectors/page"
-import { loadPage } from "../../redux/modules/page"
 
 class AppPagination extends Component {
   static propTypes = {
     pagination: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    loadPage: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired
   }
 
@@ -24,7 +22,6 @@ class AppPagination extends Component {
       qs.parse(location.search.slice(1)) :
       {}
     )
-    this.props.loadPage(page)
     this.props.push({
       ...location,
       search: qs.stringify({ ...query, page })
@@ -35,7 +32,7 @@ class AppPagination extends Component {
     return _.without(
       this.props,
       "pagination",
-      "loadPage",
+      "push",
       "history",
       "location",
       "match",
@@ -56,8 +53,8 @@ class AppPagination extends Component {
   }
 }
 
-const mapper = state => ({
+const props = state => ({
   pagination: getPagination(state)
 })
 
-export default connect(mapper, { loadPage, push })(withRouter(AppPagination))
+export default connect(props, { push })(withRouter(AppPagination))
