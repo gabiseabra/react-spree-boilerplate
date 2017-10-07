@@ -30,7 +30,7 @@ class QuickSearchApp extends Component {
       pathname,
       search: qs.stringify({
         ...query,
-        q: { name_cont: value }
+        search: { name_cont: value }
       })
     })
   }

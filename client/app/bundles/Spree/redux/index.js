@@ -20,7 +20,7 @@ export const createStore = context => hydrateStore(function * (railsContext) {
   yield store
   store.dispatch(hydrate({
     path: pathname,
-    search: (search && qs.parse(search).q) || {}
+    search: (search && qs.parse(search).search) || {}
   }, railsContext))
   // Parse hydration data from server
   while(true) {

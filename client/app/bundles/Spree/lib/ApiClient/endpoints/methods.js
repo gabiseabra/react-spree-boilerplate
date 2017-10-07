@@ -4,7 +4,7 @@ import Response from "../Response"
 import { Collection } from "../resources"
 import { pagination, search } from "../helpers"
 
-export const page = (Entity, { href, query, collection }) => (
+export const page = (Entity, { href, query }) => (
   async function (pageNum, props = {}) {
     const targetUrl = (
       typeof href === "function" ?
@@ -13,7 +13,7 @@ export const page = (Entity, { href, query, collection }) => (
     )
     const params = Object.assign(
       pagination.query({ page: pageNum, perPage: props.perPage }),
-      props.search ? search.query(props.search) : {},
+      props.search ? search.query(props.search, "q") : {},
       query ? query(pageNum, props) : {}
     )
     const queryString = qs.stringify(_.pickBy(params, n => n !== undefined))

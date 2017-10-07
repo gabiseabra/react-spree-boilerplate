@@ -31,7 +31,8 @@ class PageApp extends Component {
     const query = parseQuery(location.search)
     const nextLocation = next.location
     const nextQuery = parseQuery(nextLocation.search)
-    if(nextLocation.pathname !== location.pathname || !_.isEqual(nextQuery.q, query.q)) {
+    if(nextLocation.pathname !== location.pathname ||
+      !_.isEqual(nextQuery.search, query.search)) {
       this.load(next)
     } else if(nextQuery.page !== query.page) {
       this.loadPage(next)
@@ -43,7 +44,7 @@ class PageApp extends Component {
     this.props.load(
       location.pathname,
       query.page || 1,
-      query.q
+      query.search
     )
   }
 
