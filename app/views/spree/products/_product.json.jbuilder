@@ -1,6 +1,7 @@
 variants = false if local_assigns[:variants].nil?
 
 json.extract! product, :id, :slug, :name, :description
+json.extract! product, :meta_description, :meta_keywords
 json.has_variants product.has_variants?
 
 json.taxon_ids do
