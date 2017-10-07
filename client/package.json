@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev-server": "NODE_ENV=development webpack-dev-server --config webpack/devServer.babel.js --hot --inline",
-    "prebuild": "NODE_ENV=production yarn run build:vendor && yarn run translate",
+    "prebuild": "yarn run build:vendor && yarn run translate",
     "build": "webpack --config webpack/config.babel.js --colors --progress",
     "build:dev": "NODE_ENV=development yarn run build --",
     "build:test": "NODE_ENV=test yarn run build --",
