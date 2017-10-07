@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Breadcrumbs } from "../app"
-import { Info } from "../product"
-import { getPageProducts } from "../../redux/selectors/page"
-import Page from "./Page"
+import { Breadcrumbs } from "../../app"
+import { Info } from "../../product"
+import { Page } from "../../page"
+import { getPageProducts } from "../../../redux/selectors/page"
 
 const ShowProductPageApp = ({ product }) => (
   <Page>

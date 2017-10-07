@@ -1,13 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Catalog } from "../product"
-import { getPageProducts } from "../../redux/selectors/page"
-import Page from "./Page"
-import Pagination from "./Pagination"
-import QuickSearch from "./QuickSearch"
+import { Catalog } from "../../product"
+import { Page, Pagination, QuickSearch } from "../../page"
+import { getPageProducts } from "../../../redux/selectors/page"
 
-const ProductsPageApp = ({ products }) => (
+const HomePageApp = ({ products }) => (
   <Page>
     <QuickSearch />
     <Page.Content>
@@ -17,7 +15,7 @@ const ProductsPageApp = ({ products }) => (
   </Page>
 )
 
-ProductsPageApp.propTypes = {
+HomePageApp.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object)
 }
 
@@ -25,4 +23,4 @@ const props = state => ({
   products: getPageProducts(state)
 })
 
-export default connect(props)(ProductsPageApp)
+export default connect(props)(HomePageApp)

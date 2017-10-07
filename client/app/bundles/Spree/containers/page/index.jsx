@@ -1,4 +1,3 @@
-export { default as HomePage } from "./HomePage"
-export { default as ProductsPage } from "./ProductsPage"
-export { default as ShowProductPage } from "./ShowProductPage"
-export { default as ShowTaxonPage } from "./ShowTaxonPage"
+export { default as Page } from "./Page"
+export { default as Pagination } from "./Pagination"
+export { default as QuickSearch } from "./QuickSearch"

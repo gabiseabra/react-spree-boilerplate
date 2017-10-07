@@ -1,11 +1,9 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
-import {
-  HomePage,
-  ProductsPage,
-  ShowProductPage,
-  ShowTaxonPage
-} from "../page"
+import HomePage from "./HomePage"
+import ProductsPage from "./ProductsPage"
+import ShowProductPage from "./ShowProductPage"
+import ShowTaxonPage from "./ShowTaxonPage"
 
 const App = () => (
   <Switch>

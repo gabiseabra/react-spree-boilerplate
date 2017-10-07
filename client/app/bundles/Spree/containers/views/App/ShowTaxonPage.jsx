@@ -1,12 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Breadcrumbs } from "../app"
-import { Catalog } from "../product"
-import { getPageProducts, getPageTaxons } from "../../redux/selectors/page"
-import Page from "./Page"
-import Pagination from "./Pagination"
-import QuickSearch from "./QuickSearch"
+import { Breadcrumbs } from "../../app"
+import { Catalog } from "../../product"
+import { Page, Pagination, QuickSearch } from "../../page"
+import { getPageProducts, getPageTaxons } from "../../../redux/selectors/page"
 
 const ShowTaxonPageApp = ({ products, taxon }) => (
   <Page>
