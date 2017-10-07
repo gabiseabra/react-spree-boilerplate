@@ -1,12 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import { Helmet } from "react-helmet"
 import { Catalog } from "../../product"
 import { Page, Pagination, QuickSearch } from "../../page"
 import { getPageProducts } from "../../../redux/selectors/page"
 
 const HomePageApp = ({ products }) => (
   <Page>
+    <Helmet title="" />
     <QuickSearch />
     <Page.Content>
       {products && <Catalog products={products} />}

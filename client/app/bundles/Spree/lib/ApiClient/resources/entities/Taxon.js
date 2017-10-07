@@ -11,6 +11,10 @@ export default class Taxon extends Resource {
     this.name = data.name
     this.position = data.position
     this.taxons = data.taxons.map(t => new Taxon(t))
+    this.meta = [
+      { name: "title", content: data.meta_title },
+      { name: "description", content: data.meta_description }
+    ]
     this.permalink = `/t/${data.permalink}`
   }
 }

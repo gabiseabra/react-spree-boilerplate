@@ -9,7 +9,7 @@ import { getPageProducts } from "../../../redux/selectors/page"
 
 const ShowProductPageApp = ({ product }) => (
   <Page>
-    <Helmet title={product.name} />
+    {product && <Helmet title={product.name} meta={product.meta} />}
     {product && product.taxonIds.map(id => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}
