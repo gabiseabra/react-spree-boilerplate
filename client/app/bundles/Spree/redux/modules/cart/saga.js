@@ -1,4 +1,4 @@
-import { put, fork, call, select, takeLatest } from "redux-saga/effects"
+import { all, put, fork, call, select, takeLatest } from "redux-saga/effects"
 import { getOrder } from "../../selectors/cart"
 import * as actions from "./index"
 
@@ -56,11 +56,11 @@ export default function createSaga({ apiClient }) {
   }
 
   return function * watch() {
-    yield [
+    yield all([
       takeLatest(actions.ADD, add),
       takeLatest(actions.EDIT, edit),
       takeLatest(actions.REMOVE, remove),
       takeLatest(actions.EMPTY, empty)
-    ]
+    ])
   }
 }

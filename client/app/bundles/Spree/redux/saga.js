@@ -1,4 +1,4 @@
-import { fork } from "redux-saga/effects"
+import { all, fork } from "redux-saga/effects"
 import {
   auth,
   cart,
@@ -8,11 +8,11 @@ import {
 
 export default function create(context) {
   return function * root() {
-    yield [
+    yield all([
       fork(auth(context)),
       fork(cart(context)),
       fork(page(context)),
       fork(products(context))
-    ]
+    ])
   }
 }

@@ -1,6 +1,6 @@
 import _ from "lodash"
 import { LOCATION_CHANGE } from "react-router-redux"
-import { put, call, fork, select, takeLatest } from "redux-saga/effects"
+import { all, put, call, fork, select, takeLatest } from "redux-saga/effects"
 import { hydrate } from "app/lib/hydrateStore"
 import { isPageLoaded, getLocation } from "../../selectors/page"
 import * as actions from "./index"
@@ -64,10 +64,10 @@ export default function create(context) {
   }
 
   return function * watch() {
-    yield [
+    yield all([
       takeLatest(actions.LOAD, load),
       takeLatest(actions.LOAD_PAGE, loadPage),
       takeLatest(LOCATION_CHANGE, change)
-    ]
+    ])
   }
 }

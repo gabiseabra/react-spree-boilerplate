@@ -1,4 +1,4 @@
-import { put, call, select, takeLatest } from "redux-saga/effects"
+import { all, put, call, select, takeLatest } from "redux-saga/effects"
 import { isUserLoggedIn } from "../../selectors/auth"
 import * as actions from "./index"
 
@@ -28,9 +28,9 @@ export default function create({ apiClient }) {
   }
 
   return function * watch() {
-    yield [
+    yield all([
       takeLatest(actions.LOGIN, login),
       takeLatest(actions.LOGOUT, logout)
-    ]
+    ])
   }
 }
