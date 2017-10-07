@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
 import { connect } from "react-redux"
 import { Breadcrumbs } from "../../app"
 import { Info } from "../../product"
@@ -8,6 +9,7 @@ import { getPageProducts } from "../../../redux/selectors/page"
 
 const ShowProductPageApp = ({ product }) => (
   <Page>
+    <Helmet title={product.name} />
     {product && product.taxonIds.map(id => (
       <Breadcrumbs key={id} taxonId={id} />
     ))}

@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
 import { connect } from "react-redux"
 import { Breadcrumbs } from "../../app"
 import { Catalog } from "../../product"
@@ -8,6 +9,7 @@ import { getPageProducts, getPageTaxons } from "../../../redux/selectors/page"
 
 const ShowTaxonPageApp = ({ products, taxon }) => (
   <Page>
+    <Helmet title={taxon.name} />
     {taxon && <Breadcrumbs taxonId={taxon.id} active />}
     <QuickSearch />
     <Page.Content>
