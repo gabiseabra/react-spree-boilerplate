@@ -1,9 +1,7 @@
 <meta charset="utf-8"/>
-<title>
-  <%= title or 'Rails App' %>
-</title>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport"/>
+<%= yield(:title) if content_for?(:title) %>
 <%= raw meta_data_tags %>
 <%= favicon_link_tag 'favicon.ico' %>
 <%= csrf_meta_tags %>
