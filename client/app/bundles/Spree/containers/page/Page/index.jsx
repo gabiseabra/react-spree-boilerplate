@@ -8,11 +8,7 @@ import { Page } from "../../../components/page"
 import { load, loadPage } from "../../../redux/modules/page"
 import Content from "./Content"
 
-const parseQuery = search => (
-  search ?
-  qs.parse(search.slice(1)) :
-  {}
-)
+const parseQuery = search => (search ? qs.parse(search.slice(1)) : {})
 
 class PageApp extends Component {
   static propTypes = {
