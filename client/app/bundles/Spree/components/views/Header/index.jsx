@@ -6,30 +6,19 @@ import { Logo } from "../../shared"
 
 const Header = ({ children }) => (
   <Navbar collapseOnSelect>
-    {children}
+    <Navbar.Header>
+      <Navbar.Brand>
+        <Link to="/"><Logo size="small" /></Link>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      {children}
+    </Navbar.Collapse>
   </Navbar>
 )
 
-Header.Navigation = ({ children }) => (
-  <Navbar.Collapse>
-    {children}
-  </Navbar.Collapse>
-)
-
-Header.Brand = () => (
-  <Navbar.Header>
-    <Navbar.Brand>
-      <Link to="/"><Logo size="small" /></Link>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-)
-
 Header.propTypes = {
-  children: PropTypes.node
-}
-
-Header.Navigation.propTypes = {
   children: PropTypes.node
 }
 
