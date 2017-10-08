@@ -32,7 +32,7 @@ export default class ProductInfo extends Component {
     return (
       <Grid fluid itemScope itemType="http://schema.org/Product">
         <Col xs={12} sm={6} md={4}>
-          <Slideshow variant={variant} />
+          <Slideshow product={product} variant={variant} />
         </Col>
         <Col xs={12} sm={6} md={8}>
           <header>
