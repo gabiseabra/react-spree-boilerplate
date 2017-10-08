@@ -5,10 +5,10 @@ import Card from "../Card"
 import styles from "./Catalog.scss"
 
 const Catalog = ({ products }) => (
-  <Grid className={styles.Catalog} fluid>
+  <Grid fluid itemScope itemProp="http://schema.org/ItemList" className={styles.Catalog}>
     {products.map(p => (
       <Col xs={12} sm={6} md={4} key={p.id}>
-        <Card product={p} />
+        <Card itemProp="listElement" product={p} />
       </Col>
     ))}
   </Grid>

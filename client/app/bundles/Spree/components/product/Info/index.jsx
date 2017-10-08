@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Row, Col } from "react-bootstrap"
+import { Grid, Col } from "react-bootstrap"
 import Slideshow from "../Slideshow"
 import Price from "../Price"
 import Details from "../Details"
@@ -30,21 +30,23 @@ export default class ProductInfo extends Component {
   render() {
     const { product, variant, options } = this.props
     return (
-      <Row>
+      <Grid fluid itemScope itemType="http://schema.org/Product">
         <Col xs={12} sm={6} md={4}>
           <Slideshow variant={variant} />
         </Col>
         <Col xs={12} sm={6} md={8}>
           <header>
-            <h2>{product.name}</h2>
-            <Price product={variant} />
+            <h2 itemProp="name">{product.name}</h2>
+            <span itemScope itemProp="offers">
+              <Price itemProp="price" product={variant} />
+            </span>
           </header>
           <div>
             {options}
           </div>
           <Details product={product} />
         </Col>
-      </Row>
+      </Grid>
     )
   }
 }
