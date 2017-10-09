@@ -9,6 +9,7 @@ import { getPageProducts } from "../../../redux/selectors/page"
 const ProductsPageApp = ({ products }) => (
   <Page>
     <Helmet title="Products" />
+    <Page.Title>Products</Page.Title>
     <QuickSearch />
     <Page.Content>
       {products && <Catalog products={products} />}

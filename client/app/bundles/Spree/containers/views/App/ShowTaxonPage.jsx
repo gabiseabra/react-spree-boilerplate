@@ -10,6 +10,7 @@ import { getPageProducts, getPageTaxons } from "../../../redux/selectors/page"
 const ShowTaxonPageApp = ({ products, taxon }) => (
   <Page>
     {taxon && <Helmet title={taxon.name} meta={taxon.meta} />}
+    {taxon && <Page.Title>{taxon.name}</Page.Title>}
     {taxon && <Breadcrumbs taxonId={taxon.id} active />}
     <QuickSearch />
     <Page.Content>

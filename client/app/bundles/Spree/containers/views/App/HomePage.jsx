@@ -9,6 +9,7 @@ import { getPageProducts } from "../../../redux/selectors/page"
 const HomePageApp = ({ products }) => (
   <Page>
     <Helmet title="" />
+    <Page.Title>React Spree Boilerplate</Page.Title>
     <QuickSearch />
     <Page.Content>
       {products && <Catalog products={products} />}
