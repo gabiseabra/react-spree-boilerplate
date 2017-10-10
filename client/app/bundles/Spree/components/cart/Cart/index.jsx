@@ -4,9 +4,6 @@ import { FormattedMessage } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 import { Link } from "react-router-dom"
 import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
   Table,
   Button,
   Alert,
@@ -21,6 +18,7 @@ export default class Cart extends Component {
   static propTypes = {
     order: PropTypes.object.isRequired,
     lineItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+    coupon: PropTypes.node.isRequired,
     onClear: PropTypes.func
   }
 
@@ -79,6 +77,7 @@ export default class Cart extends Component {
   }
 
   renderCart() {
+    const { coupon } = this.props
     return (
       <Form method="patch" action="/cart">
         <Table striped>
@@ -87,19 +86,7 @@ export default class Cart extends Component {
           {this.renderFooter()}
         </Table>
         <Grid fluid>
-          <Col sm={12} md={7} className={styles.coupon}>
-            <FormGroup>
-              <ControlLabel>
-                <FormattedMessage {...messages.coupon} />
-              </ControlLabel>
-              <FormControl
-                type="string"
-                name="order[coupon_code]" />
-            </FormGroup>
-            <Button type="submit" name="button">
-              <FormattedMessage {...messages.applyCoupon} />
-            </Button>
-          </Col>
+          <Col sm={12} md={7}>{coupon}</Col>
           <Col sm={12} md={5} className={styles.checkout}>
             <Button type="submit" name="button">
               <FormattedMessage {...messages.update} />

@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { Cart } from "../../components/cart"
 import { getOrder, getLineItems } from "../../redux/selectors/cart"
 import { empty } from "../../redux/modules/cart"
+import Coupon from "./Coupon"
 
 class CartApp extends Component {
   static propTypes = {
@@ -22,7 +23,8 @@ class CartApp extends Component {
       <Cart
         order={order}
         lineItems={lineItems}
-        onClear={this.onClear} />
+        onClear={this.onClear}
+        coupon={<Coupon />} />
     )
   }
 }
