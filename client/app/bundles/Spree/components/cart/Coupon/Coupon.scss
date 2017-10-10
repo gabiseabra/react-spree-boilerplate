@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  align-items: flex-end;
+  :global(.form-group) {
+    margin: 0;
+  }
+  > * {
+    margin: 0 5px;
+  }
+}

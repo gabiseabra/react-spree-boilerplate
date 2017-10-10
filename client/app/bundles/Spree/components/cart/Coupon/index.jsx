@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 import { FormGroup, FormControl, ControlLabel, Alert } from "react-bootstrap"
 import { LoadingButton } from "../../shared"
+import styles from "./Coupon.scss"
 
 export default class Coupon extends Component {
   static propTypes = {
@@ -41,7 +42,7 @@ export default class Coupon extends Component {
       <div>
         {error && <Alert bsStyle="warning">{error.message}</Alert>}
         {success && <Alert bsStyle="success">{success}</Alert>}
-        <div>
+        <div className={styles.form}>
           <FormGroup>
             <ControlLabel>
               <FormattedMessage {...messages.coupon} />
