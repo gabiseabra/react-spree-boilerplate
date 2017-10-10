@@ -3,12 +3,13 @@ export const REQUEST = "cart/coupon/REQUEST"
 export const SUCCESS = "cart/coupon/SUCCESS"
 export const FAILURE = "cart/coupon/FAILURE"
 
-export const apply = ({ code }) => ({ type: APPLY, code })
+export const apply = code => ({ type: APPLY, code })
 export const request = () => ({ type: REQUEST })
 export const succeed = () => ({ type: SUCCESS })
 export const fail = error => ({ type: FAILURE, error })
 
 const initialState = {
+  message: undefined,
   loading: false,
   error: undefined
 }
