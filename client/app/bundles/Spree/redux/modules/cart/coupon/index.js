@@ -5,7 +5,7 @@ export const FAILURE = "cart/coupon/FAILURE"
 
 export const apply = code => ({ type: APPLY, code })
 export const request = () => ({ type: REQUEST })
-export const succeed = () => ({ type: SUCCESS })
+export const succeed = message => ({ type: SUCCESS, message })
 export const fail = error => ({ type: FAILURE, error })
 
 const initialState = {
@@ -24,12 +24,14 @@ export default function coupon(state = initialState, action) {
     case SUCCESS:
       return {
         loading: false,
-        error: undefined
+        error: undefined,
+        message: action.message
       }
     case FAILURE:
       return {
         loading: false,
-        error: action.error
+        error: action.error,
+        message: undefined
       }
     default:
       return state

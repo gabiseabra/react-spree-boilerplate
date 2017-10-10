@@ -9,8 +9,8 @@ export default function createSaga({ apiClient }) {
     if(!order) return
     yield put(actions.request())
     try {
-      yield call(apiClient.orders.applyCoupon, order, { code })
-      yield put(actions.succeed())
+      const message = yield call(apiClient.orders.applyCoupon, order, { code })
+      yield put(actions.succeed(message))
       yield put(load())
     } catch(error) {
       yield put(actions.fail(error))

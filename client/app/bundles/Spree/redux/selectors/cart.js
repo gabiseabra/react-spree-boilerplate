@@ -10,5 +10,7 @@ export const isOrderLoading = state => state.cart.order.loading
 
 export const getCouponError = state => state.cart.coupon.error
 
+export const getCouponMessage = state => state.cart.coupon.message
+
 export const isCouponLoading = state => state.cart.coupon.loading
 
