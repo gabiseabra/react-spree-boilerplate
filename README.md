@@ -10,11 +10,13 @@ This project is as base spree application with a frontend built with React + Red
 * React on Rails 8
 
 ### Node
-* React
+* React 16
+* React Router 4
 * React Intl
 * Redux
 * Redux Saga
 * Reselect
+* React Bootstrap
 * Webpack + HMR
 
 ## Installation
@@ -47,4 +49,4 @@ yarn run start:dev
 
 The store can be accessed at
 
-http://localhost:3000 
+http://localhost:3000
