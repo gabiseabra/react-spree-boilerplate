@@ -11,6 +11,14 @@ en:
     remember_me: "Remember Me"
   cart:
     cart: "Cart"
+  product:
+    description: "Description"
+    properties: "Properties"
+    invalid_variant: "Please select a product"
+    unavailable_variant: "Product unavailable"
+    out_of_stock: "Out of stock"
+    in_stock: "In stock"
+    add_to_cart: "Add to cart"
   page:
     search: "Search"
     limit_search: "Limit search to {category}"

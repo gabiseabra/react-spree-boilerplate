@@ -1,10 +1,13 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { FormControl, Button } from "react-bootstrap"
+import { injectIntl, intlShape } from "react-intl"
+import { product as messages } from "app/locales/messages"
 import Variants from "./Variants"
 
-export default class ProductOptions extends Component {
+class ProductOptions extends Component {
   static propTypes = {
+    intl: intlShape,
     optionTypes: PropTypes.object.isRequired,
     product: PropTypes.object.isRequired,
     variants: PropTypes.objectOf(PropTypes.object).isRequired,
@@ -59,15 +62,16 @@ export default class ProductOptions extends Component {
   }
 
   get statusText() {
+    const { intl } = this.props
     const { variant, completed } = this
-    if(!completed) return "Please select a product"
-    if(!variant) return "Product unavailable"
-    if(!variant.inStock) return "Out of stock"
-    return "In stock"
+    if(!completed) return intl.formatMessage(messages.invalidVariant)
+    if(!variant) return intl.formatMessage(messages.unavailableVariant)
+    if(!variant.inStock) return intl.formatMessage(messages.outOfStock)
+    return intl.formatMessage(messages.inStock)
   }
 
   render() {
-    const { optionTypes, variants, product } = this.props
+    const { intl, optionTypes, variants, product } = this.props
     return (
       <div>
         {product.hasVariants &&
@@ -83,10 +87,12 @@ export default class ProductOptions extends Component {
             value={this.state.quantity}
             onChange={this.onChangeQuantity} />
           <Button disabled={!this.status} onClick={this.onSelect}>
-            Add to cart
+            {intl.formatMessage(messages.addToCart)}
           </Button>
         </div>
       </div>
     )
   }
 }
+
+export default injectIntl(ProductOptions)
