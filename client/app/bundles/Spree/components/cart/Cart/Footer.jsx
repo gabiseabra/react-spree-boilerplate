@@ -51,7 +51,7 @@ const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
   return components
 }
 
-const CartFooter = ({ cart: { price }, onClear }) => (
+const CartFooter = ({ order: { price }, onClear }) => (
   <tfoot>
     <Adjustments price={price} />
     <tr>
@@ -69,7 +69,7 @@ const CartFooter = ({ cart: { price }, onClear }) => (
 )
 
 CartFooter.propTypes = {
-  cart: PropTypes.object.isRequired,
+  order: PropTypes.object.isRequired,
   onClear: PropTypes.func
 }
 

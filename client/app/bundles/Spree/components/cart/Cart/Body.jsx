@@ -44,7 +44,7 @@ LineItem.propTypes = {
 
 const CartBody = ({ lineItems }) => (
   <tbody>
-    {lineItems.map((item, i) => <LineItem lineItem={item} number={i} />)}
+    {lineItems.map((item, i) => <LineItem key={item.id} lineItem={item} number={i} />)}
   </tbody>
 )
 
