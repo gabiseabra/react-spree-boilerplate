@@ -47,7 +47,7 @@ class ProductOptions extends Component {
   }
 
   get completed() {
-    return (this.props.product.hasVariants && this.state.completed)
+    return (!this.props.product.hasVariants || this.state.completed)
   }
 
   get variant() {
