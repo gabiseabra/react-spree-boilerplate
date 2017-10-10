@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { FormattedMessage, injectIntl } from "react-intl"
+import { auth as messages } from "app/locales/messages"
 import {
   Alert,
   Checkbox,
@@ -9,8 +11,9 @@ import {
 } from "react-bootstrap"
 import { LoadingButton } from "../../shared"
 
-export default class Login extends Component {
+class Login extends Component {
   static propTypes = {
+    intl: PropTypes.object.isRequired,
     error: PropTypes.instanceOf(Error),
     loading: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired
@@ -33,38 +36,46 @@ export default class Login extends Component {
   }
 
   render() {
-    const { error, loading } = this.props
+    const { intl, error, loading } = this.props
     const { login, password, rememberMe } = this.state
     return (
       <form onSubmit={this.onSubmit}>
         {error && <Alert bsStyle="warning">{error.message}</Alert>}
         <FormGroup controlId="login">
-          <ControlLabel>Username</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage {...messages.username} />
+          </ControlLabel>
           <FormControl
             value={login}
             name="login"
             type="text"
-            placeholder="Username"
+            placeholder={intl.formatMessage(messages.username)}
             onChange={this.onChange} />
         </FormGroup>
         <FormGroup controlId="password">
-          <ControlLabel>Username</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage {...messages.password} />
+          </ControlLabel>
           <FormControl
             value={password}
             name="password"
             type="password"
             label="Password"
-            placeholder="Password"
+            placeholder={intl.formatMessage(messages.password)}
             onChange={this.onChange} />
         </FormGroup>
         <Checkbox
           value={rememberMe}
           name="rememberMe"
           onChange={this.onChange}>
-          Remember Me
+          <FormattedMessage {...messages.rememberMe} />
         </Checkbox>
-        <LoadingButton type="submit" loading={loading}>Login</LoadingButton>
+        <LoadingButton type="submit" loading={loading}>
+          <FormattedMessage {...messages.login} />
+        </LoadingButton>
       </form>
     )
   }
 }
+
+export default injectIntl(Login)

@@ -1,2 +1,16 @@
 en:
-  hello: "Hello world"
+  spree:
+    products: "Products"
+  auth:
+    login: "Login"
+    logout: "Logout"
+    account: "Account"
+    my_account: "My Account"
+    username: "Username"
+    password: "Password"
+    remember_me: "Remember Me"
+  cart:
+    cart: "Cart"
+  page:
+    search: "Search"
+    limit_search: "Limit search to {category}"

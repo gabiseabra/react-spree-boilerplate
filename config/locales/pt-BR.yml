@@ -1,2 +1,16 @@
 pt-BR:
-  hello: "Olá mundo"
+  spree:
+    products: "Produtos"
+  auth:
+    login: "Login"
+    logout: "Logout"
+    account: "Conta"
+    my_account: "Minha Conta"
+    username: "Login"
+    password: "Senha"
+    remember_me: "Mantenha-me Logado"
+  cart:
+    cart: "Carrinho"
+  page:
+    search: "Pesquisar"
+    limit_search: "Limitar pesquisa à {category}"

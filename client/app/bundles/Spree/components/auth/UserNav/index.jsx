@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { FormattedMessage } from "react-intl"
+import { auth as messages } from "app/locales/messages"
 import {
   Nav,
   NavItem,
@@ -33,7 +35,9 @@ export default class UserNav extends Component {
     return (
       <Modal ref={(x) => { this.modal = x }}>
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>
+            <FormattedMessage {...messages.login} />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {children}
@@ -46,7 +50,9 @@ export default class UserNav extends Component {
     return (
       <Nav>
         {this.renderModal()}
-        <NavItem onSelect={this.showModal}>Login</NavItem>
+        <NavItem onSelect={this.showModal}>
+          <FormattedMessage {...messages.login} />
+        </NavItem>
       </Nav>
     )
   }
@@ -55,10 +61,14 @@ export default class UserNav extends Component {
     const { onLogout } = this.props
     return (
       <Nav>
-        <NavDropdown id="UserNav-options" title="Account">
-          <MenuItem href="/account">My Account</MenuItem>
+        <NavDropdown id="UserNav-options" title={<FormattedMessage {...messages.account} />}>
+          <MenuItem href="/account">
+            <FormattedMessage {...messages.myAccount} />
+          </MenuItem>
           <MenuItem divider />
-          <MenuItem onSelect={onLogout}>Logout</MenuItem>
+          <MenuItem onSelect={onLogout}>
+            <FormattedMessage {...messages.logout} />
+          </MenuItem>
         </NavDropdown>
       </Nav>
     )

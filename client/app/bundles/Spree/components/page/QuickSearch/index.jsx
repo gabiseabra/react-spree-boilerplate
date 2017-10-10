@@ -1,5 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { FormattedMessage } from "react-intl"
+import { page as messages } from "app/locales/messages"
 import {
   FormGroup,
   FormControl,
@@ -26,11 +28,13 @@ const QuickSearch = ({
         {category &&
         <InputGroup.Addon>
           <Checkbox inline checked={limit} onChange={onChangeLimit}>
-            Limit search to {category}
+            <FormattedMessage {...messages.limitSearch} values={{ category }} />
           </Checkbox>
         </InputGroup.Addon>}
         <InputGroup.Button>
-          <Button type="submit">Search</Button>
+          <Button type="submit">
+            <FormattedMessage {...messages.search} />
+          </Button>
         </InputGroup.Button>
       </InputGroup>
     </FormGroup>

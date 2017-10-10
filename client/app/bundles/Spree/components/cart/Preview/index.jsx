@@ -1,9 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { FormattedMessage } from "react-intl"
+import { cart as messages } from "app/locales/messages"
 
 const CartPreview = ({ order }) => (
   <a href="/cart">
-    Cart {(order && `($${order.price.total})`)}
+    <FormattedMessage {...messages.cart} />
+    {(order && `($${order.price.total})`)}
   </a>
 )
 
