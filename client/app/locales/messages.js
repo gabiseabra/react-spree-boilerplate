@@ -23,7 +23,7 @@ Object.values(defaultMessages).forEach((descriptor) => {
             if(ready) {
               const id = _.snakeCase(name)
               console.warn(`Missing rails translation ${key} > ${id}`)
-              return { id: `${key}.${id}` }
+              return { id: `${key}.${id}`, defaultMessage: name }
             }
             return undefined
           }
