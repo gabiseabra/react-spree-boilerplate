@@ -42,4 +42,14 @@ LineItem.propTypes = {
   number: PropTypes.number.isRequired
 }
 
-export default LineItem
+const CartBody = ({ lineItems }) => (
+  <tbody>
+    {lineItems.map((item, i) => <LineItem lineItem={item} number={i} />)}
+  </tbody>
+)
+
+CartBody.propTypes = {
+  lineItems: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default CartBody

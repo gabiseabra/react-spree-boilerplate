@@ -11,7 +11,9 @@ import {
   Col
 } from "react-bootstrap"
 import { Form } from "../../shared"
-import LineItem from "./LineItem"
+import Header from "./Header"
+import Footer from "./Footer"
+import Body from "./Body"
 import styles from "./Cart.scss"
 
 export default class Cart extends Component {
@@ -22,68 +24,14 @@ export default class Cart extends Component {
     onClear: PropTypes.func
   }
 
-  renderHeader() {
-    return (
-      <thead>
-        <tr>
-          <th><FormattedMessage {...messages.item} /></th>
-          <th><FormattedMessage {...messages.price} /></th>
-          <th><FormattedMessage {...messages.quantity} /></th>
-          <th><FormattedMessage {...messages.total} /></th>
-        </tr>
-      </thead>
-    )
-  }
-
-  renderFooter() {
-    const { order, onClear } = this.props
-    const { total, adjustment } = order.price
-    return (
-      <tfoot>
-        {adjustment === 0 ? undefined :
-        <tr>
-          <td colSpan={3}>
-            <FormattedMessage {...messages.adjustment} />
-          </td>
-          <td>${adjustment}</td>
-        </tr>}
-        <tr>
-          <td colSpan={3}>
-            <Button onClick={onClear}>
-              <FormattedMessage {...messages.emptyCart} />
-            </Button>
-            <Link to="/products">
-              <FormattedMessage {...messages.continueShopping} />
-            </Link>
-          </td>
-          <td>${total}</td>
-        </tr>
-      </tfoot>
-    )
-  }
-
-  renderItems() {
-    const { lineItems } = this.props
-    return (
-      <tbody>
-        {lineItems.map((item, i) => (
-          <LineItem
-            key={item.id}
-            lineItem={item}
-            number={i} />
-        ))}
-      </tbody>
-    )
-  }
-
   renderCart() {
-    const { coupon } = this.props
+    const { coupon, order, lineItems, onClear } = this.props
     return (
       <Form method="patch" action="/cart">
         <Table striped>
-          {this.renderHeader()}
-          {this.renderItems()}
-          {this.renderFooter()}
+          <Header />
+          <Body lineItems={lineItems} />
+          <Footer order={order} onClear={onClear} />
         </Table>
         <Grid fluid>
           <Col sm={12} md={7}>{coupon}</Col>
