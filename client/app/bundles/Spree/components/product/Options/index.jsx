@@ -4,6 +4,7 @@ import { FormControl, Button } from "react-bootstrap"
 import { injectIntl, intlShape } from "react-intl"
 import { product as messages } from "app/locales/messages"
 import Variants from "./Variants"
+import styles from "./Options.scss"
 
 class ProductOptions extends Component {
   static propTypes = {
@@ -79,8 +80,10 @@ class ProductOptions extends Component {
           variants={variants}
           optionTypes={optionTypes}
           onChange={this.onChangeVariant} />}
-        <div>
-          <p>{this.statusText}</p>
+        <div className={styles.form}>
+          <p>
+            {this.statusText}
+          </p>
           <FormControl
             type="number"
             min="1"

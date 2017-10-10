@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  align-items: baseline;
+  margin: 15px 0;
+
+  > * {
+    flex: 0 1 33.33%;
+    padding: 0 5px;
+    margin: 0 5px;
+  }
+}
