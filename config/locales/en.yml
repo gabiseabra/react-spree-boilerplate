@@ -11,6 +11,17 @@ en:
     remember_me: "Remember Me"
   cart:
     cart: "Cart"
+    item: "Item"
+    price: "Price"
+    quantity: "Quantity"
+    total: "Total"
+    coupon: "Coupon Code"
+    apply_coupon: "Apply Coupon"
+    empty_cart: "Empty Cart"
+    cart_is_empty: "Your shopping cart is empty"
+    continue_shopping: "Continue Shopping"
+    update: "Update"
+    proceed_checkout: "Checkout"
   product:
     description: "Description"
     properties: "Properties"

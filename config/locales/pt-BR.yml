@@ -11,6 +11,17 @@ pt-BR:
     remember_me: "Mantenha-me Logado"
   cart:
     cart: "Carrinho"
+    item: "Item"
+    price: "Preço"
+    quantity: "Quantidade"
+    total: "Total"
+    coupon: "Código de Cupom"
+    apply_coupon: "Aplicar Cupom"
+    empty_cart: "Esvaziar Carrinho"
+    cart_is_empty: "O seu carrinho está vazio"
+    continue_shopping: "Continue Comprando"
+    update: "Atualizar"
+    proceed_checkout: "Prosseguir"
   product:
     description: "Descrição"
     properties: "Propriedades"
