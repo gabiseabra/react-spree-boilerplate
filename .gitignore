@@ -33,7 +33,6 @@ node_modules
 /public/webpack/*
 
 # Ignore i18n
-/client/app/locales/translations.js
-/client/app/locales/default.js
+/client/app/locales/rails/*
 
 /bin

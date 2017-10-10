@@ -1,9 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { IntlProvider } from "react-intl"
-import { defaultLocale } from "../locales/default"
-import { translations } from "../locales/translations"
-import "../locales"
+import { translations, defaultLocale } from "../locales"
 
 const LocaleProvider = ({ children, locale }) => (
   <IntlProvider locale={locale} messages={translations[locale]}>
