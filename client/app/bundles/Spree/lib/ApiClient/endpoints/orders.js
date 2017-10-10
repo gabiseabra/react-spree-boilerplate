@@ -19,7 +19,7 @@ export async function empty(order) {
 }
 
 export async function applyCoupon(order, { code }) {
-  await this.fetch(`${href(order)}/apply_coupon_code?coupon_code=${code}`, {
+  await this.json(`${href(order)}/apply_coupon_code?coupon_code=${code}`, {
     method: "PUT",
     credentials: "same-origin",
     headers: {
