@@ -18,7 +18,10 @@
     <div id="app">
       <%= react_component 'Header' %>
       <main>
-        <%= yield %>
+        <%= react_component 'App' %>
+        <div id="rails-root">
+          <%= yield %>
+        </div>
       </main>
       <%= react_component 'Footer' %>
     </div>
