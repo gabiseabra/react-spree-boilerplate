@@ -6,6 +6,7 @@ import HomePage from "./HomePage"
 import ProductsPage from "./ProductsPage"
 import ShowProductPage from "./ShowProductPage"
 import ShowTaxonPage from "./ShowTaxonPage"
+import CartPage from "./CartPage"
 
 // Modified react-router Route component that notifies parent on match.
 class Route extends BaseRoute {
@@ -53,6 +54,7 @@ export default class App extends Component {
           <Route exact path="/products" component={ProductsPage} />
           <Route exact path="/products/:id" component={ShowProductPage} />
           <Route exact path="/t/:id*" component={ShowTaxonPage} />
+          <Route exact path="/cart" component={CartPage} />
         </Switch>
       </div>
     )
