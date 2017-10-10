@@ -9,7 +9,7 @@ window.Spree = {}
 
 const history = createBrowserHistory()
 
-const connect = Component => withProvider(Component, { history })
+const connect = Component => withProvider({ history })(Component)
 
 const connectedContainers = _.mapValues(containers, connect)
 

@@ -23,9 +23,9 @@ Provider.contextTypes = {
 
 export default Provider
 
-export const withProvider = (Component, { history }) => (
+export const withProvider = providerProps => Component => (
   withContextInjector(withStore(props => (
-    <Provider history={history}>
+    <Provider {...providerProps}>
       <Component {...props} />
     </Provider>
   )))
