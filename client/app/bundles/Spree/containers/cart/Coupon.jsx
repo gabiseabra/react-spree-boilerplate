@@ -2,11 +2,16 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Coupon } from "../../components/cart"
-import { isCouponLoading, getCouponError } from "../../redux/selectors/cart"
+import {
+  isCouponLoading,
+  getCouponError,
+  getCouponMessage
+} from "../../redux/selectors/cart"
 import { applyCoupon } from "../../redux/modules/cart"
 
 class CouponApp extends Component {
   static propTypes = {
+    message: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.instanceOf(Error),
     applyCoupon: PropTypes.func.isRequired
@@ -17,14 +22,19 @@ class CouponApp extends Component {
   }
 
   render() {
-    const { loading, error } = this.props
+    const { loading, message, error } = this.props
     return (
-      <Coupon loading={loading} error={error} onSubmit={this.onSubmit} />
+      <Coupon
+        success={message}
+        loading={loading}
+        error={error}
+        onSubmit={this.onSubmit} />
     )
   }
 }
 
 const props = state => ({
+  message: getCouponMessage(state),
   loading: isCouponLoading(state),
   error: getCouponError(state)
 })

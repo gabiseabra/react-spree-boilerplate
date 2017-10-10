@@ -8,6 +8,7 @@ import { LoadingButton } from "../../shared"
 export default class Coupon extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    success: PropTypes.string,
     error: PropTypes.instanceOf(Error),
     onSubmit: PropTypes.func
   }
@@ -35,10 +36,11 @@ export default class Coupon extends Component {
 
   render() {
     const { code } = this.state
-    const { loading, error } = this.props
+    const { loading, success, error } = this.props
     return (
       <div>
         {error && <Alert bsStyle="warning">{error.message}</Alert>}
+        {success && <Alert bsStyle="success">{success}</Alert>}
         <div>
           <FormGroup>
             <ControlLabel>
