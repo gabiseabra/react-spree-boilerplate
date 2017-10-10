@@ -1,8 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { FormControl } from "react-bootstrap"
-// import { FormattedMessage } from "react-intl"
-// import { cart as messages } from "app/locales/messages"
+import { Price } from "../../shared"
 
 const LineItem = ({ lineItem, number }) => {
   const { variant } = lineItem
@@ -18,7 +17,7 @@ const LineItem = ({ lineItem, number }) => {
           </div>
         </div>
       </td>
-      <td>${lineItem.price}</td>
+      <td><Price value={lineItem.price} /></td>
       <td>
         <input
           type="hidden"
@@ -30,9 +29,7 @@ const LineItem = ({ lineItem, number }) => {
           name={`order[line_items_attributes][${number}][quantity]`}
           defaultValue={lineItem.quantity} />
       </td>
-      <td>
-        ${lineItem.price}
-      </td>
+      <td><Price value={lineItem.price} /></td>
     </tr>
   )
 }
