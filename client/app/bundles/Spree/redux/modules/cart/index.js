@@ -1,58 +1,8 @@
-import { HYDRATE } from "app/lib/hydrateStore"
+import { combineReducers } from "redux"
+import order from "./order"
+import coupon from "./coupon"
 
-export const ADD = "cart/ADD"
-export const EDIT = "cart/EDIT"
-export const REMOVE = "cart/REMOVE"
-export const EMPTY = "cart/EMPTY"
-export const REQUEST = "cart/REQUEST"
-export const SUCCESS = "cart/SUCCESS"
-export const FAILURE = "cart/FAILURE"
+export default combineReducers({ order, coupon })
 
-export const add = (variantId, quantity = 1) => ({ type: ADD, variantId, quantity })
-export const edit = (lineItemId, quantity) => ({ type: EDIT, lineItemId, quantity })
-export const remove = lineItemId => ({ type: REMOVE, lineItemId })
-export const empty = () => ({ type: EMPTY })
-export const request = () => ({ type: REQUEST })
-export const succeed = ({ lineItems, ...order }) => ({ type: SUCCESS, order, lineItems })
-export const fail = error => ({ type: FAILURE, error })
-
-const initialState = {
-  order: undefined,
-  lineItems: [],
-  loading: false,
-  error: undefined
-}
-
-export default function cart(state = initialState, action) {
-  switch(action.type) {
-    case REQUEST:
-      return {
-        ...state,
-        loading: true
-      }
-    case SUCCESS:
-      return {
-        order: action.order,
-        lineItems: action.lineItems,
-        loading: false,
-        error: undefined
-      }
-    case FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.error
-      }
-    case HYDRATE: {
-      if(!action.payload.order) return state
-      const { lineItems, ...order } = action.payload.order
-      return {
-        ...state,
-        order,
-        lineItems
-      }
-    }
-    default:
-      return state
-  }
-}
+export { load, add, edit, remove, empty } from "./order"
+export { apply as applyCoupon } from "./coupon"
