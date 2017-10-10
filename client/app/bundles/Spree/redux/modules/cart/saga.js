@@ -49,7 +49,18 @@ export default function createSaga({ apiClient }) {
     yield put(actions.request())
     try {
       yield call(apiClient.orders.empty, order)
-      yield put(actions.succeed({ ...order, lineItems: [] }))
+      yield put(actions.succeed({
+        ...order,
+        quantity: 0,
+        price: {
+          total: 0.0,
+          items: 0.0,
+          tax: 0.0,
+          shipping: 0.0,
+          adjustment: 0.0
+        },
+        lineItems: []
+      }))
     } catch(error) {
       yield put(actions.fail(error))
     }
