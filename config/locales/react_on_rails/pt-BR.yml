@@ -1,0 +1,24 @@
+pt-BR:
+  spree:
+    products: "Produtos"
+  auth:
+    login: "Login"
+    logout: "Logout"
+    account: "Conta"
+    my_account: "Minha Conta"
+    username: "Login"
+    password: "Senha"
+    remember_me: "Mantenha-me Logado"
+  cart:
+    cart: "Carrinho"
+  product:
+    description: "Descrição"
+    properties: "Propriedades"
+    invalid_variant: "Selecione um produto"
+    unavailable_variant: "Produto indisponível"
+    out_of_stock: "Fora de estoque"
+    in_stock: "Estoque disponível"
+    add_to_cart: "Adicionar ao carrinho"
+  page:
+    search: "Pesquisar"
+    limit_search: "Limitar pesquisa à {category}"
