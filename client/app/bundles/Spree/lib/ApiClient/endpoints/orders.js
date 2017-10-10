@@ -19,12 +19,12 @@ export async function empty(order) {
 }
 
 export async function applyCoupon(order, { code }) {
-  await this.json(`${href(order)}/apply_coupon_code?coupon_code=${code}`, {
+  const { success } = await this.json(`${href(order)}/apply_coupon_code?coupon_code=${code}`, {
     method: "PUT",
     credentials: "same-origin",
     headers: {
       "X-Spree-Order-Token": order.token
     }
   })
-  return true
+  return success
 }
