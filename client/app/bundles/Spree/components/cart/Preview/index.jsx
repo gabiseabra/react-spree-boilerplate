@@ -1,13 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import { FormattedMessage } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 
 const CartPreview = ({ order }) => (
-  <a href="/cart">
+  <Link to="/cart">
     <FormattedMessage {...messages.cart} />
     {(order && `($${order.price.total})`)}
-  </a>
+  </Link>
 )
 
 CartPreview.propTypes = {
