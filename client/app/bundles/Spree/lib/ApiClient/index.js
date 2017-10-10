@@ -71,10 +71,11 @@ export default class ApiClient {
       return new Response(response, await response.json())
     } catch(error) {
       if(error.status !== 422) throw error
+      let data
       try {
-        const data = await error.response.json()
-        throw new ResponseError(error.response, data.error, data)
+        data = await error.response.json()
       } catch(__) { throw error }
+      throw new ResponseError(error.response, data.error, data)
     }
   }
 
