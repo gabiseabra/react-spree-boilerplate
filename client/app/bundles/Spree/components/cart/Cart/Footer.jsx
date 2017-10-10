@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { FormattedMessage } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 import { Button } from "react-bootstrap"
+import { Price } from "../../shared"
 
 const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
   const components = []
@@ -13,7 +14,7 @@ const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
         <td colSpan={3}>
           <FormattedMessage {...messages.taxTotal} />
         </td>
-        <td>${tax}</td>
+        <td><Price value={tax} /></td>
       </tr>
     )
   }
@@ -23,7 +24,7 @@ const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
         <td colSpan={3}>
           <FormattedMessage {...messages.shippingTotal} />
         </td>
-        <td>${shipping}</td>
+        <td><Price value={shipping} /></td>
       </tr>
     )
   }
@@ -33,7 +34,7 @@ const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
         <td colSpan={3}>
           <FormattedMessage {...messages.adjustmentTotal} />
         </td>
-        <td>${adjustment}</td>
+        <td><Price value={adjustment} /></td>
       </tr>
     )
   }
@@ -43,7 +44,7 @@ const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
         <td colSpan={3}>
           <FormattedMessage {...messages.itemsTotal} />
         </td>
-        <td>${items}</td>
+        <td><Price value={items} /></td>
       </tr>
     )
   }
@@ -62,7 +63,7 @@ const CartFooter = ({ cart: { price }, onClear }) => (
           <FormattedMessage {...messages.continueShopping} />
         </Link>
       </td>
-      <td>${price.total}</td>
+      <td><Price value={price.total} /></td>
     </tr>
   </tfoot>
 )

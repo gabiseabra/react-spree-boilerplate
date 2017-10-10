@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import classnames from "classnames"
-import Price from "../Price"
+import { Price } from "../../shared"
 import Image from "./Image"
 import styles from "./Card.scss"
 
@@ -17,7 +17,7 @@ const ProductCard = ({ product, itemProp }) => (
       <div className={classnames("caption", styles.body)}>
         <h3 itemProp="name">{product.name}</h3>
         <span itemScope itemProp="offers">
-          <Price itemProp="price" product={product.master} />
+          <Price itemProp="price" value={product.master.price} />
         </span>
       </div>
     </div>

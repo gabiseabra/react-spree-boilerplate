@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Grid, Col } from "react-bootstrap"
+import { Price } from "../../shared"
 import Slideshow from "../Slideshow"
-import Price from "../Price"
 import Details from "../Details"
 
 export default class ProductInfo extends Component {
@@ -38,7 +38,7 @@ export default class ProductInfo extends Component {
           <header>
             <h2 itemProp="name">{product.name}</h2>
             <span itemScope itemProp="offers">
-              <Price itemProp="price" product={variant} />
+              <Price itemProp="price" value={variant.price} />
             </span>
           </header>
           <div>
