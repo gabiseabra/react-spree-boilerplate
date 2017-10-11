@@ -11,8 +11,7 @@ export default merge.smart(config, {
   entry: {
     common: [
       "babel-polyfill",
-      "./app/styles/app.scss",
-      "./app/styles/bootstrap.scss"
+      "./app/styles/app.scss"
     ],
     spree: "./app/bundles/Spree/startup/client"
   },
