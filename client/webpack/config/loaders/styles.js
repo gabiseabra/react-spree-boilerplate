@@ -1,5 +1,3 @@
-import path from "path"
-
 const localIdentName = (
   process.env.NODE_ENV === "development" ?
   "[name]_[local]--[hash:base64:5]" :
@@ -14,7 +12,7 @@ const defaults = context => ({
   },
   sass: {
     includePaths: [
-      path.join(context, "app")
+      context
     ]
   },
   url: {
@@ -22,11 +20,10 @@ const defaults = context => ({
   },
   modules: {
     include: [
-      path.join(context, "app")
+      context
     ],
     exclude: [
-      /global\.\w+$/,
-      path.join(context, "app/styles")
+      /global\.\w+$/
     ]
   }
 })
