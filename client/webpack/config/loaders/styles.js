@@ -1,3 +1,5 @@
+import autoprefixer from "autoprefixer"
+
 const localIdentName = (
   process.env.NODE_ENV === "development" ?
   "[name]_[local]--[hash:base64:5]" :
@@ -13,6 +15,11 @@ const defaults = context => ({
   sass: {
     includePaths: [
       context
+    ]
+  },
+  postcss: {
+    plugins: [
+      autoprefixer
     ]
   },
   url: {
@@ -38,7 +45,7 @@ export default function build(context, opts) {
   const loaders = [
     {
       test: /\.css$/,
-      use: [ /* { loader: "postcss-loader", options: options.postcss } */ ]
+      use: []
     },
     {
       test: /\.less$/,
@@ -52,12 +59,20 @@ export default function build(context, opts) {
     {
       test,
       exclude: condition,
-      use: [ { loader: "css-loader", options: options.css }, ...use ]
+      use: [
+        { loader: "css-loader", options: options.css },
+        { loader: "postcss-loader", options: options.postcss },
+        ...use
+      ]
     },
     {
       test,
       include: condition,
-      use: [ { loader: "css-loader", options: options.mcss }, ...use ]
+      use: [
+        { loader: "css-loader", options: options.mcss },
+        { loader: "postcss-loader", options: options.postcss },
+        ...use
+      ]
     }
   ), [])
   if(extract) {
