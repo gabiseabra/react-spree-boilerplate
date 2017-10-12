@@ -1,16 +1,6 @@
 import Resource from "../Resource"
-
-const country = data => ({
-  id: data.id,
-  name: data.name,
-  iso: data.iso
-})
-
-const state = data => ({
-  id: data.id,
-  name: data.name,
-  abbr: data.abbr
-})
+import Country from "./Country"
+import State from "./State"
 
 export default class Address extends Resource {
   constructor(data) {
@@ -23,8 +13,8 @@ export default class Address extends Resource {
     this.zipCode = data.zipcode
     this.phone = data.phone
     this.alternativePhone = data.alternative_phone
-    this.country = country(data.country)
-    this.state = state(data.state)
+    this.country = new Country(data.country)
+    this.state = new State(data.state)
     this.address = [
       data.address1,
       data.address2
