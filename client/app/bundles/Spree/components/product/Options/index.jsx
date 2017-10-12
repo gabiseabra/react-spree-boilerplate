@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { injectIntl, intlShape } from "react-intl"
 import { product as messages } from "app/locales/messages"
-import { FormControl } from "react-bootstrap"
+import { FormControl, Grid, Col } from "react-bootstrap"
 import { LoadingButton } from "../../shared"
 import Variants from "./Variants"
 import styles from "./Options.scss"
@@ -82,22 +82,25 @@ class ProductOptions extends Component {
           variants={variants}
           optionTypes={optionTypes}
           onChange={this.onChangeVariant} />}
-        <div className={styles.form}>
-          <p>
+        <Grid fluid>
+          <Col xs={12} md={2} className={styles.stock}>
             {this.statusText}
-          </p>
-          <FormControl
-            type="number"
-            min="1"
-            value={this.state.quantity}
-            onChange={this.onChangeQuantity} />
-          <LoadingButton
-            loading={loading}
-            disabled={!this.status}
-            onClick={this.onSelect}>
-            {intl.formatMessage(messages.addToCart)}
-          </LoadingButton>
-        </div>
+          </Col>
+          <Col xs={12} md={10} className={styles.form}>
+            <FormControl
+              type="number"
+              min="1"
+              size="3"
+              value={this.state.quantity}
+              onChange={this.onChangeQuantity} />
+            <LoadingButton
+              loading={loading}
+              disabled={!this.status}
+              onClick={this.onSelect}>
+              {intl.formatMessage(messages.addToCart)}
+            </LoadingButton>
+          </Col>
+        </Grid>
       </div>
     )
   }

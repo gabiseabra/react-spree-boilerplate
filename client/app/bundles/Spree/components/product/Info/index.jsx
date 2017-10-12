@@ -31,10 +31,10 @@ export default class ProductInfo extends Component {
     const { product, variant, options } = this.props
     return (
       <Grid fluid itemScope itemType="http://schema.org/Product">
-        <Col xs={12} sm={6} md={4}>
+        <Col xs={12} sm={6}>
           <Slideshow product={product} variant={variant} />
         </Col>
-        <Col xs={12} sm={6} md={8}>
+        <Col xs={12} sm={6}>
           <header>
             <h2 itemProp="name">{product.name}</h2>
             <span itemScope itemProp="offers">
