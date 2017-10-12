@@ -3,12 +3,14 @@ import * as hydrate from "./hydrate"
 import * as products from "./products"
 import * as orders from "./orders"
 import * as lineItems from "./lineItems"
+import * as states from "./states"
 
 const endpoints = {
   hydrate,
   products,
   orders,
-  lineItems
+  lineItems,
+  states
 }
 
 export default function createEndpoints(api) {

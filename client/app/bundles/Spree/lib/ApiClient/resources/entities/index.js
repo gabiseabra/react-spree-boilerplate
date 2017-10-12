@@ -1,3 +1,5 @@
+export { default as Country } from "./Country"
+export { default as State } from "./State"
 export { default as Address } from "./Address"
 export { default as Taxon } from "./Taxon"
 export { default as Taxonomy } from "./Taxonomy"
