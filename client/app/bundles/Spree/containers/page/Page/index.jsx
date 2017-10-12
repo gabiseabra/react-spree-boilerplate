@@ -19,10 +19,10 @@ const getPath = props => (
 class PageApp extends Component {
   static propTypes = {
     // eslint-disable-next-line react/no-unused-prop-types
-    load: PropTypes.oneOfType(
+    load: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string
-    ).isRequired,
+    ]).isRequired,
     children: PropTypes.node.isRequired,
     location: PropTypes.object.isRequired,
     loadPage: PropTypes.func.isRequired,
