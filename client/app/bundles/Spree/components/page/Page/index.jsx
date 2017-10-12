@@ -11,7 +11,7 @@ const Page = ({ children }) => (
 Page.Title = ({ children }) => (<h2>{children}</h2>)
 
 Page.Content = ({ loading, children }) => (
-  <Loader loading={loading}>
+  <Loader dim loading={loading}>
     {children}
   </Loader>
 )

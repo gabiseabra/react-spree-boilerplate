@@ -1,0 +1,24 @@
+$color: #000;
+$size: 40px;
+
+.Spinner {
+	width: $size;
+	height: $size;
+	clear: both;
+  z-index: 100;
+	border: 4px rgba($color, 0.25) solid;
+	border-top: 4px rgba($color, 1) solid;
+	border-radius: 50%;
+  animation: spinner .6s infinite linear;
+  &.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes spinner {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(359deg); }
+}
