@@ -16,6 +16,9 @@ const defaults = context => ({
       context
     ]
   },
+  postcss: {
+    sourceMap: true
+  },
   url: {
     silent: true
   },
