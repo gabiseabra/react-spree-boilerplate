@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Options } from "../../components/product"
+import { isOrderLoading } from "../../redux/selectors/cart"
 import { getProductVariants, getOptionTypes } from "../../redux/selectors/products"
 import { add } from "../../redux/modules/cart"
 
@@ -15,6 +16,7 @@ class OptionsApp extends Component {
 }
 
 const props = (state, { product }) => ({
+  loading: isOrderLoading(state),
   optionTypes: getOptionTypes(state, { id: product.id }),
   variants: getProductVariants(state, { id: product.id })
 })
