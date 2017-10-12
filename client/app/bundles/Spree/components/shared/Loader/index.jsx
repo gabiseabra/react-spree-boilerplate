@@ -22,8 +22,9 @@ class Content extends Component {
   }
 }
 
-const Loader = ({ children, loading, dim }) => {
+const Loader = ({ className, children, loading, dim }) => {
   const loaderClass = classnames(
+    className,
     styles.Loader,
     loading && styles.loading,
     dim && styles.dim
@@ -37,6 +38,7 @@ const Loader = ({ children, loading, dim }) => {
 }
 
 Loader.propTypes = {
+  className: PropTypes.any,
   dim: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   children: PropTypes.node
