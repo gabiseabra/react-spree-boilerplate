@@ -1,8 +1,9 @@
 import { connect } from "react-redux"
 import { Preview } from "../../components/cart"
-import { getOrder } from "../../redux/selectors/cart"
+import { getOrder, isOrderLoading } from "../../redux/selectors/cart"
 
 const props = state => ({
+  loading: isOrderLoading(state),
   order: getOrder(state)
 })
 

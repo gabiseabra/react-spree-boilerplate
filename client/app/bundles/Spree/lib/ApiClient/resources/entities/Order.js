@@ -21,7 +21,7 @@ export default class Order extends Resource {
     this.token = data.token
     this.state = data.state
     this.userId = data.user_id
-    this.quantity = data.total_quantity
+    this.quantity = data.quantity
     this.price = {
       total: parseFloat(data.total),
       items: parseFloat(data.item_total),

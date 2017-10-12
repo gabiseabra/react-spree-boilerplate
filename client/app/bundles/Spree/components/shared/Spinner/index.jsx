@@ -3,10 +3,11 @@ import PropTypes from "prop-types"
 import classnames from "classnames"
 import styles from "./Spinner.scss"
 
-const Spinner = ({ className, center, ...props }) => {
+const Spinner = ({ className, size, center, ...props }) => {
   const spinnerClass = classnames(
     className,
     styles.Spinner,
+    styles[`size--${size}`],
     center && styles.center
   )
   return (
@@ -16,11 +17,13 @@ const Spinner = ({ className, center, ...props }) => {
 
 Spinner.propTypes = {
   className: PropTypes.any,
+  size: PropTypes.string.isRequired,
   center: PropTypes.bool.isRequired
 }
 
 Spinner.defaultProps = {
-  center: false
+  center: false,
+  size: "default"
 }
 
 export default Spinner
