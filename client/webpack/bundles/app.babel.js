@@ -16,7 +16,11 @@ export default merge.smart(config, {
     spree: "./app/bundles/Spree/startup/client"
   },
   output: {
-    filename: "[name]-bundle.[chunkhash].js"
+    filename: (
+      process.env.NODE_ENV === "production" ?
+      "[name]-bundle.[chunkhash:5].js" :
+      "[name]-bundle.js"
+    )
   },
   module: {
     rules: loaders({
