@@ -13,11 +13,13 @@ const defaults = context => ({
     importLoaders: 2
   },
   sass: {
+    sourceMap: true,
     includePaths: [
       context
     ]
   },
   postcss: {
+    sourceMap: true,
     plugins: [
       autoprefixer
     ]
