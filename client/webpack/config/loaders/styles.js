@@ -1,5 +1,3 @@
-import autoprefixer from "autoprefixer"
-
 const localIdentName = (
   process.env.NODE_ENV === "development" ?
   "[name]_[local]--[hash:base64:5]" :
@@ -16,12 +14,6 @@ const defaults = context => ({
     sourceMap: true,
     includePaths: [
       context
-    ]
-  },
-  postcss: {
-    sourceMap: true,
-    plugins: [
-      autoprefixer
     ]
   },
   url: {
