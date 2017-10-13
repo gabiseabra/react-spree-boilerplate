@@ -33,6 +33,16 @@ class PageApp extends Component {
     load: false
   }
 
+  static childContextTypes = {
+    load: PropTypes.bool.isRequired
+  }
+
+  getChildContext() {
+    return {
+      load: Boolean(this.props.load)
+    }
+  }
+
   componentDidMount() {
     if(this.props.load) this.loadPath(this.props)
   }
