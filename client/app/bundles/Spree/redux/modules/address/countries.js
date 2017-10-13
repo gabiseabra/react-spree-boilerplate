@@ -15,7 +15,7 @@ export default function countries(state = initialState, action) {
       const { payload } = action
       return {
         ...state,
-        data: payload.countries ? byId(payload.countries) : {}
+        ...(payload.countries ? byId(payload.countries) : {})
       }
     }
     default:
