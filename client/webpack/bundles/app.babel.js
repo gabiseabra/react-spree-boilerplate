@@ -33,7 +33,7 @@ export default merge.smart(config, {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin("common"),
     new ExtractTextPlugin({
-      filename: "[name]-bundle.css",
+      filename: "[name]-bundle.[chunkhash:5].css",
       // Disable css files in hot mode, stylesheets are
       // added to the document with javascript instead
       disable: (process.argv.indexOf("--hot") !== -1)
