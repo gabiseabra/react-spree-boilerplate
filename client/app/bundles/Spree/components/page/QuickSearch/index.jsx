@@ -9,6 +9,7 @@ import {
   Checkbox,
   Button
 } from "react-bootstrap"
+import styles from "./QuickSearch.scss"
 
 const QuickSearch = ({
   value,
@@ -18,7 +19,7 @@ const QuickSearch = ({
   onChangeLimit,
   onSubmit
 }) => (
-  <form onSubmit={onSubmit}>
+  <form onSubmit={onSubmit} className={styles.QuickSearch}>
     <FormGroup>
       <InputGroup>
         <FormControl
