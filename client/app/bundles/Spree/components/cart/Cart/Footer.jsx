@@ -5,55 +5,11 @@ import { FormattedMessage } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 import { Button } from "react-bootstrap"
 import { Price } from "../../shared"
+import Adjustments from "../Adjustments"
 
-const Adjustments = ({ price: { items, tax, shipping, adjustment } }) => {
-  const components = []
-  if(tax) {
-    components.push(
-      <tr key="tax">
-        <td colSpan={3}>
-          <FormattedMessage {...messages.taxTotal} />
-        </td>
-        <td><Price value={tax} /></td>
-      </tr>
-    )
-  }
-  if(shipping) {
-    components.push(
-      <tr key="shipping">
-        <td colSpan={3}>
-          <FormattedMessage {...messages.shippingTotal} />
-        </td>
-        <td><Price value={shipping} /></td>
-      </tr>
-    )
-  }
-  if(adjustment) {
-    components.push(
-      <tr key="adjustment">
-        <td colSpan={3}>
-          <FormattedMessage {...messages.adjustmentTotal} />
-        </td>
-        <td><Price value={adjustment} /></td>
-      </tr>
-    )
-  }
-  if(components.length) {
-    components.unshift(
-      <tr key="items">
-        <td colSpan={3}>
-          <FormattedMessage {...messages.itemsTotal} />
-        </td>
-        <td><Price value={items} /></td>
-      </tr>
-    )
-  }
-  return components
-}
-
-const CartFooter = ({ order: { price }, onClear }) => (
+const CartFooter = ({ order, onClear }) => (
   <tfoot>
-    <Adjustments price={price} />
+    <Adjustments colSpan={4} order={order} />
     <tr>
       <td colSpan={3}>
         <Button onClick={onClear}>
@@ -63,7 +19,7 @@ const CartFooter = ({ order: { price }, onClear }) => (
           <FormattedMessage {...messages.continueShopping} />
         </Link>
       </td>
-      <td><Price value={price.total} /></td>
+      <td><Price value={order.price.total} /></td>
     </tr>
   </tfoot>
 )
