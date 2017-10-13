@@ -22,17 +22,26 @@ export default class Cart extends Component {
     order: PropTypes.object.isRequired,
     lineItems: PropTypes.arrayOf(PropTypes.object).isRequired,
     coupon: PropTypes.node.isRequired,
-    onClear: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired
+    onClear: PropTypes.func,
+    onChange: PropTypes.func,
+    onRemove: PropTypes.func
   }
 
   renderCart() {
-    const { loading, coupon, order, lineItems, onClear, onRemove } = this.props
+    const {
+      loading,
+      coupon,
+      order,
+      lineItems,
+      onClear,
+      onChange,
+      onRemove
+    } = this.props
     return (
       <Form method="patch" action="/cart">
         <Table striped>
           <Header />
-          <Body lineItems={lineItems} onRemove={onRemove} />
+          <Body lineItems={lineItems} onChange={onChange} onRemove={onRemove} />
           <Footer order={order} onClear={onClear} />
         </Table>
         <Grid fluid>
