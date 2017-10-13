@@ -8,11 +8,12 @@ import { Spinner } from "../../shared"
 const CartPreview = ({ loading, order }) => (
   <a href="/cart">
     <FormattedMessage {...messages.cart} />
-    {order.quantity &&
-    <Badge style={{ position: "relative" }}>
-      {loading && <Spinner center size="tiny" />}
-      ${order.price.total}
-    </Badge>}
+    {order.quantity ?
+      <Badge style={{ position: "relative" }}>
+        {loading && <Spinner center size="tiny" />}
+        ${order.price.total}
+      </Badge> :
+      undefined}
   </a>
 )
 
