@@ -8,9 +8,18 @@ import createRouter from "./routes"
 import createEndpoints from "./endpoints"
 
 const FORMATS = {
-  json: "application/json",
-  html: "text/html",
-  text: "text/*;q=0.9 */*;q=0.8"
+  json: {
+    header: "application/json",
+    ext: ".json"
+  },
+  html: {
+    header: "text/html",
+    ext: null
+  },
+  text: {
+    header: "text/*;q=0.9 */*;q=0.8",
+    ext: ".txt"
+  }
 }
 
 export const CSRF_TOKEN_HEADER = "X-CSRF-Token"
@@ -35,7 +44,7 @@ export default class ApiClient {
   request(input, init = {}) {
     const headers = new Headers(this.headers)
     const request = (input instanceof Request ? input : init)
-    const path = (input instanceof Request ? input.path : input)
+    let path = (input instanceof Request ? input.path : input)
     if(request.headers) {
       const rawHeaders = (
         request.headers instanceof Headers ?
@@ -50,7 +59,15 @@ export default class ApiClient {
       headers.delete(CSRF_TOKEN_HEADER)
     }
     if(init.format) {
-      headers.append("Accept", FORMATS[init.format])
+      const format = FORMATS[init.format]
+      headers.append("Accept", format.header)
+      if(format.ext) {
+        const { pathname, query } = url.parse(path)
+        path = pathname
+        if(pathname.match(/\/$/)) path += "index"
+        path += format.ext
+        if(query) path += `?${query}`
+      }
     }
     const targetUrl = url.resolve(this.url, path.replace(/^\//, ""))
     return new Request(targetUrl, {
