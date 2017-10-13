@@ -18,7 +18,7 @@ body,
   font-family: "Roboto", sans-serif;
 }
 
-#app > main,
-#app > main [data-reactroot] {
+#app > main {
   flex: 1;
+  margin: 0 20px 40px;
 }
