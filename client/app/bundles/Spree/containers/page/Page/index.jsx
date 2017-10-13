@@ -33,7 +33,7 @@ class PageApp extends Component {
     load: false
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(this.props.load) this.loadPath(this.props)
   }
 
@@ -49,6 +49,12 @@ class PageApp extends Component {
     }
   }
 
+  scrollIntoView() {
+    if(this.node) {
+      this.node.scrollIntoView()
+    }
+  }
+
   loadPath(props) {
     const query = parseQuery(props.location.search)
     this.props.loadPath(
@@ -56,6 +62,7 @@ class PageApp extends Component {
       query.page || 1,
       query.search
     )
+    this.scrollIntoView()
   }
 
   loadPage({ location }) {
@@ -65,7 +72,11 @@ class PageApp extends Component {
 
   render() {
     const { children } = this.props
-    return <Page>{children}</Page>
+    return (
+      <div ref={(node) => { this.node = node }}>
+        <Page>{children}</Page>
+      </div>
+    )
   }
 }
 
