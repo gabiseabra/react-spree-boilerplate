@@ -17,6 +17,7 @@ pt-BR:
     total: "Total"
     coupon: "Código de Cupom"
     apply_coupon: "Aplicar Cupom"
+    remove_item: "Remover"
     empty_cart: "Esvaziar Carrinho"
     cart_is_empty: "O seu carrinho está vazio"
     continue_shopping: "Continue Comprando"

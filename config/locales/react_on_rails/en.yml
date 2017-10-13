@@ -17,6 +17,7 @@ en:
     total: "Total"
     coupon: "Coupon Code"
     apply_coupon: "Apply Coupon"
+    remove_item: "Remove"
     empty_cart: "Empty Cart"
     cart_is_empty: "Your shopping cart is empty"
     continue_shopping: "Continue Shopping"

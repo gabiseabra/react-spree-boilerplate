@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Cart } from "../../components/cart"
 import { getOrder, isOrderLoading, getLineItems } from "../../redux/selectors/cart"
-import { empty } from "../../redux/modules/cart"
+import { empty, remove } from "../../redux/modules/cart"
 import Coupon from "./Coupon"
 
 class CartApp extends Component {
@@ -11,11 +11,16 @@ class CartApp extends Component {
     loading: PropTypes.bool.isRequired,
     order: PropTypes.object.isRequired,
     lineItems: PropTypes.arrayOf(PropTypes.object).isRequired,
-    empty: PropTypes.func.isRequired
+    empty: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
   }
 
   onClear = () => {
     this.props.empty()
+  }
+
+  onRemove = (lineItemId) => {
+    this.props.remove(lineItemId)
   }
 
   render() {
@@ -26,6 +31,7 @@ class CartApp extends Component {
         order={order}
         lineItems={lineItems}
         onClear={this.onClear}
+        onRemove={this.onRemove}
         coupon={<Coupon />} />
     )
   }
@@ -37,4 +43,4 @@ const props = state => ({
   lineItems: getLineItems(state)
 })
 
-export default connect(props, { empty })(CartApp)
+export default connect(props, { empty, remove })(CartApp)
