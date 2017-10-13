@@ -1,5 +1,5 @@
 .stock, .form {
-  margin: 15px 0;  
+  margin: 15px 0;
 }
 
 .form {
@@ -10,7 +10,8 @@
     margin: 0 5px;
   }
   input {
-    flex: 1 0 5em;
+    flex: 1 0;
+    min-width: 5em;
   }
   button {
     flex: 1 1 80%;

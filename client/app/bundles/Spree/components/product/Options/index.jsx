@@ -90,7 +90,6 @@ class ProductOptions extends Component {
             <FormControl
               type="number"
               min="1"
-              size="3"
               value={this.state.quantity}
               onChange={this.onChangeQuantity} />
             <LoadingButton
