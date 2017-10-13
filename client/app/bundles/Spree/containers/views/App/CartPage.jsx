@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { Cart } from "../../cart"
 import { Page } from "../../page"
@@ -13,9 +12,5 @@ const CartPageApp = () => (
     </Page.Content>
   </Page>
 )
-
-CartPageApp.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object)
-}
 
 export default CartPageApp

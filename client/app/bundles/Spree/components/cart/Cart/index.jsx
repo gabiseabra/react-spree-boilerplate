@@ -10,7 +10,7 @@ import {
   Grid,
   Col
 } from "react-bootstrap"
-import { Form } from "../../shared"
+import { Form, LoadingButton } from "../../shared"
 import Header from "./Header"
 import Footer from "./Footer"
 import Body from "./Body"
@@ -18,6 +18,7 @@ import styles from "./Cart.scss"
 
 export default class Cart extends Component {
   static propTypes = {
+    loading: PropTypes.bool.isRequired,
     order: PropTypes.object.isRequired,
     lineItems: PropTypes.arrayOf(PropTypes.object).isRequired,
     coupon: PropTypes.node.isRequired,
@@ -25,7 +26,7 @@ export default class Cart extends Component {
   }
 
   renderCart() {
-    const { coupon, order, lineItems, onClear } = this.props
+    const { loading, coupon, order, lineItems, onClear } = this.props
     return (
       <Form method="patch" action="/cart">
         <Table striped>
@@ -39,9 +40,14 @@ export default class Cart extends Component {
             <Button type="submit" name="button">
               <FormattedMessage {...messages.update} />
             </Button>
-            <Button bsStyle="primary" bsSize="large" type="submit" name="checkout">
+            <LoadingButton
+              loading={loading}
+              bsStyle="primary"
+              bsSize="large"
+              type="submit"
+              name="checkout">
               <FormattedMessage {...messages.proceedCheckout} />
-            </Button>
+            </LoadingButton>
           </Col>
         </Grid>
       </Form>
