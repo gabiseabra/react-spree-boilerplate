@@ -7,7 +7,7 @@ import { Badge } from "react-bootstrap"
 import { Price, Spinner } from "../../shared"
 
 const CartPreview = ({ loading, order }) => (
-  <Link href="/cart">
+  <Link to="/cart">
     <FormattedMessage {...messages.cart} />
     {order.quantity ?
       <Badge style={{ position: "relative" }}>
