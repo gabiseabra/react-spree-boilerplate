@@ -3,8 +3,6 @@
   <head>
     <%= render 'shared/head' %>
     <%= render 'shared/spree_head' %>
-    <%= render 'spree/shared/translations' %>
-    <%= javascript_include_tag 'spree/frontend/all' %>
   </head>
   <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
     <%= render 'spree/shared/google_analytics.js' %>
@@ -12,9 +10,6 @@
       <%= react_component 'Header' %>
       <main>
         <%= react_component 'App' %>
-        <div id="rails-root">
-          <%= yield %>
-        </div>
       </main>
       <%= react_component 'Footer' %>
     </div>

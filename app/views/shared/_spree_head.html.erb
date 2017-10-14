@@ -1,0 +1,10 @@
+<%= canonical_tag current_store.url %>
+<%= render 'spree/shared/paths' %>
+<%= javascript_include_tag 'vendor_bundle' %>
+<%= javascript_pack_tag 'common' %>
+<%= stylesheet_pack_tag 'common', media: 'all' %>
+<%= javascript_pack_tag 'spree' %>
+<%= stylesheet_pack_tag 'spree', media: 'all' %>
+<%= hydrate_taxonomies 'spreeStore' %>
+<%= hydrate_user 'spreeStore' %>
+<%= hydrate_order 'spreeStore' %>
