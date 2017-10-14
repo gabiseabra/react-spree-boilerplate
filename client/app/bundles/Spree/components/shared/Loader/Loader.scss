@@ -1,0 +1,9 @@
+.Loader {
+  position: relative;
+
+  &.loading.dim {
+    .content {
+      filter: blur(5px);
+    }
+  }
+}

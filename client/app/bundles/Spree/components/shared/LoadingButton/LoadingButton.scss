@@ -1,0 +1,8 @@
+.LoadingButton {
+  position: relative;
+  &::before {
+    content: " ";
+    display: inline;
+    white-space: pre-wrap;
+  }
+}

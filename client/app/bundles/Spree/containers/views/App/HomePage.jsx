@@ -7,7 +7,7 @@ import { Page, Pagination, QuickSearch } from "../../page"
 import { getPageProducts } from "../../../redux/selectors/page"
 
 const HomePageApp = ({ products }) => (
-  <Page>
+  <Page load>
     <Helmet title="" />
     <Page.Title>React Spree Boilerplate</Page.Title>
     <QuickSearch />

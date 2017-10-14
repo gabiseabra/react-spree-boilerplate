@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto');
+@import "app/vendor";
+@import "app/fonts";
 
 html,
 html,
@@ -14,9 +15,10 @@ body,
 #app {
   display: flex;
   flex-direction: column;
+  font-family: "Roboto", sans-serif;
 }
 
-#app > main,
-#app > main [data-reactroot] {
+#app > main {
   flex: 1;
+  margin: 0 20px 40px;
 }

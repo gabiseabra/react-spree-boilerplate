@@ -1,0 +1,35 @@
+en:
+  spree:
+    products: "Products"
+  auth:
+    login: "Login"
+    logout: "Logout"
+    account: "Account"
+    my_account: "My Account"
+    username: "Username"
+    password: "Password"
+    remember_me: "Remember Me"
+  cart:
+    cart: "Cart"
+    item: "Item"
+    price: "Price"
+    quantity: "Quantity"
+    total: "Total"
+    coupon: "Coupon Code"
+    apply_coupon: "Apply Coupon"
+    empty_cart: "Empty Cart"
+    cart_is_empty: "Your shopping cart is empty"
+    continue_shopping: "Continue Shopping"
+    update: "Update"
+    proceed_checkout: "Checkout"
+  product:
+    description: "Description"
+    properties: "Properties"
+    invalid_variant: "Please select a product"
+    unavailable_variant: "Product unavailable"
+    out_of_stock: "Out of stock"
+    in_stock: "In stock"
+    add_to_cart: "Add to cart"
+  page:
+    search: "Search"
+    limit_search: "Limit search to {category}"

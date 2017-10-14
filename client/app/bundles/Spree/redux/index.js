@@ -9,7 +9,9 @@ export const STORE_NAME = "spreeStore"
 
 export const createStore = context => hydrateStore(function * (railsContext) {
   const { scheme, host, port, pathname, search } = railsContext
-  const apiClient = new ApiClient(`${scheme}://${host}:${port}/`, {
+  let appUrl = `${scheme}://${host}`
+  if(port) appUrl += `:${port}`
+  const apiClient = new ApiClient(appUrl, {
     csrfToken: ReactOnRails.authenticityToken()
   })
   const store = _createStore({ apiClient, ...context })

@@ -1,0 +1,36 @@
+$color: #000;
+$sizes: (
+  tiny: 15px,
+  small: 25px,
+  default: 40px
+);
+
+@keyframes spinner {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(359deg); }
+}
+
+.Spinner {
+	clear: both;
+  z-index: 100;
+	border: 4px rgba($color, 0.25) solid;
+	border-top: 4px rgba($color, 1) solid;
+	border-radius: 50%;
+  animation: spinner .6s infinite linear;
+  &.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+
+@each $sizeName, $value in $sizes {
+  .size--#{$sizeName} {
+    width: $value;
+    height: $value;
+    &.center {
+      margin-top: -($value / 2);
+      margin-left: -($value / 2);
+    }
+  }
+}

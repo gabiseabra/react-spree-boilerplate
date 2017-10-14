@@ -11,13 +11,16 @@ export default merge.smart(config, {
   entry: {
     common: [
       "babel-polyfill",
-      "./app/styles/app.scss",
-      "./app/styles/bootstrap.scss"
+      "./app/styles/app.global.scss"
     ],
     spree: "./app/bundles/Spree/startup/client"
   },
   output: {
-    filename: "[name]-bundle.js"
+    filename: (
+      process.env.NODE_ENV === "production" ?
+      "[name]-bundle.[chunkhash:5].js" :
+      "[name]-bundle.js"
+    )
   },
   module: {
     rules: loaders({
@@ -30,7 +33,7 @@ export default merge.smart(config, {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin("common"),
     new ExtractTextPlugin({
-      filename: "[name]-bundle.css",
+      filename: "[name]-bundle.[chunkhash:5].css",
       // Disable css files in hot mode, stylesheets are
       // added to the document with javascript instead
       disable: (process.argv.indexOf("--hot") !== -1)

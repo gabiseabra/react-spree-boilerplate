@@ -1,10 +1,19 @@
+.stock, .form {
+  margin: 15px 0;
+}
+
 .form {
   display: flex;
   align-items: baseline;
-  margin: 15px 0;
 
   > * {
-    flex: 0 1 33.33%;
     margin: 0 5px;
+  }
+  input {
+    flex: 1 0;
+    min-width: 5em;
+  }
+  button {
+    flex: 1 1 80%;
   }
 }

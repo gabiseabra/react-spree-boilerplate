@@ -9,7 +9,7 @@ import { Page, Pagination, QuickSearch } from "../../page"
 import { getPageProducts } from "../../../redux/selectors/page"
 
 const ProductsPageApp = ({ products }) => (
-  <Page>
+  <Page load>
     <Helmet title="Products" />
     <Page.Title>
       <FormattedMessage {...messages.products} />

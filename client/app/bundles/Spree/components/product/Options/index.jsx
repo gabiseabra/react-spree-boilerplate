@@ -1,14 +1,16 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { FormControl, Button } from "react-bootstrap"
 import { injectIntl, intlShape } from "react-intl"
 import { product as messages } from "app/locales/messages"
+import { FormControl, Grid, Col } from "react-bootstrap"
+import { LoadingButton } from "../../shared"
 import Variants from "./Variants"
 import styles from "./Options.scss"
 
 class ProductOptions extends Component {
   static propTypes = {
     intl: intlShape,
+    loading: PropTypes.bool.isRequired,
     optionTypes: PropTypes.object.isRequired,
     product: PropTypes.object.isRequired,
     variants: PropTypes.objectOf(PropTypes.object).isRequired,
@@ -72,7 +74,7 @@ class ProductOptions extends Component {
   }
 
   render() {
-    const { intl, optionTypes, variants, product } = this.props
+    const { intl, loading, optionTypes, variants, product } = this.props
     return (
       <div>
         {product.hasVariants &&
@@ -80,19 +82,24 @@ class ProductOptions extends Component {
           variants={variants}
           optionTypes={optionTypes}
           onChange={this.onChangeVariant} />}
-        <div className={styles.form}>
-          <p>
+        <Grid fluid>
+          <Col xs={12} md={2} className={styles.stock}>
             {this.statusText}
-          </p>
-          <FormControl
-            type="number"
-            min="1"
-            value={this.state.quantity}
-            onChange={this.onChangeQuantity} />
-          <Button disabled={!this.status} onClick={this.onSelect}>
-            {intl.formatMessage(messages.addToCart)}
-          </Button>
-        </div>
+          </Col>
+          <Col xs={12} md={10} className={styles.form}>
+            <FormControl
+              type="number"
+              min="1"
+              value={this.state.quantity}
+              onChange={this.onChangeQuantity} />
+            <LoadingButton
+              loading={loading}
+              disabled={!this.status}
+              onClick={this.onSelect}>
+              {intl.formatMessage(messages.addToCart)}
+            </LoadingButton>
+          </Col>
+        </Grid>
       </div>
     )
   }

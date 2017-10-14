@@ -27,7 +27,7 @@ export default {
   },
   output: {
     path: outputDir,
-    filename: "[name].dll.js",
+    filename: "[name].[chunkhash:5].dll.js",
     library: "[name]_dll"
   },
   resolve: {
