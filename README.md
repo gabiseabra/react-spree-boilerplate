@@ -21,9 +21,22 @@ This project is as base spree application with a frontend built with React + Red
 
 ## Installation
 
+Setup services with docker:
+
+```shell
+docker-compose up
+```
+
+Install dependencies:
+
 ```shell
 bundle install
 yarn install
+```
+
+Setup the database:
+
+```shell
 bundle exec rake db:create
 bundle exec rake db:migrate
 bundle exec rake db:seed

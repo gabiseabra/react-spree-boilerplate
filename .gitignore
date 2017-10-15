@@ -36,3 +36,5 @@ node_modules
 /client/app/locales/rails/*
 
 /bin
+
+.env
