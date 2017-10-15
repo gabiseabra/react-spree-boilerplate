@@ -41,8 +41,10 @@ export default function createSaga({ apiClient }) {
   function * edit({ lineItemId, quantity }) {
     const order = yield select(getOrder)
     if(!order) return
-    // eslint-disable-next-line consistent-return
-    if(quantity === 0) return fork(remove, { lineItemId })
+    if(quantity === 0) {
+      yield fork(remove, { lineItemId })
+      return
+    }
     yield put(actions.request())
     try {
       yield call(apiClient.lineItems.put, order, lineItemId, { quantity })

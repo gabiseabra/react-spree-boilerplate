@@ -43,16 +43,16 @@ export default function create(context) {
     }
   }
 
-  // eslint-disable-next-line consistent-return
   function * load({ path, search, page, perPage }) {
     const location = yield select(getLocation)
     if(location.path === path &&
       _.isEqual(location.search, search) &&
       (!perPage || location.perPage === perPage)) {
-      return fork(loadPage, { page })
+      yield fork(loadPage, { page })
+    } else {
+      yield put(actions.request(path, page, search))
+      yield fork(request, { path, search, page, perPage })
     }
-    yield put(actions.request(path, page, search))
-    yield fork(request, { path, search, page, perPage })
   }
 
   function * change({ payload }) {
