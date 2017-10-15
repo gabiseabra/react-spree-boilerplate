@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0'
 # Use pgsql as the database for Active Record
 gem 'pg'
+# Use Sidekiq for background proccessing
+gem 'sidekiq'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
