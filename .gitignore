@@ -20,6 +20,9 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Rails assets
+/public/assets
+
 # Spree
 /spree
 /public/spree
@@ -38,3 +41,4 @@ node_modules
 /bin
 
 .env
+
