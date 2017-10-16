@@ -117,7 +117,7 @@ module ReduxStoreHydration
   # Get class collection data by name
   def class_collection(name)
     collection = self.class.store_collections[name].dup
-    collection[:record] = instance_eval(&collection[:selector])
+    collection[:record] = instance_exec(&collection[:selector])
     collection
   end
 
