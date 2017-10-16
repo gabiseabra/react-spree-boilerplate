@@ -25,6 +25,9 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  # Generate digests for assets URLs.
+  config.assets.digest = true
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -75,12 +78,32 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
+
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  if ENV['AWS_ACCESS_KEY_ID'] &&
+     ENV['AWS_SECRET_ACCESS_KEY'] &&
+     ENV['S3_BUCKET_NAME']
+    config.paperclip_defaults = {
+      storage: :s3,
+      s3_credentials: {
+        access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        bucket: ENV['S3_BUCKET_NAME'],
+        s3_region: ENV['S3_REGION']
+      },
+      s3_headers: {
+        'Cache-Control' => 'max-age=31557600'
+      },
+      s3_protocol: :https,
+      url: ':s3_domain_url',
+      path: ':class/:attachment/:id_partition/:style/:filename'
+    }
+  end
 end

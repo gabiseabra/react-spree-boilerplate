@@ -55,6 +55,10 @@ end
 # Windows does not include zoneinfo :files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# File uploads
+gem 'aws-sdk'
+gem 'paperclip'
+
 # Front-end
 gem 'react_on_rails', '~> 8.0.3'
 gem 'webpacker_lite'
