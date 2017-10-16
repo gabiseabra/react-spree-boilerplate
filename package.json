@@ -11,7 +11,7 @@
     "client/node_modules"
   ],
   "scripts": {
-    "postinstall": "cd client && yarn install",
+    "postinstall": "cd client && yarn install --production=false",
     "start": "foreman start",
     "start:dev": "foreman start -f Procfile.dev",
     "start:hot": "foreman start -f Procfile.hot",
