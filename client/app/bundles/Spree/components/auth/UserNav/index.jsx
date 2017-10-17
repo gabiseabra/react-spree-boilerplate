@@ -21,7 +21,7 @@ export default class UserNav extends Component {
 
   componentWillReceiveProps(next) {
     // Close modal on successful login
-    if(next.user !== this.props.user) {
+    if(next.user !== this.props.user && this.modal) {
       this.hideModal()
     }
   }
