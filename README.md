@@ -2,6 +2,8 @@
 
 This project is as base spree application with a frontend built with React + Redux.
 
+Demo: https://react-spree-app.herokuapp.com
+
 ## Stack
 
 ### Ruby
