@@ -4,12 +4,14 @@ import { FormattedMessage, injectIntl } from "react-intl"
 import { auth as messages } from "app/locales/messages"
 import {
   Alert,
+  Button,
   Checkbox,
   FormGroup,
   FormControl,
   ControlLabel
 } from "react-bootstrap"
 import { LoadingButton } from "../../shared"
+import styles from "./Login.scss"
 
 class Login extends Component {
   static propTypes = {
@@ -70,9 +72,17 @@ class Login extends Component {
           onChange={this.onChange}>
           <FormattedMessage {...messages.rememberMe} />
         </Checkbox>
-        <LoadingButton type="submit" loading={loading}>
-          <FormattedMessage {...messages.login} />
-        </LoadingButton>
+        <div className={styles.controls}>
+          <LoadingButton type="submit" bsStyle="primary" loading={loading}>
+            <FormattedMessage {...messages.login} />
+          </LoadingButton>
+          <Button href="/signup">
+            <FormattedMessage {...messages.signUp} />
+          </Button>
+          <Button bsStyle="link" href="/password/recover">
+            <FormattedMessage {...messages.recoverPassword} />
+          </Button>
+        </div>
       </form>
     )
   }

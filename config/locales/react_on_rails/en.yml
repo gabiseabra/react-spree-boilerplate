@@ -9,6 +9,8 @@ en:
     username: "Username"
     password: "Password"
     remember_me: "Remember Me"
+    sign_up: "Sign Up"
+    recover_password: "Forgot your password?"
   cart:
     cart: "Cart"
     item: "Item"

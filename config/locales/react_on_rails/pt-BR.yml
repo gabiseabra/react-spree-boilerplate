@@ -9,6 +9,8 @@ pt-BR:
     username: "Login"
     password: "Senha"
     remember_me: "Mantenha-me Logado"
+    sign_up: "Criar Conta"
+    recover_password: "Esqueceu a senha?"
   cart:
     cart: "Carrinho"
     item: "Item"
