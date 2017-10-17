@@ -8,7 +8,7 @@ import styles from "./LoadingButton.scss"
 const LoadingButton = ({ className, loading, disabled, loadingText, children, ...props }) => {
   const isDisabled = (
     typeof disabled === "boolean" ?
-    loading && disabled :
+    loading || disabled :
     loading
   )
   return (
