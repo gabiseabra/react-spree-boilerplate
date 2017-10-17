@@ -87,6 +87,17 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  heroku_app_url = ENV['HEROKU_APP_NAME'].present? && "#{ENV['HEROKU_APP_NAME']}.herokuapp.com"
+
+  if (host = heroku_app_url || ENV['APP_URL']).present?
+    routes.default_url_options[:host] = host
+    config.action_mailer.default_url_options[:host] = host
+  end
+
+  if (host = heroku_app_url || ENV['CDN_URL']).present?
+    config.action_controller.asset_host = host
+  end
+
   if ENV['AWS_ACCESS_KEY_ID'] &&
      ENV['AWS_SECRET_ACCESS_KEY'] &&
      ENV['S3_BUCKET_NAME']
@@ -107,5 +118,9 @@ Rails.application.configure do
       url: ':s3_domain_url',
       path: ':class/:attachment/:id_partition/:style/:filename'
     }
+    if ENV['S3_CDN_URL']
+      config.paperclip_defaults[:s3_host_alias] = ENV['S3_CDN_URL']
+      config.paperclip_defaults[:url] = ':s3_alias_url'
+    end
   end
 end
