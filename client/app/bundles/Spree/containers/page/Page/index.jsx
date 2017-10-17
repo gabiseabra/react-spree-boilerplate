@@ -57,6 +57,7 @@ class PageApp extends Component {
     } else if(nextQuery.page !== query.page) {
       this.loadPage(next)
     }
+    this.scrollIntoView()
   }
 
   scrollIntoView() {
@@ -72,7 +73,6 @@ class PageApp extends Component {
       query.page || 1,
       query.search
     )
-    this.scrollIntoView()
   }
 
   loadPage({ location }) {
