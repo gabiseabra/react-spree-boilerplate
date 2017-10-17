@@ -46,7 +46,8 @@ class ProductOptions extends Component {
   onSelect = () => {
     const { onSelect } = this.props
     const { quantity } = this.state
-    if(onSelect && quantity) onSelect(this.variant, quantity)
+    const variant = this.variant
+    if(onSelect && quantity && variant) onSelect(variant, quantity)
   }
 
   get completed() {
