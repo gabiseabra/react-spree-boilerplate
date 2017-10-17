@@ -12,11 +12,13 @@ const CartFooter = ({ order, onClear }) => (
     <Adjustments colSpan={4} order={order} />
     <tr>
       <td colSpan={3}>
-        <Button onClick={onClear}>
+        <Button bsStyle="danger" onClick={onClear}>
           <FormattedMessage {...messages.emptyCart} />
         </Button>
         <Link to="/products">
-          <FormattedMessage {...messages.continueShopping} />
+          <Button bsStyle="link">
+            <FormattedMessage {...messages.continueShopping} />
+          </Button>
         </Link>
       </td>
       <td><Price value={order.price.total} /></td>
