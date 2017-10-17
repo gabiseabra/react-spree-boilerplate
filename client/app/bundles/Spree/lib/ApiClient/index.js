@@ -61,7 +61,7 @@ export default class ApiClient {
     if(init.format) {
       const format = FORMATS[init.format]
       headers.append("Accept", format.header)
-      if(format.ext) {
+      if(format.ext && !path.match(/\.[\w\d]+$/)) {
         const { pathname, query } = url.parse(path)
         path = pathname
         if(pathname.match(/\/$/)) path += "index"
