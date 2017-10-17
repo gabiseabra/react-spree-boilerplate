@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import { FormattedMessage } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 import { FormControl, Button } from "react-bootstrap"
@@ -48,7 +49,9 @@ class LineItem extends Component {
           <div>
             {image && <img src={image.urls.small} alt={variant.name} />}
             <div>
-              <h3>{variant.name}</h3>
+              <Link to={variant.permalink}>
+                <h3>{variant.name}</h3>
+              </Link>
               <p>{variant.description}</p>
             </div>
           </div>

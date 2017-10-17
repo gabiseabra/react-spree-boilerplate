@@ -39,5 +39,6 @@ export default class Variant extends Resource {
     this.inStock = data.in_stock
     this.images = data.images.map(img => image(img))
     this.options = options(data.option_values)
+    this.permalink = `/products/${data.slug}`
   }
 }
