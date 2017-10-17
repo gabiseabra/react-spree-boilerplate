@@ -118,6 +118,7 @@ Rails.application.configure do
       url: ':s3_domain_url',
       path: ':class/:attachment/:id_partition/:style/:filename'
     }
+
     if ENV['S3_CDN_URL']
       config.paperclip_defaults[:s3_host_alias] = ENV['S3_CDN_URL']
       config.paperclip_defaults[:url] = ':s3_alias_url'
