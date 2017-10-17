@@ -102,6 +102,7 @@ Rails.application.configure do
       s3_headers: {
         'Cache-Control' => 'max-age=31557600'
       },
+      s3_host_name: "s3-#{ENV['S3_REGION']}.amazonaws.com",
       s3_protocol: :https,
       url: ':s3_domain_url',
       path: ':class/:attachment/:id_partition/:style/:filename'
