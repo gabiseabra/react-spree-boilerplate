@@ -1,6 +1,7 @@
 pt-BR:
   spree:
     products: "Produtos"
+    cart: "Carrinho"
   auth:
     login: "Login"
     logout: "Logout"

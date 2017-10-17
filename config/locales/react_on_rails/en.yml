@@ -1,6 +1,7 @@
 en:
   spree:
     products: "Products"
+    cart: "Cart"
   auth:
     login: "Login"
     logout: "Logout"
