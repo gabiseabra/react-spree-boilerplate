@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.1.0'
 # Use pgsql as the database for Active Record
 gem 'pg'
 # Use Sidekiq for background proccessing
@@ -60,10 +60,10 @@ gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 
 # Front-end
-gem 'react_on_rails', '~> 8.0.3'
+gem 'react_on_rails', '8.0.3'
 gem 'webpacker_lite'
 
 # Spree
-gem 'spree', '~> 3.2.0'
+gem 'spree', '~> 3.4.0'
 gem 'spree_auth_devise', '~> 3.3'
 gem 'spree_gateway', '~> 3.3'
