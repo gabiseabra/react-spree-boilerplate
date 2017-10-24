@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Route as BaseRoute, Switch } from "react-router-dom"
 import { Helmet } from "react-helmet"
+import { Messages as FlashMessages } from "../../flash"
 import HomePage from "./HomePage"
 import ProductsPage from "./ProductsPage"
 import ShowProductPage from "./ShowProductPage"
@@ -49,6 +50,7 @@ export default class App extends Component {
         <Helmet
           defaultTitle="React Spree Boilerplate"
           titleTemplate="%s - React Spree Boilerplate" />
+        <FlashMessages />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products" component={ProductsPage} />

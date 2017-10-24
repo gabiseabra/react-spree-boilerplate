@@ -20,4 +20,9 @@ module SpreeHydrationHelper
                           locals: { order: simple_current_order }
     redux_store store_name, props: { order: json }
   end
+
+  def hydrate_flash(store_name)
+    json = flash.keys.map { |type| { type: type, message: flash.discard(type) } }
+    redux_store store_name, props: { flash: json }
+  end
 end
