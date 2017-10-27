@@ -48,6 +48,7 @@ export default class App extends Component {
     return (
       <div>
         <Helmet
+          defer={false}
           defaultTitle="React Spree Boilerplate"
           titleTemplate="%s - React Spree Boilerplate" />
         <FlashMessages />
