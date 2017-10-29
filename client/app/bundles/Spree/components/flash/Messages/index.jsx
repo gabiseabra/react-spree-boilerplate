@@ -16,7 +16,7 @@ export default class Messages extends Component {
     messages: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       type: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired
+      message: PropTypes.any.isRequired
     })).isRequired,
     onDismiss: PropTypes.func
   }
@@ -31,7 +31,7 @@ export default class Messages extends Component {
     if(!messages.length) return null
     return (
       <div>
-        {messages.map(({ id, type, message }) => (message ?
+        {messages.map(({ id, type, message }) => (typeof message === "string" ?
           <Alert key={id} bsStyle={bsStyle(type)} onDismiss={this.onDismiss(id)}>
             {message}
           </Alert>
