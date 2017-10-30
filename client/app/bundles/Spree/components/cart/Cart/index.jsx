@@ -18,6 +18,7 @@ import styles from "./Cart.scss"
 
 export default class Cart extends Component {
   static propTypes = {
+    csrfToken: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     order: PropTypes.object.isRequired,
     lineItems: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -29,6 +30,7 @@ export default class Cart extends Component {
 
   renderCart() {
     const {
+      csrfToken,
       loading,
       coupon,
       order,
@@ -38,7 +40,7 @@ export default class Cart extends Component {
       onRemove
     } = this.props
     return (
-      <Form method="patch" action="/cart">
+      <Form method="patch" action="/cart" csrfToken={csrfToken}>
         <Table striped>
           <Header />
           <Body lineItems={lineItems} onChange={onChange} onRemove={onRemove} />

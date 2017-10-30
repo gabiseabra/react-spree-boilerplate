@@ -3,6 +3,13 @@ import { isUserLoggedIn } from "../../selectors/auth"
 import * as actions from "./index"
 
 export default function create({ apiClient }) {
+  function * refreshToken() {
+    try {
+      yield call(apiClient.refreshCsfrToken)
+      yield put(actions.updateToken(apiClient.csrfToken))
+    } catch(_) { /* ... */ }
+  }
+
   function * login({ data }) {
     const loggedIn = yield select(isUserLoggedIn)
     if(loggedIn) return
@@ -10,6 +17,7 @@ export default function create({ apiClient }) {
     try {
       const response = yield call(apiClient.route, "/login", data)
       yield put(actions.succeed(response.toJSON()))
+      yield put(actions.updateToken(apiClient.csrfToken))
     } catch(error) {
       yield put(actions.fail(error))
     }
@@ -22,6 +30,7 @@ export default function create({ apiClient }) {
     try {
       yield call(apiClient.route, "/logout")
       yield put(actions.succeed(undefined))
+      yield put(actions.updateToken(apiClient.csrfToken))
     } catch(error) {
       yield put(actions.fail(error))
     }
@@ -30,7 +39,8 @@ export default function create({ apiClient }) {
   return function * watch() {
     yield all([
       takeLatest(actions.LOGIN, login),
-      takeLatest(actions.LOGOUT, logout)
+      takeLatest(actions.LOGOUT, logout),
+      takeLatest(actions.REFRESH_TOKEN, refreshToken)
     ])
   }
 }

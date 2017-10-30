@@ -14,7 +14,9 @@ export default {
       method: "POST",
       body
     })
-    return new Response(response, new User(response.data.user))
+    const result = new Response(response, new User(response.data.user))
+    await this.refreshCsrfToken()
+    return result
   },
   "/logout": async function () {
     await this.fetch("/logout", {
