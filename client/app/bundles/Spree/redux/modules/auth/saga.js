@@ -16,8 +16,8 @@ export default function create({ apiClient }) {
     yield put(actions.request())
     try {
       const response = yield call(apiClient.route, "/login", data)
-      yield put(actions.succeed(response.toJSON()))
       yield put(actions.updateToken(apiClient.csrfToken))
+      yield put(actions.succeed(response.toJSON()))
     } catch(error) {
       yield put(actions.fail(error))
     }
@@ -29,8 +29,8 @@ export default function create({ apiClient }) {
     yield put(actions.request())
     try {
       yield call(apiClient.route, "/logout")
-      yield put(actions.succeed(undefined))
       yield put(actions.updateToken(apiClient.csrfToken))
+      yield put(actions.succeed(undefined))
     } catch(error) {
       yield put(actions.fail(error))
     }

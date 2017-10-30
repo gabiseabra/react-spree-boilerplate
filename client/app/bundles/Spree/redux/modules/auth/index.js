@@ -33,6 +33,7 @@ export default function auth(state = initialState, action) {
       }
     case SUCCESS:
       return {
+        ...state,
         user: action.user,
         loading: false,
         error: undefined
