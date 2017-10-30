@@ -34,7 +34,7 @@ class CartApp extends Component {
     const { csrfToken, loading, order, lineItems } = this.props
     return (
       <Cart
-        csfrToken={csrfToken}
+        csrfToken={csrfToken}
         loading={loading}
         order={order}
         lineItems={lineItems}
