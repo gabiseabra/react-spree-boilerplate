@@ -26,6 +26,10 @@ en:
     continue_shopping: "Continue Shopping"
     update: "Update"
     proceed_checkout: "Checkout"
+    tax_total: Tax total
+    shipping_total: Shipping total
+    items_total: Items total
+    adjustment_total: Discount
   product:
     description: "Description"
     properties: "Properties"

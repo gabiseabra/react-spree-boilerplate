@@ -26,6 +26,10 @@ pt-BR:
     continue_shopping: "Continue Comprando"
     update: "Atualizar"
     proceed_checkout: "Prosseguir"
+    tax_total: Taxa de imposto
+    shipping_total: Valor de envio
+    items_total: Valor dos ítems
+    adjustment_total: Desconto
   product:
     description: "Descrição"
     properties: "Propriedades"
