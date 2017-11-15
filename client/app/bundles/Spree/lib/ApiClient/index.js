@@ -101,11 +101,6 @@ export default class ApiClient {
     return new Response(response, await response.text())
   }
 
-  async text(req, init = {}) {
-    const response = await this.fetch(req, { format: "text", ...init })
-    return new Response(response, await response.text())
-  }
-
   async route(target, context = {}) {
     const { pathname, query } = url.parse(target, true)
     return this.router.resolve({

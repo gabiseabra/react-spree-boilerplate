@@ -15,7 +15,7 @@ describe("#lineItems", () => {
     beforeEach(function () {
       this.scope
         .withCredentials()
-        .post(`/api/v1/orders/${order.number}/line_items`)
+        .post(`/api/v1/orders/${order.number}/line_items.json`)
         .query({
           line_item: {
             variant_id: 1,
@@ -35,7 +35,7 @@ describe("#lineItems", () => {
     beforeEach(function () {
       this.scope
         .withCredentials()
-        .put(`/api/v1/orders/${order.number}/line_items/${item.id}`)
+        .put(`/api/v1/orders/${order.number}/line_items/${item.id}.json`)
         .query({
           line_item: {
             quantity: 2

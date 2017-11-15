@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import nock from "nock"
 import ApiClient, { CSRF_TOKEN_HEADER } from "../../ApiClient"
-import Response from "../Response"
+import ApiResponse from "../Response"
 import * as mock from "./mock"
 
 describe("ApiClient", () => {
@@ -17,6 +17,37 @@ describe("ApiClient", () => {
     this.scope.done()
   })
 
+  describe("#request()", () => {
+    it("accepts a path", function () {
+      this.client.request("/foo").should.be.instanceof(Request)
+    })
+
+    it("accepts a request object", function () {
+      this.client.request(new Request("/foo")).should.be.instanceof(Request)
+    })
+
+    it("adds csrf headers", function () {
+      this.client.request("/foo").headers.has(CSRF_TOKEN_HEADER).should.eql(true)
+    })
+
+    it("omits csrf headers", function () {
+      this.client.request("/foo", { credentials: "omit" }).headers.has(CSRF_TOKEN_HEADER).should.eql(false)
+    })
+
+    context("with format option", () => {
+      it("appends format extension to path", function () {
+        this.client.request("/", { format: "json" }).path.should.eql("/index.json")
+        this.client.request("/foo", { format: "json" }).path.should.eql("/foo.json")
+        this.client.request("/foo?test=true", { format: "json" }).path.should.eql("/foo.json?test=true")
+      })
+
+      it("doesn't change path with extension", function () {
+        this.client.request("/foo.json", { format: "json" }).path.should.eql("/foo.json")
+        this.client.request("/foo.txt", { format: "json" }).path.should.eql("/foo.txt")
+      })
+    })
+  })
+
   describe("#fetch()", () => {
     beforeEach(function () {
       this.scope
@@ -24,13 +55,8 @@ describe("ApiClient", () => {
         .reply(200)
     })
 
-    it("accepts a path", async function () {
+    it("sends a request", async function () {
       const response = await this.client.fetch("/foo")
-      response.status.should.equal(200)
-    })
-
-    it("accepts a request object", async function () {
-      const response = await this.client.fetch(new Request("/foo"))
       response.status.should.equal(200)
     })
   })
@@ -39,13 +65,13 @@ describe("ApiClient", () => {
     beforeEach(function () {
       this.scope
         .matchHeader("Accept", "application/json")
-        .get("/json")
+        .get("/json.json")
         .reply(200, { foo: 1, bar: 2 })
     })
 
     it("requests a json page and returns it's body", async function () {
       const response = await this.client.json("/json")
-      response.should.be.instanceof(Response)
+      response.should.be.instanceof(ApiResponse)
       response.data.should.deep.equal({ foo: 1, bar: 2 })
     })
   })
@@ -54,29 +80,14 @@ describe("ApiClient", () => {
     beforeEach(function () {
       this.scope
         .matchHeader("Accept", "text/html")
-        .get("/text")
+        .get("/html")
         .reply(200, "<span>Test</span>")
     })
 
     it("requests an html page and returns it's body", async function () {
-      const response = await this.client.html("/text")
-      response.should.be.instanceof(Response)
+      const response = await this.client.html("/html")
+      response.should.be.instanceof(ApiResponse)
       response.data.should.equal("<span>Test</span>")
-    })
-  })
-
-  describe("#text()", () => {
-    beforeEach(function () {
-      this.scope
-        .matchHeader("Accept", /^text\//)
-        .get("/text")
-        .reply(200, "Test")
-    })
-
-    it("requests a text page and returns it's body", async function () {
-      const response = await this.client.text("/text")
-      response.should.be.instanceof(Response)
-      response.data.should.equal("Test")
     })
   })
 
@@ -84,7 +95,7 @@ describe("ApiClient", () => {
     beforeEach(function () {
       this.scope
         .withCredentials()
-        .get("/authenticity_token")
+        .get("/authenticity_token.json")
         .reply(200, {
           authenticity_token: "csrf-token-test"
         })

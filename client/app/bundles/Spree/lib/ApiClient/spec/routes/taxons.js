@@ -10,7 +10,7 @@ const taxon = mock.taxon(1)
 describe("/t/:id", () => {
   beforeEach(function () {
     this.scope
-      .get("/t/foo")
+      .get("/t/foo.json")
       .reply(200, {
         taxon,
         products,

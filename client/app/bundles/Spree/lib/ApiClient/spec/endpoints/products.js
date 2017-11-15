@@ -11,7 +11,7 @@ describe("#products", () => {
   describe("#page()", () => {
     beforeEach(function () {
       this.scope
-        .get("/api/v1/products")
+        .get("/api/v1/products.json")
         .query({ page: 1 })
         .reply(200, {
           products: [ subject ],
@@ -29,7 +29,7 @@ describe("#products", () => {
   describe("#get()", () => {
     beforeEach(function () {
       this.scope
-        .get(`/api/v1/products/${subject.id}`)
+        .get(`/api/v1/products/${subject.id}.json`)
         .reply(200, subject)
     })
 

@@ -12,7 +12,7 @@ describe("/products", () => {
 
   it("returns a collection of products", async function () {
     this.scope
-      .get("/products")
+      .get("/products.json")
       .query(true)
       .reply(200, reply)
 
@@ -23,8 +23,8 @@ describe("/products", () => {
 
   it("accepts a search parameter", async function () {
     this.scope
-    .get("/products")
-    .query({ q: { name: "test" } })
+    .get("/products.json")
+    .query({ search: { name: "test" } })
     .reply(200, reply)
 
     const response = await this.client.route("/products", {
@@ -38,7 +38,7 @@ describe("/products", () => {
 
   it("accepts pagination parameters", async function () {
     this.scope
-    .get("/products")
+    .get("/products.json")
     .query({ page: 2, per_page: 15 })
     .reply(200, reply)
 
@@ -51,7 +51,7 @@ describe("/products", () => {
 describe("/products/:id", () => {
   beforeEach(function () {
     this.scope
-      .get("/products/1")
+      .get("/products/1.json")
       .reply(200, products[0])
   })
 

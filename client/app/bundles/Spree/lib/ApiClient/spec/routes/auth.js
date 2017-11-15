@@ -25,14 +25,26 @@ describe("/login", () => {
       })
   })
 
-  it("throws ResponseError on invalid credentials", function () {
-    return this.client.route("/login", { login, password: "wrongpass" })
-      .should.eventually.be.rejectedWith(ResponseError)
+  context("failure", () => {
+    it("throws ResponseError on invalid credentials", function () {
+      return this.client.route("/login", { login, password: "wrongpass" })
+        .should.eventually.be.rejectedWith(ResponseError)
+    })
   })
 
-  it("returns logged in user on success", async function () {
-    const response = await this.client.route("/login", { login, password })
-    response.data.should.be.instanceof(User)
+  context("success", () => {
+    beforeEach(function () {
+      this.scope
+        .get("/authenticity_token.json")
+        .reply(200, {
+          authenticity_token: "foo"
+        })
+    })
+
+    it("returns logged in user on success", async function () {
+      const response = await this.client.route("/login", { login, password })
+      response.data.should.be.instanceof(User)
+    })
   })
 })
 
@@ -42,7 +54,7 @@ describe("/logout", () => {
       .withCredentials()
       .get("/logout")
       .reply(200)
-      .get("/authenticity_token")
+      .get("/authenticity_token.json")
       .reply(200, {
         authenticity_token: "foo"
       })
