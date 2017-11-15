@@ -5,18 +5,23 @@ import classnames from "classnames"
 import Spinner from "../Spinner"
 import styles from "./LoadingButton.scss"
 
-const LoadingButton = ({ className, loading, disabled, loadingText, children, ...props }) => {
+const LoadingButton = ({ className, loading, disabled, children, ...props }) => {
   const isDisabled = (
     typeof disabled === "boolean" ?
     loading || disabled :
     loading
   )
+  const buttonClass = classnames(
+    className,
+    styles.LoadingButton,
+  )
   return (
     <Button
       disabled={isDisabled}
-      className={classnames(className, styles.LoadingButton)}
+      className={buttonClass}
       {...props}>
-      {loading ? (loadingText || <Spinner center size="small" />) : children}
+      {loading && <Spinner center size="small" />}
+      {children}
     </Button>
   )
 }
