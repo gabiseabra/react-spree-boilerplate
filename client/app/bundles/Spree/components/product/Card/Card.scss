@@ -1,5 +1,19 @@
-.Card:hover {
-  text-decoration: none;
+.Card {
+  &[data-instock=false] {
+    img {
+      filter: grayscale(1);
+    }
+    :global .thumbnail .caption {
+      color: #888;
+    }
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.availability {
+  margin-left: 10px;
 }
 
 .body {

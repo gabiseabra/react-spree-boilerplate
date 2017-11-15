@@ -39,5 +39,10 @@ export default class Product extends Resource {
       { name: "keywords", content: data.meta_keywords }
     ]
     this.permalink = `/products/${data.slug}`
+    if(this.hasVariants) {
+      this.inStock = Boolean(this.variants.find(variant => variant.inStock))
+    } else {
+      this.inStock = this.master.inStock
+    }
   }
 }
