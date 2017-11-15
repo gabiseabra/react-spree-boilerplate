@@ -34,15 +34,12 @@ export default class Product extends Resource {
     this.properties = properties(data.product_properties)
     this.optionTypes = optionTypes(data.option_types)
     this.taxonIds = data.taxon_ids
+    this.totalOnHand = data.total_on_hand
     this.meta = [
       { name: "description", content: data.meta_description },
       { name: "keywords", content: data.meta_keywords }
     ]
     this.permalink = `/products/${data.slug}`
-    if(this.hasVariants) {
-      this.inStock = Boolean(this.variants.find(variant => variant.inStock))
-    } else {
-      this.inStock = this.master.inStock
-    }
+    this.inStock = (this.totalOnHand > 0)
   }
 }

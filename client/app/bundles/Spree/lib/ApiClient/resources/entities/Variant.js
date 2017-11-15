@@ -36,6 +36,7 @@ export default class Variant extends Resource {
     this.name = data.name
     this.description = data.description
     this.price = parseFloat(data.price) || undefined
+    this.totalOnHand = data.total_on_hand
     this.inStock = data.in_stock
     this.images = data.images.map(img => image(img))
     this.options = options(data.option_values)

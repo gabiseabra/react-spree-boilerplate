@@ -1,6 +1,7 @@
 json.cache! [current_currency, variant] do
   json.extract! variant, :id, :slug, :name, :description, :price
   json.extract! variant, :sku, :weight, :width, :height
+  json.extract! variant, :total_on_hand
   json.in_stock variant.in_stock?
 
   json.images(variant.images) do |img|
