@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   Spree::Core::Engine.routes.draw do
     get '/authenticity_token' => 'store#authenticity_token'
+    get '/index' => 'home#index'
   end
 
   # sidekiq web UI

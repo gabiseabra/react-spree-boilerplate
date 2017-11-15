@@ -4,7 +4,7 @@ import * as mock from "../mock"
 
 const products = Array.from(Array(10), (_, i) => mock.product(i + 1))
 
-describe.skip("/", () => {
+describe("/", () => {
   const reply = {
     products,
     ...mock.pagination({ page: 1, totalCount: products.length })
@@ -12,7 +12,7 @@ describe.skip("/", () => {
 
   it("returns a collection of products", async function () {
     this.scope
-      .get("/")
+      .get("/index.json")
       .query(true)
       .reply(200, reply)
 
@@ -23,8 +23,8 @@ describe.skip("/", () => {
 
   it("accepts a search parameter", async function () {
     this.scope
-    .get("/")
-    .query({ q: { name: "test" } })
+    .get("/index.json")
+    .query({ search: { name: "test" } })
     .reply(200, reply)
 
     const response = await this.client.route("/", {
@@ -38,7 +38,7 @@ describe.skip("/", () => {
 
   it("accepts pagination parameters", async function () {
     this.scope
-    .get("/")
+    .get("/index.json")
     .query({ page: 2, per_page: 15 })
     .reply(200, reply)
 

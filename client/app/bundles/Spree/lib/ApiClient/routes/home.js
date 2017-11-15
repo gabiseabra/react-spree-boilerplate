@@ -9,7 +9,7 @@ export default {
       helpers.pagination.query({ page, perPage }),
       search ? helpers.search.query(search) : {}
     ))
-    const response = await this.json(`/products?${queryString}`)
+    const response = await this.json(`/?${queryString}`)
     return new Response(response, new Collection(response.data, Product))
   }
 }
