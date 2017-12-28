@@ -35,8 +35,15 @@ export default class Slideshow extends Component {
     return this.variant.images
   }
 
+  renderNoImage() {
+    return (
+      <img className={styles.noImage} src={require("images/no_image.png")} />
+    )
+  }
+
   render() {
     const images = this.images
+    if(!images.length) return this.renderNoImage()
     const { product } = this.props
     const { selected } = this.state
     return (
