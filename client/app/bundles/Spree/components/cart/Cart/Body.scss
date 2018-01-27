@@ -1,0 +1,26 @@
+$button-size: 30px;
+
+.removeButton {
+  position: relative;
+  width: $button-size;
+  height: $button-size;
+  border-radius: $button-size / 2;
+  margin: 0 10px;
+  &:before, &:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 70%;
+    top: 50%;
+    right: 15%;
+    margin-top: -1px;
+    background: white;
+  }
+  &::before { transform: rotate(45deg) }
+  &::after { transform: rotate(135deg) }
+}
+
+.controls {
+  display: flex;
+}

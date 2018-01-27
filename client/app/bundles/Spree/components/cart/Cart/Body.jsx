@@ -1,13 +1,15 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
-import { FormattedMessage } from "react-intl"
+import { injectIntl, intlShape } from "react-intl"
 import { cart as messages } from "app/locales/messages"
 import { FormControl, Button } from "react-bootstrap"
 import { Price } from "../../shared"
+import styles from "./Body.scss"
 
-class LineItem extends Component {
+class BaseLineItem extends Component {
   static propTypes = {
+    intl: intlShape,
     lineItem: PropTypes.object.isRequired,
     number: PropTypes.number.isRequired,
     onChange: PropTypes.func,
@@ -39,7 +41,7 @@ class LineItem extends Component {
   }
 
   render() {
-    const { lineItem, number } = this.props
+    const { lineItem, number, intl } = this.props
     const { quantity } = this.state
     const { variant } = lineItem
     const image = variant.images[0]
@@ -57,7 +59,7 @@ class LineItem extends Component {
           </div>
         </td>
         <td><Price value={lineItem.price} /></td>
-        <td>
+        <td className={styles.controls}>
           <input
             type="hidden"
             name={`order[line_items_attributes][${number}][id]`}
@@ -71,15 +73,17 @@ class LineItem extends Component {
             onBlur={this.onBlur} />
           <Button
             bsStyle="danger"
-            onClick={this.onRemove}>
-            <FormattedMessage {...messages.removeItem} />
-          </Button>
+            className={styles.removeButton}
+            onClick={this.onRemove}
+            title={intl.formatMessage(messages.removeItem)} />
         </td>
         <td><Price value={lineItem.total} /></td>
       </tr>
     )
   }
 }
+
+const LineItem = injectIntl(BaseLineItem)
 
 const CartBody = ({ lineItems, onChange, onRemove }) => (
   <tbody>
